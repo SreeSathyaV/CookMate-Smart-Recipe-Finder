@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Profile | CookMate</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+    <style>
+
+        /* =========================================
+           PROFILE PAGE
+           ========================================= */
+
+        .profile-hero {
+
+            text-align: center;
+
+            padding: 70px 20px 45px;
+
+        }
+
+
+        .profile-hero h1 {
+
+            font-size: 42px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .profile-hero p {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            color: #666;
+
+        }
+
+
+        .profile-container {
+
+            width: 90%;
+
+            max-width: 1000px;
+
+            margin: auto;
+
+            padding-bottom: 70px;
+
+        }
+
+
+        /* =========================================
+           PROFILE CARD
+           ========================================= */
+
+        .profile-card {
+
+            background: rgba(255, 255, 255, 0.95);
+
+            border-radius: 24px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 8px 28px rgba(0, 0, 0, 0.08);
+
+            margin-bottom: 30px;
+
+        }
+
+
+        /* =========================================
+           PROFILE HEADER
+           ========================================= */
+
+        .profile-header {
+
+            text-align: center;
+
+            padding-bottom: 30px;
+
+            border-bottom: 1px solid #eee;
+
+        }
+
+
+        .profile-picture-wrapper {
+
+            position: relative;
+
+            width: 125px;
+
+            height: 125px;
+
+            margin: auto;
+
+        }
+
+
+        .profile-picture {
+
+            width: 125px;
+
+            height: 125px;
+
+            border-radius: 50%;
+
+            background: #f1eee8;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 65px;
+
+            overflow: hidden;
+
+            border: 4px solid white;
+
+            box-shadow:
+                0 5px 18px rgba(0, 0, 0, 0.12);
+
+        }
+
+
+        .profile-picture img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+        }
+
+
+        .picture-btn {
+
+            position: absolute;
+
+            right: 0;
+
+            bottom: 0;
+
+            width: 38px;
+
+            height: 38px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #333;
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 17px;
+
+        }
+
+
+        .profile-header h2 {
+
+            margin-top: 18px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .profile-header span {
+
+            color: #777;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =========================================
+           PROFILE FORM
+           ========================================= */
+
+        .profile-form {
+
+            margin-top: 30px;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+        }
+
+
+        .form-group input,
+
+        .form-group textarea {
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+            padding: 14px 16px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 12px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            font-family: inherit;
+
+        }
+
+
+        .form-group textarea {
+
+            min-height: 110px;
+
+            resize: vertical;
+
+        }
+
+
+        .form-group input:focus,
+
+        .form-group textarea:focus {
+
+            border-color: #777;
+
+        }
+
+
+        /* =========================================
+           BUTTONS
+           ========================================= */
+
+        .profile-buttons {
+
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 25px;
+
+        }
+
+
+        .save-profile,
+
+        .reset-profile {
+
+            border: none;
+
+            padding: 13px 22px;
+
+            border-radius: 11px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+
+        }
+
+
+        .save-profile {
+
+            background: #333;
+
+            color: white;
+
+            flex: 1;
+
+        }
+
+
+        .save-profile:hover {
+
+            opacity: 0.85;
+
+            transform: translateY(-2px);
+
+        }
+
+
+        .reset-profile {
+
+            background: #eee;
+
+            color: #333;
+
+        }
+
+
+        .reset-profile:hover {
+
+            background: #ddd;
+
+        }
+
+
+        /* =========================================
+           STATISTICS
+           ========================================= */
+
+        .stats-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+        }
+
+
+        .stat-card {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 25px 15px;
+
+            text-align: center;
+
+            box-shadow:
+                0 6px 20px rgba(0, 0, 0, 0.07);
+
+            transition: 0.3s;
+
+        }
+
+
+        .stat-card:hover {
+
+            transform: translateY(-5px);
+
+        }
+
+
+        .stat-icon {
+
+            font-size: 38px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .stat-number {
+
+            font-size: 28px;
+
+            font-weight: 700;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .stat-name {
+
+            font-size: 14px;
+
+            color: #777;
+
+        }
+
+
+        /* =========================================
+           QUICK LINKS
+           ========================================= */
+
+        .quick-links {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+
+            margin-top: 20px;
+
+        }
+
+
+        .quick-link {
+
+            text-decoration: none;
+
+            color: #333;
+
+            background: #f7f5f0;
+
+            border-radius: 15px;
+
+            padding: 18px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .quick-link:hover {
+
+            transform: translateY(-3px);
+
+            background: #eeeae2;
+
+        }
+
+
+        .quick-link-icon {
+
+            font-size: 28px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .quick-link-title {
+
+            font-weight: 600;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .quick-link-description {
+
+            font-size: 13px;
+
+            color: #777;
+
+        }
+
+
+        /* =========================================
+           HIDDEN FILE INPUT
+           ========================================= */
+
+        #profileImageInput {
+
+            display: none;
+
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 700px) {
+
+            .profile-hero h1 {
+
+                font-size: 32px;
+
+            }
+
+
+            .profile-card {
+
+                padding: 22px;
+
+            }
+
+
+            .stats-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .quick-links {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .profile-buttons {
+
+                flex-direction: column;
+
+            }
+
+
+            .reset-profile {
+
+                width: 100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         NAVBAR
+         ========================================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            🍳 CookMate
+
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="recipes.html">
+                Recipes
+            </a>
+
+            <a href="ingredients.html">
+                My Ingredients
+            </a>
+
+            <a href="equipment.html">
+                Equipment
+            </a>
+
+            <a href="favourites.html">
+                Favourites
+            </a>
+
+            <a href="profile.html"
+               class="active">
+
+                Profile
+
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================================
+         HERO
+         ========================================= -->
+
+    <section class="profile-hero">
+
+        <h1>
+            👤 My Profile
+        </h1>
+
+        <p>
+
+            Manage your CookMate profile and
+            keep track of your cooking activity.
+
+        </p>
+
+    </section>
+
+
+
+    <main class="profile-container">
+
+
+        <!-- =========================================
+             PROFILE INFORMATION
+             ========================================= -->
+
+        <section class="profile-card">
+
+            <div class="profile-header">
+
+                <div class="profile-picture-wrapper">
+
+                    <div
+                        class="profile-picture"
+                        id="profilePicture">
+
+                        👤
+
+                    </div>
+
+
+                    <button
+                        class="picture-btn"
+                        onclick="document.getElementById('profileImageInput').click()">
+
+                        📷
+
+                    </button>
+
+
+                    <input
+                        type="file"
+                        id="profileImageInput"
+                        accept="image/*"
+                        onchange="changeProfilePicture(event)">
+
+                </div>
+
+
+                <h2 id="profileDisplayName">
+                    CookMate User
+                </h2>
+
+
+                <span id="profileDisplayEmail">
+                    Welcome to CookMate
+                </span>
+
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <div class="profile-form">
+
+
+                <div class="form-group">
+
+                    <label for="profileName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="profileName"
+                        placeholder="Enter your name">
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="profileEmail">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="profileEmail"
+                        placeholder="Enter your email">
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="profileBio">
+                        About Me
+                    </label>
+
+                    <textarea
+                        id="profileBio"
+                        placeholder="Tell something about yourself..."></textarea>
+
+                </div>
+
+
+
+                <div class="profile-buttons">
+
+                    <button
+                        class="save-profile"
+                        onclick="saveProfile()">
+
+                        💾 Save Profile
+
+                    </button>
+
+
+                    <button
+                        class="reset-profile"
+                        onclick="resetProfile()">
+
+                        🔄 Reset
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             COOKING STATISTICS
+             ========================================= -->
+
+        <section class="profile-card">
+
+            <h2>
+                📊 My Cooking Activity
+            </h2>
+
+            <p>
+                Your saved information across CookMate.
+            </p>
+
+
+            <div class="stats-grid">
+
+
+                <!-- FAVOURITES -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ⭐
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="favouriteCount">
+
+                        0
+
+                    </div>
+
+                    <div class="stat-name">
+
+                        Favourite Recipes
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- INGREDIENTS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🥕
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="ingredientCount">
+
+                        0
+
+                    </div>
+
+                    <div class="stat-name">
+
+                        My Ingredients
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- EQUIPMENT -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🧰
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="equipmentCount">
+
+                        0
+
+                    </div>
+
+                    <div class="stat-name">
+
+                        Kitchen Equipment
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             QUICK LINKS
+             ========================================= -->
+
+        <section class="profile-card">
+
+            <h2>
+                ⚡ Quick Access
+            </h2>
+
+
+            <div class="quick-links">
+
+
+                <a
+                    href="recipes.html"
+                    class="quick-link">
+
+                    <div class="quick-link-icon">
+                        🍳
+                    </div>
+
+                    <div class="quick-link-title">
+                        Browse Recipes
+                    </div>
+
+                    <div class="quick-link-description">
+                        Discover new dishes to cook.
+                    </div>
+
+                </a>
+
+
+
+                <a
+                    href="ingredients.html"
+                    class="quick-link">
+
+                    <div class="quick-link-icon">
+                        🥕
+                    </div>
+
+                    <div class="quick-link-title">
+                        My Ingredients
+                    </div>
+
+                    <div class="quick-link-description">
+                        Find recipes from ingredients you have.
+                    </div>
+
+                </a>
+
+
+
+                <a
+                    href="equipment.html"
+                    class="quick-link">
+
+                    <div class="quick-link-icon">
+                        🧰
+                    </div>
+
+                    <div class="quick-link-title">
+                        Kitchen Equipment
+                    </div>
+
+                    <div class="quick-link-description">
+                        Find recipes based on your equipment.
+                    </div>
+
+                </a>
+
+
+
+                <a
+                    href="favourites.html"
+                    class="quick-link">
+
+                    <div class="quick-link-icon">
+                        ⭐
+                    </div>
+
+                    <div class="quick-link-title">
+                        Favourite Recipes
+                    </div>
+
+                    <div class="quick-link-description">
+                        Open your saved recipes.
+                    </div>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================
+         FOOTER
+         ========================================= -->
+
+    <footer class="footer">
+
+        <p>
+
+            © 2026 CookMate |
+            Smart Cooking & Recipe Finder
+
+        </p>
+
+    </footer>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+         ========================================= -->
+
+    <script>
+
+
+        /* =========================================
+           DEFAULT PROFILE
+           ========================================= */
+
+        const defaultProfile = {
+
+            name: "CookMate User",
+
+            email: "",
+
+            bio: "",
+
+            image: ""
+
+        };
+
+
+
+        /* =========================================
+           GET PROFILE
+           ========================================= */
+
+        let profile =
+            JSON.parse(
+                localStorage.getItem(
+                    "cookmateProfile"
+                )
+            ) || {
+                ...defaultProfile
+            };
+
+
+
+        /* =========================================
+           PAGE LOAD
+           ========================================= */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                loadProfile();
+
+                updateStatistics();
+
+            }
+        );
+
+
+
+        /* =========================================
+           LOAD PROFILE
+           ========================================= */
+
+        function loadProfile() {
+
+            document.getElementById(
+                "profileName"
+            ).value =
+                profile.name || "";
+
+
+            document.getElementById(
+                "profileEmail"
+            ).value =
+                profile.email || "";
+
+
+            document.getElementById(
+                "profileBio"
+            ).value =
+                profile.bio || "";
+
+
+            document.getElementById(
+                "profileDisplayName"
+            ).textContent =
+                profile.name ||
+                "CookMate User";
+
+
+            document.getElementById(
+                "profileDisplayEmail"
+            ).textContent =
+                profile.email ||
+                "Welcome to CookMate";
+
+
+            if (profile.image) {
+
+                document.getElementById(
+                    "profilePicture"
+                ).innerHTML = `
+
+                    <img
+                        src="${profile.image}"
+                        alt="Profile Picture">
+
+                `;
+
+            }
+
+        }
+
+
+
+        /* =========================================
+           SAVE PROFILE
+           ========================================= */
+
+        function saveProfile() {
+
+            const name =
+                document
+                    .getElementById(
+                        "profileName"
+                    )
+                    .value
+                    .trim();
+
+
+            const email =
+                document
+                    .getElementById(
+                        "profileEmail"
+                    )
+                    .value
+                    .trim();
+
+
+            const bio =
+                document
+                    .getElementById(
+                        "profileBio"
+                    )
+                    .value
+                    .trim();
+
+
+            if (name === "") {
+
+                alert(
+                    "Please enter your name."
+                );
+
+                return;
+
+            }
+
+
+            profile.name = name;
+
+            profile.email = email;
+
+            profile.bio = bio;
+
+
+            localStorage.setItem(
+
+                "cookmateProfile",
+
+                JSON.stringify(profile)
+
+            );
+
+
+            loadProfile();
+
+
+            alert(
+                "✅ Profile saved successfully!"
+            );
+
+        }
+
+
+
+        /* =========================================
+           PROFILE IMAGE
+           ========================================= */
+
+        function changeProfilePicture(event) {
+
+            const file =
+                event.target.files[0];
+
+
+            if (!file) {
+
+                return;
+
+            }
+
+
+            if (!file.type.startsWith("image/")) {
+
+                alert(
+                    "Please select an image file."
+                );
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function (e) {
+
+                    profile.image =
+                        e.target.result;
+
+
+                    localStorage.setItem(
+
+                        "cookmateProfile",
+
+                        JSON.stringify(profile)
+
+                    );
+
+
+                    document.getElementById(
+                        "profilePicture"
+                    ).innerHTML = `
+
+                        <img
+                            src="${profile.image}"
+                            alt="Profile Picture">
+
+                    `;
+
+                };
+
+
+            reader.readAsDataURL(file);
+
+        }
+
+
+
+        /* =========================================
+           UPDATE STATISTICS
+           ========================================= */
+
+        function updateStatistics() {
+
+            const favourites =
+                JSON.parse(
+                    localStorage.getItem(
+                        "cookmateFavourites"
+                    )
+                ) || [];
+
+
+            const ingredients =
+                JSON.parse(
+                    localStorage.getItem(
+                        "cookmateIngredients"
+                    )
+                ) || [];
+
+
+            const equipment =
+                JSON.parse(
+                    localStorage.getItem(
+                        "cookmateEquipment"
+                    )
+                ) || [];
+
+
+            document.getElementById(
+                "favouriteCount"
+            ).textContent =
+                favourites.length;
+
+
+            document.getElementById(
+                "ingredientCount"
+            ).textContent =
+                ingredients.length;
+
+
+            document.getElementById(
+                "equipmentCount"
+            ).textContent =
+                equipment.length;
+
+        }
+
+
+
+        /* =========================================
+           RESET PROFILE
+           ========================================= */
+
+        function resetProfile() {
+
+            const confirmation =
+                confirm(
+                    "Reset your profile information?"
+                );
+
+
+            if (!confirmation) {
+
+                return;
+
+            }
+
+
+            profile = {
+                ...defaultProfile
+            };
+
+
+            localStorage.removeItem(
+                "cookmateProfile"
+            );
+
+
+            document.getElementById(
+                "profilePicture"
+            ).innerHTML = "👤";
+
+
+            loadProfile();
+
+
+            alert(
+                "Profile has been reset."
+            );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
