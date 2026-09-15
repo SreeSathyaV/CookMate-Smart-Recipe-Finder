@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CookMate - Recipe Details</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+
+    <style>
+
+        /* =====================================================
+           RECIPE DETAILS PAGE
+           ===================================================== */
+
+
+        /* =========================
+           PAGE HERO
+           ========================= */
+
+        .details-hero {
+
+            padding: 65px 7%;
+
+            background: #f9eee3;
+
+        }
+
+
+        .breadcrumb {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            margin-bottom: 25px;
+
+            font-size: 13px;
+
+            color: #817870;
+
+        }
+
+
+        .breadcrumb a {
+
+            color: #d75b22;
+
+            font-weight: 600;
+
+        }
+
+
+        /* =========================
+           MAIN RECIPE CARD
+           ========================= */
+
+        .recipe-details-card {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns: 0.9fr 1.1fr;
+
+            background: white;
+
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            border: 1px solid #eaded2;
+
+            box-shadow:
+                0 15px 45px
+                rgba(70, 45, 25, 0.09);
+
+        }
+
+
+        /* =========================
+           IMAGE
+           ========================= */
+
+        .details-image {
+
+            min-height: 480px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f7dfc7,
+                    #fff1df
+                );
+
+            position: relative;
+
+        }
+
+
+        .details-food {
+
+            font-size: 150px;
+
+            filter:
+                drop-shadow(
+                    0 15px 15px
+                    rgba(0,0,0,0.12)
+                );
+
+        }
+
+
+        .details-category {
+
+            position: absolute;
+
+            top: 20px;
+
+            left: 20px;
+
+            padding: 7px 12px;
+
+            background: white;
+
+            color: #d75b22;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        /* =========================
+           DETAILS CONTENT
+           ========================= */
+
+        .details-content {
+
+            padding: 50px;
+
+        }
+
+
+        .details-content h1 {
+
+            font-size: 44px;
+
+            line-height: 1.15;
+
+            color: #302a26;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .rating {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .stars {
+
+            color: #e99a35;
+
+            font-size: 18px;
+
+        }
+
+
+        .rating-text {
+
+            font-size: 13px;
+
+            color: #776e67;
+
+        }
+
+
+        .details-description {
+
+            color: #71675f;
+
+            font-size: 15px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        /* =========================
+           RECIPE META
+           ========================= */
+
+        .details-meta {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 10px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .meta-box {
+
+            padding: 14px 10px;
+
+            text-align: center;
+
+            background: #fff6ed;
+
+            border-radius: 12px;
+
+        }
+
+
+        .meta-icon {
+
+            display: block;
+
+            font-size: 20px;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .meta-box strong {
+
+            display: block;
+
+            font-size: 12px;
+
+            color: #403934;
+
+        }
+
+
+        .meta-box span {
+
+            font-size: 10px;
+
+            color: #817870;
+
+        }
+
+
+        /* =========================
+           ACTION BUTTONS
+           ========================= */
+
+        .recipe-actions {
+
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .action-btn {
+
+            border: none;
+
+            padding: 12px 17px;
+
+            border-radius: 10px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            transition: 0.3s ease;
+
+        }
+
+
+        .favorite-btn {
+
+            background: #fff0ed;
+
+            color: #d94c4c;
+
+            border: 1px solid #f2cccc;
+
+        }
+
+
+        .favorite-btn:hover {
+
+            background: #d94c4c;
+
+            color: white;
+
+        }
+
+
+        .shopping-btn {
+
+            background: #fff3e4;
+
+            color: #c96128;
+
+            border: 1px solid #f0d3b9;
+
+        }
+
+
+        .shopping-btn:hover {
+
+            background: #e66a2c;
+
+            color: white;
+
+        }
+
+
+        /* =========================
+           MAIN CONTENT
+           ========================= */
+
+        .details-main {
+
+            background: white;
+
+            padding-top: 70px;
+
+        }
+
+
+        .details-layout {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                0.8fr 1.2fr;
+
+            gap: 35px;
+
+        }
+
+
+        /* =========================
+           INGREDIENTS
+           ========================= */
+
+        .ingredients-card,
+        .equipment-card {
+
+            padding: 30px;
+
+            background: #fffaf5;
+
+            border: 1px solid #eee1d4;
+
+            border-radius: 20px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .details-heading {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .details-heading h2 {
+
+            font-size: 23px;
+
+            color: #342e2a;
+
+        }
+
+
+        .ingredient-list {
+
+            list-style: none;
+
+        }
+
+
+        .ingredient-list li {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            padding: 12px 0;
+
+            border-bottom:
+                1px solid #eee3d8;
+
+            font-size: 13px;
+
+            color: #554e48;
+
+        }
+
+
+        .ingredient-list li:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .ingredient-name {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+        }
+
+
+        .ingredient-check {
+
+            width: 18px;
+
+            height: 18px;
+
+            border-radius: 50%;
+
+            background: #fff0df;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 9px;
+
+            color: #e66a2c;
+
+        }
+
+
+        .quantity {
+
+            color: #817870;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+        }
+
+
+        /* =========================
+           EQUIPMENT
+           ========================= */
+
+        .equipment-list-details {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 10px;
+
+        }
+
+
+        .equipment-tag {
+
+            padding: 12px;
+
+            background: white;
+
+            border: 1px solid #eaded2;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            color: #625951;
+
+        }
+
+
+        /* =========================
+           INSTRUCTIONS
+           ========================= */
+
+        .instructions-card {
+
+            padding: 35px;
+
+            background: white;
+
+            border: 1px solid #eee1d4;
+
+            border-radius: 20px;
+
+        }
+
+
+        .instruction-step {
+
+            display: grid;
+
+            grid-template-columns: 45px 1fr;
+
+            gap: 18px;
+
+            margin-bottom: 30px;
+
+            position: relative;
+
+        }
+
+
+        .instruction-step:last-child {
+
+            margin-bottom: 0;
+
+        }
+
+
+        .step-circle {
+
+            width: 40px;
+
+            height: 40px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #e66a2c;
+
+            color: white;
+
+            border-radius: 50%;
+
+            font-weight: 800;
+
+            font-size: 13px;
+
+        }
+
+
+        .instruction-step h3 {
+
+            font-size: 17px;
+
+            margin-bottom: 6px;
+
+            color: #3a332e;
+
+        }
+
+
+        .instruction-step p {
+
+            color: #776e67;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =========================
+           COOKING TIPS
+           ========================= */
+
+        .tips-card {
+
+            margin-top: 30px;
+
+            padding: 28px;
+
+            background: #fff3e4;
+
+            border: 1px solid #f0d6bd;
+
+            border-radius: 18px;
+
+        }
+
+
+        .tips-card h2 {
+
+            font-size: 20px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .tips-card ul {
+
+            padding-left: 20px;
+
+        }
+
+
+        .tips-card li {
+
+            margin-bottom: 8px;
+
+            color: #655c55;
+
+            font-size: 13px;
+
+        }
+
+
+        /* =========================
+           RELATED RECIPES
+           ========================= */
+
+        .related-section {
+
+            margin-top: 70px;
+
+            padding-top: 70px;
+
+            background: #f9eee3;
+
+        }
+
+
+        .related-grid {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+
+        }
+
+
+        .related-card {
+
+            background: white;
+
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            border: 1px solid #eaded2;
+
+            transition: 0.3s ease;
+
+        }
+
+
+        .related-card:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(70,45,25,0.09);
+
+        }
+
+
+        .related-image {
+
+            height: 150px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #f9e9d7;
+
+            font-size: 65px;
+
+        }
+
+
+        .related-content {
+
+            padding: 17px;
+
+        }
+
+
+        .related-content h3 {
+
+            font-size: 15px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .related-content p {
+
+            color: #817870;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =========================
+           MOBILE
+           ========================= */
+
+        @media (max-width: 1000px) {
+
+            .recipe-details-card {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .details-image {
+
+                min-height: 330px;
+
+            }
+
+
+            .details-layout {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .related-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .details-hero {
+
+                padding: 40px 5%;
+
+            }
+
+
+            .details-content {
+
+                padding: 30px 22px;
+
+            }
+
+
+            .details-content h1 {
+
+                font-size: 34px;
+
+            }
+
+
+            .details-meta {
+
+                grid-template-columns:
+                    repeat(3, 1fr);
+
+            }
+
+
+            .details-main {
+
+                padding-left: 5%;
+
+                padding-right: 5%;
+
+            }
+
+
+            .ingredients-card,
+            .equipment-card,
+            .instructions-card {
+
+                padding: 22px;
+
+            }
+
+
+            .related-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .equipment-list-details {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    <header class="navbar">
+
+
+        <div class="logo">
+
+            🍳 <span>CookMate</span>
+
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="recipes.html"
+               class="active">
+                Recipes
+            </a>
+
+            <a href="ingredients.html">
+                My Ingredients
+            </a>
+
+            <a href="equipment.html">
+                My Kitchen
+            </a>
+
+            <a href="favourites.html">
+                ❤️ Favourites
+            </a>
+
+        </nav>
+
+
+        <a href="profile.html"
+           class="profile-btn">
+
+            👤 Profile
+
+        </a>
+
+
+    </header>
+
+
+
+    <!-- =====================================================
+         RECIPE HERO
+         ===================================================== -->
+
+    <section class="details-hero">
+
+
+        <div class="breadcrumb">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            &nbsp; / &nbsp;
+
+            <a href="recipes.html">
+                Recipes
+            </a>
+
+            &nbsp; / &nbsp;
+
+            Chicken Biryani
+
+        </div>
+
+
+
+        <div class="recipe-details-card">
+
+
+            <!-- IMAGE -->
+
+            <div class="details-image">
+
+                <div class="details-category">
+                    NON-VEG
+                </div>
+
+                <div class="details-food">
+                    🍛
+                </div>
+
+            </div>
+
+
+
+            <!-- CONTENT -->
+
+            <div class="details-content">
+
+
+                <h1>
+                    Chicken Biryani
+                </h1>
+
+
+                <div class="rating">
+
+                    <span class="stars">
+                        ★★★★★
+                    </span>
+
+                    <span class="rating-text">
+                        4.8 (125 ratings)
+                    </span>
+
+                </div>
+
+
+                <p class="details-description">
+
+                    A delicious and aromatic chicken biryani
+                    made with fragrant basmati rice, tender
+                    chicken, fresh herbs and flavorful spices.
+
+                </p>
+
+
+
+                <!-- META -->
+
+                <div class="details-meta">
+
+
+                    <div class="meta-box">
+
+                        <span class="meta-icon">
+                            🥣
+                        </span>
+
+                        <strong>
+                            Preparation
+                        </strong>
+
+                        <span>
+                            15 min
+                        </span>
+
+                    </div>
+
+
+                    <div class="meta-box">
+
+                        <span class="meta-icon">
+                            🔥
+                        </span>
+
+                        <strong>
+                            Cooking
+                        </strong>
+
+                        <span>
+                            30 min
+                        </span>
+
+                    </div>
+
+
+                    <div class="meta-box">
+
+                        <span class="meta-icon">
+                            👥
+                        </span>
+
+                        <strong>
+                            Servings
+                        </strong>
+
+                        <span>
+                            4 People
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ACTIONS -->
+
+                <div class="recipe-actions">
+
+
+                    <button
+                        class="action-btn favorite-btn"
+                        onclick="toggleFavorite()">
+
+                        ❤️ Save Recipe
+
+                    </button>
+
+
+                    <button
+                        class="action-btn shopping-btn"
+                        onclick="addShoppingList()">
+
+                        🛒 Shopping List
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         RECIPE CONTENT
+         ===================================================== -->
+
+    <main class="details-main">
+
+
+        <div class="details-layout">
+
+
+            <!-- =========================
+                 LEFT COLUMN
+                 ========================= -->
+
+            <div>
+
+
+                <!-- INGREDIENTS -->
+
+                <div class="ingredients-card">
+
+
+                    <div class="details-heading">
+
+                        <span>
+                            🧺
+                        </span>
+
+                        <h2>
+                            Ingredients
+                        </h2>
+
+                    </div>
+
+
+                    <ul class="ingredient-list">
+
+
+                        <li>
+
+                            <div class="ingredient-name">
+
+                                <span class="ingredient-check">
+                                    ✓
+                                </span>
+
+                                Basmati Rice
+
+                            </div>
+
+                            <span class="quantity">
+                                2 cups
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <div class="ingredient-name">
+
+                                <span class="ingredient-check">
+                                    ✓
+                                </span>
+
+                                Chicken
+
+                            </div>
+
+                            <span class="quantity">
+                                500 g
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <div class="ingredient-name">
+
+                                <span class="ingredient-check">
+                                    ✓
+                                </span>
+
+                                Onion
+
+                            </div>
+
+                            <span class="quantity">
+                                2 large
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <div class="ingredient-name">
+
+                                <span class="ingredient-check">
+                                    ✓
+                                </span>
+
+                                Tomato
+
+                            </div>
+
+                            <span class="quantity">
+                                2 medium
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <div class="ingredient-name">
+
+                                <span class="ingredient-check">
+                                    ✓
+                                </span>
+
+                                Ginger Garlic Paste
+
+                            </div>
+
+                            <span class="quantity">
+                                2 tbsp
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <div class="ingredient-name">
+
+                                <span class="ingredient-check">
+                                    ✓
+                                </span>
+
+                                Biryani Masala
+
+                            </div>
+
+                            <span class="quantity">
+                                2 tbsp
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <div class="ingredient-name">
+
+                                <span class="ingredient-check">
+                                    ✓
+                                </span>
+
+                                Curd
+
+                            </div>
+
+                            <span class="quantity">
+                                ½ cup
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <div class="ingredient-name">
+
+                                <span class="ingredient-check">
+                                    ✓
+                                </span>
+
+                                Mint & Coriander
+
+                            </div>
+
+                            <span class="quantity">
+                                1 handful
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <div class="ingredient-name">
+
+                                <span class="ingredient-check">
+                                    ✓
+                                </span>
+
+                                Cooking Oil
+
+                            </div>
+
+                            <span class="quantity">
+                                3 tbsp
+                            </span>
+
+                        </li>
+
+
+                        <li>
+
+                            <div class="ingredient-name">
+
+                                <span class="ingredient-check">
+                                    ✓
+                                </span>
+
+                                Salt
+
+                            </div>
+
+                            <span class="quantity">
+                                As needed
+                            </span>
+
+                        </li>
+
+
+                    </ul>
+
+
+                </div>
+
+
+
+                <!-- EQUIPMENT -->
+
+                <div class="equipment-card">
+
+
+                    <div class="details-heading">
+
+                        <span>
+                            🍳
+                        </span>
+
+                        <h2>
+                            Required Equipment
+                        </h2>
+
+                    </div>
+
+
+                    <div class="equipment-list-details">
+
+
+                        <div class="equipment-tag">
+                            🥘 Pressure Cooker
+                        </div>
+
+
+                        <div class="equipment-tag">
+                            🍳 Frying Pan
+                        </div>
+
+
+                        <div class="equipment-tag">
+                            🔪 Knife
+                        </div>
+
+
+                        <div class="equipment-tag">
+                            🥣 Mixing Bowl
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =========================
+                 RIGHT COLUMN
+                 ========================= -->
+
+            <div>
+
+
+                <!-- INSTRUCTIONS -->
+
+                <div class="instructions-card">
+
+
+                    <div class="details-heading">
+
+                        <span>
+                            👩‍🍳
+                        </span>
+
+                        <h2>
+                            Step-by-Step Instructions
+                        </h2>
+
+                    </div>
+
+
+
+                    <!-- STEP 1 -->
+
+                    <div class="instruction-step">
+
+                        <div class="step-circle">
+                            1
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Marinate the Chicken
+                            </h3>
+
+                            <p>
+                                Add chicken, curd, ginger garlic
+                                paste, biryani masala, salt and
+                                a little turmeric into a bowl.
+                                Mix everything well and marinate
+                                for at least 20 minutes.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- STEP 2 -->
+
+                    <div class="instruction-step">
+
+                        <div class="step-circle">
+                            2
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Prepare the Rice
+                            </h3>
+
+                            <p>
+                                Wash the basmati rice thoroughly.
+                                Boil water with salt and whole
+                                spices. Add rice and cook until
+                                it is about 70% done. Drain and
+                                keep aside.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- STEP 3 -->
+
+                    <div class="instruction-step">
+
+                        <div class="step-circle">
+                            3
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Cook the Chicken
+                            </h3>
+
+                            <p>
+                                Heat oil in a large pan.
+                                Add sliced onions and cook until
+                                golden brown. Add tomatoes and
+                                marinated chicken. Cook until the
+                                chicken is almost completely done.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- STEP 4 -->
+
+                    <div class="instruction-step">
+
+                        <div class="step-circle">
+                            4
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Layer the Biryani
+                            </h3>
+
+                            <p>
+                                Spread the partially cooked rice
+                                over the chicken. Add mint,
+                                coriander and fried onions.
+                                Add a little saffron milk if
+                                available.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- STEP 5 -->
+
+                    <div class="instruction-step">
+
+                        <div class="step-circle">
+                            5
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Dum Cook
+                            </h3>
+
+                            <p>
+                                Cover the pan tightly and cook
+                                on low flame for around 15 minutes.
+                                Turn off the flame and allow the
+                                biryani to rest for 5 minutes.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- STEP 6 -->
+
+                    <div class="instruction-step">
+
+                        <div class="step-circle">
+                            6
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Serve
+                            </h3>
+
+                            <p>
+                                Gently mix the layers without
+                                breaking the rice. Serve hot
+                                with onion raita, boiled egg
+                                or your favorite side dish.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- COOKING TIPS -->
+
+                <div class="tips-card">
+
+
+                    <h2>
+                        💡 Cooking Tips
+                    </h2>
+
+
+                    <ul>
+
+                        <li>
+                            Use good quality basmati rice
+                            for better texture.
+                        </li>
+
+                        <li>
+                            Do not overcook the rice before
+                            layering.
+                        </li>
+
+                        <li>
+                            Marinating the chicken improves
+                            the flavor and tenderness.
+                        </li>
+
+                        <li>
+                            Always cook the final biryani
+                            on low flame.
+                        </li>
+
+                        <li>
+                            Let the biryani rest for a few
+                            minutes before serving.
+                        </li>
+
+                    </ul>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         RELATED RECIPES
+         ===================================================== -->
+
+    <section class="related-section">
+
+
+        <div class="section-heading">
+
+            <span class="feature-label">
+                🍴 MORE TO TRY
+            </span>
+
+            <h2>
+                You May Also Like
+            </h2>
+
+            <p>
+                Discover more delicious recipes
+            </p>
+
+        </div>
+
+
+
+        <div class="related-grid">
+
+
+            <div class="related-card">
+
+                <div class="related-image">
+                    🍳
+                </div>
+
+                <div class="related-content">
+
+                    <h3>
+                        Egg Fried Rice
+                    </h3>
+
+                    <p>
+                        ⏱ 20 min · Easy
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="related-card">
+
+                <div class="related-image">
+                    🍗
+                </div>
+
+                <div class="related-content">
+
+                    <h3>
+                        Chicken 65
+                    </h3>
+
+                    <p>
+                        ⏱ 35 min · Medium
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="related-card">
+
+                <div class="related-image">
+                    🍚
+                </div>
+
+                <div class="related-content">
+
+                    <h3>
+                        Vegetable Pulao
+                    </h3>
+
+                    <p>
+                        ⏱ 30 min · Easy
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="related-card">
+
+                <div class="related-image">
+                    🧀
+                </div>
+
+                <div class="related-content">
+
+                    <h3>
+                        Paneer Butter Masala
+                    </h3>
+
+                    <p>
+                        ⏱ 35 min · Medium
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="footer">
+
+
+        <div class="footer-content">
+
+
+            <div class="footer-brand">
+
+                <h2>
+                    🍳 CookMate
+                </h2>
+
+                <p>
+                    Tell us what you have.
+                    We'll tell you what you can cook.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <h3>
+                    Quick Links
+                </h3>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="recipes.html">
+                    Recipes
+                </a>
+
+                <a href="ingredients.html">
+                    Ingredients
+                </a>
+
+                <a href="equipment.html">
+                    Kitchen Equipment
+                </a>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <h3>
+                    Categories
+                </h3>
+
+                <a href="recipes.html?category=veg">
+                    Vegetarian
+                </a>
+
+                <a href="recipes.html?category=nonveg">
+                    Non-Vegetarian
+                </a>
+
+                <a href="recipes.html?category=sweets">
+                    Sweets
+                </a>
+
+                <a href="recipes.html?category=snacks">
+                    Snacks
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 CookMate.
+                Made with ❤️ for food lovers.
+            </p>
+
+        </div>
+
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+
+
+        /* =========================
+           FAVORITE BUTTON
+           ========================= */
+
+        function toggleFavorite() {
+
+            const button =
+                document.querySelector(
+                    ".favorite-btn"
+                );
+
+
+            if (
+                button.classList.contains(
+                    "saved"
+                )
+            ) {
+
+                button.innerHTML =
+                    "❤️ Save Recipe";
+
+                button.classList.remove(
+                    "saved"
+                );
+
+                alert(
+                    "Recipe removed from favourites."
+                );
+
+            }
+
+            else {
+
+                button.innerHTML =
+                    "💖 Saved!";
+
+                button.classList.add(
+                    "saved"
+                );
+
+                alert(
+                    "Recipe added to favourites!"
+                );
+
+            }
+
+        }
+
+
+
+        /* =========================
+           SHOPPING LIST
+           ========================= */
+
+        function addShoppingList() {
+
+            alert(
+                "Ingredients added to your shopping list! 🛒"
+            );
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
