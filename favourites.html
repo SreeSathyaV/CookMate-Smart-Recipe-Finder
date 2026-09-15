@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Favourites | CookMate</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+
+    <style>
+
+        /* =========================================
+           FAVOURITES PAGE
+           ========================================= */
+
+        .favourites-hero {
+
+            text-align: center;
+
+            padding: 70px 20px 45px;
+
+        }
+
+
+        .favourites-hero h1 {
+
+            font-size: 42px;
+
+            margin-bottom: 12px;
+
+        }
+
+
+        .favourites-hero p {
+
+            max-width: 700px;
+
+            margin: auto;
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            color: #666;
+
+        }
+
+
+        .favourites-container {
+
+            width: 90%;
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding-bottom: 70px;
+
+        }
+
+
+        /* =========================================
+           TOP BAR
+           ========================================= */
+
+        .favourites-top {
+
+            background: rgba(255, 255, 255, 0.94);
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.08);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .favourites-count {
+
+            font-size: 15px;
+
+            color: #777;
+
+        }
+
+
+        .clear-favourites {
+
+            border: none;
+
+            background: #eee;
+
+            color: #333;
+
+            padding: 11px 18px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+
+        }
+
+
+        .clear-favourites:hover {
+
+            background: #ddd;
+
+        }
+
+
+        /* =========================================
+           SEARCH
+           ========================================= */
+
+        .favourite-search {
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .favourite-search input {
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+            padding: 15px 18px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            outline: none;
+
+        }
+
+
+        .favourite-search input:focus {
+
+            border-color: #777;
+
+        }
+
+
+        /* =========================================
+           FAVOURITES GRID
+           ========================================= */
+
+        .favourites-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(260px, 1fr));
+
+            gap: 22px;
+
+        }
+
+
+        /* =========================================
+           RECIPE CARD
+           ========================================= */
+
+        .favourite-card {
+
+            background: white;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 7px 22px rgba(0, 0, 0, 0.08);
+
+            transition: 0.3s;
+
+        }
+
+
+        .favourite-card:hover {
+
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 12px 28px rgba(0, 0, 0, 0.12);
+
+        }
+
+
+        .food-image {
+
+            height: 180px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #f5f2eb;
+
+            font-size: 75px;
+
+        }
+
+
+        .favourite-content {
+
+            padding: 22px;
+
+        }
+
+
+        .category-label {
+
+            display: inline-block;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            background: #eee;
+
+            color: #555;
+
+            padding: 6px 10px;
+
+            border-radius: 20px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .favourite-content h3 {
+
+            margin: 5px 0 8px;
+
+            font-size: 21px;
+
+        }
+
+
+        .description {
+
+            color: #666;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .recipe-info {
+
+            display: flex;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+            color: #777;
+
+            font-size: 13px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        /* =========================================
+           CARD BUTTONS
+           ========================================= */
+
+        .card-buttons {
+
+            display: flex;
+
+            gap: 10px;
+
+        }
+
+
+        .view-recipe {
+
+            flex: 1;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            background: #333;
+
+            color: white;
+
+            padding: 11px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+
+        }
+
+
+        .view-recipe:hover {
+
+            opacity: 0.85;
+
+        }
+
+
+        .remove-favourite {
+
+            border: none;
+
+            background: #f1eee8;
+
+            color: #555;
+
+            padding: 11px 14px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-size: 16px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .remove-favourite:hover {
+
+            background: #ddd;
+
+        }
+
+
+        /* =========================================
+           EMPTY STATE
+           ========================================= */
+
+        .empty-state {
+
+            background: rgba(255, 255, 255, 0.94);
+
+            border-radius: 20px;
+
+            padding: 60px 25px;
+
+            text-align: center;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.08);
+
+        }
+
+
+        .empty-icon {
+
+            font-size: 70px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .empty-state h2 {
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .empty-state p {
+
+            color: #777;
+
+            line-height: 1.6;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .browse-btn {
+
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: #333;
+
+            color: white;
+
+            padding: 13px 22px;
+
+            border-radius: 11px;
+
+            font-weight: 600;
+
+        }
+
+
+        .browse-btn:hover {
+
+            opacity: 0.85;
+
+        }
+
+
+        /* =========================================
+           NO SEARCH RESULT
+           ========================================= */
+
+        .no-search-result {
+
+            display: none;
+
+            text-align: center;
+
+            padding: 35px;
+
+            color: #777;
+
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 600px) {
+
+            .favourites-hero h1 {
+
+                font-size: 32px;
+
+            }
+
+
+            .favourites-top {
+
+                padding: 20px;
+
+            }
+
+
+            .card-buttons {
+
+                flex-direction: column;
+
+            }
+
+
+            .remove-favourite {
+
+                width: 100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         NAVBAR
+         ========================================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            🍳 CookMate
+
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="recipes.html">
+                Recipes
+            </a>
+
+            <a href="ingredients.html">
+                My Ingredients
+            </a>
+
+            <a href="equipment.html">
+                Equipment
+            </a>
+
+            <a href="favourites.html"
+               class="active">
+
+                Favourites
+
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================================
+         HERO
+         ========================================= -->
+
+    <section class="favourites-hero">
+
+        <h1>
+            ⭐ My Favourite Recipes
+        </h1>
+
+        <p>
+
+            Keep your favourite recipes in one place
+            and quickly access them whenever you want
+            to cook.
+
+        </p>
+
+    </section>
+
+
+
+    <main class="favourites-container">
+
+
+        <!-- =========================================
+             TOP INFORMATION
+             ========================================= -->
+
+        <section class="favourites-top">
+
+            <div>
+
+                <h2>
+                    ❤️ Saved Recipes
+                </h2>
+
+                <div
+                    class="favourites-count"
+                    id="favouritesCount">
+
+                    0 recipes saved
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="clear-favourites"
+                onclick="clearAllFavourites()">
+
+                🗑️ Clear All
+
+            </button>
+
+        </section>
+
+
+
+        <!-- =========================================
+             SEARCH
+             ========================================= -->
+
+        <div class="favourite-search">
+
+            <input
+                type="text"
+                id="favouriteSearch"
+                placeholder="🔍 Search your favourite recipes..."
+                oninput="searchFavourites()">
+
+        </div>
+
+
+
+        <!-- =========================================
+             FAVOURITES GRID
+             ========================================= -->
+
+        <div
+            class="favourites-grid"
+            id="favouritesGrid">
+        </div>
+
+
+        <!-- NO SEARCH RESULT -->
+
+        <div
+            class="no-search-result"
+            id="noSearchResult">
+
+            😔 No favourite recipe matches your search.
+
+        </div>
+
+
+
+        <!-- =========================================
+             EMPTY STATE
+             ========================================= -->
+
+        <div
+            class="empty-state"
+            id="emptyState">
+
+            <div class="empty-icon">
+
+                💔
+
+            </div>
+
+
+            <h2>
+                No Favourite Recipes Yet
+            </h2>
+
+
+            <p>
+
+                You haven't saved any recipes yet.
+
+                <br>
+
+                Browse the recipes and click
+                <strong>Save Recipe</strong>
+                to add them here.
+
+            </p>
+
+
+            <a
+                href="recipes.html"
+                class="browse-btn">
+
+                🍳 Browse Recipes
+
+            </a>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================================
+         FOOTER
+         ========================================= -->
+
+    <footer class="footer">
+
+        <p>
+
+            © 2026 CookMate |
+            Smart Cooking & Recipe Finder
+
+        </p>
+
+    </footer>
+
+
+
+    <!-- =========================================
+         JAVASCRIPT
+         ========================================= -->
+
+    <script>
+
+
+        /* =========================================
+           RECIPE DATABASE
+           ========================================= */
+
+        const recipeDatabase = [
+
+            {
+                id: "chicken-biryani",
+
+                name: "Chicken Biryani",
+
+                category: "NON-VEG",
+
+                icon: "🍛",
+
+                description:
+                    "A delicious and aromatic chicken biryani made with basmati rice and spices.",
+
+                time: "45 min",
+
+                servings: "4 people",
+
+                link:
+                    "recipe-details.html?recipe=chicken-biryani"
+            },
+
+
+            {
+                id: "masala-dosa",
+
+                name: "Masala Dosa",
+
+                category: "VEG",
+
+                icon: "🥞",
+
+                description:
+                    "Crispy dosa filled with delicious spicy potato masala.",
+
+                time: "35 min",
+
+                servings: "3 people",
+
+                link:
+                    "recipe-details.html?recipe=masala-dosa"
+            },
+
+
+            {
+                id: "gulab-jamun",
+
+                name: "Gulab Jamun",
+
+                category: "SWEETS",
+
+                icon: "🍩",
+
+                description:
+                    "Soft and sweet gulab jamun soaked in warm sugar syrup.",
+
+                time: "40 min",
+
+                servings: "4 people",
+
+                link:
+                    "recipe-details.html?recipe=gulab-jamun"
+            },
+
+
+            {
+                id: "vegetable-sandwich",
+
+                name: "Vegetable Sandwich",
+
+                category: "SNACKS",
+
+                icon: "🥪",
+
+                description:
+                    "A quick and tasty sandwich packed with fresh vegetables.",
+
+                time: "15 min",
+
+                servings: "2 people",
+
+                link:
+                    "recipe-details.html?recipe=vegetable-sandwich"
+            },
+
+
+            {
+                id: "egg-fried-rice",
+
+                name: "Egg Fried Rice",
+
+                category: "NON-VEG",
+
+                icon: "🍳",
+
+                description:
+                    "Simple and tasty fried rice prepared with egg and vegetables.",
+
+                time: "20 min",
+
+                servings: "2 people",
+
+                link:
+                    "recipe-details.html?recipe=egg-fried-rice"
+            },
+
+
+            {
+                id: "paneer-butter-masala",
+
+                name: "Paneer Butter Masala",
+
+                category: "VEG",
+
+                icon: "🧀",
+
+                description:
+                    "Soft paneer cooked in a rich and creamy tomato gravy.",
+
+                time: "30 min",
+
+                servings: "3 people",
+
+                link:
+                    "recipe-details.html?recipe=paneer-butter-masala"
+            },
+
+
+            {
+                id: "onion-pakoda",
+
+                name: "Onion Pakoda",
+
+                category: "SNACKS",
+
+                icon: "🧅",
+
+                description:
+                    "Crispy and spicy onion pakodas perfect for evening snacks.",
+
+                time: "20 min",
+
+                servings: "3 people",
+
+                link:
+                    "recipe-details.html?recipe=onion-pakoda"
+            },
+
+
+            {
+                id: "payasam",
+
+                name: "Payasam",
+
+                category: "SWEETS",
+
+                icon: "🥛",
+
+                description:
+                    "Traditional creamy Indian payasam prepared with milk and sugar.",
+
+                time: "30 min",
+
+                servings: "4 people",
+
+                link:
+                    "recipe-details.html?recipe=payasam"
+            },
+
+
+            {
+                id: "vegetable-pulao",
+
+                name: "Vegetable Pulao",
+
+                category: "VEG",
+
+                icon: "🍚",
+
+                description:
+                    "Aromatic rice cooked with colourful vegetables and spices.",
+
+                time: "30 min",
+
+                servings: "4 people",
+
+                link:
+                    "recipe-details.html?recipe=vegetable-pulao"
+            },
+
+
+            {
+                id: "chicken-65",
+
+                name: "Chicken 65",
+
+                category: "NON-VEG",
+
+                icon: "🍗",
+
+                description:
+                    "Crispy, spicy and delicious South Indian style chicken starter.",
+
+                time: "35 min",
+
+                servings: "3 people",
+
+                link:
+                    "recipe-details.html?recipe=chicken-65"
+            },
+
+
+            {
+                id: "vegetable-samosa",
+
+                name: "Vegetable Samosa",
+
+                category: "SNACKS",
+
+                icon: "🥟",
+
+                description:
+                    "Crispy samosa filled with spicy potato and vegetable filling.",
+
+                time: "40 min",
+
+                servings: "4 people",
+
+                link:
+                    "recipe-details.html?recipe=vegetable-samosa"
+            },
+
+
+            {
+                id: "carrot-halwa",
+
+                name: "Carrot Halwa",
+
+                category: "SWEETS",
+
+                icon: "🥕",
+
+                description:
+                    "Rich and delicious carrot halwa made with milk and sugar.",
+
+                time: "45 min",
+
+                servings: "4 people",
+
+                link:
+                    "recipe-details.html?recipe=carrot-halwa"
+            }
+
+        ];
+
+
+
+        /* =========================================
+           GET FAVOURITES
+           ========================================= */
+
+        let favourites =
+            JSON.parse(
+                localStorage.getItem(
+                    "cookmateFavourites"
+                )
+            ) || [];
+
+
+
+        /* =========================================
+           PAGE LOAD
+           ========================================= */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                displayFavourites();
+
+            }
+        );
+
+
+
+        /* =========================================
+           DISPLAY FAVOURITES
+           ========================================= */
+
+        function displayFavourites() {
+
+            const grid =
+                document.getElementById(
+                    "favouritesGrid"
+                );
+
+
+            const emptyState =
+                document.getElementById(
+                    "emptyState"
+                );
+
+
+            const noSearchResult =
+                document.getElementById(
+                    "noSearchResult"
+                );
+
+
+            const count =
+                document.getElementById(
+                    "favouritesCount"
+                );
+
+
+            grid.innerHTML = "";
+
+            noSearchResult.style.display =
+                "none";
+
+
+            count.textContent =
+                favourites.length +
+                (
+                    favourites.length === 1
+                        ? " recipe saved"
+                        : " recipes saved"
+                );
+
+
+            if (favourites.length === 0) {
+
+                emptyState.style.display =
+                    "block";
+
+                return;
+
+            }
+
+
+            emptyState.style.display =
+                "none";
+
+
+            favourites.forEach(
+                function (favouriteId) {
+
+                    const recipe =
+                        recipeDatabase.find(
+                            item =>
+                                item.id ===
+                                favouriteId
+                        );
+
+
+                    if (!recipe) {
+
+                        return;
+
+                    }
+
+
+                    createRecipeCard(
+                        recipe,
+                        grid
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* =========================================
+           CREATE RECIPE CARD
+           ========================================= */
+
+        function createRecipeCard(
+            recipe,
+            container
+        ) {
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "favourite-card";
+
+
+            card.dataset.name =
+                recipe.name.toLowerCase();
+
+
+            card.innerHTML = `
+
+                <div class="food-image">
+
+                    ${recipe.icon}
+
+                </div>
+
+
+                <div class="favourite-content">
+
+                    <span class="category-label">
+
+                        ${recipe.category}
+
+                    </span>
+
+
+                    <h3>
+
+                        ${recipe.name}
+
+                    </h3>
+
+
+                    <div class="description">
+
+                        ${recipe.description}
+
+                    </div>
+
+
+                    <div class="recipe-info">
+
+                        <span>
+                            ⏱️ ${recipe.time}
+                        </span>
+
+                        <span>
+                            👥 ${recipe.servings}
+                        </span>
+
+                    </div>
+
+
+                    <div class="card-buttons">
+
+                        <a
+                            href="${recipe.link}"
+                            class="view-recipe">
+
+                            👨‍🍳 View Recipe
+
+                        </a>
+
+
+                        <button
+                            class="remove-favourite"
+                            onclick="removeFavourite('${recipe.id}')"
+                            title="Remove from favourites">
+
+                            🗑️
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(card);
+
+        }
+
+
+
+        /* =========================================
+           REMOVE ONE FAVOURITE
+           ========================================= */
+
+        function removeFavourite(id) {
+
+            favourites =
+                favourites.filter(
+                    favouriteId =>
+                        favouriteId !== id
+                );
+
+
+            saveFavourites();
+
+            displayFavourites();
+
+        }
+
+
+
+        /* =========================================
+           CLEAR ALL FAVOURITES
+           ========================================= */
+
+        function clearAllFavourites() {
+
+            if (favourites.length === 0) {
+
+                return;
+
+            }
+
+
+            const confirmation =
+                confirm(
+                    "Are you sure you want to remove all favourite recipes?"
+                );
+
+
+            if (confirmation) {
+
+                favourites = [];
+
+                saveFavourites();
+
+                displayFavourites();
+
+            }
+
+        }
+
+
+
+        /* =========================================
+           SAVE FAVOURITES
+           ========================================= */
+
+        function saveFavourites() {
+
+            localStorage.setItem(
+
+                "cookmateFavourites",
+
+                JSON.stringify(favourites)
+
+            );
+
+        }
+
+
+
+        /* =========================================
+           SEARCH FAVOURITES
+           ========================================= */
+
+        function searchFavourites() {
+
+            const search =
+                document
+                    .getElementById(
+                        "favouriteSearch"
+                    )
+                    .value
+                    .toLowerCase()
+                    .trim();
+
+
+            const cards =
+                document.querySelectorAll(
+                    ".favourite-card"
+                );
+
+
+            let visibleCount = 0;
+
+
+            cards.forEach(card => {
+
+                const name =
+                    card.dataset.name;
+
+
+                if (
+                    name.includes(search)
+                ) {
+
+                    card.style.display =
+                        "block";
+
+                    visibleCount++;
+
+                } else {
+
+                    card.style.display =
+                        "none";
+
+                }
+
+            });
+
+
+            const noSearchResult =
+                document.getElementById(
+                    "noSearchResult"
+                );
+
+
+            if (
+                search !== "" &&
+                visibleCount === 0 &&
+                favourites.length > 0
+            ) {
+
+                noSearchResult.style.display =
+                    "block";
+
+            } else {
+
+                noSearchResult.style.display =
+                    "none";
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
