@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CookMate - Smart Recipe Finder</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            🍳 <span>CookMate</span>
+        </div>
+
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="recipes.html">Recipes</a>
+            <a href="ingredients.html">My Ingredients</a>
+            <a href="equipment.html">My Kitchen</a>
+            <a href="favourites.html">❤️ Favourites</a>
+        </nav>
+
+        <a href="profile.html" class="profile-btn">
+            👤 Profile
+        </a>
+
+    </header>
+
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <p class="welcome-text">
+                    Welcome to CookMate 👩‍🍳
+                </p>
+
+                <h1>
+                    What do you want to
+                    <span>cook today?</span>
+                </h1>
+
+                <p class="hero-description">
+                    Find delicious recipes based on what you have
+                    in your kitchen.
+                </p>
+
+
+                <!-- SEARCH BAR -->
+
+                <div class="search-box">
+
+                    <input
+                        type="text"
+                        id="homeSearch"
+                        placeholder="Search for a recipe..."
+                    >
+
+                    <button onclick="searchRecipe()">
+                        🔍 Search
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= QUICK CATEGORIES ================= -->
+
+        <section class="categories-section">
+
+            <div class="section-heading">
+
+                <h2>Explore Categories</h2>
+
+                <p>
+                    Choose what you are craving today
+                </p>
+
+            </div>
+
+
+            <div class="category-container">
+
+                <a href="recipes.html?category=veg"
+                   class="category-card">
+
+                    <div class="category-icon">
+                        🥗
+                    </div>
+
+                    <h3>Vegetarian</h3>
+
+                    <p>Healthy & delicious veg recipes</p>
+
+                </a>
+
+
+                <a href="recipes.html?category=nonveg"
+                   class="category-card">
+
+                    <div class="category-icon">
+                        🍗
+                    </div>
+
+                    <h3>Non-Vegetarian</h3>
+
+                    <p>Chicken, fish, egg & more</p>
+
+                </a>
+
+
+                <a href="recipes.html?category=sweets"
+                   class="category-card">
+
+                    <div class="category-icon">
+                        🍰
+                    </div>
+
+                    <h3>Sweets</h3>
+
+                    <p>Sweet treats for every occasion</p>
+
+                </a>
+
+
+                <a href="recipes.html?category=snacks"
+                   class="category-card">
+
+                    <div class="category-icon">
+                        🍟
+                    </div>
+
+                    <h3>Snacks</h3>
+
+                    <p>Quick & tasty snack ideas</p>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= INGREDIENT FEATURE ================= -->
+
+        <section class="smart-section">
+
+            <div class="smart-content">
+
+                <span class="feature-label">
+                    ✨ SMART RECIPE FINDER
+                </span>
+
+                <h2>
+                    Cook with what
+                    <span>you already have</span>
+                </h2>
+
+                <p>
+                    Don't know what to cook? Tell us the ingredients
+                    available in your kitchen and we'll recommend
+                    recipes you can make.
+                </p>
+
+                <a href="ingredients.html"
+                   class="primary-btn">
+
+                    🧺 Find Recipes From Ingredients
+
+                </a>
+
+            </div>
+
+
+            <div class="smart-example">
+
+                <div class="ingredient-box">
+
+                    <h3>🧺 Your Ingredients</h3>
+
+                    <div class="ingredient-tags">
+
+                        <span>Rice</span>
+                        <span>Egg</span>
+                        <span>Onion</span>
+                        <span>Tomato</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="arrow">
+                    →
+                </div>
+
+
+                <div class="ingredient-box recipe-result">
+
+                    <h3>🍳 You Can Make</h3>
+
+                    <p>
+                        Egg Fried Rice
+                    </p>
+
+                    <p>
+                        Tomato Rice
+                    </p>
+
+                    <p>
+                        Egg Masala
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= EQUIPMENT FEATURE ================= -->
+
+        <section class="equipment-section">
+
+            <div class="equipment-content">
+
+                <span class="feature-label">
+                    🍳 KITCHEN EQUIPMENT
+                </span>
+
+                <h2>
+                    Recipes based on your
+                    <span>kitchen equipment</span>
+                </h2>
+
+                <p>
+                    Enter the cooking equipment you have at home
+                    and discover recipes that you can prepare with it.
+                </p>
+
+                <a href="equipment.html"
+                   class="primary-btn">
+
+                    🍳 Explore My Kitchen
+
+                </a>
+
+            </div>
+
+
+            <div class="equipment-list">
+
+                <div class="equipment-item">
+                    🔥
+                    <span>Gas Stove</span>
+                </div>
+
+                <div class="equipment-item">
+                    🍳
+                    <span>Tawa</span>
+                </div>
+
+                <div class="equipment-item">
+                    🥘
+                    <span>Pressure Cooker</span>
+                </div>
+
+                <div class="equipment-item">
+                    ♨️
+                    <span>Oven</span>
+                </div>
+
+                <div class="equipment-item">
+                    🌪️
+                    <span>Air Fryer</span>
+                </div>
+
+                <div class="equipment-item">
+                    🥤
+                    <span>Mixer Grinder</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= RECIPE OF THE DAY ================= -->
+
+        <section class="recipe-day-section">
+
+            <div class="section-heading">
+
+                <span class="feature-label">
+                    ⭐ TODAY'S PICK
+                </span>
+
+                <h2>Recipe of the Day</h2>
+
+                <p>
+                    A delicious recipe selected for you
+                </p>
+
+            </div>
+
+
+            <div class="recipe-day-card">
+
+                <div class="recipe-image">
+
+                    <div class="food-placeholder">
+                        🍛
+                    </div>
+
+                </div>
+
+
+                <div class="recipe-day-content">
+
+                    <span class="recipe-category">
+                        NON-VEGETARIAN
+                    </span>
+
+                    <h2>
+                        Chicken Biryani
+                    </h2>
+
+                    <p>
+                        A flavorful and aromatic rice dish made
+                        with tender chicken and delicious spices.
+                    </p>
+
+
+                    <div class="recipe-info">
+
+                        <span>⏱ 45 min</span>
+
+                        <span>👥 4 servings</span>
+
+                        <span>📊 Medium</span>
+
+                    </div>
+
+
+                    <a href="recipe-details.html?recipe=chicken-biryani"
+                       class="primary-btn">
+
+                        View Recipe →
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= POPULAR RECIPES ================= -->
+
+        <section class="popular-section">
+
+            <div class="section-heading">
+
+                <h2>Popular Recipes</h2>
+
+                <p>
+                    Recipes everyone loves
+                </p>
+
+            </div>
+
+
+            <div class="recipe-grid">
+
+
+                <div class="recipe-card">
+
+                    <div class="recipe-card-image">
+                        🍕
+                    </div>
+
+                    <div class="recipe-card-content">
+
+                        <span>SNACKS</span>
+
+                        <h3>Vegetable Sandwich</h3>
+
+                        <p>
+                            ⏱ 15 min
+                        </p>
+
+                        <a href="recipe-details.html?recipe=vegetable-sandwich">
+                            View Recipe →
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="recipe-card">
+
+                    <div class="recipe-card-image">
+                        🥞
+                    </div>
+
+                    <div class="recipe-card-content">
+
+                        <span>VEG</span>
+
+                        <h3>Masala Dosa</h3>
+
+                        <p>
+                            ⏱ 30 min
+                        </p>
+
+                        <a href="recipe-details.html?recipe=masala-dosa">
+                            View Recipe →
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="recipe-card">
+
+                    <div class="recipe-card-image">
+                        🍮
+                    </div>
+
+                    <div class="recipe-card-content">
+
+                        <span>SWEETS</span>
+
+                        <h3>Gulab Jamun</h3>
+
+                        <p>
+                            ⏱ 30 min
+                        </p>
+
+                        <a href="recipe-details.html?recipe=gulab-jamun">
+                            View Recipe →
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="recipe-card">
+
+                    <div class="recipe-card-image">
+                        🍳
+                    </div>
+
+                    <div class="recipe-card-content">
+
+                        <span>NON-VEG</span>
+
+                        <h3>Egg Fried Rice</h3>
+
+                        <p>
+                            ⏱ 20 min
+                        </p>
+
+                        <a href="recipe-details.html?recipe=egg-fried-rice">
+                            View Recipe →
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="view-all">
+
+                <a href="recipes.html"
+                   class="secondary-btn">
+
+                    View All Recipes →
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= HOW IT WORKS ================= -->
+
+        <section class="how-section">
+
+            <div class="section-heading">
+
+                <h2>How CookMate Works</h2>
+
+                <p>
+                    Find your perfect recipe in three simple steps
+                </p>
+
+            </div>
+
+
+            <div class="steps-container">
+
+                <div class="step">
+
+                    <div class="step-number">
+                        1
+                    </div>
+
+                    <h3>Tell Us What You Have</h3>
+
+                    <p>
+                        Enter the ingredients and equipment
+                        available in your kitchen.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        2
+                    </div>
+
+                    <h3>We Find Recipes</h3>
+
+                    <p>
+                        CookMate checks the available ingredients
+                        and finds suitable recipes.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        3
+                    </div>
+
+                    <h3>Start Cooking</h3>
+
+                    <p>
+                        Follow the step-by-step recipe instructions
+                        and enjoy your food!
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <h2>🍳 CookMate</h2>
+
+                <p>
+                    Tell us what you have.
+                    We'll tell you what you can cook.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <h3>Quick Links</h3>
+
+                <a href="index.html">Home</a>
+                <a href="recipes.html">Recipes</a>
+                <a href="ingredients.html">Ingredients</a>
+                <a href="equipment.html">Kitchen Equipment</a>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <h3>Categories</h3>
+
+                <a href="recipes.html?category=veg">Vegetarian</a>
+                <a href="recipes.html?category=nonveg">Non-Vegetarian</a>
+                <a href="recipes.html?category=sweets">Sweets</a>
+                <a href="recipes.html?category=snacks">Snacks</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 CookMate. Made with ❤️ for food lovers.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
