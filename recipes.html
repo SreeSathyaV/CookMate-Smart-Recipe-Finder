@@ -4,165 +4,289 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Recipes - CookMate</title>
+    <title>CookMate - Explore Recipes</title>
 
     <link rel="stylesheet" href="css/style.css">
 
     <style>
+        /* =====================================================
+           RECIPES PAGE
+        ===================================================== */
 
         .recipes-page {
-            padding: 60px 8%;
-            background: #fffdf5;
+            background: #f8f5ec;
             min-height: 100vh;
         }
 
+        /* ---------- HERO ---------- */
+
         .recipes-hero {
+            padding: 70px 20px 45px;
             text-align: center;
-            margin-bottom: 40px;
+            background:
+                linear-gradient(
+                    rgba(248, 245, 236, 0.92),
+                    rgba(248, 245, 236, 0.96)
+                );
+        }
+
+        .recipes-hero-content {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .recipes-label {
+            display: inline-block;
+            background: #fff;
+            color: #c96d16;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
         }
 
         .recipes-hero h1 {
-            font-size: 42px;
-            margin-bottom: 12px;
+            font-size: clamp(36px, 5vw, 58px);
+            margin: 0 0 12px;
+            color: #2f2a25;
+            line-height: 1.1;
+        }
+
+        .recipes-hero h1 span {
+            color: #d97719;
         }
 
         .recipes-hero p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .recipe-search {
             max-width: 650px;
-            margin: 25px auto;
+            margin: 0 auto 30px;
+            color: #6d655c;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        /* ---------- SEARCH ---------- */
+
+        .recipe-search-area {
+            max-width: 720px;
+            margin: auto;
+        }
+
+        .recipe-search-box {
             display: flex;
-            gap: 10px;
+            background: #ffffff;
+            border: 1px solid #ddd6ca;
+            border-radius: 16px;
+            padding: 6px;
+            box-shadow: 0 8px 25px rgba(70, 50, 30, 0.08);
         }
 
-        .recipe-search input {
+        .recipe-search-box input {
             flex: 1;
-            padding: 15px 18px;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .recipe-search button {
-            padding: 15px 25px;
             border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 600;
+            outline: none;
+            padding: 15px 18px;
+            font-size: 16px;
+            background: transparent;
+            color: #333;
         }
 
-        .filter-buttons {
+        .recipe-search-box button {
+            border: none;
+            background: #302e2d;
+            color: white;
+            padding: 0 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .recipe-search-box button:hover {
+            background: #d97719;
+        }
+
+        /* ---------- FILTERS ---------- */
+
+        .recipe-filters {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 10px;
-            margin: 30px 0 40px;
+            gap: 12px;
+            margin-top: 32px;
         }
 
         .filter-btn {
-            padding: 10px 20px;
-            border: 1px solid #ddd;
-            border-radius: 25px;
-            background: white;
+            border: 1px solid #ddd6ca;
+            background: #ffffff;
+            color: #403a34;
+            padding: 11px 22px;
+            border-radius: 30px;
             cursor: pointer;
-            transition: 0.3s;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
         .filter-btn:hover {
             transform: translateY(-2px);
+            border-color: #d97719;
+            color: #d97719;
         }
 
         .filter-btn.active {
-            background: #333;
+            background: #302e2d;
             color: white;
-            border-color: #333;
+            border-color: #302e2d;
+        }
+
+        /* ---------- RESULT COUNT ---------- */
+
+        .recipe-results {
+            max-width: 1250px;
+            margin: auto;
+            padding: 15px 20px 70px;
         }
 
         .recipe-count {
             text-align: center;
-            margin-bottom: 25px;
-            color: #666;
+            margin: 15px 0 30px;
+            color: #776e64;
+            font-size: 15px;
         }
+
+        /* ---------- GRID ---------- */
 
         .recipes-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+            gap: 26px;
         }
 
+        /* ---------- CARD ---------- */
+
         .recipe-card {
-            background: white;
+            background: #ffffff;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
-            transition: 0.3s;
+            box-shadow: 0 8px 25px rgba(60, 45, 30, 0.09);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.04);
         }
 
         .recipe-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(60, 45, 30, 0.14);
         }
+
+        /* ---------- IMAGE ---------- */
 
         .recipe-image {
-            height: 190px;
-            background: #f5efe0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 80px;
+            height: 235px;
+            position: relative;
+            overflow: hidden;
+            background: #eee8da;
         }
 
+        .recipe-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .recipe-card:hover .recipe-image img {
+            transform: scale(1.06);
+        }
+
+        /* ---------- CATEGORY BADGE ---------- */
+
+        .recipe-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 7px 12px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.93);
+            color: #4a4035;
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        /* ---------- CARD CONTENT ---------- */
+
         .recipe-content {
-            padding: 20px;
+            padding: 22px;
         }
 
         .recipe-content h3 {
-            margin-bottom: 8px;
+            margin: 0 0 8px;
+            color: #2e2925;
+            font-size: 21px;
         }
 
-        .recipe-category-label {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 15px;
-            background: #f0ead8;
-            font-size: 12px;
-            margin-bottom: 12px;
+        .recipe-rating {
+            color: #d79a16;
+            font-weight: 700;
+            margin-bottom: 10px;
         }
 
-        .recipe-content p {
-            color: #666;
+        .recipe-description {
+            color: #716960;
             font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 15px;
-        }
-
-        .recipe-rating-small {
-            margin-bottom: 15px;
+            line-height: 1.6;
+            min-height: 45px;
+            margin-bottom: 18px;
         }
 
         .view-recipe-btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             text-decoration: none;
-            padding: 10px 16px;
+            background: #302e2d;
+            color: #ffffff;
+            padding: 11px 18px;
             border-radius: 10px;
-            background: #333;
-            color: white;
             font-size: 14px;
+            font-weight: 700;
+            transition: 0.3s;
         }
+
+        .view-recipe-btn:hover {
+            background: #d97719;
+            color: #fff;
+        }
+
+        /* ---------- NO RESULTS ---------- */
 
         .no-results {
-            text-align: center;
-            padding: 60px 20px;
             display: none;
+            text-align: center;
+            padding: 70px 20px;
+            background: white;
+            border-radius: 20px;
+            margin-top: 20px;
         }
 
-        .no-results .emoji {
-            font-size: 60px;
+        .no-results-icon {
+            font-size: 55px;
             margin-bottom: 15px;
         }
+
+        .no-results h2 {
+            color: #332d28;
+            margin-bottom: 10px;
+        }
+
+        .no-results p {
+            color: #777;
+        }
+
+        /* ---------- MOBILE ---------- */
 
         @media (max-width: 1000px) {
             .recipes-grid {
@@ -172,1470 +296,1383 @@
 
         @media (max-width: 650px) {
 
-            .recipes-page {
-                padding: 40px 5%;
+            .recipes-hero {
+                padding: 45px 16px 30px;
             }
 
             .recipes-hero h1 {
-                font-size: 32px;
+                font-size: 38px;
             }
 
-            .recipe-search {
+            .recipes-hero p {
+                font-size: 15px;
+            }
+
+            .recipe-search-box {
                 flex-direction: column;
+                gap: 8px;
+                padding: 8px;
+            }
+
+            .recipe-search-box button {
+                height: 45px;
             }
 
             .recipes-grid {
                 grid-template-columns: 1fr;
             }
 
-        }
+            .recipe-image {
+                height: 220px;
+            }
 
+            .recipe-filters {
+                gap: 8px;
+            }
+
+            .filter-btn {
+                padding: 9px 15px;
+            }
+        }
     </style>
 </head>
 
-<body>
+<body class="recipes-page">
 
-<!-- ================= NAVBAR ================= -->
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
 
-<nav class="navbar">
+    <header class="navbar">
+        <div class="nav-container">
 
-    <div class="logo">
-        🍳 CookMate
-    </div>
+            <a href="index.html" class="logo">
+                🍳 <span>CookMate</span>
+            </a>
 
-    <div class="nav-links">
+            <nav class="nav-links">
 
-        <a href="index.html" data-i18n="home">
-            Home
-        </a>
+                <a href="index.html" data-i18n="home">
+                    Home
+                </a>
 
-        <a href="recipes.html" data-i18n="recipes">
-            Recipes
-        </a>
+                <a href="recipes.html" class="active" data-i18n="recipes">
+                    Recipes
+                </a>
 
-        <a href="ingredients.html" data-i18n="ingredients">
-            Ingredients
-        </a>
+                <a href="ingredients.html" data-i18n="ingredients">
+                    Ingredients
+                </a>
 
-        <a href="equipment.html" data-i18n="equipment">
-            Equipment
-        </a>
+                <a href="equipment.html" data-i18n="equipment">
+                    Equipment
+                </a>
 
-        <a href="favourites.html" data-i18n="favourites">
-            Favourites
-        </a>
+                <a href="favourites.html" data-i18n="favourites">
+                    Favourites
+                </a>
 
-        <a href="profile.html" data-i18n="profile">
-            Profile
-        </a>
+                <a href="profile.html" data-i18n="profile">
+                    Profile
+                </a>
 
-    </div>
+            </nav>
 
-</nav>
+        </div>
+    </header>
 
 
-<!-- ================= MAIN ================= -->
-
-<main class="recipes-page">
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
 
     <section class="recipes-hero">
 
-        <h1 data-i18n="popularRecipes">
-            Explore Recipes
-        </h1>
+        <div class="recipes-hero-content">
 
-        <p id="recipeDescription">
-            Discover delicious recipes for every occasion.
-        </p>
+            <div class="recipes-label">
+                🍽️ <span data-i18n="explore">EXPLORE</span>
+            </div>
+
+            <h1>
+                <span data-i18n="popular">Explore</span>
+                <br>
+                <span data-i18n="popularRecipes">Recipes</span>
+            </h1>
+
+            <p>
+                Discover delicious recipes for every occasion,
+                from quick snacks to traditional meals and sweet treats.
+            </p>
 
 
-        <!-- SEARCH -->
+            <!-- SEARCH -->
 
-        <div class="recipe-search">
+            <div class="recipe-search-area">
 
-            <input
-                type="text"
-                id="recipeSearchInput"
-                data-i18n-placeholder="searchPlaceholder"
-                placeholder="Search recipes..."
-            >
+                <div class="recipe-search-box">
 
-            <button
-                onclick="searchRecipes()"
-                data-i18n="search"
-            >
-                Search
-            </button>
+                    <input
+                        type="text"
+                        id="recipeSearchInput"
+                        placeholder="Search recipes..."
+                        data-i18n-placeholder="searchPlaceholder"
+                        autocomplete="off"
+                    >
+
+                    <button
+                        type="button"
+                        id="recipeSearchButton"
+                        onclick="filterRecipes()"
+                        data-i18n="search"
+                    >
+                        🔍 Search
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- FILTERS -->
+
+            <div class="recipe-filters">
+
+                <button
+                    class="filter-btn active"
+                    data-category="all"
+                    onclick="selectCategory('all')"
+                >
+                    🍽️ All
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-category="veg"
+                    onclick="selectCategory('veg')"
+                >
+                    🥗 Veg
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-category="nonveg"
+                    onclick="selectCategory('nonveg')"
+                >
+                    🍗 Non-Veg
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-category="sweets"
+                    onclick="selectCategory('sweets')"
+                >
+                    🍰 Sweets
+                </button>
+
+                <button
+                    class="filter-btn"
+                    data-category="snacks"
+                    onclick="selectCategory('snacks')"
+                >
+                    🥪 Snacks
+                </button>
+
+            </div>
 
         </div>
 
     </section>
 
 
-    <!-- ================= FILTERS ================= -->
+    <!-- =====================================================
+         RECIPES
+    ====================================================== -->
 
-    <div class="filter-buttons">
+    <main class="recipe-results">
 
-        <button
-            class="filter-btn active"
-            data-category="all"
-            onclick="selectCategory('all', this)"
-            id="allButton"
+        <div
+            id="recipeCount"
+            class="recipe-count"
         >
-            All
-        </button>
-
-        <button
-            class="filter-btn"
-            data-category="veg"
-            onclick="selectCategory('veg', this)"
-        >
-            🥗 <span data-i18n="vegetarian">
-                Veg
-            </span>
-        </button>
-
-        <button
-            class="filter-btn"
-            data-category="nonveg"
-            onclick="selectCategory('nonveg', this)"
-        >
-            🍗 <span data-i18n="nonVegetarian">
-                Non-Veg
-            </span>
-        </button>
-
-        <button
-            class="filter-btn"
-            data-category="sweets"
-            onclick="selectCategory('sweets', this)"
-        >
-            🍰 <span data-i18n="sweets">
-                Sweets
-            </span>
-        </button>
-
-        <button
-            class="filter-btn"
-            data-category="snacks"
-            onclick="selectCategory('snacks', this)"
-        >
-            🥪 <span data-i18n="snacks">
-                Snacks
-            </span>
-        </button>
-
-    </div>
-
-
-    <!-- COUNT -->
-
-    <div class="recipe-count">
-
-        <span id="recipeCount">
-            18
-        </span>
-
-        <span id="countText">
-            recipes found
-        </span>
-
-    </div>
-
-
-    <!-- ================= RECIPES ================= -->
-
-    <section class="recipes-grid" id="recipesGrid">
-
-
-        <!-- 1 -->
-
-        <article
-            class="recipe-card"
-            data-name="chicken biryani"
-            data-category="nonveg"
-        >
-
-            <div class="recipe-image">
-                🍗
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Non-Veg
-                </span>
-
-                <h3>
-                    Chicken Biryani
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.8
-                </div>
-
-                <p>
-                    Flavorful and aromatic chicken biryani.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=chicken-biryani"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- 2 -->
-
-        <article
-            class="recipe-card"
-            data-name="masala dosa"
-            data-category="veg"
-        >
-
-            <div class="recipe-image">
-                🥞
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Veg
-                </span>
-
-                <h3>
-                    Masala Dosa
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.7
-                </div>
-
-                <p>
-                    Crispy dosa with delicious potato masala.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=masala-dosa"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- 3 -->
-
-        <article
-            class="recipe-card"
-            data-name="gulab jamun"
-            data-category="sweets"
-        >
-
-            <div class="recipe-image">
-                🍩
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Sweets
-                </span>
-
-                <h3>
-                    Gulab Jamun
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.9
-                </div>
-
-                <p>
-                    Soft sweet soaked in sugar syrup.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=gulab-jamun"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- 4 -->
-
-        <article
-            class="recipe-card"
-            data-name="vegetable sandwich"
-            data-category="snacks"
-        >
-
-            <div class="recipe-image">
-                🥪
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Snacks
-                </span>
-
-                <h3>
-                    Vegetable Sandwich
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.6
-                </div>
-
-                <p>
-                    Quick and healthy vegetable sandwich.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=vegetable-sandwich"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- 5 -->
-
-        <article
-            class="recipe-card"
-            data-name="egg fried rice"
-            data-category="nonveg"
-        >
-
-            <div class="recipe-image">
-                🍳
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Non-Veg
-                </span>
-
-                <h3>
-                    Egg Fried Rice
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.7
-                </div>
-
-                <p>
-                    Quick fried rice with egg and vegetables.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=egg-fried-rice"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- 6 -->
-
-        <article
-            class="recipe-card"
-            data-name="paneer butter masala"
-            data-category="veg"
-        >
-
-            <div class="recipe-image">
-                🧀
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Veg
-                </span>
-
-                <h3>
-                    Paneer Butter Masala
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.8
-                </div>
-
-                <p>
-                    Creamy paneer curry with tomato and butter.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=paneer-butter-masala"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- 7 -->
-
-        <article
-            class="recipe-card"
-            data-name="onion pakoda"
-            data-category="snacks"
-        >
-
-            <div class="recipe-image">
-                🧅
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Snacks
-                </span>
-
-                <h3>
-                    Onion Pakoda
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.6
-                </div>
-
-                <p>
-                    Crispy onion fritters made with gram flour.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=onion-pakoda"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- 8 -->
-
-        <article
-            class="recipe-card"
-            data-name="payasam"
-            data-category="sweets"
-        >
-
-            <div class="recipe-image">
-                🥛
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Sweets
-                </span>
-
-                <h3>
-                    Payasam
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.8
-                </div>
-
-                <p>
-                    Traditional creamy Indian dessert.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=payasam"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- 9 -->
-
-        <article
-            class="recipe-card"
-            data-name="vegetable pulao"
-            data-category="veg"
-        >
-
-            <div class="recipe-image">
-                🍚
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Veg
-                </span>
-
-                <h3>
-                    Vegetable Pulao
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.6
-                </div>
-
-                <p>
-                    Aromatic rice cooked with fresh vegetables.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=vegetable-pulao"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- 10 -->
-
-        <article
-            class="recipe-card"
-            data-name="chicken 65"
-            data-category="nonveg"
-        >
-
-            <div class="recipe-image">
-                🍗
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Non-Veg
-                </span>
-
-                <h3>
-                    Chicken 65
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.8
-                </div>
-
-                <p>
-                    Spicy and crispy fried chicken.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=chicken-65"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- 11 -->
-
-        <article
-            class="recipe-card"
-            data-name="vegetable samosa"
-            data-category="snacks"
-        >
-
-            <div class="recipe-image">
-                🥟
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Snacks
-                </span>
-
-                <h3>
-                    Vegetable Samosa
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.7
-                </div>
-
-                <p>
-                    Crispy pastry filled with spicy vegetables.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=vegetable-samosa"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- 12 -->
-
-        <article
-            class="recipe-card"
-            data-name="carrot halwa"
-            data-category="sweets"
-        >
-
-            <div class="recipe-image">
-                🥕
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Sweets
-                </span>
-
-                <h3>
-                    Carrot Halwa
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.8
-                </div>
-
-                <p>
-                    Sweet and creamy carrot dessert.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=carrot-halwa"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- 13 -->
-
-        <article
-            class="recipe-card"
-            data-name="banana milkshake"
-            data-category="veg"
-        >
-
-            <div class="recipe-image">
-                🍌
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Veg
-                </span>
-
-                <h3>
-                    Banana Milkshake
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.7
-                </div>
-
-                <p>
-                    Simple creamy banana milkshake.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=banana-milkshake"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- 14 -->
-
-        <article
-            class="recipe-card"
-            data-name="idli"
-            data-category="veg"
-        >
-
-            <div class="recipe-image">
-                ⚪
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Veg
-                </span>
-
-                <h3>
-                    Idli
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.8
-                </div>
-
-                <p>
-                    Soft and healthy South Indian steamed food.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=idli"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- 15 -->
-
-        <article
-            class="recipe-card"
-            data-name="steamed vegetables"
-            data-category="veg"
-        >
-
-            <div class="recipe-image">
-                🥦
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Veg
-                </span>
-
-                <h3>
-                    Steamed Vegetables
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.5
-                </div>
-
-                <p>
-                    Healthy vegetables cooked using steam.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=steamed-vegetables"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- 16 -->
-
-        <article
-            class="recipe-card"
-            data-name="baked cake"
-            data-category="sweets"
-        >
-
-            <div class="recipe-image">
-                🍰
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Sweets
-                </span>
-
-                <h3>
-                    Baked Cake
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.6
-                </div>
-
-                <p>
-                    Soft homemade cake baked in an oven.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=baked-cake"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- 17 -->
-
-        <article
-            class="recipe-card"
-            data-name="microwave mug cake"
-            data-category="sweets"
-        >
-
-            <div class="recipe-image">
-                🍫
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Sweets
-                </span>
-
-                <h3>
-                    Microwave Mug Cake
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.7
-                </div>
-
-                <p>
-                    Quick single-serving cake made in a microwave.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=microwave-mug-cake"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- 18 -->
-
-        <article
-            class="recipe-card"
-            data-name="aloo roti"
-            data-category="veg"
-        >
-
-            <div class="recipe-image">
-                🫓
-            </div>
-
-            <div class="recipe-content">
-
-                <span class="recipe-category-label">
-                    Veg
-                </span>
-
-                <h3>
-                    Aloo Roti
-                </h3>
-
-                <div class="recipe-rating-small">
-                    ⭐ 4.6
-                </div>
-
-                <p>
-                    Indian flatbread filled with spicy potato.
-                </p>
-
-                <a
-                    href="recipe-details.html?recipe=aloo-roti"
-                    class="view-recipe-btn"
-                    data-i18n="viewRecipe"
-                >
-                    View Recipe
-                </a>
-
-            </div>
-
-        </article>
-
-    </section>
-
-
-    <!-- ================= NO RESULTS ================= -->
-
-    <section
-        class="no-results"
-        id="noResults"
-    >
-
-        <div class="emoji">
-            🔍
+            18 recipes found
         </div>
 
-        <h2 id="noResultsTitle">
-            No recipes found
-        </h2>
 
-        <p id="noResultsText">
-            Try another recipe name or category.
-        </p>
+        <div
+            class="recipes-grid"
+            id="recipesGrid"
+        >
 
-    </section>
+            <!-- =================================================
+                 CHICKEN BIRYANI
+            ================================================== -->
 
-</main>
+            <article
+                class="recipe-card"
+                data-category="nonveg"
+                data-name="chicken biryani"
+            >
+
+                <div class="recipe-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=900&q=85"
+                        alt="Chicken Biryani"
+                        loading="lazy"
+                    >
+
+                    <span class="recipe-category">
+                        🍗 Non-Veg
+                    </span>
+
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Chicken Biryani</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.8
+                    </div>
+
+                    <p class="recipe-description">
+                        Flavorful and aromatic chicken biryani
+                        prepared with fragrant rice and spices.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=chicken-biryani"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
 
 
-<!-- ================= FOOTER ================= -->
+            <!-- =================================================
+                 MASALA DOSA
+            ================================================== -->
 
-<footer class="footer">
+            <article
+                class="recipe-card"
+                data-category="veg"
+                data-name="masala dosa"
+            >
 
-    <div class="footer-content">
+                <div class="recipe-image">
 
-        <div>
+                    <img
+                        src="https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=900&q=85"
+                        alt="Masala Dosa"
+                        loading="lazy"
+                    >
 
-            <h3>
-                🍳 CookMate
-            </h3>
+                    <span class="recipe-category">
+                        🥗 Veg
+                    </span>
 
-            <p data-i18n="footerDescription">
-                Your smart cooking companion for easy and delicious recipes.
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Masala Dosa</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.7
+                    </div>
+
+                    <p class="recipe-description">
+                        Crispy South Indian dosa filled with
+                        delicious spiced potato masala.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=masala-dosa"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 GULAB JAMUN
+            ================================================== -->
+
+            <article
+                class="recipe-card"
+                data-category="sweets"
+                data-name="gulab jamun"
+            >
+
+                <div class="recipe-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1601303516534-8c4f8a7a3f34?auto=format&fit=crop&w=900&q=85"
+                        alt="Gulab Jamun"
+                        loading="lazy"
+                    >
+
+                    <span class="recipe-category">
+                        🍰 Sweets
+                    </span>
+
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Gulab Jamun</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.9
+                    </div>
+
+                    <p class="recipe-description">
+                        Soft and juicy sweet dumplings soaked
+                        in fragrant sugar syrup.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=gulab-jamun"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 VEGETABLE SANDWICH
+            ================================================== -->
+
+            <article
+                class="recipe-card"
+                data-category="snacks"
+                data-name="vegetable sandwich"
+            >
+
+                <div class="recipe-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=900&q=85"
+                        alt="Vegetable Sandwich"
+                        loading="lazy"
+                    >
+
+                    <span class="recipe-category">
+                        🥪 Snacks
+                    </span>
+
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Vegetable Sandwich</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.6
+                    </div>
+
+                    <p class="recipe-description">
+                        Quick and healthy sandwich packed with
+                        fresh vegetables.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=vegetable-sandwich"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 EGG FRIED RICE
+            ================================================== -->
+
+            <article
+                class="recipe-card"
+                data-category="nonveg"
+                data-name="egg fried rice"
+            >
+
+                <div class="recipe-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=900&q=85"
+                        alt="Egg Fried Rice"
+                        loading="lazy"
+                    >
+
+                    <span class="recipe-category">
+                        🍗 Non-Veg
+                    </span>
+
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Egg Fried Rice</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.7
+                    </div>
+
+                    <p class="recipe-description">
+                        Quick fried rice made with eggs,
+                        vegetables and aromatic seasoning.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=egg-fried-rice"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 PANEER BUTTER MASALA
+            ================================================== -->
+
+            <article
+                class="recipe-card"
+                data-category="veg"
+                data-name="paneer butter masala"
+            >
+
+                <div class="recipe-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=900&q=85"
+                        alt="Paneer Butter Masala"
+                        loading="lazy"
+                    >
+
+                    <span class="recipe-category">
+                        🥗 Veg
+                    </span>
+
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Paneer Butter Masala</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.8
+                    </div>
+
+                    <p class="recipe-description">
+                        Creamy paneer curry cooked with tomato,
+                        butter and aromatic spices.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=paneer-butter-masala"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 ONION PAKODA
+            ================================================== -->
+
+            <article
+                class="recipe-card"
+                data-category="snacks"
+                data-name="onion pakoda"
+            >
+
+                <div class="recipe-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=900&q=85"
+                        alt="Onion Pakoda"
+                        loading="lazy"
+                    >
+
+                    <span class="recipe-category">
+                        🥪 Snacks
+                    </span>
+
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Onion Pakoda</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.6
+                    </div>
+
+                    <p class="recipe-description">
+                        Crispy onion fritters made with gram flour
+                        and simple Indian spices.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=onion-pakoda"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 PAYASAM
+            ================================================== -->
+
+            <article
+                class="recipe-card"
+                data-category="sweets"
+                data-name="payasam"
+            >
+
+                <div class="recipe-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=900&q=85"
+                        alt="Payasam"
+                        loading="lazy"
+                    >
+
+                    <span class="recipe-category">
+                        🍰 Sweets
+                    </span>
+
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Payasam</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.8
+                    </div>
+
+                    <p class="recipe-description">
+                        Traditional creamy Indian dessert made
+                        with milk, sugar and aromatic ingredients.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=payasam"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 VEGETABLE PULAO
+            ================================================== -->
+
+            <article
+                class="recipe-card"
+                data-category="veg"
+                data-name="vegetable pulao"
+            >
+
+                <div class="recipe-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=900&q=85"
+                        alt="Vegetable Pulao"
+                        loading="lazy"
+                    >
+
+                    <span class="recipe-category">
+                        🥗 Veg
+                    </span>
+
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Vegetable Pulao</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.6
+                    </div>
+
+                    <p class="recipe-description">
+                        Fragrant rice cooked with colorful
+                        vegetables and mild spices.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=vegetable-pulao"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 CHICKEN 65
+            ================================================== -->
+
+            <article
+                class="recipe-card"
+                data-category="nonveg"
+                data-name="chicken 65"
+            >
+
+                <div class="recipe-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=900&q=85"
+                        alt="Chicken 65"
+                        loading="lazy"
+                    >
+
+                    <span class="recipe-category">
+                        🍗 Non-Veg
+                    </span>
+
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Chicken 65</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.8
+                    </div>
+
+                    <p class="recipe-description">
+                        Spicy and crispy fried chicken with
+                        bold South Indian flavours.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=chicken-65"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 VEGETABLE SAMOSA
+            ================================================== -->
+
+            <article
+                class="recipe-card"
+                data-category="snacks"
+                data-name="vegetable samosa"
+            >
+
+                <div class="recipe-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85"
+                        alt="Vegetable Samosa"
+                        loading="lazy"
+                    >
+
+                    <span class="recipe-category">
+                        🥪 Snacks
+                    </span>
+
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Vegetable Samosa</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.7
+                    </div>
+
+                    <p class="recipe-description">
+                        Crispy pastry filled with spicy potato
+                        and mixed vegetable stuffing.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=vegetable-samosa"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 CARROT HALWA
+            ================================================== -->
+
+            <article
+                class="recipe-card"
+                data-category="sweets"
+                data-name="carrot halwa"
+            >
+
+                <div class="recipe-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=900&q=85"
+                        alt="Carrot Halwa"
+                        loading="lazy"
+                    >
+
+                    <span class="recipe-category">
+                        🍰 Sweets
+                    </span>
+
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Carrot Halwa</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.8
+                    </div>
+
+                    <p class="recipe-description">
+                        Sweet and creamy carrot dessert
+                        cooked with milk and sugar.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=carrot-halwa"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 BANANA MILKSHAKE
+            ================================================== -->
+
+            <article
+                class="recipe-card"
+                data-category="veg"
+                data-name="banana milkshake"
+            >
+
+                <div class="recipe-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=900&q=85"
+                        alt="Banana Milkshake"
+                        loading="lazy"
+                    >
+
+                    <span class="recipe-category">
+                        🥗 Veg
+                    </span>
+
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Banana Milkshake</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.7
+                    </div>
+
+                    <p class="recipe-description">
+                        Creamy banana milkshake prepared
+                        with fresh milk and ripe bananas.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=banana-milkshake"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 IDLI
+            ================================================== -->
+
+            <article
+                class="recipe-card"
+                data-category="veg"
+                data-name="idli"
+            >
+
+                <div class="recipe-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=85"
+                        alt="Idli"
+                        loading="lazy"
+                    >
+
+                    <span class="recipe-category">
+                        🥗 Veg
+                    </span>
+
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Idli</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.8
+                    </div>
+
+                    <p class="recipe-description">
+                        Soft and fluffy South Indian steamed
+                        rice cakes served with chutney or sambar.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=idli"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 STEAMED VEGETABLES
+            ================================================== -->
+
+            <article
+                class="recipe-card"
+                data-category="veg"
+                data-name="steamed vegetables"
+            >
+
+                <div class="recipe-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=900&q=85"
+                        alt="Steamed Vegetables"
+                        loading="lazy"
+                    >
+
+                    <span class="recipe-category">
+                        🥗 Veg
+                    </span>
+
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Steamed Vegetables</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.5
+                    </div>
+
+                    <p class="recipe-description">
+                        Healthy mixed vegetables lightly steamed
+                        to preserve their natural flavour.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=steamed-vegetables"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 BAKED CAKE
+            ================================================== -->
+
+            <article
+                class="recipe-card"
+                data-category="sweets"
+                data-name="baked cake"
+            >
+
+                <div class="recipe-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85"
+                        alt="Baked Cake"
+                        loading="lazy"
+                    >
+
+                    <span class="recipe-category">
+                        🍰 Sweets
+                    </span>
+
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Baked Cake</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.7
+                    </div>
+
+                    <p class="recipe-description">
+                        Soft homemade cake with a light,
+                        fluffy texture and sweet flavour.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=baked-cake"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 MICROWAVE MUG CAKE
+            ================================================== -->
+
+            <article
+                class="recipe-card"
+                data-category="sweets"
+                data-name="microwave mug cake"
+            >
+
+                <div class="recipe-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1606313564200-e75d5e30476b?auto=format&fit=crop&w=900&q=85"
+                        alt="Microwave Mug Cake"
+                        loading="lazy"
+                    >
+
+                    <span class="recipe-category">
+                        🍰 Sweets
+                    </span>
+
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Microwave Mug Cake</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.6
+                    </div>
+
+                    <p class="recipe-description">
+                        Quick single-serving chocolate cake
+                        prepared in a microwave.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=microwave-mug-cake"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 ALOO ROTI
+            ================================================== -->
+
+            <article
+                class="recipe-card"
+                data-category="veg"
+                data-name="aloo roti"
+            >
+
+                <div class="recipe-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=900&q=85"
+                        alt="Aloo Roti"
+                        loading="lazy"
+                    >
+
+                    <span class="recipe-category">
+                        🥗 Veg
+                    </span>
+
+                </div>
+
+                <div class="recipe-content">
+
+                    <h3>Aloo Roti</h3>
+
+                    <div class="recipe-rating">
+                        ⭐ 4.6
+                    </div>
+
+                    <p class="recipe-description">
+                        Soft Indian flatbread filled with
+                        seasoned potato mixture.
+                    </p>
+
+                    <a
+                        href="recipe-details.html?recipe=aloo-roti"
+                        class="view-recipe-btn"
+                    >
+                        View Recipe →
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <!-- =====================================================
+             NO RESULTS
+        ====================================================== -->
+
+        <div
+            id="noResults"
+            class="no-results"
+        >
+
+            <div class="no-results-icon">
+                🍽️
+            </div>
+
+            <h2>
+                No recipes found
+            </h2>
+
+            <p>
+                Try another recipe name or choose a different category.
             </p>
 
         </div>
 
-        <div>
+    </main>
 
-            <p data-i18n="madeForFoodLovers">
-                Made with ❤️ for food lovers
-            </p>
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div>
+                <h3>🍳 CookMate</h3>
+
+                <p>
+                    Your smart cooking companion for
+                    discovering delicious recipes.
+                </p>
+            </div>
+
+            <div>
+                <h4>Quick Links</h4>
+
+                <a href="index.html">Home</a>
+                <a href="recipes.html">Recipes</a>
+                <a href="ingredients.html">Ingredients</a>
+                <a href="equipment.html">Equipment</a>
+            </div>
+
+            <div>
+                <h4>CookMate</h4>
+
+                <a href="favourites.html">Favourites</a>
+                <a href="profile.html">Profile</a>
+            </div>
 
         </div>
 
-    </div>
+        <div class="footer-bottom">
+            Made with ❤️ for food lovers
+        </div>
 
-</footer>
-
-
-<!-- ================= SHARED SCRIPT ================= -->
-
-<script src="js/script.js"></script>
+    </footer>
 
 
-<script>
+    <!-- =====================================================
+         SHARED JAVASCRIPT
+    ====================================================== -->
 
-/* =====================================================
-   LANGUAGE DATA
-===================================================== */
-
-const recipePageLanguages = {
-
-    en: {
-        description:
-            "Discover delicious recipes for every occasion.",
-
-        all: "All",
-
-        count: "recipes found",
-
-        noResults:
-            "No recipes found",
-
-        tryAnother:
-            "Try another recipe name or category.",
-
-        viewRecipe:
-            "View Recipe"
-    },
-
-    ta: {
-        description:
-            "ஒவ்வொரு சந்தர்ப்பத்திற்கும் சுவையான சமையல் குறிப்புகளை கண்டறியுங்கள்.",
-
-        all: "அனைத்தும்",
-
-        count:
-            "சமையல் குறிப்புகள் கிடைத்தன",
-
-        noResults:
-            "சமையல் குறிப்புகள் எதுவும் கிடைக்கவில்லை",
-
-        tryAnother:
-            "வேறு சமையல் பெயர் அல்லது வகையை முயற்சிக்கவும்.",
-
-        viewRecipe:
-            "சமையல் குறிப்பை பார்க்க"
-    },
-
-    hi: {
-        description:
-            "हर अवसर के लिए स्वादिष्ट रेसिपी खोजें।",
-
-        all: "सभी",
-
-        count:
-            "रेसिपी मिलीं",
-
-        noResults:
-            "कोई रेसिपी नहीं मिली",
-
-        tryAnother:
-            "कोई दूसरा रेसिपी नाम या श्रेणी आज़माएँ।",
-
-        viewRecipe:
-            "रेसिपी देखें"
-    },
-
-    ml: {
-        description:
-            "എല്ലാ അവസരങ്ങൾക്കും അനുയോജ്യമായ രുചികരമായ പാചകക്കുറിപ്പുകൾ കണ്ടെത്തൂ.",
-
-        all: "എല്ലാം",
-
-        count:
-            "പാചകക്കുറിപ്പുകൾ ലഭിച്ചു",
-
-        noResults:
-            "പാചകക്കുറിപ്പുകൾ കണ്ടെത്താനായില്ല",
-
-        tryAnother:
-            "മറ്റൊരു പാചകക്കുറിപ്പിന്റെ പേരോ വിഭാഗമോ പരീക്ഷിക്കുക.",
-
-        viewRecipe:
-            "പാചകക്കുറിപ്പ് കാണുക"
-    },
-
-    te: {
-        description:
-            "ప్రతి సందర్భానికి రుచికరమైన వంటకాలను కనుగొనండి.",
-
-        all: "అన్నీ",
-
-        count:
-            "వంటకాలు కనుగొనబడ్డాయి",
-
-        noResults:
-            "వంటకాలు ఏవీ కనుగొనబడలేదు",
-
-        tryAnother:
-            "మరొక వంటకం పేరు లేదా కేటగిరీని ప్రయత్నించండి.",
-
-        viewRecipe:
-            "వంటకం చూడండి"
-    }
-
-};
+    <script src="js/script.js"></script>
 
 
-/* =====================================================
-   GET LANGUAGE
-===================================================== */
+    <!-- =====================================================
+         RECIPES PAGE JAVASCRIPT
+    ====================================================== -->
 
-function getRecipesLanguage() {
+    <script>
 
-    return localStorage.getItem("cookmateLanguage") || "en";
-
-}
+        let currentCategory = "all";
 
 
-/* =====================================================
-   SEARCH
-===================================================== */
+        /* ---------------------------------------------
+           FILTER RECIPES
+        --------------------------------------------- */
 
-function searchRecipes() {
+        function filterRecipes() {
 
-    const input =
+            const searchInput =
+                document.getElementById("recipeSearchInput");
+
+            const searchText =
+                searchInput.value.trim().toLowerCase();
+
+            const cards =
+                document.querySelectorAll(".recipe-card");
+
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+
+                const name =
+                    card.dataset.name.toLowerCase();
+
+                const category =
+                    card.dataset.category;
+
+                const matchesSearch =
+                    name.includes(searchText);
+
+                const matchesCategory =
+                    currentCategory === "all" ||
+                    category === currentCategory;
+
+                if (matchesSearch && matchesCategory) {
+
+                    card.style.display = "";
+
+                    visibleCount++;
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+            updateRecipeCount(visibleCount);
+
+        }
+
+
+        /* ---------------------------------------------
+           CATEGORY FILTER
+        --------------------------------------------- */
+
+        function selectCategory(category) {
+
+            currentCategory = category;
+
+            const buttons =
+                document.querySelectorAll(".filter-btn");
+
+            buttons.forEach(button => {
+
+                button.classList.remove("active");
+
+                if (button.dataset.category === category) {
+
+                    button.classList.add("active");
+
+                }
+
+            });
+
+            filterRecipes();
+
+        }
+
+
+        /* ---------------------------------------------
+           RESULT COUNT
+        --------------------------------------------- */
+
+        function updateRecipeCount(count) {
+
+            const countElement =
+                document.getElementById("recipeCount");
+
+            const noResults =
+                document.getElementById("noResults");
+
+            const grid =
+                document.getElementById("recipesGrid");
+
+            countElement.textContent =
+                count === 1
+                    ? "1 recipe found"
+                    : `${count} recipes found`;
+
+            if (count === 0) {
+
+                grid.style.display = "none";
+
+                noResults.style.display = "block";
+
+            } else {
+
+                grid.style.display = "grid";
+
+                noResults.style.display = "none";
+
+            }
+
+        }
+
+
+        /* ---------------------------------------------
+           ENTER KEY SEARCH
+        --------------------------------------------- */
+
         document
             .getElementById("recipeSearchInput")
-            .value
-            .toLowerCase()
-            .trim();
+            .addEventListener("keydown", function(event) {
 
+                if (event.key === "Enter") {
 
-    const cards =
-        document.querySelectorAll(".recipe-card");
+                    filterRecipes();
 
+                }
 
-    let visibleCount = 0;
+            });
 
 
-    cards.forEach(card => {
+        /* ---------------------------------------------
+           READ URL PARAMETERS
+        --------------------------------------------- */
 
-        const name =
-            card.dataset.name.toLowerCase();
+        function loadURLFilters() {
 
+            const params =
+                new URLSearchParams(window.location.search);
 
-        if (
-            input === "" ||
-            name.includes(input)
-        ) {
+            const search =
+                params.get("search");
 
-            card.style.display = "";
+            const category =
+                params.get("category");
 
-            visibleCount++;
+            if (search) {
 
-        } else {
-
-            card.style.display = "none";
-
-        }
-
-    });
-
-
-    updateRecipeCount(visibleCount);
-
-
-    const noResults =
-        document.getElementById("noResults");
-
-
-    if (visibleCount === 0) {
-
-        noResults.style.display = "block";
-
-    } else {
-
-        noResults.style.display = "none";
-
-    }
-
-}
-
-
-/* =====================================================
-   CATEGORY FILTER
-===================================================== */
-
-function selectCategory(category, button) {
-
-    const cards =
-        document.querySelectorAll(".recipe-card");
-
-
-    document
-        .querySelectorAll(".filter-btn")
-        .forEach(btn => {
-
-            btn.classList.remove("active");
-
-        });
-
-
-    if (button) {
-
-        button.classList.add("active");
-
-    }
-
-
-    let visibleCount = 0;
-
-
-    cards.forEach(card => {
-
-        const cardCategory =
-            card.dataset.category;
-
-
-        if (
-            category === "all" ||
-            cardCategory === category
-        ) {
-
-            card.style.display = "";
-
-            visibleCount++;
-
-        } else {
-
-            card.style.display = "none";
-
-        }
-
-    });
-
-
-    document
-        .getElementById("recipeSearchInput")
-        .value = "";
-
-
-    updateRecipeCount(visibleCount);
-
-
-    const noResults =
-        document.getElementById("noResults");
-
-
-    if (visibleCount === 0) {
-
-        noResults.style.display = "block";
-
-    } else {
-
-        noResults.style.display = "none";
-
-    }
-
-}
-
-
-/* =====================================================
-   COUNT
-===================================================== */
-
-function updateRecipeCount(count) {
-
-    document
-        .getElementById("recipeCount")
-        .textContent = count;
-
-
-    const language =
-        getRecipesLanguage();
-
-
-    const data =
-        recipePageLanguages[language] ||
-        recipePageLanguages.en;
-
-
-    document
-        .getElementById("countText")
-        .textContent = data.count;
-
-}
-
-
-/* =====================================================
-   APPLY PAGE LANGUAGE
-===================================================== */
-
-function applyRecipePageLanguage() {
-
-    const language =
-        getRecipesLanguage();
-
-
-    const data =
-        recipePageLanguages[language] ||
-        recipePageLanguages.en;
-
-
-    document
-        .getElementById("recipeDescription")
-        .textContent = data.description;
-
-
-    document
-        .getElementById("allButton")
-        .textContent = data.all;
-
-
-    document
-        .getElementById("noResultsTitle")
-        .textContent = data.noResults;
-
-
-    document
-        .getElementById("noResultsText")
-        .textContent = data.tryAnother;
-
-
-    document
-        .querySelectorAll(".view-recipe-btn")
-        .forEach(button => {
-
-            button.textContent =
-                data.viewRecipe;
-
-        });
-
-
-    const visibleCards =
-        [...document.querySelectorAll(".recipe-card")]
-            .filter(card =>
-                card.style.display !== "none"
-            ).length;
-
-
-    updateRecipeCount(visibleCards);
-
-}
-
-
-/* =====================================================
-   ENTER KEY SEARCH
-===================================================== */
-
-document
-    .getElementById("recipeSearchInput")
-    .addEventListener(
-        "keydown",
-        function(event) {
-
-            if (event.key === "Enter") {
-
-                searchRecipes();
+                document.getElementById(
+                    "recipeSearchInput"
+                ).value = search;
 
             }
 
-        }
-    );
+            if (
+                category &&
+                ["veg", "nonveg", "sweets", "snacks"].includes(category)
+            ) {
 
+                currentCategory = category;
 
-/* =====================================================
-   LANGUAGE CHANGE
-===================================================== */
+                const button =
+                    document.querySelector(
+                        `.filter-btn[data-category="${category}"]`
+                    );
 
-window.addEventListener(
-    "cookmateLanguageChanged",
-    function() {
+                if (button) {
 
-        applyRecipePageLanguage();
+                    document
+                        .querySelectorAll(".filter-btn")
+                        .forEach(btn =>
+                            btn.classList.remove("active")
+                        );
 
-    }
-);
+                    button.classList.add("active");
 
-
-window.addEventListener(
-    "storage",
-    function(event) {
-
-        if (
-            event.key === "cookmateLanguage"
-        ) {
-
-            applyRecipePageLanguage();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   URL PARAMETERS
-===================================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
-
-        applyRecipePageLanguage();
-
-
-        const params =
-            new URLSearchParams(
-                window.location.search
-            );
-
-
-        const category =
-            params.get("category");
-
-
-        const search =
-            params.get("search");
-
-
-        if (search) {
-
-            document
-                .getElementById("recipeSearchInput")
-                .value = search;
-
-            searchRecipes();
-
-        }
-
-
-        if (category) {
-
-            const button =
-                document.querySelector(
-                    `[data-category="${category}"]`
-                );
-
-
-            if (button) {
-
-                selectCategory(
-                    category,
-                    button
-                );
+                }
 
             }
 
+            filterRecipes();
+
         }
 
-    }
-);
 
-</script>
+        /* ---------------------------------------------
+           PAGE LOAD
+        --------------------------------------------- */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                loadURLFilters();
+
+            }
+        );
+
+    </script>
 
 </body>
 </html>
