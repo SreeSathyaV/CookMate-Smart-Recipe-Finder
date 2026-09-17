@@ -2,1785 +2,593 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>CookMate - Recipe Details</title>
 
-    <link rel="stylesheet"
-          href="css/style.css">
-
+    <link rel="stylesheet" href="css/style.css">
 
     <style>
-
-        /* =====================================================
-           RECIPE DETAILS PAGE
-           ===================================================== */
-
-
         /* =========================
-           PAGE HERO
-           ========================= */
+           RECIPE DETAILS
+        ========================== */
 
         .details-hero {
-
-            padding: 65px 7%;
-
-            background: #f9eee3;
-
+            padding: 55px 7%;
+            background: #fff3dc;
         }
-
 
         .breadcrumb {
-
-            max-width: 1200px;
-
-            margin: auto;
-
             margin-bottom: 25px;
-
-            font-size: 13px;
-
-            color: #817870;
-
+            color: #777;
+            font-size: 14px;
         }
-
 
         .breadcrumb a {
-
-            color: #d75b22;
-
-            font-weight: 600;
-
+            color: #d97706;
+            text-decoration: none;
         }
 
-
-        /* =========================
-           MAIN RECIPE CARD
-           ========================= */
-
-        .recipe-details-card {
-
-            max-width: 1200px;
-
+        .recipe-details-header {
+            max-width: 1100px;
             margin: auto;
-
             display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+            align-items: center;
+        }
 
-            grid-template-columns: 0.9fr 1.1fr;
-
-            background: white;
-
+        .recipe-big-image {
+            height: 280px;
             border-radius: 25px;
-
-            overflow: hidden;
-
-            border: 1px solid #eaded2;
-
-            box-shadow:
-                0 15px 45px
-                rgba(70, 45, 25, 0.09);
-
-        }
-
-
-        /* =========================
-           IMAGE
-           ========================= */
-
-        .details-image {
-
-            min-height: 480px;
-
+            background: #fff;
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #f7dfc7,
-                    #fff1df
-                );
-
-            position: relative;
-
+            font-size: 110px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
-
-        .details-food {
-
-            font-size: 150px;
-
-            filter:
-                drop-shadow(
-                    0 15px 15px
-                    rgba(0,0,0,0.12)
-                );
-
-        }
-
-
-        .details-category {
-
-            position: absolute;
-
-            top: 20px;
-
-            left: 20px;
-
-            padding: 7px 12px;
-
-            background: white;
-
-            color: #d75b22;
-
+        .recipe-category-label {
+            display: inline-block;
+            background: #d97706;
+            color: white;
+            padding: 6px 14px;
             border-radius: 20px;
-
-            font-size: 10px;
-
-            font-weight: 800;
-
-            letter-spacing: 1px;
-
-        }
-
-
-        /* =========================
-           DETAILS CONTENT
-           ========================= */
-
-        .details-content {
-
-            padding: 50px;
-
-        }
-
-
-        .details-content h1 {
-
-            font-size: 44px;
-
-            line-height: 1.15;
-
-            color: #302a26;
-
-            margin-bottom: 12px;
-
-        }
-
-
-        .rating {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 8px;
-
-            margin-bottom: 20px;
-
-        }
-
-
-        .stars {
-
-            color: #e99a35;
-
-            font-size: 18px;
-
-        }
-
-
-        .rating-text {
-
             font-size: 13px;
-
-            color: #776e67;
-
+            margin-bottom: 12px;
         }
 
-
-        .details-description {
-
-            color: #71675f;
-
-            font-size: 15px;
-
-            margin-bottom: 25px;
-
+        .recipe-details-header h1 {
+            font-size: clamp(35px, 5vw, 55px);
+            margin-bottom: 12px;
+            color: #292929;
         }
 
-
-        /* =========================
-           RECIPE META
-           ========================= */
-
-        .details-meta {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 10px;
-
-            margin-bottom: 30px;
-
+        .recipe-description {
+            color: #666;
+            line-height: 1.7;
+            max-width: 750px;
         }
 
-
-        .meta-box {
-
-            padding: 14px 10px;
-
-            text-align: center;
-
-            background: #fff6ed;
-
-            border-radius: 12px;
-
+        .rating-box {
+            margin: 15px 0;
+            color: #e6a000;
+            font-weight: 600;
         }
-
-
-        .meta-icon {
-
-            display: block;
-
-            font-size: 20px;
-
-            margin-bottom: 4px;
-
-        }
-
-
-        .meta-box strong {
-
-            display: block;
-
-            font-size: 12px;
-
-            color: #403934;
-
-        }
-
-
-        .meta-box span {
-
-            font-size: 10px;
-
-            color: #817870;
-
-        }
-
-
-        /* =========================
-           ACTION BUTTONS
-           ========================= */
 
         .recipe-actions {
-
             display: flex;
-
-            gap: 10px;
-
             flex-wrap: wrap;
-
+            gap: 12px;
+            margin-top: 22px;
         }
 
-
-        .action-btn {
-
-            border: none;
-
-            padding: 12px 17px;
-
-            border-radius: 10px;
-
-            font-size: 12px;
-
-            font-weight: 700;
-
-            transition: 0.3s ease;
-
-        }
-
-
-        .favorite-btn {
-
-            background: #fff0ed;
-
-            color: #d94c4c;
-
-            border: 1px solid #f2cccc;
-
-        }
-
-
-        .favorite-btn:hover {
-
-            background: #d94c4c;
-
-            color: white;
-
-        }
-
-
-        .shopping-btn {
-
-            background: #fff3e4;
-
-            color: #c96128;
-
-            border: 1px solid #f0d3b9;
-
-        }
-
-
-        .shopping-btn:hover {
-
-            background: #e66a2c;
-
-            color: white;
-
-        }
-
-
-        /* =========================
-           MAIN CONTENT
-           ========================= */
-
-        .details-main {
-
+        .secondary-btn {
             background: white;
-
-            padding-top: 70px;
-
+            color: #d97706;
+            border: 1px solid #d97706;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
         }
 
+        .secondary-btn:hover {
+            background: #fff0d5;
+        }
 
-        .details-layout {
+        .info-section {
+            padding: 45px 7%;
+        }
 
-            max-width: 1200px;
-
+        .recipe-info-grid {
+            max-width: 1000px;
             margin: auto;
-
             display: grid;
-
-            grid-template-columns:
-                0.8fr 1.2fr;
-
-            gap: 35px;
-
-        }
-
-
-        /* =========================
-           INGREDIENTS
-           ========================= */
-
-        .ingredients-card,
-        .equipment-card {
-
-            padding: 30px;
-
-            background: #fffaf5;
-
-            border: 1px solid #eee1d4;
-
-            border-radius: 20px;
-
-            margin-bottom: 25px;
-
-        }
-
-
-        .details-heading {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 10px;
-
-            margin-bottom: 22px;
-
-        }
-
-
-        .details-heading h2 {
-
-            font-size: 23px;
-
-            color: #342e2a;
-
-        }
-
-
-        .ingredient-list {
-
-            list-style: none;
-
-        }
-
-
-        .ingredient-list li {
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 10px;
-
-            padding: 12px 0;
-
-            border-bottom:
-                1px solid #eee3d8;
-
-            font-size: 13px;
-
-            color: #554e48;
-
-        }
-
-
-        .ingredient-list li:last-child {
-
-            border-bottom: none;
-
-        }
-
-
-        .ingredient-name {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 9px;
-
-        }
-
-
-        .ingredient-check {
-
-            width: 18px;
-
-            height: 18px;
-
-            border-radius: 50%;
-
-            background: #fff0df;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 9px;
-
-            color: #e66a2c;
-
-        }
-
-
-        .quantity {
-
-            color: #817870;
-
-            font-size: 12px;
-
-            font-weight: 600;
-
-        }
-
-
-        /* =========================
-           EQUIPMENT
-           ========================= */
-
-        .equipment-list-details {
-
-            display: grid;
-
-            grid-template-columns: 1fr 1fr;
-
-            gap: 10px;
-
-        }
-
-
-        .equipment-tag {
-
-            padding: 12px;
-
-            background: white;
-
-            border: 1px solid #eaded2;
-
-            border-radius: 10px;
-
-            text-align: center;
-
-            font-size: 12px;
-
-            font-weight: 600;
-
-            color: #625951;
-
-        }
-
-
-        /* =========================
-           INSTRUCTIONS
-           ========================= */
-
-        .instructions-card {
-
-            padding: 35px;
-
-            background: white;
-
-            border: 1px solid #eee1d4;
-
-            border-radius: 20px;
-
-        }
-
-
-        .instruction-step {
-
-            display: grid;
-
-            grid-template-columns: 45px 1fr;
-
+            grid-template-columns: repeat(3, 1fr);
             gap: 18px;
-
-            margin-bottom: 30px;
-
-            position: relative;
-
         }
 
-
-        .instruction-step:last-child {
-
-            margin-bottom: 0;
-
+        .info-box {
+            padding: 22px;
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 15px;
+            text-align: center;
         }
 
-
-        .step-circle {
-
-            width: 40px;
-
-            height: 40px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            background: #e66a2c;
-
-            color: white;
-
-            border-radius: 50%;
-
-            font-weight: 800;
-
-            font-size: 13px;
-
-        }
-
-
-        .instruction-step h3 {
-
-            font-size: 17px;
-
-            margin-bottom: 6px;
-
-            color: #3a332e;
-
-        }
-
-
-        .instruction-step p {
-
-            color: #776e67;
-
-            font-size: 13px;
-
-            line-height: 1.7;
-
-        }
-
-
-        /* =========================
-           COOKING TIPS
-           ========================= */
-
-        .tips-card {
-
-            margin-top: 30px;
-
-            padding: 28px;
-
-            background: #fff3e4;
-
-            border: 1px solid #f0d6bd;
-
-            border-radius: 18px;
-
-        }
-
-
-        .tips-card h2 {
-
-            font-size: 20px;
-
-            margin-bottom: 15px;
-
-        }
-
-
-        .tips-card ul {
-
-            padding-left: 20px;
-
-        }
-
-
-        .tips-card li {
-
+        .info-box-icon {
+            font-size: 30px;
             margin-bottom: 8px;
-
-            color: #655c55;
-
-            font-size: 13px;
-
         }
 
+        .info-box h3 {
+            font-size: 15px;
+            color: #777;
+            margin-bottom: 5px;
+        }
 
-        /* =========================
-           RELATED RECIPES
-           ========================= */
+        .info-box p {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .recipe-content {
+            max-width: 1100px;
+            margin: auto;
+            padding: 20px 7% 70px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .content-card {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 18px;
+            padding: 28px;
+        }
+
+        .content-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .content-card h2 {
+            margin-bottom: 20px;
+        }
+
+        .ingredient-list,
+        .equipment-list,
+        .steps-list {
+            padding-left: 22px;
+        }
+
+        .ingredient-list li,
+        .equipment-list li {
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .steps-list li {
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+
+        .tip-box {
+            background: #fff8e8;
+            padding: 18px;
+            border-radius: 12px;
+            border-left: 4px solid #d97706;
+            margin-bottom: 12px;
+        }
 
         .related-section {
-
-            margin-top: 70px;
-
-            padding-top: 70px;
-
-            background: #f9eee3;
-
+            padding: 60px 7%;
+            background: #faf8f3;
         }
-
 
         .related-grid {
-
-            max-width: 1200px;
-
-            margin: auto;
-
+            max-width: 1000px;
+            margin: 30px auto 0;
             display: grid;
-
-            grid-template-columns:
-                repeat(4, 1fr);
-
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-
         }
-
 
         .related-card {
-
             background: white;
-
             border-radius: 16px;
-
-            overflow: hidden;
-
-            border: 1px solid #eaded2;
-
-            transition: 0.3s ease;
-
+            padding: 22px;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #eee;
+            transition: 0.3s;
         }
-
 
         .related-card:hover {
-
             transform: translateY(-5px);
-
-            box-shadow:
-                0 10px 25px
-                rgba(70,45,25,0.09);
-
         }
-
 
         .related-image {
-
-            height: 150px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            background: #f9e9d7;
-
-            font-size: 65px;
-
+            font-size: 55px;
+            text-align: center;
+            margin-bottom: 12px;
         }
 
-
-        .related-content {
-
-            padding: 17px;
-
+        .shopping-list {
+            line-height: 1.8;
         }
 
+        @media (max-width: 800px) {
 
-        .related-content h3 {
-
-            font-size: 15px;
-
-            margin-bottom: 5px;
-
-        }
-
-
-        .related-content p {
-
-            color: #817870;
-
-            font-size: 11px;
-
-        }
-
-
-        /* =========================
-           MOBILE
-           ========================= */
-
-        @media (max-width: 1000px) {
-
-            .recipe-details-card {
-
+            .recipe-details-header {
                 grid-template-columns: 1fr;
-
+                text-align: center;
             }
 
-
-            .details-image {
-
-                min-height: 330px;
-
+            .recipe-big-image {
+                max-width: 280px;
+                width: 100%;
+                margin: auto;
             }
 
+            .recipe-description {
+                margin: auto;
+            }
 
-            .details-layout {
+            .recipe-actions {
+                justify-content: center;
+            }
 
+            .recipe-info-grid {
                 grid-template-columns: 1fr;
-
             }
 
+            .recipe-content {
+                grid-template-columns: 1fr;
+            }
+
+            .content-card.full-width {
+                grid-column: auto;
+            }
 
             .related-grid {
-
-                grid-template-columns:
-                    repeat(2, 1fr);
-
-            }
-
-        }
-
-
-        @media (max-width: 650px) {
-
-            .details-hero {
-
-                padding: 40px 5%;
-
-            }
-
-
-            .details-content {
-
-                padding: 30px 22px;
-
-            }
-
-
-            .details-content h1 {
-
-                font-size: 34px;
-
-            }
-
-
-            .details-meta {
-
-                grid-template-columns:
-                    repeat(3, 1fr);
-
-            }
-
-
-            .details-main {
-
-                padding-left: 5%;
-
-                padding-right: 5%;
-
-            }
-
-
-            .ingredients-card,
-            .equipment-card,
-            .instructions-card {
-
-                padding: 22px;
-
-            }
-
-
-            .related-grid {
-
                 grid-template-columns: 1fr;
-
             }
-
-
-            .equipment-list-details {
-
-                grid-template-columns: 1fr;
-
-            }
-
         }
-
-
     </style>
-
 </head>
 
 
 <body>
 
-
-    <!-- =====================================================
+    <!-- =========================
          NAVBAR
-         ===================================================== -->
+    ========================== -->
 
     <header class="navbar">
 
-
         <div class="logo">
-
-            🍳 <span>CookMate</span>
-
+            🍳 CookMate
         </div>
-
 
         <nav>
 
-            <a href="index.html">
+            <a href="index.html" data-i18n="home">
                 Home
             </a>
 
-            <a href="recipes.html"
-               class="active">
+            <a href="recipes.html" data-i18n="recipes">
                 Recipes
             </a>
 
-            <a href="ingredients.html">
-                My Ingredients
+            <a href="ingredients.html" data-i18n="ingredients">
+                Ingredients
             </a>
 
-            <a href="equipment.html">
-                My Kitchen
+            <a href="equipment.html" data-i18n="equipment">
+                Equipment
             </a>
 
-            <a href="favourites.html">
-                ❤️ Favourites
+            <a href="favourites.html" data-i18n="favourites">
+                Favourites
+            </a>
+
+            <a href="profile.html" data-i18n="profile">
+                Profile
             </a>
 
         </nav>
 
-
-        <a href="profile.html"
-           class="profile-btn">
-
-            👤 Profile
-
-        </a>
-
-
     </header>
 
 
-
-    <!-- =====================================================
-         RECIPE HERO
-         ===================================================== -->
+    <!-- =========================
+         RECIPE HEADER
+    ========================== -->
 
     <section class="details-hero">
 
-
         <div class="breadcrumb">
 
-            <a href="index.html">
+            <a href="index.html" data-i18n="home">
                 Home
             </a>
 
-            &nbsp; / &nbsp;
-
-            <a href="recipes.html">
+            /
+            
+            <a href="recipes.html" data-i18n="recipes">
                 Recipes
             </a>
 
-            &nbsp; / &nbsp;
+            /
 
-            Chicken Biryani
+            <span id="breadcrumbName">
+                Recipe
+            </span>
 
         </div>
 
 
+        <div class="recipe-details-header">
 
-        <div class="recipe-details-card">
-
-
-            <!-- IMAGE -->
-
-            <div class="details-image">
-
-                <div class="details-category">
-                    NON-VEG
-                </div>
-
-                <div class="details-food">
-                    🍛
-                </div>
-
+            <div
+                class="recipe-big-image"
+                id="recipeImage"
+            >
+                🍳
             </div>
 
 
+            <div>
 
-            <!-- CONTENT -->
+                <span
+                    class="recipe-category-label"
+                    id="recipeCategory"
+                >
+                    Recipe
+                </span>
 
-            <div class="details-content">
 
-
-                <h1>
-                    Chicken Biryani
+                <h1 id="recipeName">
+                    Recipe
                 </h1>
 
 
-                <div class="rating">
-
-                    <span class="stars">
-                        ★★★★★
-                    </span>
-
-                    <span class="rating-text">
-                        4.8 (125 ratings)
-                    </span>
-
+                <div
+                    class="rating-box"
+                    id="recipeRating"
+                >
+                    ⭐⭐⭐⭐⭐ 4.8
                 </div>
 
 
-                <p class="details-description">
-
-                    A delicious and aromatic chicken biryani
-                    made with fragrant basmati rice, tender
-                    chicken, fresh herbs and flavorful spices.
-
+                <p
+                    class="recipe-description"
+                    id="recipeDescription"
+                >
+                    Delicious recipe.
                 </p>
 
 
-
-                <!-- META -->
-
-                <div class="details-meta">
-
-
-                    <div class="meta-box">
-
-                        <span class="meta-icon">
-                            🥣
-                        </span>
-
-                        <strong>
-                            Preparation
-                        </strong>
-
-                        <span>
-                            15 min
-                        </span>
-
-                    </div>
-
-
-                    <div class="meta-box">
-
-                        <span class="meta-icon">
-                            🔥
-                        </span>
-
-                        <strong>
-                            Cooking
-                        </strong>
-
-                        <span>
-                            30 min
-                        </span>
-
-                    </div>
-
-
-                    <div class="meta-box">
-
-                        <span class="meta-icon">
-                            👥
-                        </span>
-
-                        <strong>
-                            Servings
-                        </strong>
-
-                        <span>
-                            4 People
-                        </span>
-
-                    </div>
-
-
-                </div>
-
-
-
-                <!-- ACTIONS -->
-
                 <div class="recipe-actions">
 
-
                     <button
-                        class="action-btn favorite-btn"
-                        onclick="toggleFavorite()">
-
-                        ❤️ Save Recipe
-
+                        class="primary-btn"
+                        id="saveButton"
+                        onclick="toggleFavourite()"
+                    >
+                        ♡ Save Recipe
                     </button>
 
 
                     <button
-                        class="action-btn shopping-btn"
-                        onclick="addShoppingList()">
-
+                        class="secondary-btn"
+                        onclick="showShoppingList()"
+                    >
                         🛒 Shopping List
-
                     </button>
-
 
                 </div>
 
-
             </div>
-
 
         </div>
 
     </section>
 
 
+    <!-- =========================
+         RECIPE INFORMATION
+    ========================== -->
 
-    <!-- =====================================================
-         RECIPE CONTENT
-         ===================================================== -->
+    <section class="info-section">
 
-    <main class="details-main">
+        <div
+            class="recipe-info-grid"
+            id="recipeInfo"
+        >
 
+            <div class="info-box">
 
-        <div class="details-layout">
-
-
-            <!-- =========================
-                 LEFT COLUMN
-                 ========================= -->
-
-            <div>
-
-
-                <!-- INGREDIENTS -->
-
-                <div class="ingredients-card">
-
-
-                    <div class="details-heading">
-
-                        <span>
-                            🧺
-                        </span>
-
-                        <h2>
-                            Ingredients
-                        </h2>
-
-                    </div>
-
-
-                    <ul class="ingredient-list">
-
-
-                        <li>
-
-                            <div class="ingredient-name">
-
-                                <span class="ingredient-check">
-                                    ✓
-                                </span>
-
-                                Basmati Rice
-
-                            </div>
-
-                            <span class="quantity">
-                                2 cups
-                            </span>
-
-                        </li>
-
-
-                        <li>
-
-                            <div class="ingredient-name">
-
-                                <span class="ingredient-check">
-                                    ✓
-                                </span>
-
-                                Chicken
-
-                            </div>
-
-                            <span class="quantity">
-                                500 g
-                            </span>
-
-                        </li>
-
-
-                        <li>
-
-                            <div class="ingredient-name">
-
-                                <span class="ingredient-check">
-                                    ✓
-                                </span>
-
-                                Onion
-
-                            </div>
-
-                            <span class="quantity">
-                                2 large
-                            </span>
-
-                        </li>
-
-
-                        <li>
-
-                            <div class="ingredient-name">
-
-                                <span class="ingredient-check">
-                                    ✓
-                                </span>
-
-                                Tomato
-
-                            </div>
-
-                            <span class="quantity">
-                                2 medium
-                            </span>
-
-                        </li>
-
-
-                        <li>
-
-                            <div class="ingredient-name">
-
-                                <span class="ingredient-check">
-                                    ✓
-                                </span>
-
-                                Ginger Garlic Paste
-
-                            </div>
-
-                            <span class="quantity">
-                                2 tbsp
-                            </span>
-
-                        </li>
-
-
-                        <li>
-
-                            <div class="ingredient-name">
-
-                                <span class="ingredient-check">
-                                    ✓
-                                </span>
-
-                                Biryani Masala
-
-                            </div>
-
-                            <span class="quantity">
-                                2 tbsp
-                            </span>
-
-                        </li>
-
-
-                        <li>
-
-                            <div class="ingredient-name">
-
-                                <span class="ingredient-check">
-                                    ✓
-                                </span>
-
-                                Curd
-
-                            </div>
-
-                            <span class="quantity">
-                                ½ cup
-                            </span>
-
-                        </li>
-
-
-                        <li>
-
-                            <div class="ingredient-name">
-
-                                <span class="ingredient-check">
-                                    ✓
-                                </span>
-
-                                Mint & Coriander
-
-                            </div>
-
-                            <span class="quantity">
-                                1 handful
-                            </span>
-
-                        </li>
-
-
-                        <li>
-
-                            <div class="ingredient-name">
-
-                                <span class="ingredient-check">
-                                    ✓
-                                </span>
-
-                                Cooking Oil
-
-                            </div>
-
-                            <span class="quantity">
-                                3 tbsp
-                            </span>
-
-                        </li>
-
-
-                        <li>
-
-                            <div class="ingredient-name">
-
-                                <span class="ingredient-check">
-                                    ✓
-                                </span>
-
-                                Salt
-
-                            </div>
-
-                            <span class="quantity">
-                                As needed
-                            </span>
-
-                        </li>
-
-
-                    </ul>
-
-
+                <div class="info-box-icon">
+                    ⏱️
                 </div>
 
+                <h3 data-i18n="prepTime">
+                    Prep Time
+                </h3>
 
-
-                <!-- EQUIPMENT -->
-
-                <div class="equipment-card">
-
-
-                    <div class="details-heading">
-
-                        <span>
-                            🍳
-                        </span>
-
-                        <h2>
-                            Required Equipment
-                        </h2>
-
-                    </div>
-
-
-                    <div class="equipment-list-details">
-
-
-                        <div class="equipment-tag">
-                            🥘 Pressure Cooker
-                        </div>
-
-
-                        <div class="equipment-tag">
-                            🍳 Frying Pan
-                        </div>
-
-
-                        <div class="equipment-tag">
-                            🔪 Knife
-                        </div>
-
-
-                        <div class="equipment-tag">
-                            🥣 Mixing Bowl
-                        </div>
-
-
-                    </div>
-
-
-                </div>
-
+                <p id="prepTime">
+                    -
+                </p>
 
             </div>
 
 
+            <div class="info-box">
 
-            <!-- =========================
-                 RIGHT COLUMN
-                 ========================= -->
-
-            <div>
-
-
-                <!-- INSTRUCTIONS -->
-
-                <div class="instructions-card">
-
-
-                    <div class="details-heading">
-
-                        <span>
-                            👩‍🍳
-                        </span>
-
-                        <h2>
-                            Step-by-Step Instructions
-                        </h2>
-
-                    </div>
-
-
-
-                    <!-- STEP 1 -->
-
-                    <div class="instruction-step">
-
-                        <div class="step-circle">
-                            1
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Marinate the Chicken
-                            </h3>
-
-                            <p>
-                                Add chicken, curd, ginger garlic
-                                paste, biryani masala, salt and
-                                a little turmeric into a bowl.
-                                Mix everything well and marinate
-                                for at least 20 minutes.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- STEP 2 -->
-
-                    <div class="instruction-step">
-
-                        <div class="step-circle">
-                            2
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Prepare the Rice
-                            </h3>
-
-                            <p>
-                                Wash the basmati rice thoroughly.
-                                Boil water with salt and whole
-                                spices. Add rice and cook until
-                                it is about 70% done. Drain and
-                                keep aside.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- STEP 3 -->
-
-                    <div class="instruction-step">
-
-                        <div class="step-circle">
-                            3
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Cook the Chicken
-                            </h3>
-
-                            <p>
-                                Heat oil in a large pan.
-                                Add sliced onions and cook until
-                                golden brown. Add tomatoes and
-                                marinated chicken. Cook until the
-                                chicken is almost completely done.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- STEP 4 -->
-
-                    <div class="instruction-step">
-
-                        <div class="step-circle">
-                            4
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Layer the Biryani
-                            </h3>
-
-                            <p>
-                                Spread the partially cooked rice
-                                over the chicken. Add mint,
-                                coriander and fried onions.
-                                Add a little saffron milk if
-                                available.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- STEP 5 -->
-
-                    <div class="instruction-step">
-
-                        <div class="step-circle">
-                            5
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Dum Cook
-                            </h3>
-
-                            <p>
-                                Cover the pan tightly and cook
-                                on low flame for around 15 minutes.
-                                Turn off the flame and allow the
-                                biryani to rest for 5 minutes.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- STEP 6 -->
-
-                    <div class="instruction-step">
-
-                        <div class="step-circle">
-                            6
-                        </div>
-
-                        <div>
-
-                            <h3>
-                                Serve
-                            </h3>
-
-                            <p>
-                                Gently mix the layers without
-                                breaking the rice. Serve hot
-                                with onion raita, boiled egg
-                                or your favorite side dish.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-
-
-                <!-- COOKING TIPS -->
-
-                <div class="tips-card">
-
-
-                    <h2>
-                        💡 Cooking Tips
-                    </h2>
-
-
-                    <ul>
-
-                        <li>
-                            Use good quality basmati rice
-                            for better texture.
-                        </li>
-
-                        <li>
-                            Do not overcook the rice before
-                            layering.
-                        </li>
-
-                        <li>
-                            Marinating the chicken improves
-                            the flavor and tenderness.
-                        </li>
-
-                        <li>
-                            Always cook the final biryani
-                            on low flame.
-                        </li>
-
-                        <li>
-                            Let the biryani rest for a few
-                            minutes before serving.
-                        </li>
-
-                    </ul>
-
-
-                </div>
-
-
-            </div>
-
-
-        </div>
-
-
-    </main>
-
-
-
-    <!-- =====================================================
-         RELATED RECIPES
-         ===================================================== -->
-
-    <section class="related-section">
-
-
-        <div class="section-heading">
-
-            <span class="feature-label">
-                🍴 MORE TO TRY
-            </span>
-
-            <h2>
-                You May Also Like
-            </h2>
-
-            <p>
-                Discover more delicious recipes
-            </p>
-
-        </div>
-
-
-
-        <div class="related-grid">
-
-
-            <div class="related-card">
-
-                <div class="related-image">
+                <div class="info-box-icon">
                     🍳
                 </div>
 
-                <div class="related-content">
+                <h3 data-i18n="cookTime">
+                    Cook Time
+                </h3>
 
-                    <h3>
-                        Egg Fried Rice
-                    </h3>
-
-                    <p>
-                        ⏱ 20 min · Easy
-                    </p>
-
-                </div>
+                <p id="cookTime">
+                    -
+                </p>
 
             </div>
 
 
+            <div class="info-box">
 
-            <div class="related-card">
-
-                <div class="related-image">
-                    🍗
+                <div class="info-box-icon">
+                    👥
                 </div>
 
-                <div class="related-content">
+                <h3 data-i18n="servings">
+                    Servings
+                </h3>
 
-                    <h3>
-                        Chicken 65
-                    </h3>
-
-                    <p>
-                        ⏱ 35 min · Medium
-                    </p>
-
-                </div>
+                <p id="servings">
+                    -
+                </p>
 
             </div>
-
-
-
-            <div class="related-card">
-
-                <div class="related-image">
-                    🍚
-                </div>
-
-                <div class="related-content">
-
-                    <h3>
-                        Vegetable Pulao
-                    </h3>
-
-                    <p>
-                        ⏱ 30 min · Easy
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="related-card">
-
-                <div class="related-image">
-                    🧀
-                </div>
-
-                <div class="related-content">
-
-                    <h3>
-                        Paneer Butter Masala
-                    </h3>
-
-                    <p>
-                        ⏱ 35 min · Medium
-                    </p>
-
-                </div>
-
-            </div>
-
 
         </div>
-
 
     </section>
 
 
+    <!-- =========================
+         INGREDIENTS + EQUIPMENT
+    ========================== -->
 
-    <!-- =====================================================
+    <section class="recipe-content">
+
+
+        <!-- INGREDIENTS -->
+
+        <div class="content-card">
+
+            <h2 data-i18n="ingredientsTitle">
+                🥕 Ingredients
+            </h2>
+
+            <ul
+                class="ingredient-list"
+                id="ingredientList"
+            >
+            </ul>
+
+        </div>
+
+
+        <!-- EQUIPMENT -->
+
+        <div class="content-card">
+
+            <h2 data-i18n="equipmentTitle">
+                🍳 Equipment
+            </h2>
+
+            <ul
+                class="equipment-list"
+                id="equipmentList"
+            >
+            </ul>
+
+        </div>
+
+
+        <!-- =========================
+             HOW TO MAKE
+        ========================== -->
+
+        <div class="content-card full-width">
+
+            <h2 data-i18n="howToMake">
+                👨‍🍳 How to Make
+            </h2>
+
+            <ol
+                class="steps-list"
+                id="stepsList"
+            >
+            </ol>
+
+        </div>
+
+
+        <!-- =========================
+             COOKING TIPS
+        ========================== -->
+
+        <div class="content-card full-width">
+
+            <h2 data-i18n="cookingTips">
+                💡 Cooking Tips
+            </h2>
+
+            <div id="tipsList">
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         RELATED RECIPES
+    ========================== -->
+
+    <section class="related-section">
+
+        <div class="section-heading">
+
+            <p class="section-label">
+                🍽️ EXPLORE MORE
+            </p>
+
+            <h2 data-i18n="relatedRecipes">
+                Related Recipes
+            </h2>
+
+        </div>
+
+
+        <div
+            class="related-grid"
+            id="relatedRecipes"
+        >
+        </div>
+
+    </section>
+
+
+    <!-- =========================
          FOOTER
-         ===================================================== -->
+    ========================== -->
 
     <footer class="footer">
 
-
         <div class="footer-content">
 
-
-            <div class="footer-brand">
+            <div>
 
                 <h2>
                     🍳 CookMate
                 </h2>
 
-                <p>
-                    Tell us what you have.
-                    We'll tell you what you can cook.
+                <p data-i18n="footerDescription">
+                    Your smart cooking companion for
+                    simple and delicious recipes.
                 </p>
 
             </div>
@@ -1788,143 +596,1649 @@
 
             <div class="footer-links">
 
-                <h3>
-                    Quick Links
-                </h3>
-
-                <a href="index.html">
+                <a href="index.html" data-i18n="home">
                     Home
                 </a>
 
-                <a href="recipes.html">
+                <a href="recipes.html" data-i18n="recipes">
                     Recipes
                 </a>
 
-                <a href="ingredients.html">
+                <a href="ingredients.html" data-i18n="ingredients">
                     Ingredients
                 </a>
 
-                <a href="equipment.html">
-                    Kitchen Equipment
+                <a href="equipment.html" data-i18n="equipment">
+                    Equipment
+                </a>
+
+                <a href="favourites.html" data-i18n="favourites">
+                    Favourites
+                </a>
+
+                <a href="profile.html" data-i18n="profile">
+                    Profile
                 </a>
 
             </div>
-
-
-            <div class="footer-links">
-
-                <h3>
-                    Categories
-                </h3>
-
-                <a href="recipes.html?category=veg">
-                    Vegetarian
-                </a>
-
-                <a href="recipes.html?category=nonveg">
-                    Non-Vegetarian
-                </a>
-
-                <a href="recipes.html?category=sweets">
-                    Sweets
-                </a>
-
-                <a href="recipes.html?category=snacks">
-                    Snacks
-                </a>
-
-            </div>
-
 
         </div>
 
 
         <div class="footer-bottom">
 
-            <p>
-                © 2026 CookMate.
-                Made with ❤️ for food lovers.
+            <p data-i18n="madeForFoodLovers">
+                © 2026 CookMate. Made for food lovers ❤️
             </p>
 
         </div>
 
-
     </footer>
 
 
-
-    <!-- =====================================================
+    <!-- =========================
          JAVASCRIPT
-         ===================================================== -->
+    ========================== -->
+
+    <script src="js/script.js"></script>
+
 
     <script>
 
+        /* ==========================================
+           LANGUAGE DATA
+        ========================================== */
 
-        /* =========================
-           FAVORITE BUTTON
-           ========================= */
+        const detailTranslations = {
 
-        function toggleFavorite() {
+            en: {
 
-            const button =
-                document.querySelector(
-                    ".favorite-btn"
-                );
+                prepTime: "Prep Time",
+                cookTime: "Cook Time",
+                servings: "Servings",
+
+                ingredientsTitle: "🥕 Ingredients",
+                equipmentTitle: "🍳 Equipment",
+                howToMake: "👨‍🍳 How to Make",
+                cookingTips: "💡 Cooking Tips",
+                relatedRecipes: "Related Recipes",
+
+                saveRecipe: "♡ Save Recipe",
+                savedRecipe: "♥ Saved",
+                shoppingList: "🛒 Shopping List",
+
+                viewRecipe: "View Recipe →",
+
+                category: {
+                    veg: "Veg",
+                    nonveg: "Non-Veg",
+                    sweets: "Sweets",
+                    snacks: "Snacks"
+                },
+
+                shoppingMessage:
+                    "Shopping List:\\n\\n",
+
+                savedMessage:
+                    "Recipe saved to favourites!",
+
+                removedMessage:
+                    "Recipe removed from favourites!"
+
+            },
 
 
-            if (
-                button.classList.contains(
-                    "saved"
-                )
-            ) {
+            ta: {
 
-                button.innerHTML =
-                    "❤️ Save Recipe";
+                prepTime: "தயாரிப்பு நேரம்",
+                cookTime: "சமைக்கும் நேரம்",
+                servings: "பரிமாறுதல்",
 
-                button.classList.remove(
-                    "saved"
-                );
+                ingredientsTitle: "🥕 தேவையான பொருட்கள்",
+                equipmentTitle: "🍳 சமையல் உபகரணங்கள்",
+                howToMake: "👨‍🍳 செய்வது எப்படி",
+                cookingTips: "💡 சமையல் குறிப்புகள்",
+                relatedRecipes: "தொடர்புடைய சமையல் குறிப்புகள்",
 
-                alert(
-                    "Recipe removed from favourites."
-                );
+                saveRecipe: "♡ சேமிக்கவும்",
+                savedRecipe: "♥ சேமிக்கப்பட்டது",
+                shoppingList: "🛒 வாங்க வேண்டிய பொருட்கள்",
+
+                viewRecipe: "செய்முறையைப் பார்க்க →",
+
+                category: {
+                    veg: "சைவம்",
+                    nonveg: "அசைவம்",
+                    sweets: "இனிப்புகள்",
+                    snacks: "சிற்றுண்டிகள்"
+                },
+
+                shoppingMessage:
+                    "வாங்க வேண்டிய பொருட்கள்:\\n\\n",
+
+                savedMessage:
+                    "சமையல் குறிப்பு பிடித்தவைகளில் சேமிக்கப்பட்டது!",
+
+                removedMessage:
+                    "சமையல் குறிப்பு பிடித்தவைகளிலிருந்து நீக்கப்பட்டது!"
+
+            },
+
+
+            hi: {
+
+                prepTime: "तैयारी का समय",
+                cookTime: "पकाने का समय",
+                servings: "सर्विंग्स",
+
+                ingredientsTitle: "🥕 सामग्री",
+                equipmentTitle: "🍳 रसोई के उपकरण",
+                howToMake: "👨‍🍳 बनाने की विधि",
+                cookingTips: "💡 खाना पकाने के सुझाव",
+                relatedRecipes: "संबंधित रेसिपी",
+
+                saveRecipe: "♡ सेव करें",
+                savedRecipe: "♥ सेव किया गया",
+                shoppingList: "🛒 खरीदारी सूची",
+
+                viewRecipe: "रेसिपी देखें →",
+
+                category: {
+                    veg: "शाकाहारी",
+                    nonveg: "मांसाहारी",
+                    sweets: "मिठाइयाँ",
+                    snacks: "स्नैक्स"
+                },
+
+                shoppingMessage:
+                    "खरीदारी सूची:\\n\\n",
+
+                savedMessage:
+                    "रेसिपी पसंदीदा में सेव की गई!",
+
+                removedMessage:
+                    "रेसिपी पसंदीदा से हटा दी गई!"
+
+            },
+
+
+            ml: {
+
+                prepTime: "തയ്യാറാക്കുന്ന സമയം",
+                cookTime: "പാചക സമയം",
+                servings: "സെർവിംഗുകൾ",
+
+                ingredientsTitle: "🥕 ചേരുവകൾ",
+                equipmentTitle: "🍳 പാചക ഉപകരണങ്ങൾ",
+                howToMake: "👨‍🍳 തയ്യാറാക്കുന്ന വിധം",
+                cookingTips: "💡 പാചക നുറുങ്ങുകൾ",
+                relatedRecipes: "ബന്ധപ്പെട്ട പാചകക്കുറിപ്പുകൾ",
+
+                saveRecipe: "♡ സേവ് ചെയ്യുക",
+                savedRecipe: "♥ സേവ് ചെയ്തു",
+                shoppingList: "🛒 വാങ്ങേണ്ട സാധനങ്ങൾ",
+
+                viewRecipe: "പാചകക്കുറിപ്പ് കാണുക →",
+
+                category: {
+                    veg: "സസ്യാഹാരം",
+                    nonveg: "മാംസാഹാരം",
+                    sweets: "മധുരപലഹാരങ്ങൾ",
+                    snacks: "സ്നാക്കുകൾ"
+                },
+
+                shoppingMessage:
+                    "വാങ്ങേണ്ട സാധനങ്ങൾ:\\n\\n",
+
+                savedMessage:
+                    "പാചകക്കുറിപ്പ് പ്രിയപ്പെട്ടവയിൽ സേവ് ചെയ്തു!",
+
+                removedMessage:
+                    "പാചകക്കുറിപ്പ് പ്രിയപ്പെട്ടവയിൽ നിന്ന് നീക്കി!"
+
+            },
+
+
+            te: {
+
+                prepTime: "తయారీ సమయం",
+                cookTime: "వంట సమయం",
+                servings: "సర్వింగ్స్",
+
+                ingredientsTitle: "🥕 కావలసిన పదార్థాలు",
+                equipmentTitle: "🍳 వంట పరికరాలు",
+                howToMake: "👨‍🍳 తయారు చేసే విధానం",
+                cookingTips: "💡 వంట చిట్కాలు",
+                relatedRecipes: "సంబంధిత వంటకాలు",
+
+                saveRecipe: "♡ సేవ్ చేయండి",
+                savedRecipe: "♥ సేవ్ చేయబడింది",
+                shoppingList: "🛒 కొనాల్సిన వస్తువులు",
+
+                viewRecipe: "వంటకాన్ని చూడండి →",
+
+                category: {
+                    veg: "శాకాహారం",
+                    nonveg: "మాంసాహారం",
+                    sweets: "తీపి వంటకాలు",
+                    snacks: "స్నాక్స్"
+                },
+
+                shoppingMessage:
+                    "కొనాల్సిన వస్తువులు:\\n\\n",
+
+                savedMessage:
+                    "వంటకం ఇష్టమైన వాటిలో సేవ్ చేయబడింది!",
+
+                removedMessage:
+                    "వంటకం ఇష్టమైన వాటి నుండి తొలగించబడింది!"
 
             }
 
-            else {
+        };
 
-                button.innerHTML =
-                    "💖 Saved!";
 
-                button.classList.add(
-                    "saved"
-                );
+        /* ==========================================
+           RECIPE DATABASE
+        ========================================== */
 
-                alert(
-                    "Recipe added to favourites!"
-                );
+        const recipes = {
+
+            "chicken-biryani": {
+
+                emoji: "🍗🍚",
+
+                category: "nonveg",
+
+                rating: "⭐⭐⭐⭐⭐ 4.9 / 5",
+
+                prepTime: "20 min",
+                cookTime: "40 min",
+                servings: "4",
+
+                name: {
+                    en: "Chicken Biryani",
+                    ta: "சிக்கன் பிரியாணி",
+                    hi: "चिकन बिरयानी",
+                    ml: "ചിക്കൻ ബിരിയാണി",
+                    te: "చికెన్ బిర్యానీ"
+                },
+
+                description: {
+                    en: "Aromatic chicken biryani made with flavorful rice, spices and tender chicken.",
+                    ta: "மணம் மிக்க அரிசி, மசாலா மற்றும் மென்மையான சிக்கனுடன் செய்யப்படும் சுவையான பிரியாணி.",
+                    hi: "खुशबूदार चावल, मसालों और नरम चिकन से बनी स्वादिष्ट बिरयानी।",
+                    ml: "സുഗന്ധമുള്ള അരിയും മസാലകളും മൃദുവായ ചിക്കനും ചേർത്ത് തയ്യാറാക്കുന്ന രുചികരമായ ബിരിയാണി.",
+                    te: "సువాసనగల బియ్యం, మసాలాలు మరియు మృదువైన చికెన్‌తో తయారు చేసే రుచికరమైన బిర్యానీ."
+                },
+
+                ingredients: {
+                    en: [
+                        "2 cups Basmati rice",
+                        "500 g chicken",
+                        "2 onions",
+                        "2 tomatoes",
+                        "1/2 cup curd",
+                        "2 tbsp ginger-garlic paste",
+                        "Biryani masala",
+                        "Salt",
+                        "Oil",
+                        "Mint and coriander"
+                    ],
+                    ta: [
+                        "2 கப் பாஸ்மதி அரிசி",
+                        "500 கிராம் சிக்கன்",
+                        "2 வெங்காயம்",
+                        "2 தக்காளி",
+                        "1/2 கப் தயிர்",
+                        "2 மேசைக்கரண்டி இஞ்சி-பூண்டு விழுது",
+                        "பிரியாணி மசாலா",
+                        "உப்பு",
+                        "எண்ணெய்",
+                        "புதினா மற்றும் கொத்தமல்லி"
+                    ],
+                    hi: [
+                        "2 कप बासमती चावल",
+                        "500 ग्राम चिकन",
+                        "2 प्याज",
+                        "2 टमाटर",
+                        "1/2 कप दही",
+                        "2 बड़े चम्मच अदरक-लहसुन पेस्ट",
+                        "बिरयानी मसाला",
+                        "नमक",
+                        "तेल",
+                        "पुदीना और धनिया"
+                    ],
+                    ml: [
+                        "2 കപ്പ് ബാസ്മതി അരി",
+                        "500 ഗ്രാം ചിക്കൻ",
+                        "2 സവാള",
+                        "2 തക്കാളി",
+                        "1/2 കപ്പ് തൈര്",
+                        "2 ടേബിൾസ്പൂൺ ഇഞ്ചി-വെളുത്തുള്ളി പേസ്റ്റ്",
+                        "ബിരിയാണി മസാല",
+                        "ഉപ്പ്",
+                        "എണ്ണ",
+                        "പുതിനയും മല്ലിയിലയും"
+                    ],
+                    te: [
+                        "2 కప్పులు బాస్మతి బియ్యం",
+                        "500 గ్రాముల చికెన్",
+                        "2 ఉల్లిపాయలు",
+                        "2 టమోటాలు",
+                        "1/2 కప్పు పెరుగు",
+                        "2 టేబుల్ స్పూన్లు అల్లం-వెల్లుల్లి పేస్ట్",
+                        "బిర్యానీ మసాలా",
+                        "ఉప్పు",
+                        "నూనె",
+                        "పుదీనా మరియు కొత్తిమీర"
+                    ]
+                },
+
+                equipment: {
+                    en: [
+                        "Pressure Cooker",
+                        "Frying Pan",
+                        "Knife",
+                        "Mixing Bowl"
+                    ],
+                    ta: [
+                        "பிரஷர் குக்கர்",
+                        "வாணலி",
+                        "கத்தி",
+                        "கலவை கிண்ணம்"
+                    ],
+                    hi: [
+                        "प्रेशर कुकर",
+                        "फ्राइंग पैन",
+                        "चाकू",
+                        "मिक्सिंग बाउल"
+                    ],
+                    ml: [
+                        "പ്രഷർ കുക്കർ",
+                        "ഫ്രൈയിംഗ് പാൻ",
+                        "കത്തി",
+                        "മിക്സിംഗ് ബൗൾ"
+                    ],
+                    te: [
+                        "ప్రెషర్ కుక్కర్",
+                        "ఫ్రైయింగ్ పాన్",
+                        "కత్తి",
+                        "మిక్సింగ్ బౌల్"
+                    ]
+                },
+
+                steps: {
+                    en: [
+                        "Wash and soak the rice for about 20 minutes.",
+                        "Marinate the chicken with curd, spices, salt and ginger-garlic paste.",
+                        "Heat oil and sauté onions until golden brown.",
+                        "Add tomatoes and cook until soft.",
+                        "Add marinated chicken and cook well.",
+                        "Add soaked rice and required water.",
+                        "Cook until the rice is completely done.",
+                        "Garnish with mint and coriander and serve hot."
+                    ],
+                    ta: [
+                        "அரிசியை கழுவி சுமார் 20 நிமிடங்கள் ஊற வைக்கவும்.",
+                        "சிக்கனை தயிர், மசாலா, உப்பு மற்றும் இஞ்சி-பூண்டு விழுதுடன் ஊற வைக்கவும்.",
+                        "எண்ணெயை சூடாக்கி வெங்காயத்தை பொன்னிறமாக வதக்கவும்.",
+                        "தக்காளியை சேர்த்து மென்மையாகும் வரை சமைக்கவும்.",
+                        "ஊற வைத்த சிக்கனை சேர்த்து நன்றாக சமைக்கவும்.",
+                        "ஊற வைத்த அரிசி மற்றும் தேவையான தண்ணீர் சேர்க்கவும்.",
+                        "அரிசி நன்றாக வெந்ததும் இறக்கவும்.",
+                        "புதினா மற்றும் கொத்தமல்லியால் அலங்கரித்து சூடாக பரிமாறவும்."
+                    ],
+                    hi: [
+                        "चावल को धोकर लगभग 20 मिनट भिगोएँ।",
+                        "चिकन को दही, मसाले, नमक और अदरक-लहसुन पेस्ट के साथ मैरिनेट करें।",
+                        "तेल गर्म करके प्याज को सुनहरा होने तक भूनें।",
+                        "टमाटर डालकर नरम होने तक पकाएँ।",
+                        "मैरिनेट किया हुआ चिकन डालकर अच्छी तरह पकाएँ।",
+                        "भीगे हुए चावल और आवश्यक पानी डालें।",
+                        "चावल पूरी तरह पकने तक पकाएँ।",
+                        "पुदीना और धनिया से सजाकर गरम परोसें।"
+                    ],
+                    ml: [
+                        "അരി കഴുകി ഏകദേശം 20 മിനിറ്റ് കുതിർക്കുക.",
+                        "ചിക്കൻ തൈര്, മസാല, ഉപ്പ്, ഇഞ്ചി-വെളുത്തുള്ളി പേസ്റ്റ് എന്നിവ ചേർത്ത് മാരിനേറ്റ് ചെയ്യുക.",
+                        "എണ്ണ ചൂടാക്കി സവാള സ്വർണ്ണനിറമാകുന്നത് വരെ വഴറ്റുക.",
+                        "തക്കാളി ചേർത്ത് മൃദുവാകുന്നത് വരെ വേവിക്കുക.",
+                        "മാരിനേറ്റ് ചെയ്ത ചിക്കൻ ചേർത്ത് നന്നായി വേവിക്കുക.",
+                        "കുതിർന്ന അരിയും ആവശ്യത്തിന് വെള്ളവും ചേർക്കുക.",
+                        "അരി പൂർണ്ണമായി വേവുന്നത് വരെ പാകം ചെയ്യുക.",
+                        "പുതിനയും മല്ലിയിലയും ചേർത്ത് ചൂടോടെ വിളമ്പുക."
+                    ],
+                    te: [
+                        "బియ్యాన్ని కడిగి సుమారు 20 నిమిషాలు నానబెట్టండి.",
+                        "చికెన్‌ను పెరుగు, మసాలాలు, ఉప్పు మరియు అల్లం-వెల్లుల్లి పేస్ట్‌తో మారినేట్ చేయండి.",
+                        "నూనె వేడి చేసి ఉల్లిపాయలను బంగారు రంగు వచ్చే వరకు వేయించండి.",
+                        "టమోటాలు వేసి మెత్తబడే వరకు ఉడికించండి.",
+                        "మారినేట్ చేసిన చికెన్ వేసి బాగా ఉడికించండి.",
+                        "నానబెట్టిన బియ్యం మరియు అవసరమైన నీరు వేయండి.",
+                        "బియ్యం పూర్తిగా ఉడికే వరకు ఉడికించండి.",
+                        "పుదీనా మరియు కొత్తిమీరతో అలంకరించి వేడిగా వడ్డించండి."
+                    ]
+                },
+
+                tips: {
+                    en: [
+                        "Use good quality basmati rice for better texture.",
+                        "Do not add too much water.",
+                        "Allow the biryani to rest for 5 minutes before serving."
+                    ],
+                    ta: [
+                        "நல்ல தரமான பாஸ்மதி அரிசியை பயன்படுத்தவும்.",
+                        "அதிகமாக தண்ணீர் சேர்க்க வேண்டாம்.",
+                        "பரிமாறுவதற்கு முன் 5 நிமிடங்கள் பிரியாணியை அப்படியே வைக்கவும்."
+                    ],
+                    hi: [
+                        "बेहतर स्वाद और बनावट के लिए अच्छी गुणवत्ता वाले बासमती चावल का उपयोग करें।",
+                        "बहुत अधिक पानी न डालें।",
+                        "परोसने से पहले बिरयानी को 5 मिनट आराम दें।"
+                    ],
+                    ml: [
+                        "നല്ല ഗുണമേന്മയുള്ള ബാസ്മതി അരി ഉപയോഗിക്കുക.",
+                        "വളരെ അധികം വെള്ളം ചേർക്കരുത്.",
+                        "വിളമ്പുന്നതിന് മുമ്പ് ബിരിയാണി 5 മിനിറ്റ് വയ്ക്കുക."
+                    ],
+                    te: [
+                        "మంచి నాణ్యత గల బాస్మతి బియ్యం ఉపయోగించండి.",
+                        "ఎక్కువ నీరు వేయకండి.",
+                        "వడ్డించే ముందు బిర్యానీని 5 నిమిషాలు ఉంచండి."
+                    ]
+                }
+
+            },
+
+
+            "masala-dosa": {
+
+                emoji: "🥞🥔",
+                category: "veg",
+                rating: "⭐⭐⭐⭐⭐ 4.8 / 5",
+
+                prepTime: "15 min",
+                cookTime: "20 min",
+                servings: "4",
+
+                name: {
+                    en: "Masala Dosa",
+                    ta: "மசாலா தோசை",
+                    hi: "मसाला डोसा",
+                    ml: "മസാല ദോശ",
+                    te: "మసాలా దోస"
+                },
+
+                description: {
+                    en: "Crispy South Indian dosa filled with delicious spiced potato masala.",
+                    ta: "சுவையான மசாலா உருளைக்கிழங்குடன் நிரப்பப்பட்ட மொறுமொறுப்பான தென்னிந்திய தோசை.",
+                    hi: "स्वादिष्ट मसालेदार आलू से भरा हुआ कुरकुरा दक्षिण भारतीय डोसा।",
+                    ml: "രുചികരമായ മസാല ഉരുളക്കിഴങ്ങ് നിറച്ച ക്രിസ്പിയായ ദക്ഷിണേന്ത്യൻ ദോശ.",
+                    te: "రుచికరమైన మసాలా ఆలూ ఫిల్లింగ్‌తో తయారు చేసే క్రిస్పీ దక్షిణ భారత దోస."
+                },
+
+                ingredients: {
+                    en: [
+                        "2 cups dosa batter",
+                        "3 potatoes",
+                        "1 onion",
+                        "Green chillies",
+                        "Mustard seeds",
+                        "Turmeric",
+                        "Salt",
+                        "Oil"
+                    ],
+                    ta: [
+                        "2 கப் தோசை மாவு",
+                        "3 உருளைக்கிழங்கு",
+                        "1 வெங்காயம்",
+                        "பச்சை மிளகாய்",
+                        "கடுகு",
+                        "மஞ்சள் தூள்",
+                        "உப்பு",
+                        "எண்ணெய்"
+                    ],
+                    hi: [
+                        "2 कप डोसा बैटर",
+                        "3 आलू",
+                        "1 प्याज",
+                        "हरी मिर्च",
+                        "सरसों",
+                        "हल्दी",
+                        "नमक",
+                        "तेल"
+                    ],
+                    ml: [
+                        "2 കപ്പ് ദോശ മാവ്",
+                        "3 ഉരുളക്കിഴങ്ങ്",
+                        "1 സവാള",
+                        "പച്ചമുളക്",
+                        "കടുക്",
+                        "മഞ്ഞൾപ്പൊടി",
+                        "ഉപ്പ്",
+                        "എണ്ണ"
+                    ],
+                    te: [
+                        "2 కప్పుల దోస పిండి",
+                        "3 ఆలుగడ్డలు",
+                        "1 ఉల్లిపాయ",
+                        "పచ్చిమిరపకాయలు",
+                        "ఆవాలు",
+                        "పసుపు",
+                        "ఉప్పు",
+                        "నూనె"
+                    ]
+                },
+
+                equipment: {
+                    en: [
+                        "Tawa",
+                        "Knife",
+                        "Mixing Bowl"
+                    ],
+                    ta: [
+                        "தோசைக்கல்",
+                        "கத்தி",
+                        "கலவை கிண்ணம்"
+                    ],
+                    hi: [
+                        "तवा",
+                        "चाकू",
+                        "मिक्सिंग बाउल"
+                    ],
+                    ml: [
+                        "ദോശക്കല്ല്",
+                        "കത്തി",
+                        "മിക്സിംഗ് ബൗൾ"
+                    ],
+                    te: [
+                        "తవా",
+                        "కత్తి",
+                        "మిక్సింగ్ బౌల్"
+                    ]
+                },
+
+                steps: {
+                    en: [
+                        "Prepare the potato masala with boiled potatoes, onion and spices.",
+                        "Heat the tawa and spread dosa batter into a thin circle.",
+                        "Drizzle some oil around the dosa.",
+                        "Cook until the bottom becomes crispy.",
+                        "Place potato masala in the centre.",
+                        "Fold the dosa and serve hot."
+                    ],
+                    ta: [
+                        "வேகவைத்த உருளைக்கிழங்கு, வெங்காயம் மற்றும் மசாலாவுடன் உருளைக்கிழங்கு மசாலா தயாரிக்கவும்.",
+                        "தோசைக்கல்லை சூடாக்கி மாவை மெல்லிய வட்டமாக ஊற்றவும்.",
+                        "தோசையைச் சுற்றி சிறிது எண்ணெய் ஊற்றவும்.",
+                        "கீழ்ப்பக்கம் மொறுமொறுப்பாகும் வரை சமைக்கவும்.",
+                        "நடுவில் உருளைக்கிழங்கு மசாலாவை வைக்கவும்.",
+                        "தோசையை மடித்து சூடாக பரிமாறவும்."
+                    ],
+                    hi: [
+                        "उबले हुए आलू, प्याज और मसालों से आलू मसाला तैयार करें।",
+                        "तवा गर्म करके डोसा बैटर को पतले गोल आकार में फैलाएँ।",
+                        "डोसे के चारों ओर थोड़ा तेल डालें।",
+                        "नीचे से कुरकुरा होने तक पकाएँ।",
+                        "बीच में आलू मसाला रखें।",
+                        "डोसा मोड़कर गरम परोसें।"
+                    ],
+                    ml: [
+                        "വേവിച്ച ഉരുളക്കിഴങ്ങ്, സവാള, മസാല എന്നിവ ഉപയോഗിച്ച് മസാല തയ്യാറാക്കുക.",
+                        "ദോശക്കല്ല് ചൂടാക്കി ദോശമാവ് നേർത്ത വൃത്താകൃതിയിൽ പരത്തുക.",
+                        "ദോശയുടെ ചുറ്റും കുറച്ച് എണ്ണ ഒഴിക്കുക.",
+                        "താഴെ ഭാഗം ക്രിസ്പിയാകുന്നത് വരെ വേവിക്കുക.",
+                        "നടുവിൽ ഉരുളക്കിഴങ്ങ് മസാല വയ്ക്കുക.",
+                        "ദോശ മടക്കി ചൂടോടെ വിളമ്പുക."
+                    ],
+                    te: [
+                        "ఉడికించిన ఆలుగడ్డలు, ఉల్లిపాయ మరియు మసాలాలతో ఆలూ మసాలా తయారు చేయండి.",
+                        "తవాను వేడి చేసి దోస పిండిని పలుచగా గుండ్రంగా పోయండి.",
+                        "దోస చుట్టూ కొద్దిగా నూనె వేయండి.",
+                        "కింద భాగం క్రిస్పీగా అయ్యే వరకు ఉడికించండి.",
+                        "మధ్యలో ఆలూ మసాలా పెట్టండి.",
+                        "దోసను మడిచి వేడిగా వడ్డించండి."
+                    ]
+                },
+
+                tips: {
+                    en: [
+                        "Keep the batter at the right consistency.",
+                        "A hot tawa gives a crispier dosa.",
+                        "Serve immediately for the best texture."
+                    ],
+                    ta: [
+                        "மாவை சரியான பதத்தில் வைத்திருக்கவும்.",
+                        "சூடான தோசைக்கல் மொறுமொறுப்பான தோசையை தரும்.",
+                        "சிறந்த சுவைக்காக உடனடியாக பரிமாறவும்."
+                    ],
+                    hi: [
+                        "बैटर की सही consistency रखें।",
+                        "गर्म तवे से डोसा अधिक कुरकुरा बनेगा।",
+                        "बेहतर स्वाद के लिए तुरंत परोसें।"
+                    ],
+                    ml: [
+                        "മാവിന്റെ ശരിയായ കട്ട നിലനിർത്തുക.",
+                        "ചൂടുള്ള ദോശക്കല്ലിൽ കൂടുതൽ ക്രിസ്പിയായ ദോശ ലഭിക്കും.",
+                        "മികച്ച രുചിക്കായി ഉടൻ വിളമ്പുക."
+                    ],
+                    te: [
+                        "పిండి సరైన గాఢతలో ఉండేలా చూసుకోండి.",
+                        "వేడి తవా క్రిస్పీ దోసను ఇస్తుంది.",
+                        "మంచి రుచి కోసం వెంటనే వడ్డించండి."
+                    ]
+                }
+
+            },
+
+
+            "gulab-jamun": {
+
+                emoji: "🍩🍯",
+                category: "sweets",
+                rating: "⭐⭐⭐⭐⭐ 4.9 / 5",
+
+                prepTime: "15 min",
+                cookTime: "20 min",
+                servings: "4",
+
+                name: {
+                    en: "Gulab Jamun",
+                    ta: "குலாப் ஜாமூன்",
+                    hi: "गुलाब जामुन",
+                    ml: "ഗുലാബ് ജാമുൻ",
+                    te: "గులాబ్ జామూన్"
+                },
+
+                description: {
+                    en: "Soft sweet dumplings soaked in warm sugar syrup.",
+                    ta: "சூடான சர்க்கரை பாகில் ஊறவைக்கப்படும் மென்மையான இனிப்பு உருண்டைகள்.",
+                    hi: "गर्म चीनी की चाशनी में भिगोए हुए नरम मीठे गोले।",
+                    ml: "ചൂടുള്ള പഞ്ചസാര പാനിയിൽ മുക്കിയ മൃദുവായ മധുര ഉരുളകൾ.",
+                    te: "వెచ్చని చక్కెర పాకంలో నానబెట్టిన మృదువైన తీపి ఉండలు."
+                },
+
+                ingredients: {
+                    en: [
+                        "1 cup milk powder",
+                        "2 tbsp flour",
+                        "Milk",
+                        "Sugar",
+                        "Cardamom",
+                        "Oil for frying"
+                    ],
+                    ta: [
+                        "1 கப் பால் பவுடர்",
+                        "2 மேசைக்கரண்டி மாவு",
+                        "பால்",
+                        "சர்க்கரை",
+                        "ஏலக்காய்",
+                        "பொரிப்பதற்கு எண்ணெய்"
+                    ],
+                    hi: [
+                        "1 कप मिल्क पाउडर",
+                        "2 बड़े चम्मच मैदा",
+                        "दूध",
+                        "चीनी",
+                        "इलायची",
+                        "तलने के लिए तेल"
+                    ],
+                    ml: [
+                        "1 കപ്പ് പാൽപ്പൊടി",
+                        "2 ടേബിൾസ്പൂൺ മൈദ",
+                        "പാൽ",
+                        "പഞ്ചസാര",
+                        "ഏലക്ക",
+                        "വറുക്കാൻ എണ്ണ"
+                    ],
+                    te: [
+                        "1 కప్పు మిల్క్ పౌడర్",
+                        "2 టేబుల్ స్పూన్లు మైదా",
+                        "పాలు",
+                        "చక్కెర",
+                        "ఏలకులు",
+                        "వేయించడానికి నూనె"
+                    ]
+                },
+
+                equipment: {
+                    en: [
+                        "Mixing Bowl",
+                        "Kadai",
+                        "Knife"
+                    ],
+                    ta: [
+                        "கலவை கிண்ணம்",
+                        "கடை",
+                        "கத்தி"
+                    ],
+                    hi: [
+                        "मिक्सिंग बाउल",
+                        "कड़ाही",
+                        "चाकू"
+                    ],
+                    ml: [
+                        "മിക്സിംഗ് ബൗൾ",
+                        "കടായി",
+                        "കത്തി"
+                    ],
+                    te: [
+                        "మిక్సింగ్ బౌల్",
+                        "కడాయి",
+                        "కత్తి"
+                    ]
+                },
+
+                steps: {
+                    en: [
+                        "Mix milk powder and flour in a bowl.",
+                        "Add a little milk and make a soft dough.",
+                        "Shape the dough into small smooth balls.",
+                        "Heat oil and fry the balls on low-medium heat.",
+                        "Prepare sugar syrup with sugar and water.",
+                        "Soak the fried balls in warm syrup.",
+                        "Allow them to absorb the syrup before serving."
+                    ],
+                    ta: [
+                        "ஒரு கிண்ணத்தில் பால் பவுடர் மற்றும் மாவை கலக்கவும்.",
+                        "சிறிது பால் சேர்த்து மென்மையான மாவாக பிசையவும்.",
+                        "மாவை சிறிய உருண்டைகளாக உருட்டவும்.",
+                        "எண்ணெயை சூடாக்கி குறைந்த-நடுத்தர தீயில் உருண்டைகளை பொரிக்கவும்.",
+                        "சர்க்கரை மற்றும் தண்ணீருடன் சர்க்கரை பாகு தயாரிக்கவும்.",
+                        "பொரித்த உருண்டைகளை சூடான பாகில் போடவும்.",
+                        "பாகை நன்றாக உறிஞ்சிய பிறகு பரிமாறவும்."
+                    ],
+                    hi: [
+                        "एक बाउल में मिल्क पाउडर और मैदा मिलाएँ।",
+                        "थोड़ा दूध डालकर नरम आटा तैयार करें।",
+                        "आटे से छोटे चिकने गोले बनाएँ।",
+                        "तेल गर्म करके गोलों को धीमी-मध्यम आँच पर तलें।",
+                        "चीनी और पानी से चाशनी तैयार करें।",
+                        "तले हुए गोलों को गर्म चाशनी में डालें।",
+                        "चाशनी सोखने के बाद परोसें।"
+                    ],
+                    ml: [
+                        "ഒരു ബൗളിൽ പാൽപ്പൊടിയും മൈദയും ചേർക്കുക.",
+                        "കുറച്ച് പാൽ ചേർത്ത് മൃദുവായ മാവ് തയ്യാറാക്കുക.",
+                        "മാവ് ചെറിയ മിനുസമുള്ള ഉരുളകളാക്കുക.",
+                        "എണ്ണ ചൂടാക്കി കുറഞ്ഞ-ഇടത്തരം തീയിൽ ഉരുളകൾ വറുക്കുക.",
+                        "പഞ്ചസാരയും വെള്ളവും ഉപയോഗിച്ച് പഞ്ചസാര പാനി തയ്യാറാക്കുക.",
+                        "വറുത്ത ഉരുളകൾ ചൂടുള്ള പാനിയിൽ ഇടുക.",
+                        "പാനി നന്നായി ആഗിരണം ചെയ്ത ശേഷം വിളമ്പുക."
+                    ],
+                    te: [
+                        "ఒక బౌల్‌లో మిల్క్ పౌడర్ మరియు మైదా కలపండి.",
+                        "కొద్దిగా పాలు వేసి మెత్తని పిండిని తయారు చేయండి.",
+                        "పిండిని చిన్న మృదువైన ఉండలుగా చేయండి.",
+                        "నూనె వేడి చేసి తక్కువ-మధ్యస్థ మంటపై ఉండలను వేయించండి.",
+                        "చక్కెర మరియు నీటితో పాకం తయారు చేయండి.",
+                        "వేయించిన ఉండలను వెచ్చని పాకంలో వేయండి.",
+                        "పాకం బాగా పీల్చుకున్న తర్వాత వడ్డించండి."
+                    ]
+                },
+
+                tips: {
+                    en: [
+                        "Do not make the dough too hard.",
+                        "Fry on medium-low heat for even cooking.",
+                        "Warm syrup helps the jamun absorb it better."
+                    ],
+                    ta: [
+                        "மாவை மிகவும் கடினமாக பிசைய வேண்டாம்.",
+                        "சமமாக வேகுவதற்கு மிதமான தீயில் பொரிக்கவும்.",
+                        "சூடான பாகு ஜாமூன் நன்றாக பாகை உறிஞ்ச உதவும்."
+                    ],
+                    hi: [
+                        "आटे को बहुत सख्त न करें।",
+                        "समान रूप से पकाने के लिए मध्यम-धीमी आँच पर तलें।",
+                        "गर्म चाशनी से जामुन अच्छी तरह चाशनी सोखता है।"
+                    ],
+                    ml: [
+                        "മാവ് വളരെ കട്ടിയാക്കരുത്.",
+                        "ഒരുപോലെ വേവാൻ ഇടത്തരം കുറഞ്ഞ തീയിൽ വറുക്കുക.",
+                        "ചൂടുള്ള പാനി ജാമുൻ നന്നായി ആഗിരണം ചെയ്യാൻ സഹായിക്കും."
+                    ],
+                    te: [
+                        "పిండిని చాలా గట్టిగా చేయకండి.",
+                        "సమంగా ఉడకడానికి మధ్యస్థ తక్కువ మంటపై వేయించండి.",
+                        "వెచ్చని పాకం జామూన్ బాగా పీల్చుకోవడానికి సహాయపడుతుంది."
+                    ]
+                }
 
             }
+
+        };
+
+
+        /* ==========================================
+           SIMPLE FALLBACK RECIPES
+           Other recipe links also continue working.
+        ========================================== */
+
+        const extraRecipes = {
+
+            "vegetable-sandwich": [
+                "Vegetable Sandwich",
+                "🥪🥕",
+                "snacks"
+            ],
+
+            "egg-fried-rice": [
+                "Egg Fried Rice",
+                "🍳🍚",
+                "nonveg"
+            ],
+
+            "paneer-butter-masala": [
+                "Paneer Butter Masala",
+                "🧀🍅",
+                "veg"
+            ],
+
+            "onion-pakoda": [
+                "Onion Pakoda",
+                "🧅🥨",
+                "snacks"
+            ],
+
+            "payasam": [
+                "Payasam",
+                "🥛🍚",
+                "sweets"
+            ],
+
+            "vegetable-pulao": [
+                "Vegetable Pulao",
+                "🍚🥕",
+                "veg"
+            ],
+
+            "chicken-65": [
+                "Chicken 65",
+                "🍗🌶️",
+                "nonveg"
+            ],
+
+            "vegetable-samosa": [
+                "Vegetable Samosa",
+                "🥟🥔",
+                "snacks"
+            ],
+
+            "carrot-halwa": [
+                "Carrot Halwa",
+                "🥕🍮",
+                "sweets"
+            ],
+
+            "banana-milkshake": [
+                "Banana Milkshake",
+                "🍌🥛",
+                "sweets"
+            ],
+
+            "idli": [
+                "Idli",
+                "⚪🥥",
+                "veg"
+            ],
+
+            "steamed-vegetables": [
+                "Steamed Vegetables",
+                "🥦🥕",
+                "veg"
+            ],
+
+            "baked-cake": [
+                "Baked Cake",
+                "🎂",
+                "sweets"
+            ],
+
+            "microwave-mug-cake": [
+                "Microwave Mug Cake",
+                "🍰☕",
+                "sweets"
+            ],
+
+            "aloo-roti": [
+                "Aloo Roti",
+                "🫓🥔",
+                "veg"
+            ]
+
+        };
+
+
+        /* ==========================================
+           GET LANGUAGE
+        ========================================== */
+
+        function getDetailLanguage() {
+
+            return localStorage.getItem(
+                "cookmateLanguage"
+            ) || "en";
 
         }
 
 
+        /* ==========================================
+           GET RECIPE ID
+        ========================================== */
 
-        /* =========================
-           SHOPPING LIST
-           ========================= */
+        const urlParams =
+            new URLSearchParams(
+                window.location.search
+            );
 
-        function addShoppingList() {
+        const recipeId =
+            urlParams.get("recipe")
+            || "chicken-biryani";
 
-            alert(
-                "Ingredients added to your shopping list! 🛒"
+
+        let currentRecipe =
+            recipes[recipeId];
+
+
+        /* ==========================================
+           DISPLAY RECIPE
+        ========================================== */
+
+        function displayRecipe() {
+
+            const language =
+                getDetailLanguage();
+
+            const t =
+                detailTranslations[language]
+                || detailTranslations.en;
+
+
+            /*
+             * Full multilingual recipe
+             */
+
+            if (currentRecipe) {
+
+                document.getElementById(
+                    "recipeImage"
+                ).textContent =
+                    currentRecipe.emoji;
+
+
+                document.getElementById(
+                    "recipeName"
+                ).textContent =
+                    currentRecipe.name[language]
+                    || currentRecipe.name.en;
+
+
+                document.getElementById(
+                    "breadcrumbName"
+                ).textContent =
+                    currentRecipe.name[language]
+                    || currentRecipe.name.en;
+
+
+                document.getElementById(
+                    "recipeCategory"
+                ).textContent =
+                    t.category[
+                        currentRecipe.category
+                    ];
+
+
+                document.getElementById(
+                    "recipeRating"
+                ).textContent =
+                    currentRecipe.rating;
+
+
+                document.getElementById(
+                    "recipeDescription"
+                ).textContent =
+                    currentRecipe.description[language]
+                    || currentRecipe.description.en;
+
+
+                document.getElementById(
+                    "prepTime"
+                ).textContent =
+                    currentRecipe.prepTime;
+
+
+                document.getElementById(
+                    "cookTime"
+                ).textContent =
+                    currentRecipe.cookTime;
+
+
+                document.getElementById(
+                    "servings"
+                ).textContent =
+                    currentRecipe.servings;
+
+
+                /* INGREDIENTS */
+
+                const ingredientList =
+                    document.getElementById(
+                        "ingredientList"
+                    );
+
+                ingredientList.innerHTML = "";
+
+                currentRecipe.ingredients[
+                    language
+                ].forEach(
+                    function(item) {
+
+                        const li =
+                            document.createElement(
+                                "li"
+                            );
+
+                        li.textContent =
+                            item;
+
+                        ingredientList.appendChild(
+                            li
+                        );
+
+                    }
+                );
+
+
+                /* EQUIPMENT */
+
+                const equipmentList =
+                    document.getElementById(
+                        "equipmentList"
+                    );
+
+                equipmentList.innerHTML = "";
+
+                currentRecipe.equipment[
+                    language
+                ].forEach(
+                    function(item) {
+
+                        const li =
+                            document.createElement(
+                                "li"
+                            );
+
+                        li.textContent =
+                            item;
+
+                        equipmentList.appendChild(
+                            li
+                        );
+
+                    }
+                );
+
+
+                /* STEPS */
+
+                const stepsList =
+                    document.getElementById(
+                        "stepsList"
+                    );
+
+                stepsList.innerHTML = "";
+
+                currentRecipe.steps[
+                    language
+                ].forEach(
+                    function(item) {
+
+                        const li =
+                            document.createElement(
+                                "li"
+                            );
+
+                        li.textContent =
+                            item;
+
+                        stepsList.appendChild(
+                            li
+                        );
+
+                    }
+                );
+
+
+                /* TIPS */
+
+                const tipsList =
+                    document.getElementById(
+                        "tipsList"
+                    );
+
+                tipsList.innerHTML = "";
+
+                currentRecipe.tips[
+                    language
+                ].forEach(
+                    function(item) {
+
+                        const div =
+                            document.createElement(
+                                "div"
+                            );
+
+                        div.className =
+                            "tip-box";
+
+                        div.textContent =
+                            "✓ " + item;
+
+                        tipsList.appendChild(
+                            div
+                        );
+
+                    }
+                );
+
+            }
+
+            /*
+             * Other recipes
+             * fallback display
+             */
+
+            else if (
+                extraRecipes[recipeId]
+            ) {
+
+                const data =
+                    extraRecipes[recipeId];
+
+
+                document.getElementById(
+                    "recipeImage"
+                ).textContent =
+                    data[1];
+
+
+                document.getElementById(
+                    "recipeName"
+                ).textContent =
+                    data[0];
+
+
+                document.getElementById(
+                    "breadcrumbName"
+                ).textContent =
+                    data[0];
+
+
+                document.getElementById(
+                    "recipeCategory"
+                ).textContent =
+                    t.category[data[2]]
+                    || data[2];
+
+
+                document.getElementById(
+                    "recipeRating"
+                ).textContent =
+                    "⭐⭐⭐⭐⭐";
+
+
+                document.getElementById(
+                    "recipeDescription"
+                ).textContent =
+                    data[0] +
+                    " - a delicious homemade recipe.";
+
+
+                document.getElementById(
+                    "prepTime"
+                ).textContent =
+                    "15 min";
+
+
+                document.getElementById(
+                    "cookTime"
+                ).textContent =
+                    "20 min";
+
+
+                document.getElementById(
+                    "servings"
+                ).textContent =
+                    "4";
+
+
+                const sampleText = {
+                    en: "Recipe ingredients will be displayed here.",
+                    ta: "சமையல் குறிப்பின் தேவையான பொருட்கள் இங்கே காட்டப்படும்.",
+                    hi: "रेसिपी की सामग्री यहाँ दिखाई जाएगी।",
+                    ml: "പാചകക്കുറിപ്പിന്റെ ചേരുവകൾ ഇവിടെ കാണിക്കും.",
+                    te: "వంటకానికి కావలసిన పదార్థాలు ఇక్కడ చూపబడతాయి."
+                };
+
+
+                document.getElementById(
+                    "ingredientList"
+                ).innerHTML =
+                    "<li>" +
+                    sampleText[language] +
+                    "</li>";
+
+
+                document.getElementById(
+                    "equipmentList"
+                ).innerHTML =
+                    "<li>" +
+                    (language === "ta"
+                        ? "தேவையான சமையல் உபகரணங்கள்"
+                        : language === "hi"
+                        ? "आवश्यक रसोई उपकरण"
+                        : language === "ml"
+                        ? "ആവശ്യമായ പാചക ഉപകരണങ്ങൾ"
+                        : language === "te"
+                        ? "అవసరమైన వంట పరికరాలు"
+                        : "Required cooking equipment"
+                    ) +
+                    "</li>";
+
+
+                document.getElementById(
+                    "stepsList"
+                ).innerHTML =
+                    "<li>" +
+                    (language === "ta"
+                        ? "செய்முறை படிகள் இங்கே காட்டப்படும்."
+                        : language === "hi"
+                        ? "बनाने की विधि यहाँ दिखाई जाएगी।"
+                        : language === "ml"
+                        ? "തയ്യാറാക്കുന്ന വിധം ഇവിടെ കാണിക്കും."
+                        : language === "te"
+                        ? "తయారు చేసే విధానం ఇక్కడ చూపబడుతుంది."
+                        : "Recipe preparation steps will be displayed here."
+                    ) +
+                    "</li>";
+
+
+                document.getElementById(
+                    "tipsList"
+                ).innerHTML =
+                    "<div class='tip-box'>✓ " +
+                    (
+                        language === "ta"
+                        ? "புதிய பொருட்களை பயன்படுத்தவும்."
+                        : language === "hi"
+                        ? "ताजा सामग्री का उपयोग करें।"
+                        : language === "ml"
+                        ? "പുതിയ ചേരുവകൾ ഉപയോഗിക്കുക."
+                        : language === "te"
+                        ? "తాజా పదార్థాలను ఉపయోగించండి."
+                        : "Use fresh ingredients."
+                    ) +
+                    "</div>";
+
+            }
+
+            updateSaveButton();
+
+            displayRelatedRecipes();
+
+        }
+
+
+        /* ==========================================
+           FAVOURITES
+        ========================================== */
+
+        function getFavourites() {
+
+            return JSON.parse(
+                localStorage.getItem(
+                    "cookmateFavourites"
+                ) || "[]"
             );
 
         }
 
 
-    </script>
+        function toggleFavourite() {
 
+            let favourites =
+                getFavourites();
+
+
+            const language =
+                getDetailLanguage();
+
+            const t =
+                detailTranslations[language]
+                || detailTranslations.en;
+
+
+            const index =
+                favourites.indexOf(
+                    recipeId
+                );
+
+
+            if (index === -1) {
+
+                favourites.push(
+                    recipeId
+                );
+
+                alert(
+                    t.savedMessage
+                );
+
+            } else {
+
+                favourites.splice(
+                    index,
+                    1
+                );
+
+                alert(
+                    t.removedMessage
+                );
+
+            }
+
+
+            localStorage.setItem(
+                "cookmateFavourites",
+                JSON.stringify(
+                    favourites
+                )
+            );
+
+
+            updateSaveButton();
+
+        }
+
+
+        function updateSaveButton() {
+
+            const button =
+                document.getElementById(
+                    "saveButton"
+                );
+
+
+            const language =
+                getDetailLanguage();
+
+            const t =
+                detailTranslations[language]
+                || detailTranslations.en;
+
+
+            const favourites =
+                getFavourites();
+
+
+            if (
+                favourites.includes(
+                    recipeId
+                )
+            ) {
+
+                button.textContent =
+                    t.savedRecipe;
+
+            } else {
+
+                button.textContent =
+                    t.saveRecipe;
+
+            }
+
+        }
+
+
+        /* ==========================================
+           SHOPPING LIST
+        ========================================== */
+
+        function showShoppingList() {
+
+            if (!currentRecipe) {
+
+                return;
+
+            }
+
+
+            const language =
+                getDetailLanguage();
+
+            const t =
+                detailTranslations[language]
+                || detailTranslations.en;
+
+
+            const ingredients =
+                currentRecipe.ingredients[
+                    language
+                ];
+
+
+            alert(
+                t.shoppingMessage +
+                ingredients
+                    .map(
+                        item => "• " + item
+                    )
+                    .join("\n")
+            );
+
+        }
+
+
+        /* ==========================================
+           RELATED RECIPES
+        ========================================== */
+
+        function displayRelatedRecipes() {
+
+            const container =
+                document.getElementById(
+                    "relatedRecipes"
+                );
+
+
+            const language =
+                getDetailLanguage();
+
+
+            const related =
+                Object.keys(
+                    recipes
+                )
+                .filter(
+                    id =>
+                        id !== recipeId
+                )
+                .slice(0, 3);
+
+
+            container.innerHTML = "";
+
+
+            related.forEach(
+                function(id) {
+
+                    const recipe =
+                        recipes[id];
+
+
+                    const card =
+                        document.createElement(
+                            "a"
+                        );
+
+
+                    card.className =
+                        "related-card";
+
+
+                    card.href =
+                        "recipe-details.html?recipe=" +
+                        id;
+
+
+                    card.innerHTML = `
+
+                        <div class="related-image">
+                            ${recipe.emoji}
+                        </div>
+
+                        <h3>
+                            ${
+                                recipe.name[language]
+                                || recipe.name.en
+                            }
+                        </h3>
+
+                        <p>
+                            ${recipe.rating}
+                        </p>
+
+                    `;
+
+
+                    container.appendChild(
+                        card
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* ==========================================
+           TRANSLATE PAGE LABELS
+        ========================================== */
+
+        function translateDetailLabels() {
+
+            const language =
+                getDetailLanguage();
+
+            const t =
+                detailTranslations[language]
+                || detailTranslations.en;
+
+
+            document
+                .querySelectorAll(
+                    "[data-i18n]"
+                )
+                .forEach(
+                    function(element) {
+
+                        const key =
+                            element.getAttribute(
+                                "data-i18n"
+                            );
+
+
+                        if (t[key]) {
+
+                            element.textContent =
+                                t[key];
+
+                        }
+
+                    }
+                );
+
+
+            updateSaveButton();
+
+        }
+
+
+        /* ==========================================
+           INITIAL LOAD
+        ========================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                displayRecipe();
+
+                translateDetailLabels();
+
+            }
+        );
+
+
+        /* ==========================================
+           LANGUAGE CHANGE DETECTION
+        ========================================== */
+
+        window.addEventListener(
+            "storage",
+            function(event) {
+
+                if (
+                    event.key ===
+                    "cookmateLanguage"
+                ) {
+
+                    displayRecipe();
+
+                    translateDetailLabels();
+
+                }
+
+            }
+        );
+
+
+        /*
+         * Re-render when language selector
+         * in the shared script changes.
+         */
+
+        const originalSetLanguage =
+            window.setLanguage;
+
+
+        if (originalSetLanguage) {
+
+            window.setLanguage =
+                function(language) {
+
+                    originalSetLanguage(
+                        language
+                    );
+
+                    setTimeout(
+                        function() {
+
+                            displayRecipe();
+
+                            translateDetailLabels();
+
+                        },
+                        50
+                    );
+
+                };
+
+        }
+
+    </script>
 
 </body>
 
