@@ -3,985 +3,1018 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>My Favourites | CookMate</title>
+    <title>CookMate - Favourites</title>
 
     <link rel="stylesheet" href="css/style.css">
-
-    <style>
-        /* =====================================================
-           COOKMATE - FAVOURITES PAGE
-           ===================================================== */
-
-        .favourites-page {
-            padding: 45px 7%;
-            min-height: 75vh;
-        }
-
-        .page-hero {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-
-        .page-hero h1 {
-            font-size: 42px;
-            color: #3f2d20;
-            margin-bottom: 10px;
-        }
-
-        .page-hero p {
-            color: #777;
-            font-size: 16px;
-        }
-
-        .favourite-toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .saved-count {
-            background: #f7f6e3;
-            color: #5a402d;
-            padding: 12px 18px;
-            border-radius: 12px;
-            font-weight: 600;
-        }
-
-        .clear-btn {
-            border: none;
-            background: #ead1c4;
-            color: #6b3025;
-            padding: 12px 18px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .clear-btn:hover {
-            background: #dcb7a7;
-            transform: translateY(-2px);
-        }
-
-        .search-box {
-            display: flex;
-            max-width: 650px;
-            margin: 0 auto 35px;
-            background: white;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
-        }
-
-        .search-box input {
-            flex: 1;
-            border: none;
-            outline: none;
-            padding: 16px 18px;
-            font-size: 15px;
-        }
-
-        .search-box button {
-            border: none;
-            background: #6b4f35;
-            color: white;
-            padding: 0 22px;
-            cursor: pointer;
-            font-size: 15px;
-        }
-
-        .search-box button:hover {
-            background: #513a28;
-        }
-
-        .favourites-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .favourite-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 7px 25px rgba(0,0,0,0.07);
-            transition: 0.3s;
-            position: relative;
-        }
-
-        .favourite-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.11);
-        }
-
-        .recipe-emoji {
-            height: 190px;
-            background: linear-gradient(135deg, #f7f6e3, #eadcc8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 90px;
-        }
-
-        .card-content {
-            padding: 22px;
-        }
-
-        .category-tag {
-            display: inline-block;
-            background: #f0e5d6;
-            color: #6b4f35;
-            padding: 5px 11px;
-            border-radius: 15px;
-            font-size: 11px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .card-content h2 {
-            color: #3f2d20;
-            margin: 3px 0 10px;
-            font-size: 23px;
-        }
-
-        .card-content p {
-            color: #777;
-            line-height: 1.6;
-            font-size: 14px;
-            min-height: 45px;
-        }
-
-        .recipe-meta {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin: 15px 0;
-            color: #666;
-            font-size: 13px;
-        }
-
-        .card-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .view-btn {
-            flex: 1;
-            text-align: center;
-            text-decoration: none;
-            background: #6b4f35;
-            color: white;
-            padding: 11px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .view-btn:hover {
-            background: #513a28;
-        }
-
-        .remove-btn {
-            border: none;
-            background: #f1dfd8;
-            color: #8b4034;
-            padding: 11px 14px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .remove-btn:hover {
-            background: #e5c5bb;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 80px 20px;
-            background: white;
-            border-radius: 22px;
-            box-shadow: 0 7px 25px rgba(0,0,0,0.06);
-        }
-
-        .empty-icon {
-            font-size: 75px;
-            margin-bottom: 15px;
-        }
-
-        .empty-state h2 {
-            color: #3f2d20;
-            margin-bottom: 10px;
-        }
-
-        .empty-state p {
-            color: #777;
-            margin-bottom: 25px;
-        }
-
-        .browse-btn {
-            display: inline-block;
-            text-decoration: none;
-            background: #6b4f35;
-            color: white;
-            padding: 13px 22px;
-            border-radius: 11px;
-            font-weight: 600;
-        }
-
-        .browse-btn:hover {
-            background: #513a28;
-        }
-
-        .no-results {
-            display: none;
-            text-align: center;
-            padding: 50px 20px;
-            color: #777;
-        }
-
-        /* =====================================================
-           RESPONSIVE
-           ===================================================== */
-
-        @media (max-width: 950px) {
-
-            .favourites-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-        }
-
-        @media (max-width: 600px) {
-
-            .favourites-page {
-                padding: 30px 5%;
-            }
-
-            .page-hero h1 {
-                font-size: 32px;
-            }
-
-            .favourites-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .favourite-toolbar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .clear-btn {
-                width: 100%;
-            }
-
-            .saved-count {
-                text-align: center;
-            }
-
-        }
-    </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     NAVBAR
-     ===================================================== -->
+<!-- ================= NAVBAR ================= -->
 
-<header>
+<nav class="navbar">
 
-    <nav class="navbar">
+    <div class="logo">🍳 CookMate</div>
 
-        <div class="logo">
-            🍳 CookMate
-        </div>
+    <div class="nav-links">
+        <a href="index.html" data-i18n="home">Home</a>
+        <a href="recipes.html" data-i18n="recipes">Recipes</a>
+        <a href="ingredients.html" data-i18n="ingredients">Ingredients</a>
+        <a href="equipment.html" data-i18n="equipment">Equipment</a>
+        <a href="favourites.html" class="active" data-i18n="favourites">Favourites</a>
+        <a href="profile.html" data-i18n="profile">Profile</a>
+    </div>
 
-        <ul class="nav-links">
-
-            <li>
-                <a href="index.html">Home</a>
-            </li>
-
-            <li>
-                <a href="recipes.html">Recipes</a>
-            </li>
-
-            <li>
-                <a href="ingredients.html">Ingredients</a>
-            </li>
-
-            <li>
-                <a href="equipment.html">Equipment</a>
-            </li>
-
-            <li>
-                <a href="favourites.html">Favourites</a>
-            </li>
-
-            <li>
-                <a href="profile.html">Profile</a>
-            </li>
-
-        </ul>
-
-    </nav>
-
-</header>
+</nav>
 
 
-<!-- =====================================================
-     MAIN CONTENT
-     ===================================================== -->
+<!-- ================= HERO ================= -->
 
-<main class="favourites-page">
+<section class="hero">
 
-    <!-- Page Heading -->
+    <div class="hero-content">
 
-    <section class="page-hero">
+        <span class="section-label">❤️ CookMate</span>
 
-        <h1>
-            ⭐ My Favourite Recipes
+        <h1 data-i18n="favouriteRecipes">
+            My Favourite Recipes
         </h1>
 
-        <p>
-            Your saved recipes are all in one place.
+        <p data-i18n="favouriteDescription">
+            Your saved recipes are available here.
         </p>
 
-    </section>
-
-
-    <!-- Search -->
-
-    <div class="search-box">
-
-        <input
-            type="text"
-            id="favouriteSearch"
-            placeholder="Search your favourite recipes..."
-            oninput="searchFavourites()"
-        >
-
-        <button onclick="searchFavourites()">
-            🔍 Search
-        </button>
-
     </div>
 
-
-    <!-- Toolbar -->
-
-    <div class="favourite-toolbar">
-
-        <div
-            class="saved-count"
-            id="savedCount"
-        >
-            ⭐ 0 Saved Recipes
-        </div>
-
-        <button
-            class="clear-btn"
-            onclick="clearAllFavourites()"
-        >
-            🗑️ Clear All
-        </button>
-
-    </div>
+</section>
 
 
-    <!-- Recipe Grid -->
+<!-- ================= FAVOURITES ================= -->
 
-    <section
-        class="favourites-grid"
-        id="favouritesGrid"
-    >
-    </section>
+<section class="section">
 
+    <div class="section-heading">
 
-    <!-- No Search Results -->
+        <span class="section-label">❤️ Saved</span>
 
-    <div
-        class="no-results"
-        id="noResults"
-    >
-
-        <h2>
-            🔍 No recipes found
+        <h2 data-i18n="savedRecipes">
+            Saved Recipes
         </h2>
 
         <p>
-            Try searching with another recipe name.
+            <span data-i18n="youHaveSaved">
+                You have saved
+            </span>
+
+            <strong id="favouriteCount">0</strong>
+
+            <span data-i18n="recipesText">
+                recipes.
+            </span>
         </p>
 
     </div>
 
 
-    <!-- Empty State -->
+    <!-- EMPTY STATE -->
 
-    <div
-        class="empty-state"
-        id="emptyState"
-        style="display:none;"
-    >
+    <div id="emptyFavourites" class="smart-section">
 
-        <div class="empty-icon">
-            💔
-        </div>
+        <div style="font-size: 55px;">💔</div>
 
-        <h2>
+        <h3 data-i18n="noFavourites">
             No Favourite Recipes Yet
-        </h2>
+        </h3>
 
-        <p>
+        <p data-i18n="noFavouritesDescription">
             Save your favourite recipes and they will appear here.
         </p>
 
-        <a
-            href="recipes.html"
-            class="browse-btn"
-        >
-            🍽️ Browse Recipes
+        <br>
+
+        <a href="recipes.html" class="primary-btn">
+            🍽️
+            <span data-i18n="exploreRecipes">
+                Explore Recipes
+            </span>
         </a>
 
     </div>
 
-</main>
+
+    <!-- FAVOURITE GRID -->
+
+    <div
+        id="favouriteGrid"
+        class="recipe-grid"
+    ></div>
+
+</section>
 
 
-<!-- =====================================================
-     FOOTER
-     ===================================================== -->
+<!-- ================= FOOTER ================= -->
 
-<footer>
+<footer class="footer">
 
-    <p>
-        © 2026 CookMate | Smart Cooking Made Easy 🍳
-    </p>
+    <div class="footer-content">
+
+        <div>
+
+            <h3>🍳 CookMate</h3>
+
+            <p data-i18n="footerDescription">
+                Your smart cooking companion for discovering delicious recipes.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <p>© 2026 CookMate</p>
+
+            <p data-i18n="madeForFoodLovers">
+                Made with ❤️ for food lovers
+            </p>
+
+        </div>
+
+    </div>
 
 </footer>
 
 
 <script>
 
-    /* =====================================================
-       RECIPE DATABASE
-       ===================================================== */
+/* =========================================================
+   RECIPE DATABASE
+========================================================= */
 
-    const recipes = {
+const favouriteRecipes = {
 
-        "chicken-biryani": {
-            name: "Chicken Biryani",
-            category: "NON-VEG",
-            emoji: "🍛",
-            description: "Aromatic and delicious chicken biryani.",
-            time: "45 min",
-            servings: "4"
+    "chicken-biryani": {
+        name: {
+            en: "Chicken Biryani",
+            ta: "சிக்கன் பிரியாணி",
+            hi: "चिकन बिरयानी",
+            ml: "ചിക്കൻ ബിരിയാണി",
+            te: "చికెన్ బిర్యానీ"
         },
-
-        "masala-dosa": {
-            name: "Masala Dosa",
-            category: "VEG",
-            emoji: "🥞",
-            description: "Crispy dosa filled with spicy potato masala.",
-            time: "35 min",
-            servings: "4"
+        category: {
+            en: "Non-Vegetarian",
+            ta: "அசைவம்",
+            hi: "मांसाहारी",
+            ml: "നോൺ വെജിറ്റേറിയൻ",
+            te: "నాన్ వెజిటేరియన్"
         },
-
-        "gulab-jamun": {
-            name: "Gulab Jamun",
-            category: "SWEETS",
-            emoji: "🍩",
-            description: "Soft and juicy gulab jamuns soaked in sugar syrup.",
-            time: "35 min",
-            servings: "4"
-        },
-
-        "vegetable-sandwich": {
-            name: "Vegetable Sandwich",
-            category: "SNACKS",
-            emoji: "🥪",
-            description: "Quick and healthy vegetable sandwich.",
-            time: "20 min",
-            servings: "2"
-        },
-
-        "egg-fried-rice": {
-            name: "Egg Fried Rice",
-            category: "NON-VEG",
-            emoji: "🍳",
-            description: "Tasty fried rice with egg and vegetables.",
-            time: "25 min",
-            servings: "2"
-        },
-
-        "paneer-butter-masala": {
-            name: "Paneer Butter Masala",
-            category: "VEG",
-            emoji: "🧀",
-            description: "Creamy and rich paneer curry.",
-            time: "40 min",
-            servings: "4"
-        },
-
-        "onion-pakoda": {
-            name: "Onion Pakoda",
-            category: "SNACKS",
-            emoji: "🧅",
-            description: "Crispy onion pakodas perfect for tea time.",
-            time: "25 min",
-            servings: "4"
-        },
-
-        "payasam": {
-            name: "Payasam",
-            category: "SWEETS",
-            emoji: "🥛",
-            description: "Traditional creamy South Indian payasam.",
-            time: "25 min",
-            servings: "4"
-        },
-
-        "vegetable-pulao": {
-            name: "Vegetable Pulao",
-            category: "VEG",
-            emoji: "🍚",
-            description: "Aromatic rice cooked with vegetables and spices.",
-            time: "40 min",
-            servings: "4"
-        },
-
-        "chicken-65": {
-            name: "Chicken 65",
-            category: "NON-VEG",
-            emoji: "🍗",
-            description: "Crispy and spicy South Indian chicken.",
-            time: "40 min",
-            servings: "4"
-        },
-
-        "vegetable-samosa": {
-            name: "Vegetable Samosa",
-            category: "SNACKS",
-            emoji: "🥟",
-            description: "Crispy samosas filled with vegetable masala.",
-            time: "50 min",
-            servings: "4"
-        },
-
-        "carrot-halwa": {
-            name: "Carrot Halwa",
-            category: "SWEETS",
-            emoji: "🥕",
-            description: "Rich Indian dessert made with carrots and milk.",
-            time: "45 min",
-            servings: "4"
-        },
-
-        "banana-milkshake": {
-            name: "Banana Milkshake",
-            category: "DRINKS",
-            emoji: "🍌",
-            description: "Creamy and refreshing banana milkshake.",
-            time: "5 min",
-            servings: "2"
-        },
-
-        "idli": {
-            name: "Idli",
-            category: "VEG",
-            emoji: "⚪",
-            description: "Soft and fluffy South Indian steamed idlis.",
-            time: "25 min",
-            servings: "4"
-        },
-
-        "steamed-vegetables": {
-            name: "Steamed Vegetables",
-            category: "VEG",
-            emoji: "🥦",
-            description: "Healthy mixed vegetables cooked with steam.",
-            time: "25 min",
-            servings: "2"
-        },
-
-        "baked-cake": {
-            name: "Baked Cake",
-            category: "SWEETS",
-            emoji: "🎂",
-            description: "Simple soft cake baked in an oven.",
-            time: "50 min",
-            servings: "6"
-        },
-
-        "microwave-mug-cake": {
-            name: "Microwave Mug Cake",
-            category: "SWEETS",
-            emoji: "🍰",
-            description: "Quick single-serving cake made in a microwave.",
-            time: "7 min",
-            servings: "1"
-        },
-
-        "aloo-roti": {
-            name: "Aloo Roti",
-            category: "VEG",
-            emoji: "🫓",
-            description: "Soft roti filled with spiced potato mixture.",
-            time: "40 min",
-            servings: "4"
+        emoji: "🍗",
+        rating: "4.8",
+        description: {
+            en: "A delicious and aromatic rice dish made with chicken and spices.",
+            ta: "சிக்கன் மற்றும் நறுமண மசாலாக்களுடன் செய்யப்படும் சுவையான பிரியாணி.",
+            hi: "चिकन और मसालों से बना स्वादिष्ट और सुगंधित चावल का व्यंजन।",
+            ml: "ചിക്കനും മസാലകളും ഉപയോഗിച്ച് തയ്യാറാക്കുന്ന രുചികരമായ സുഗന്ധമുള്ള ചോറ് വിഭവം.",
+            te: "చికెన్ మరియు మసాలాలతో తయారు చేసే రుచికరమైన సువాసనగల అన్నం వంటకం."
         }
+    },
 
-    };
+
+    "masala-dosa": {
+        name: {
+            en: "Masala Dosa",
+            ta: "மசாலா தோசை",
+            hi: "मसाला डोसा",
+            ml: "മസാല ദോശ",
+            te: "మసాలా దోస"
+        },
+        category: {
+            en: "Vegetarian",
+            ta: "சைவம்",
+            hi: "शाकाहारी",
+            ml: "വെജിറ്റേറിയൻ",
+            te: "వెజిటేరియన్"
+        },
+        emoji: "🥞",
+        rating: "4.7",
+        description: {
+            en: "Crispy dosa filled with delicious spiced potato masala.",
+            ta: "சுவையான உருளைக்கிழங்கு மசாலா நிரப்பப்பட்ட மொறுமொறுப்பான தோசை.",
+            hi: "स्वादिष्ट मसालेदार आलू से भरा कुरकुरा डोसा।",
+            ml: "രുചികരമായ മസാല ഉരുളക്കിഴങ്ങ് നിറച്ച ക്രിസ്പിയായ ദോശ.",
+            te: "రుచికరమైన మసాలా బంగాళాదుంపతో నింపిన క్రిస్పీ దోస."
+        }
+    },
 
 
-    /* =====================================================
-       GET FAVOURITES
-       ===================================================== */
+    "gulab-jamun": {
+        name: {
+            en: "Gulab Jamun",
+            ta: "குலாப் ஜாமூன்",
+            hi: "गुलाब जामुन",
+            ml: "ഗുലാബ് ജാമുൻ",
+            te: "గులాబ్ జామూన్"
+        },
+        category: {
+            en: "Sweets",
+            ta: "இனிப்பு",
+            hi: "मिठाई",
+            ml: "മധുരപലഹാരം",
+            te: "స్వీట్"
+        },
+        emoji: "🍮",
+        rating: "4.9",
+        description: {
+            en: "Soft sweet dumplings soaked in delicious sugar syrup.",
+            ta: "சுவையான சர்க்கரை பாகில் ஊறவைத்த மென்மையான இனிப்பு.",
+            hi: "स्वादिष्ट चाशनी में भिगोए हुए नरम मीठे गोले।",
+            ml: "രുചികരമായ പഞ്ചസാര പാനിയിൽ മുക്കിയ മൃദുവായ മധുരപലഹാരം.",
+            te: "రుచికరమైన చక్కెర పాకంలో నానబెట్టిన మెత్తని స్వీట్."
+        }
+    },
 
-    function getFavourites() {
 
-        return JSON.parse(
-            localStorage.getItem("cookmateFavourites")
-        ) || [];
+    "vegetable-sandwich": {
+        name: {
+            en: "Vegetable Sandwich",
+            ta: "காய்கறி சாண்ட்விச்",
+            hi: "वेजिटेबल सैंडविच",
+            ml: "വെജിറ്റബിൾ സാൻഡ്‌വിച്ച്",
+            te: "వెజిటబుల్ శాండ్విచ్"
+        },
+        category: {
+            en: "Snacks",
+            ta: "சிற்றுண்டி",
+            hi: "स्नैक्स",
+            ml: "ലഘുഭക്ഷണം",
+            te: "స్నాక్స్"
+        },
+        emoji: "🥪",
+        rating: "4.5",
+        description: {
+            en: "A quick and healthy sandwich filled with fresh vegetables.",
+            ta: "புதிய காய்கறிகளுடன் செய்யப்படும் எளிய மற்றும் ஆரோக்கியமான சாண்ட்விச்.",
+            hi: "ताजी सब्जियों से बना आसान और स्वस्थ सैंडविच।",
+            ml: "പുതിയ പച്ചക്കറികൾ ഉപയോഗിച്ച് തയ്യാറാക്കുന്ന എളുപ്പവും ആരോഗ്യകരവുമായ സാൻഡ്‌വിച്ച്.",
+            te: "తాజా కూరగాయలతో తయారు చేసే సులభమైన మరియు ఆరోగ్యకరమైన శాండ్విచ్."
+        }
+    },
+
+
+    "egg-fried-rice": {
+        name: {
+            en: "Egg Fried Rice",
+            ta: "முட்டை ஃப்ரைட் ரைஸ்",
+            hi: "एग फ्राइड राइस",
+            ml: "എഗ് ഫ്രൈഡ് റൈസ്",
+            te: "ఎగ్ ఫ్రైడ్ రైస్"
+        },
+        category: {
+            en: "Non-Vegetarian",
+            ta: "அசைவம்",
+            hi: "मांसाहारी",
+            ml: "നോൺ വെജിറ്റേറിയൻ",
+            te: "నాన్ వెజిటేరియన్"
+        },
+        emoji: "🍳",
+        rating: "4.6",
+        description: {
+            en: "Fried rice prepared with egg, vegetables and tasty seasonings.",
+            ta: "முட்டை, காய்கறிகள் மற்றும் சுவையான மசாலாக்களுடன் செய்யப்படும் ஃப்ரைட் ரைஸ்.",
+            hi: "अंडे, सब्जियों और स्वादिष्ट मसालों से बना फ्राइड राइस।",
+            ml: "മുട്ട, പച്ചക്കറികൾ, മസാലകൾ എന്നിവ ഉപയോഗിച്ച് തയ്യാറാക്കുന്ന ഫ്രൈഡ് റൈസ്.",
+            te: "గుడ్డు, కూరగాయలు మరియు రుచికరమైన మసాలాలతో తయారు చేసే ఫ్రైడ్ రైస్."
+        }
+    },
+
+
+    "paneer-butter-masala": {
+        name: {
+            en: "Paneer Butter Masala",
+            ta: "பனீர் பட்டர் மசாலா",
+            hi: "पनीर बटर मसाला",
+            ml: "പനീർ ബട്ടർ മസാല",
+            te: "పనీర్ బటర్ మసాలా"
+        },
+        category: {
+            en: "Vegetarian",
+            ta: "சைவம்",
+            hi: "शाकाहारी",
+            ml: "വെജിറ്റേറിയൻ",
+            te: "వెజిటేరియన్"
+        },
+        emoji: "🥘",
+        rating: "4.8",
+        description: {
+            en: "Soft paneer cooked in a creamy and flavorful tomato gravy.",
+            ta: "க்ரீமியான தக்காளி கிரேவியில் சமைக்கப்படும் மென்மையான பனீர்.",
+            hi: "क्रीमी और स्वादिष्ट टमाटर ग्रेवी में पका हुआ नरम पनीर।",
+            ml: "ക്രീമിയായ തക്കാളി ഗ്രേവിയിൽ പാകം ചെയ്ത മൃദുവായ പനീർ.",
+            te: "క్రీమీ మరియు రుచికరమైన టమాటా గ్రేవీలో వండిన మెత్తని పనీర్."
+        }
+    },
+
+
+    "onion-pakoda": {
+        name: {
+            en: "Onion Pakoda",
+            ta: "வெங்காய பக்கோடா",
+            hi: "प्याज पकौड़ा",
+            ml: "ഉള്ളി പക്കോഡ",
+            te: "ఉల్లిపాయ పకోడా"
+        },
+        category: {
+            en: "Snacks",
+            ta: "சிற்றுண்டி",
+            hi: "स्नैक्स",
+            ml: "ലഘുഭക്ഷണം",
+            te: "స్నాక్స్"
+        },
+        emoji: "🧅",
+        rating: "4.6",
+        description: {
+            en: "Crispy onion fritters perfect for an evening snack.",
+            ta: "மாலை நேர சிற்றுண்டிக்கு ஏற்ற மொறுமொறுப்பான வெங்காய பக்கோடா.",
+            hi: "शाम के नाश्ते के लिए कुरकुरे प्याज पकौड़े।",
+            ml: "വൈകുന്നേരത്തെ ലഘുഭക്ഷണത്തിന് അനുയോജ്യമായ ക്രിസ്പിയായ ഉള്ളി പക്കോഡ.",
+            te: "సాయంత్రం స్నాక్‌కు సరైన క్రిస్పీ ఉల్లిపాయ పకోడా."
+        }
+    },
+
+
+    "payasam": {
+        name: {
+            en: "Payasam",
+            ta: "பாயசம்",
+            hi: "पायसम",
+            ml: "പായസം",
+            te: "పాయసం"
+        },
+        category: {
+            en: "Sweets",
+            ta: "இனிப்பு",
+            hi: "मिठाई",
+            ml: "മധുരപലഹാരം",
+            te: "స్వీట్"
+        },
+        emoji: "🥛",
+        rating: "4.7",
+        description: {
+            en: "A traditional creamy sweet dessert made with milk and sugar.",
+            ta: "பால் மற்றும் சர்க்கரையுடன் செய்யப்படும் பாரம்பரிய இனிப்பு பாயசம்.",
+            hi: "दूध और चीनी से बनी पारंपरिक मलाईदार मिठाई।",
+            ml: "പാലും പഞ്ചസാരയും ഉപയോഗിച്ച് തയ്യാറാക്കുന്ന പരമ്പരാഗത മധുരപലഹാരം.",
+            te: "పాలు మరియు చక్కెరతో తయారు చేసే సాంప్రదాయ క్రీమీ స్వీట్."
+        }
+    },
+
+
+    "vegetable-pulao": {
+        name: {
+            en: "Vegetable Pulao",
+            ta: "காய்கறி புலாவ்",
+            hi: "वेजिटेबल पुलाव",
+            ml: "വെജിറ്റബിൾ പുലാവ്",
+            te: "వెజిటబుల్ పులావ్"
+        },
+        category: {
+            en: "Vegetarian",
+            ta: "சைவம்",
+            hi: "शाकाहारी",
+            ml: "വെജിറ്റേറിയൻ",
+            te: "వెజిటేరియన్"
+        },
+        emoji: "🍚",
+        rating: "4.5",
+        description: {
+            en: "Fragrant rice cooked with colourful vegetables and spices.",
+            ta: "வண்ணமயமான காய்கறிகள் மற்றும் மசாலாக்களுடன் செய்யப்படும் மணமிக்க சாதம்.",
+            hi: "रंगीन सब्जियों और मसालों से बना खुशबूदार चावल।",
+            ml: "നിറമുള്ള പച്ചക്കറികളും മസാലകളും ചേർത്ത് തയ്യാറാക്കുന്ന സുഗന്ധമുള്ള ചോറ്.",
+            te: "రంగురంగుల కూరగాయలు మరియు మసాలాలతో తయారు చేసే సువాసనగల అన్నం."
+        }
+    },
+
+
+    "chicken-65": {
+        name: {
+            en: "Chicken 65",
+            ta: "சிக்கன் 65",
+            hi: "चिकन 65",
+            ml: "ചിക്കൻ 65",
+            te: "చికెన్ 65"
+        },
+        category: {
+            en: "Non-Vegetarian",
+            ta: "அசைவம்",
+            hi: "मांसाहारी",
+            ml: "നോൺ വെജിറ്റേറിയൻ",
+            te: "నాన్ వెజిటేరియన్"
+        },
+        emoji: "🍗",
+        rating: "4.7",
+        description: {
+            en: "Spicy and crispy fried chicken pieces.",
+            ta: "காரமான மற்றும் மொறுமொறுப்பான வறுத்த சிக்கன் துண்டுகள்.",
+            hi: "मसालेदार और कुरकुरे फ्राइड चिकन पीस।",
+            ml: "എരിവുള്ളതും ക്രിസ്പിയുമായ വറുത്ത ചിക്കൻ കഷണങ്ങൾ.",
+            te: "కారంగా మరియు క్రిస్పీగా వేయించిన చికెన్ ముక్కలు."
+        }
+    },
+
+
+    "vegetable-samosa": {
+        name: {
+            en: "Vegetable Samosa",
+            ta: "காய்கறி சமோசா",
+            hi: "वेजिटेबल समोसा",
+            ml: "വെജിറ്റബിൾ സമോസ",
+            te: "వెజిటబుల్ సమోసా"
+        },
+        category: {
+            en: "Snacks",
+            ta: "சிற்றுண்டி",
+            hi: "स्नैक्स",
+            ml: "ലഘുഭക്ഷണം",
+            te: "స్నాక్స్"
+        },
+        emoji: "🥟",
+        rating: "4.6",
+        description: {
+            en: "Crispy pastry filled with spiced vegetables.",
+            ta: "மசாலா காய்கறிகளால் நிரப்பப்பட்ட மொறுமொறுப்பான சமோசா.",
+            hi: "मसालेदार सब्जियों से भरी कुरकुरी समोसा पेस्ट्री।",
+            ml: "മസാല പച്ചക്കറികൾ നിറച്ച ക്രിസ്പിയായ സമോസ.",
+            te: "మసాలా కూరగాయలతో నింపిన క్రిస్పీ సమోసా."
+        }
+    },
+
+
+    "carrot-halwa": {
+        name: {
+            en: "Carrot Halwa",
+            ta: "கேரட் அல்வா",
+            hi: "गाजर का हलवा",
+            ml: "കാരറ്റ് ഹൽവ",
+            te: "క్యారెట్ హల్వా"
+        },
+        category: {
+            en: "Sweets",
+            ta: "இனிப்பு",
+            hi: "मिठाई",
+            ml: "മധുരപലഹാരം",
+            te: "స్వీట్"
+        },
+        emoji: "🥕",
+        rating: "4.8",
+        description: {
+            en: "Rich and delicious dessert made with fresh carrots and milk.",
+            ta: "புதிய கேரட் மற்றும் பாலுடன் செய்யப்படும் சுவையான அல்வா.",
+            hi: "ताजी गाजर और दूध से बनी स्वादिष्ट मिठाई।",
+            ml: "പുതിയ കാരറ്റും പാലും ഉപയോഗിച്ച് തയ്യാറാക്കുന്ന രുചികരമായ ഹൽവ.",
+            te: "తాజా క్యారెట్ మరియు పాలతో తయారు చేసే రుచికరమైన స్వీట్."
+        }
+    },
+
+
+    "banana-milkshake": {
+        name: {
+            en: "Banana Milkshake",
+            ta: "வாழைப்பழ மில்க்ஷேக்",
+            hi: "केला मिल्कशेक",
+            ml: "വാഴപ്പഴ മിൽക്ക്‌ഷേക്ക്",
+            te: "అరటి మిల్క్‌షేక్"
+        },
+        category: {
+            en: "Drinks",
+            ta: "பானங்கள்",
+            hi: "पेय",
+            ml: "പാനീയങ്ങൾ",
+            te: "పానీయాలు"
+        },
+        emoji: "🥤",
+        rating: "4.5",
+        description: {
+            en: "A creamy and refreshing banana drink.",
+            ta: "கிரீமியான மற்றும் புத்துணர்ச்சியூட்டும் வாழைப்பழ பானம்.",
+            hi: "मलाईदार और ताज़ा केले का पेय।",
+            ml: "ക്രീമിയായ ഉന്മേഷദായകമായ വാഴപ്പഴ പാനീയം.",
+            te: "క్రీమీ మరియు రిఫ్రెషింగ్ అరటి పానీయం."
+        }
+    },
+
+
+    "idli": {
+        name: {
+            en: "Idli",
+            ta: "இட்லி",
+            hi: "इडली",
+            ml: "ഇഡ്ലി",
+            te: "ఇడ్లీ"
+        },
+        category: {
+            en: "Vegetarian",
+            ta: "சைவம்",
+            hi: "शाकाहारी",
+            ml: "വെജിറ്റേറിയൻ",
+            te: "వెజిటేరియన్"
+        },
+        emoji: "🍥",
+        rating: "4.8",
+        description: {
+            en: "Soft and fluffy steamed rice cakes.",
+            ta: "மென்மையான மற்றும் பஞ்சுபோன்ற ஆவியில் வேகவைத்த இட்லி.",
+            hi: "नरम और फूली हुई भाप में पकी चावल की इडली।",
+            ml: "മൃദുവും പഞ്ഞിപോലുള്ള ആവിയിൽ വേവിച്ച ഇഡ്ലി.",
+            te: "మెత్తగా మరియు పఫ్ఫీగా ఆవిరితో ఉడికించిన ఇడ్లీ."
+        }
+    },
+
+
+    "steamed-vegetables": {
+        name: {
+            en: "Steamed Vegetables",
+            ta: "ஆவியில் வேகவைத்த காய்கறிகள்",
+            hi: "स्टीम्ड सब्जियां",
+            ml: "ആവിയിൽ വേവിച്ച പച്ചക്കറികൾ",
+            te: "ఆవిరితో ఉడికించిన కూరగాయలు"
+        },
+        category: {
+            en: "Vegetarian",
+            ta: "சைவம்",
+            hi: "शाकाहारी",
+            ml: "വെജിറ്റേറിയൻ",
+            te: "వెజిటేరియన్"
+        },
+        emoji: "🥦",
+        rating: "4.4",
+        description: {
+            en: "Healthy vegetables gently cooked using steam.",
+            ta: "ஆவியில் மென்மையாக வேகவைத்த ஆரோக்கியமான காய்கறிகள்.",
+            hi: "भाप में हल्के से पकाई गई स्वस्थ सब्जियां।",
+            ml: "ആവിയിൽ ലളിതമായി വേവിച്ച ആരോഗ്യകരമായ പച്ചക്കറികൾ.",
+            te: "ఆవిరితో మెత్తగా ఉడికించిన ఆరోగ్యకరమైన కూరగాయలు."
+        }
+    },
+
+
+    "baked-cake": {
+        name: {
+            en: "Baked Cake",
+            ta: "பேக் செய்த கேக்",
+            hi: "बेक्ड केक",
+            ml: "ബേക്ക് ചെയ്ത കേക്ക്",
+            te: "బేక్ చేసిన కేక్"
+        },
+        category: {
+            en: "Sweets",
+            ta: "இனிப்பு",
+            hi: "मिठाई",
+            ml: "മധുരപലഹാരം",
+            te: "స్వీట్"
+        },
+        emoji: "🍰",
+        rating: "4.7",
+        description: {
+            en: "Soft and delicious cake baked in an oven.",
+            ta: "ஓவனில் பேக் செய்யப்படும் மென்மையான மற்றும் சுவையான கேக்.",
+            hi: "ओवन में बेक किया गया नरम और स्वादिष्ट केक।",
+            ml: "ഓവനിൽ ബേക്ക് ചെയ്ത മൃദുവും രുചികരവുമായ കേക്ക്.",
+            te: "ఓవన్‌లో బేక్ చేసిన మెత్తని మరియు రుచికరమైన కేక్."
+        }
+    },
+
+
+    "microwave-mug-cake": {
+        name: {
+            en: "Microwave Mug Cake",
+            ta: "மைக்ரோவேவ் மக் கேக்",
+            hi: "माइक्रोवेव मग केक",
+            ml: "മൈക്രോവേവ് മഗ് കേക്ക്",
+            te: "మైక్రోవేవ్ మగ్ కేక్"
+        },
+        category: {
+            en: "Sweets",
+            ta: "இனிப்பு",
+            hi: "मिठाई",
+            ml: "മധുരപലഹാരം",
+            te: "స్వీట్"
+        },
+        emoji: "🧁",
+        rating: "4.6",
+        description: {
+            en: "A quick single-serving cake prepared in a microwave.",
+            ta: "மைக்ரோவேவில் விரைவாக செய்யக்கூடிய ஒரு நபருக்கான கேக்.",
+            hi: "माइक्रोवेव में जल्दी तैयार होने वाला सिंगल-सर्विंग केक।",
+            ml: "മൈക്രോവേവിൽ വേഗത്തിൽ തയ്യാറാക്കാവുന്ന കേക്ക്.",
+            te: "మైక్రోవేవ్‌లో త్వరగా తయారు చేయగల సింగిల్ సర్వింగ్ కేక్."
+        }
+    }
+
+};
+
+
+/* =========================================================
+   TRANSLATIONS
+========================================================= */
+
+const translations = {
+
+    en: {
+        savedRecipes: "Saved Recipes",
+        youHaveSaved: "You have saved",
+        recipesText: "recipes.",
+        noFavourites: "No Favourite Recipes Yet",
+        noFavouritesDescription:
+            "Save your favourite recipes and they will appear here.",
+        exploreRecipes: "Explore Recipes",
+        viewRecipe: "View Recipe",
+        remove: "Remove",
+        saved: "Saved",
+        footerDescription:
+            "Your smart cooking companion for discovering delicious recipes.",
+        madeForFoodLovers:
+            "Made with ❤️ for food lovers"
+    },
+
+
+    ta: {
+        savedRecipes: "சேமித்த உணவுகள்",
+        youHaveSaved: "நீங்கள் சேமித்தது",
+        recipesText: "உணவுகள்.",
+        noFavourites: "இன்னும் பிடித்த உணவுகள் இல்லை",
+        noFavouritesDescription:
+            "உங்களுக்கு பிடித்த உணவுகளை சேமித்தால் அவை இங்கே தோன்றும்.",
+        exploreRecipes: "உணவுகளை ஆராயுங்கள்",
+        viewRecipe: "செய்முறையைப் பார்க்க",
+        remove: "நீக்கு",
+        saved: "சேமிக்கப்பட்டது",
+        footerDescription:
+            "சுவையான உணவுகளை கண்டறிய உங்கள் ஸ்மார்ட் சமையல் துணை.",
+        madeForFoodLovers:
+            "உணவு பிரியர்களுக்காக ❤️ உருவாக்கப்பட்டது"
+    },
+
+
+    hi: {
+        savedRecipes: "सहेजे गए व्यंजन",
+        youHaveSaved: "आपने सहेजे हैं",
+        recipesText: "व्यंजन।",
+        noFavourites: "अभी कोई पसंदीदा व्यंजन नहीं",
+        noFavouritesDescription:
+            "अपने पसंदीदा व्यंजन सेव करें और वे यहां दिखाई देंगे।",
+        exploreRecipes: "व्यंजन देखें",
+        viewRecipe: "रेसिपी देखें",
+        remove: "हटाएं",
+        saved: "सहेजा गया",
+        footerDescription:
+            "स्वादिष्ट व्यंजन खोजने के लिए आपका स्मार्ट कुकिंग साथी।",
+        madeForFoodLovers:
+            "खाने के शौकीनों के लिए ❤️ बनाया गया"
+    },
+
+
+    ml: {
+        savedRecipes: "സേവ് ചെയ്ത വിഭവങ്ങൾ",
+        youHaveSaved: "നിങ്ങൾ സേവ് ചെയ്തത്",
+        recipesText: "വിഭവങ്ങൾ.",
+        noFavourites: "ഇതുവരെ പ്രിയപ്പെട്ട വിഭവങ്ങളില്ല",
+        noFavouritesDescription:
+            "നിങ്ങളുടെ പ്രിയപ്പെട്ട വിഭവങ്ങൾ സേവ് ചെയ്യുക.",
+        exploreRecipes: "വിഭവങ്ങൾ കാണുക",
+        viewRecipe: "വിഭവം കാണുക",
+        remove: "നീക്കം ചെയ്യുക",
+        saved: "സേവ് ചെയ്തു",
+        footerDescription:
+            "രുചികരമായ വിഭവങ്ങൾ കണ്ടെത്താനുള്ള നിങ്ങളുടെ സ്മാർട്ട് പാചക സഹായി.",
+        madeForFoodLovers:
+            "ഭക്ഷണപ്രേമികൾക്കായി ❤️ നിർമ്മിച്ചത്"
+    },
+
+
+    te: {
+        savedRecipes: "సేవ్ చేసిన వంటకాలు",
+        youHaveSaved: "మీరు సేవ్ చేసినవి",
+        recipesText: "వంటకాలు.",
+        noFavourites: "ఇంకా ఇష్టమైన వంటకాలు లేవు",
+        noFavouritesDescription:
+            "మీకు ఇష్టమైన వంటకాలను సేవ్ చేస్తే అవి ఇక్కడ కనిపిస్తాయి.",
+        exploreRecipes: "వంటకాలను చూడండి",
+        viewRecipe: "వంటకం చూడండి",
+        remove: "తొలగించండి",
+        saved: "సేవ్ చేయబడింది",
+        footerDescription:
+            "రుచికరమైన వంటకాలను కనుగొనడానికి మీ స్మార్ట్ కుకింగ్ సహాయకుడు.",
+        madeForFoodLovers:
+            "ఆహార ప్రియుల కోసం ❤️ తయారు చేయబడింది"
+    }
+
+};
+
+
+/* =========================================================
+   GET LANGUAGE
+========================================================= */
+
+function getLanguage() {
+
+    return localStorage.getItem("cookmateLanguage") || "en";
+
+}
+
+
+/* =========================================================
+   GET FAVOURITES
+========================================================= */
+
+function getFavourites() {
+
+    return JSON.parse(
+        localStorage.getItem("cookmateFavourites")
+    ) || [];
+
+}
+
+
+/* =========================================================
+   SAVE FAVOURITES
+========================================================= */
+
+function saveFavourites(list) {
+
+    localStorage.setItem(
+        "cookmateFavourites",
+        JSON.stringify(list)
+    );
+
+}
+
+
+/* =========================================================
+   REMOVE FAVOURITE
+========================================================= */
+
+function removeFavourite(id) {
+
+    let favourites = getFavourites();
+
+    favourites =
+        favourites.filter(
+            recipeId => recipeId !== id
+        );
+
+    saveFavourites(favourites);
+
+    displayFavourites();
+
+}
+
+
+/* =========================================================
+   DISPLAY FAVOURITES
+========================================================= */
+
+function displayFavourites() {
+
+    const grid =
+        document.getElementById("favouriteGrid");
+
+    const empty =
+        document.getElementById("emptyFavourites");
+
+    const count =
+        document.getElementById("favouriteCount");
+
+    const language =
+        getLanguage();
+
+    const t =
+        translations[language] || translations.en;
+
+
+    const favourites =
+        getFavourites();
+
+
+    count.textContent =
+        favourites.length;
+
+
+    grid.innerHTML = "";
+
+
+    if (favourites.length === 0) {
+
+        empty.style.display = "block";
+
+        return;
 
     }
 
 
-    /* =====================================================
-       DISPLAY FAVOURITES
-       ===================================================== */
-
-    function displayFavourites(list = null) {
-
-        const grid =
-            document.getElementById("favouritesGrid");
-
-        const emptyState =
-            document.getElementById("emptyState");
-
-        const noResults =
-            document.getElementById("noResults");
-
-        const savedCount =
-            document.getElementById("savedCount");
+    empty.style.display = "none";
 
 
-        const favourites = getFavourites();
+    favourites.forEach(id => {
+
+        const recipe =
+            favouriteRecipes[id];
 
 
-        /* Update saved count */
-
-        savedCount.innerHTML =
-            `⭐ ${favourites.length} Saved Recipe${favourites.length !== 1 ? "s" : ""}`;
+        if (!recipe) return;
 
 
-        /* No saved recipes */
+        const card =
+            document.createElement("div");
 
-        if (favourites.length === 0) {
-
-            grid.innerHTML = "";
-
-            emptyState.style.display = "block";
-
-            noResults.style.display = "none";
-
-            return;
-        }
+        card.className =
+            "recipe-card";
 
 
-        emptyState.style.display = "none";
+        const recipeName =
+            recipe.name[language] ||
+            recipe.name.en;
 
 
-        /* Use search result if available */
-
-        const recipesToDisplay =
-            list !== null ? list : favourites;
-
-
-        /* Search has no result */
-
-        if (recipesToDisplay.length === 0) {
-
-            grid.innerHTML = "";
-
-            noResults.style.display = "block";
-
-            return;
-        }
+        const category =
+            recipe.category[language] ||
+            recipe.category.en;
 
 
-        noResults.style.display = "none";
+        const description =
+            recipe.description[language] ||
+            recipe.description.en;
 
 
-        /* Create cards */
+        card.innerHTML = `
 
-        grid.innerHTML = recipesToDisplay
-            .map(id => createRecipeCard(id))
-            .join("");
+            <div class="recipe-image">
 
-    }
-
-
-    /* =====================================================
-       CREATE RECIPE CARD
-       ===================================================== */
-
-    function createRecipeCard(id) {
-
-        const recipe = recipes[id];
-
-
-        /*
-           If an old/invalid recipe ID exists
-           in localStorage, skip it.
-        */
-
-        if (!recipe) {
-            return "";
-        }
-
-
-        return `
-
-            <article
-                class="favourite-card"
-                data-name="${recipe.name.toLowerCase()}"
-            >
-
-                <div class="recipe-emoji">
+                <span style="font-size:70px;">
                     ${recipe.emoji}
+                </span>
+
+            </div>
+
+
+            <div class="recipe-content">
+
+                <span class="section-label">
+                    ${category}
+                </span>
+
+
+                <h3>
+                    ${recipeName}
+                </h3>
+
+
+                <p>
+                    ${description}
+                </p>
+
+
+                <p>
+                    ⭐ ${recipe.rating}
+                </p>
+
+
+                <div
+                    style="
+                        display:flex;
+                        gap:10px;
+                        flex-wrap:wrap;
+                        margin-top:15px;
+                    "
+                >
+
+                    <a
+                        href="recipe-details.html?recipe=${id}"
+                        class="primary-btn"
+                    >
+                        👨‍🍳
+                        ${t.viewRecipe}
+                    </a>
+
+
+                    <button
+                        class="secondary-btn"
+                        onclick="removeFavourite('${id}')"
+                    >
+                        🗑️
+                        ${t.remove}
+                    </button>
+
                 </div>
 
-
-                <div class="card-content">
-
-                    <span class="category-tag">
-                        ${recipe.category}
-                    </span>
-
-
-                    <h2>
-                        ${recipe.name}
-                    </h2>
-
-
-                    <p>
-                        ${recipe.description}
-                    </p>
-
-
-                    <div class="recipe-meta">
-
-                        <span>
-                            ⏱️ ${recipe.time}
-                        </span>
-
-                        <span>
-                            👥 ${recipe.servings}
-                        </span>
-
-                    </div>
-
-
-                    <div class="card-actions">
-
-                        <a
-                            href="recipe-details.html?recipe=${id}"
-                            class="view-btn"
-                        >
-                            👨‍🍳 View Recipe
-                        </a>
-
-
-                        <button
-                            class="remove-btn"
-                            onclick="removeFavourite('${id}')"
-                            title="Remove from favourites"
-                        >
-                            🗑️
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </article>
+            </div>
 
         `;
 
-    }
+
+        grid.appendChild(card);
+
+    });
 
 
-    /* =====================================================
-       REMOVE ONE FAVOURITE
-       ===================================================== */
+    /* Animation */
 
-    function removeFavourite(id) {
+    setTimeout(() => {
 
-        let favourites = getFavourites();
+        document
+            .querySelectorAll(".recipe-card")
+            .forEach(card => {
 
-
-        favourites =
-            favourites.filter(
-                favouriteId => favouriteId !== id
-            );
-
-
-        localStorage.setItem(
-            "cookmateFavourites",
-            JSON.stringify(favourites)
-        );
-
-
-        displayFavourites();
-
-
-        alert("Recipe removed from favourites.");
-
-    }
-
-
-    /* =====================================================
-       CLEAR ALL
-       ===================================================== */
-
-    function clearAllFavourites() {
-
-        const favourites = getFavourites();
-
-
-        if (favourites.length === 0) {
-
-            alert("There are no favourite recipes to clear.");
-
-            return;
-        }
-
-
-        const confirmClear =
-            confirm(
-                "Are you sure you want to remove all favourite recipes?"
-            );
-
-
-        if (!confirmClear) {
-            return;
-        }
-
-
-        localStorage.removeItem(
-            "cookmateFavourites"
-        );
-
-
-        displayFavourites();
-
-
-        alert("All favourite recipes have been removed.");
-
-    }
-
-
-    /* =====================================================
-       SEARCH FAVOURITES
-       ===================================================== */
-
-    function searchFavourites() {
-
-        const searchInput =
-            document.getElementById("favouriteSearch");
-
-
-        const searchText =
-            searchInput.value
-                .trim()
-                .toLowerCase();
-
-
-        const favourites = getFavourites();
-
-
-        if (searchText === "") {
-
-            displayFavourites();
-
-            return;
-        }
-
-
-        const filtered =
-            favourites.filter(id => {
-
-                const recipe = recipes[id];
-
-                if (!recipe) return false;
-
-                return (
-                    recipe.name
-                        .toLowerCase()
-                        .includes(searchText)
-                    ||
-                    recipe.category
-                        .toLowerCase()
-                        .includes(searchText)
+                card.classList.add(
+                    "show-animation"
                 );
 
             });
 
+    }, 50);
 
-        displayFavourites(filtered);
-
-    }
-
-
-    /* =====================================================
-       CLEAN INVALID FAVOURITES
-       ===================================================== */
-
-    function cleanInvalidFavourites() {
-
-        const favourites = getFavourites();
+}
 
 
-        const validFavourites =
-            favourites.filter(
-                id => recipes[id]
-            );
+/* =========================================================
+   LANGUAGE UPDATE
+========================================================= */
 
+function translatePage() {
+
+    const language =
+        getLanguage();
+
+    const t =
+        translations[language] ||
+        translations.en;
+
+
+    document
+        .querySelectorAll("[data-i18n]")
+        .forEach(element => {
+
+            const key =
+                element.getAttribute("data-i18n");
+
+
+            if (t[key]) {
+
+                element.textContent =
+                    t[key];
+
+            }
+
+        });
+
+
+    displayFavourites();
+
+}
+
+
+/* =========================================================
+   LANGUAGE CHANGE EVENT
+========================================================= */
+
+window.addEventListener(
+    "storage",
+    function(event) {
 
         if (
-            validFavourites.length !==
-            favourites.length
+            event.key ===
+            "cookmateLanguage"
         ) {
 
-            localStorage.setItem(
-                "cookmateFavourites",
-                JSON.stringify(validFavourites)
-            );
+            translatePage();
 
         }
 
-    }
 
-
-    /* =====================================================
-       PAGE LOAD
-       ===================================================== */
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        function () {
-
-            cleanInvalidFavourites();
+        if (
+            event.key ===
+            "cookmateFavourites"
+        ) {
 
             displayFavourites();
 
         }
-    );
+
+    }
+);
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        translatePage();
+
+    }
+);
 
 </script>
 
