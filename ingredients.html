@@ -1,164 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Ingredients | CookMate</title>
+    <title>CookMate - Ingredients</title>
 
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        /* ================================
-           INGREDIENTS PAGE
-           ================================ */
+
+        /* =========================
+           INGREDIENT PAGE
+        ========================== */
 
         .ingredients-hero {
-            padding: 70px 20px 45px;
+            padding: 65px 7%;
             text-align: center;
+            background: #fff3dc;
         }
 
         .ingredients-hero h1 {
-            font-size: 42px;
+            font-size: clamp(34px, 5vw, 52px);
             margin-bottom: 12px;
         }
 
         .ingredients-hero p {
             max-width: 700px;
             margin: auto;
-            font-size: 17px;
+            color: #666;
             line-height: 1.7;
         }
 
-        .ingredients-container {
-            width: 90%;
-            max-width: 1100px;
-            margin: auto;
-            padding-bottom: 70px;
-        }
-
-        .ingredient-box {
-            background: rgba(255, 255, 255, 0.94);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-        }
-
-        .ingredient-box h2 {
-            margin-bottom: 8px;
-        }
-
-        .ingredient-box p {
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .ingredient-input-area {
+        .ingredient-input-box {
+            max-width: 700px;
+            margin: 30px auto 0;
             display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
+            gap: 10px;
+            background: white;
+            padding: 7px;
+            border-radius: 14px;
+            border: 1px solid #e5e0d7;
         }
 
-        .ingredient-input-area input {
+        .ingredient-input-box input {
             flex: 1;
-            min-width: 220px;
-            padding: 14px 16px;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .ingredient-input-area input:focus {
-            border-color: #777;
-        }
-
-        .add-btn,
-        .clear-btn,
-        .recommend-btn {
             border: none;
-            padding: 13px 22px;
-            border-radius: 12px;
-            cursor: pointer;
+            outline: none;
+            padding: 13px 15px;
             font-size: 15px;
-            font-weight: 600;
-            transition: 0.3s;
         }
 
-        .add-btn {
-            background: #333;
-            color: white;
+        .common-section {
+            padding: 45px 7% 20px;
         }
 
-        .add-btn:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
+        .common-section h2 {
+            text-align: center;
+            margin-bottom: 25px;
         }
-
-        .clear-btn {
-            background: #eee;
-            color: #333;
-        }
-
-        .clear-btn:hover {
-            background: #ddd;
-        }
-
-        .recommend-btn {
-            background: #6b4f3a;
-            color: white;
-            margin-top: 20px;
-            width: 100%;
-            font-size: 17px;
-        }
-
-        .recommend-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        /* Common ingredients */
 
         .common-ingredients {
+            max-width: 1000px;
+            margin: auto;
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
             gap: 10px;
-            margin-top: 20px;
         }
 
         .ingredient-chip {
+            background: white;
             border: 1px solid #ddd;
-            background: #fafafa;
-            padding: 10px 15px;
-            border-radius: 30px;
+            padding: 10px 16px;
+            border-radius: 25px;
             cursor: pointer;
             transition: 0.3s;
-            font-size: 14px;
         }
 
         .ingredient-chip:hover {
-            background: #333;
-            color: white;
+            background: #fff0d5;
+            border-color: #d97706;
+            transform: translateY(-2px);
         }
 
-        .ingredient-chip.selected {
-            background: #333;
-            color: white;
+        .selected-section {
+            padding: 30px 7%;
         }
 
-        /* Selected ingredients */
-
-        .selected-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
+        .selected-box {
+            max-width: 1000px;
+            margin: auto;
+            background: #fffaf0;
+            border-radius: 18px;
+            padding: 25px;
+            border: 1px solid #eee0c8;
         }
 
-        .selected-count {
-            font-size: 14px;
-            color: #777;
+        .selected-box h2 {
+            margin-bottom: 18px;
         }
 
         .selected-ingredients {
@@ -166,61 +107,69 @@
             flex-wrap: wrap;
             gap: 10px;
             min-height: 45px;
-            margin-top: 20px;
         }
 
         .selected-item {
             display: flex;
             align-items: center;
             gap: 8px;
-            background: #f1eee8;
-            padding: 9px 12px;
-            border-radius: 25px;
-            font-size: 14px;
+            background: #d97706;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
         }
 
         .remove-ingredient {
             border: none;
             background: transparent;
+            color: white;
             cursor: pointer;
             font-size: 16px;
+            font-weight: bold;
+        }
+
+        .empty-selected {
+            color: #888;
+        }
+
+        .selected-actions {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .recommendation-section {
+            padding: 45px 7% 70px;
+            background: #faf8f3;
+        }
+
+        .recommendation-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .recommendation-heading h2 {
+            margin-bottom: 8px;
+        }
+
+        .recommendation-heading p {
             color: #777;
         }
 
-        .empty-message {
-            color: #888;
-            font-style: italic;
-        }
-
-        /* Search */
-
-        .ingredient-search {
-            margin-top: 20px;
-        }
-
-        .ingredient-search input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            font-size: 15px;
-            box-sizing: border-box;
-        }
-
-        /* Recommendation */
-
-        .recommendations {
+        .recommendation-grid {
+            max-width: 1100px;
+            margin: auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            margin-top: 25px;
         }
 
         .recommendation-card {
             background: white;
             border-radius: 18px;
             padding: 22px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+            border: 1px solid #eee;
             transition: 0.3s;
         }
 
@@ -228,1051 +177,1623 @@
             transform: translateY(-5px);
         }
 
-        .food-icon {
-            font-size: 48px;
+        .recommendation-image {
+            text-align: center;
+            font-size: 55px;
+            margin-bottom: 12px;
+        }
+
+        .match-badge {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #287a32;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
             margin-bottom: 10px;
         }
 
-        .recommendation-card h3 {
-            margin-bottom: 8px;
+        .missing-list {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 10px 0 15px;
         }
 
-        .match-text {
-            font-size: 14px;
-            margin-bottom: 12px;
+        .recipe-link-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #d97706;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 9px;
             font-weight: 600;
         }
 
-        .progress-bar {
-            height: 8px;
-            background: #eee;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-
-        .progress {
-            height: 100%;
-            background: #6b4f3a;
-            border-radius: 10px;
-        }
-
-        .missing {
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 15px;
-            color: #666;
-        }
-
-        .make-btn {
-            display: inline-block;
-            text-decoration: none;
-            background: #333;
-            color: white;
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-size: 14px;
-        }
-
-        .make-btn:hover {
-            opacity: 0.85;
-        }
-
-        .no-results {
+        .no-recommendations {
+            max-width: 650px;
+            margin: auto;
             text-align: center;
-            padding: 30px;
-            color: #777;
-            display: none;
+            background: white;
+            padding: 35px 20px;
+            border-radius: 18px;
+            border: 1px solid #eee;
+        }
+
+        .no-recommendations .icon {
+            font-size: 50px;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 850px) {
+
+            .recommendation-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
         }
 
         @media (max-width: 600px) {
 
-            .ingredients-hero h1 {
-                font-size: 32px;
-            }
-
-            .ingredient-box {
-                padding: 20px;
-            }
-
-            .ingredient-input-area {
+            .ingredient-input-box {
                 flex-direction: column;
             }
 
-            .add-btn,
-            .clear-btn {
+            .ingredient-input-box button {
                 width: 100%;
             }
+
+            .recommendation-grid {
+                grid-template-columns: 1fr;
+            }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <!-- ================================
-         NAVIGATION
-         ================================ -->
 
-    <nav class="navbar">
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar">
 
         <div class="logo">
             🍳 CookMate
         </div>
 
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="recipes.html">Recipes</a>
-            <a href="ingredients.html" class="active">My Ingredients</a>
-            <a href="equipment.html">Equipment</a>
-            <a href="favourites.html">Favourites</a>
-            <a href="profile.html">Profile</a>
-        </div>
+        <nav>
 
-    </nav>
+            <a href="index.html" data-i18n="home">
+                Home
+            </a>
+
+            <a href="recipes.html" data-i18n="recipes">
+                Recipes
+            </a>
+
+            <a href="ingredients.html" data-i18n="ingredients">
+                Ingredients
+            </a>
+
+            <a href="equipment.html" data-i18n="equipment">
+                Equipment
+            </a>
+
+            <a href="favourites.html" data-i18n="favourites">
+                Favourites
+            </a>
+
+            <a href="profile.html" data-i18n="profile">
+                Profile
+            </a>
+
+        </nav>
+
+    </header>
 
 
-    <!-- ================================
+    <!-- =========================
          HERO
-         ================================ -->
+    ========================== -->
 
     <section class="ingredients-hero">
 
-        <h1>🥕 What Do You Have at Home?</h1>
-
-        <p>
-            Enter the ingredients you already have and CookMate
-            will suggest recipes that you can make with them.
+        <p class="section-label">
+            🏠 COOK WITH WHAT YOU HAVE
         </p>
+
+        <h1 data-i18n="ingredientsAtHome">
+            🥕 What Do You Have at Home?
+        </h1>
+
+        <p data-i18n="ingredientsDescription">
+            Select the ingredients available in your kitchen
+            and CookMate will find recipes you can make.
+        </p>
+
+
+        <div class="ingredient-input-box">
+
+            <input
+                type="text"
+                id="ingredientInput"
+                placeholder="Enter an ingredient..."
+                data-i18n-placeholder="ingredientPlaceholder"
+            >
+
+            <button
+                class="primary-btn"
+                onclick="addIngredientFromInput()"
+                data-i18n="addIngredient"
+            >
+                + Add Ingredient
+            </button>
+
+        </div>
 
     </section>
 
 
-    <main class="ingredients-container">
+    <!-- =========================
+         COMMON INGREDIENTS
+    ========================== -->
+
+    <section class="common-section">
+
+        <h2 data-i18n="commonIngredients">
+            🛒 Common Ingredients
+        </h2>
 
 
-        <!-- ================================
-             ADD INGREDIENTS
-             ================================ -->
+        <div class="common-ingredients">
 
-        <section class="ingredient-box">
+            <button class="ingredient-chip"
+                onclick="addIngredient('Rice')">
+                🍚 Rice
+            </button>
 
-            <h2>➕ Add Your Ingredients</h2>
+            <button class="ingredient-chip"
+                onclick="addIngredient('Chicken')">
+                🍗 Chicken
+            </button>
 
-            <p>
-                Type an ingredient and add it to your list.
-            </p>
+            <button class="ingredient-chip"
+                onclick="addIngredient('Egg')">
+                🥚 Egg
+            </button>
 
-            <div class="ingredient-input-area">
+            <button class="ingredient-chip"
+                onclick="addIngredient('Potato')">
+                🥔 Potato
+            </button>
 
-                <input
-                    type="text"
-                    id="ingredientInput"
-                    placeholder="Example: Tomato"
-                    autocomplete="off"
-                >
+            <button class="ingredient-chip"
+                onclick="addIngredient('Tomato')">
+                🍅 Tomato
+            </button>
+
+            <button class="ingredient-chip"
+                onclick="addIngredient('Onion')">
+                🧅 Onion
+            </button>
+
+            <button class="ingredient-chip"
+                onclick="addIngredient('Paneer')">
+                🧀 Paneer
+            </button>
+
+            <button class="ingredient-chip"
+                onclick="addIngredient('Carrot')">
+                🥕 Carrot
+            </button>
+
+            <button class="ingredient-chip"
+                onclick="addIngredient('Curd')">
+                🥛 Curd
+            </button>
+
+            <button class="ingredient-chip"
+                onclick="addIngredient('Milk')">
+                🥛 Milk
+            </button>
+
+            <button class="ingredient-chip"
+                onclick="addIngredient('Wheat Flour')">
+                🌾 Wheat Flour
+            </button>
+
+            <button class="ingredient-chip"
+                onclick="addIngredient('Besan')">
+                🌾 Besan
+            </button>
+
+            <button class="ingredient-chip"
+                onclick="addIngredient('Sugar')">
+                🍚 Sugar
+            </button>
+
+            <button class="ingredient-chip"
+                onclick="addIngredient('Bread')">
+                🍞 Bread
+            </button>
+
+            <button class="ingredient-chip"
+                onclick="addIngredient('Banana')">
+                🍌 Banana
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SELECTED INGREDIENTS
+    ========================== -->
+
+    <section class="selected-section">
+
+        <div class="selected-box">
+
+            <h2 data-i18n="selectedIngredients">
+                🧺 My Ingredients
+            </h2>
+
+            <div
+                class="selected-ingredients"
+                id="selectedIngredients"
+            >
+            </div>
+
+
+            <div class="selected-actions">
 
                 <button
-                    class="add-btn"
-                    onclick="addIngredient()">
-                    Add Ingredient
+                    class="primary-btn"
+                    onclick="findRecipes()"
+                    data-i18n="findRecipes"
+                >
+                    🍳 Find Recipes I Can Make
                 </button>
 
                 <button
-                    class="clear-btn"
-                    onclick="clearIngredients()">
+                    class="secondary-btn"
+                    onclick="clearIngredients()"
+                    data-i18n="clearAll"
+                >
                     Clear All
                 </button>
 
             </div>
 
+        </div>
 
-            <!-- Common Ingredients -->
-
-            <div class="ingredient-search">
-
-                <input
-                    type="text"
-                    id="ingredientSearch"
-                    placeholder="🔍 Search common ingredients..."
-                    oninput="searchCommonIngredients()"
-                >
-
-            </div>
+    </section>
 
 
-            <div
-                class="common-ingredients"
-                id="commonIngredients">
+    <!-- =========================
+         RECOMMENDATIONS
+    ========================== -->
 
-                <button
-                    class="ingredient-chip"
-                    onclick="toggleIngredient('Rice')">
-                    🍚 Rice
-                </button>
+    <section class="recommendation-section">
 
-                <button
-                    class="ingredient-chip"
-                    onclick="toggleIngredient('Chicken')">
-                    🍗 Chicken
-                </button>
+        <div class="recommendation-heading">
 
-                <button
-                    class="ingredient-chip"
-                    onclick="toggleIngredient('Egg')">
-                    🥚 Egg
-                </button>
-
-                <button
-                    class="ingredient-chip"
-                    onclick="toggleIngredient('Potato')">
-                    🥔 Potato
-                </button>
-
-                <button
-                    class="ingredient-chip"
-                    onclick="toggleIngredient('Tomato')">
-                    🍅 Tomato
-                </button>
-
-                <button
-                    class="ingredient-chip"
-                    onclick="toggleIngredient('Onion')">
-                    🧅 Onion
-                </button>
-
-                <button
-                    class="ingredient-chip"
-                    onclick="toggleIngredient('Paneer')">
-                    🧀 Paneer
-                </button>
-
-                <button
-                    class="ingredient-chip"
-                    onclick="toggleIngredient('Carrot')">
-                    🥕 Carrot
-                </button>
-
-                <button
-                    class="ingredient-chip"
-                    onclick="toggleIngredient('Curd')">
-                    🥛 Curd
-                </button>
-
-                <button
-                    class="ingredient-chip"
-                    onclick="toggleIngredient('Milk')">
-                    🥛 Milk
-                </button>
-
-                <button
-                    class="ingredient-chip"
-                    onclick="toggleIngredient('Wheat Flour')">
-                    🌾 Wheat Flour
-                </button>
-
-                <button
-                    class="ingredient-chip"
-                    onclick="toggleIngredient('Besan')">
-                    🌾 Besan
-                </button>
-
-                <button
-                    class="ingredient-chip"
-                    onclick="toggleIngredient('Sugar')">
-                    🍬 Sugar
-                </button>
-
-                <button
-                    class="ingredient-chip"
-                    onclick="toggleIngredient('Bread')">
-                    🍞 Bread
-                </button>
-
-                <button
-                    class="ingredient-chip"
-                    onclick="toggleIngredient('Banana')">
-                    🍌 Banana
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================================
-             SELECTED INGREDIENTS
-             ================================ -->
-
-        <section class="ingredient-box">
-
-            <div class="selected-title">
-
-                <div>
-                    <h2>🧺 My Ingredients</h2>
-
-                    <span
-                        class="selected-count"
-                        id="ingredientCount">
-                        0 ingredients selected
-                    </span>
-                </div>
-
-            </div>
-
-
-            <div
-                class="selected-ingredients"
-                id="selectedIngredients">
-
-                <span class="empty-message">
-                    No ingredients added yet.
-                </span>
-
-            </div>
-
-
-            <button
-                class="recommend-btn"
-                onclick="recommendRecipes()">
-
-                🍳 Find Recipes I Can Make
-
-            </button>
-
-        </section>
-
-
-        <!-- ================================
-             RECOMMENDATIONS
-             ================================ -->
-
-        <section
-            class="ingredient-box"
-            id="recommendationSection">
-
-            <h2>✨ Recommended Recipes</h2>
-
-            <p>
-                Based on the ingredients you selected:
+            <p class="section-label">
+                🍽️ COOKMATE SUGGESTIONS
             </p>
 
+            <h2 data-i18n="recommendedRecipes">
+                Recipes You Can Make
+            </h2>
 
-            <div
-                class="recommendations"
-                id="recommendations">
+            <p data-i18n="recommendationDescription">
+                Add ingredients above to discover matching recipes.
+            </p>
 
-                <div class="no-results" id="noResults">
-                    Add some ingredients and click
-                    <strong>Find Recipes I Can Make</strong>.
-                </div>
+        </div>
 
+
+        <div
+            class="recommendation-grid"
+            id="recommendationGrid"
+        >
+        </div>
+
+
+        <div
+            class="no-recommendations"
+            id="noRecommendations"
+        >
+
+            <div class="icon">
+                🥕
             </div>
 
-        </section>
+            <h3 data-i18n="addIngredientsFirst">
+                Add some ingredients first
+            </h3>
 
-    </main>
+            <p data-i18n="addIngredientsDescription">
+                Select what you have at home and
+                we will suggest recipes for you.
+            </p>
+
+        </div>
+
+    </section>
 
 
-    <!-- ================================
+    <!-- =========================
          FOOTER
-         ================================ -->
+    ========================== -->
 
     <footer class="footer">
 
-        <p>
-            © 2026 CookMate | Smart Cooking & Recipe Finder
-        </p>
+        <div class="footer-content">
+
+            <div>
+
+                <h2>
+                    🍳 CookMate
+                </h2>
+
+                <p data-i18n="footerDescription">
+                    Your smart cooking companion for
+                    simple and delicious recipes.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="index.html" data-i18n="home">
+                    Home
+                </a>
+
+                <a href="recipes.html" data-i18n="recipes">
+                    Recipes
+                </a>
+
+                <a href="ingredients.html" data-i18n="ingredients">
+                    Ingredients
+                </a>
+
+                <a href="equipment.html" data-i18n="equipment">
+                    Equipment
+                </a>
+
+                <a href="favourites.html" data-i18n="favourites">
+                    Favourites
+                </a>
+
+                <a href="profile.html" data-i18n="profile">
+                    Profile
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p data-i18n="madeForFoodLovers">
+                © 2026 CookMate. Made for food lovers ❤️
+            </p>
+
+        </div>
 
     </footer>
 
 
-    <!-- ================================
-         JAVASCRIPT
-         ================================ -->
+    <!-- =========================
+         SHARED SCRIPT
+    ========================== -->
+
+    <script src="js/script.js"></script>
+
+
+    <!-- =========================
+         INGREDIENT SCRIPT
+    ========================== -->
 
     <script>
 
-        /* =================================
-           RECIPE DATA
-           ================================= */
+        /* ==========================================
+           INGREDIENT TRANSLATIONS
+        ========================================== */
 
-        const recipes = [
+        const ingredientTranslations = {
+
+            en: {
+
+                ingredientPlaceholder:
+                    "Enter an ingredient...",
+
+                addIngredient:
+                    "+ Add Ingredient",
+
+                commonIngredients:
+                    "🛒 Common Ingredients",
+
+                selectedIngredients:
+                    "🧺 My Ingredients",
+
+                findRecipes:
+                    "🍳 Find Recipes I Can Make",
+
+                clearAll:
+                    "Clear All",
+
+                recommendedRecipes:
+                    "Recipes You Can Make",
+
+                recommendationDescription:
+                    "Add ingredients above to discover matching recipes.",
+
+                addIngredientsFirst:
+                    "Add some ingredients first",
+
+                addIngredientsDescription:
+                    "Select what you have at home and we will suggest recipes for you.",
+
+                howToMake:
+                    "👨‍🍳 How to Make",
+
+                missing:
+                    "Missing",
+
+                ingredientsAvailable:
+                    "ingredients available"
+
+            },
+
+
+            ta: {
+
+                ingredientPlaceholder:
+                    "ஒரு பொருளை உள்ளிடவும்...",
+
+                addIngredient:
+                    "+ பொருளைச் சேர்க்கவும்",
+
+                commonIngredients:
+                    "🛒 பொதுவான பொருட்கள்",
+
+                selectedIngredients:
+                    "🧺 எனது பொருட்கள்",
+
+                findRecipes:
+                    "🍳 என்னால் செய்யக்கூடிய சமையல் குறிப்புகளை கண்டறியவும்",
+
+                clearAll:
+                    "அனைத்தையும் அழிக்கவும்",
+
+                recommendedRecipes:
+                    "நீங்கள் செய்யக்கூடிய சமையல் குறிப்புகள்",
+
+                recommendationDescription:
+                    "பொருட்களைச் சேர்த்து உங்களுக்கு பொருத்தமான சமையல் குறிப்புகளைக் கண்டறியவும்.",
+
+                addIngredientsFirst:
+                    "முதலில் சில பொருட்களைச் சேர்க்கவும்",
+
+                addIngredientsDescription:
+                    "உங்களிடம் உள்ள பொருட்களைத் தேர்ந்தெடுக்கவும். நாங்கள் சமையல் குறிப்புகளை பரிந்துரைப்போம்.",
+
+                howToMake:
+                    "👨‍🍳 செய்வது எப்படி",
+
+                missing:
+                    "தேவை",
+
+                ingredientsAvailable:
+                    "பொருட்கள் உள்ளன"
+
+            },
+
+
+            hi: {
+
+                ingredientPlaceholder:
+                    "एक सामग्री दर्ज करें...",
+
+                addIngredient:
+                    "+ सामग्री जोड़ें",
+
+                commonIngredients:
+                    "🛒 सामान्य सामग्री",
+
+                selectedIngredients:
+                    "🧺 मेरी सामग्री",
+
+                findRecipes:
+                    "🍳 मेरे लिए बनने वाली रेसिपी खोजें",
+
+                clearAll:
+                    "सब साफ करें",
+
+                recommendedRecipes:
+                    "आप बना सकते हैं ये रेसिपी",
+
+                recommendationDescription:
+                    "सामग्री जोड़ें और आपके लिए उपयुक्त रेसिपी खोजें।",
+
+                addIngredientsFirst:
+                    "पहले कुछ सामग्री जोड़ें",
+
+                addIngredientsDescription:
+                    "अपने पास मौजूद सामग्री चुनें और हम आपके लिए रेसिपी सुझाएँगे।",
+
+                howToMake:
+                    "👨‍🍳 बनाने की विधि",
+
+                missing:
+                    "कमी",
+
+                ingredientsAvailable:
+                    "सामग्री उपलब्ध"
+
+            },
+
+
+            ml: {
+
+                ingredientPlaceholder:
+                    "ഒരു ചേരുവ നൽകുക...",
+
+                addIngredient:
+                    "+ ചേരുവ ചേർക്കുക",
+
+                commonIngredients:
+                    "🛒 സാധാരണ ചേരുവകൾ",
+
+                selectedIngredients:
+                    "🧺 എന്റെ ചേരുവകൾ",
+
+                findRecipes:
+                    "🍳 എനിക്ക് ഉണ്ടാക്കാൻ കഴിയുന്ന പാചകക്കുറിപ്പുകൾ കണ്ടെത്തുക",
+
+                clearAll:
+                    "എല്ലാം നീക്കം ചെയ്യുക",
+
+                recommendedRecipes:
+                    "നിങ്ങൾക്ക് ഉണ്ടാക്കാൻ കഴിയുന്ന പാചകക്കുറിപ്പുകൾ",
+
+                recommendationDescription:
+                    "ചേരുവകൾ ചേർത്ത് നിങ്ങൾക്ക് അനുയോജ്യമായ പാചകക്കുറിപ്പുകൾ കണ്ടെത്തുക.",
+
+                addIngredientsFirst:
+                    "ആദ്യം ചില ചേരുവകൾ ചേർക്കുക",
+
+                addIngredientsDescription:
+                    "നിങ്ങളുടെ വീട്ടിലുള്ള ചേരുവകൾ തിരഞ്ഞെടുക്കുക. ഞങ്ങൾ പാചകക്കുറിപ്പുകൾ നിർദ്ദേശിക്കും.",
+
+                howToMake:
+                    "👨‍🍳 തയ്യാറാക്കുന്ന വിധം",
+
+                missing:
+                    "ആവശ്യമായത്",
+
+                ingredientsAvailable:
+                    "ചേരുവകൾ ലഭ്യമാണ്"
+
+            },
+
+
+            te: {
+
+                ingredientPlaceholder:
+                    "ఒక పదార్థాన్ని నమోదు చేయండి...",
+
+                addIngredient:
+                    "+ పదార్థాన్ని జోడించండి",
+
+                commonIngredients:
+                    "🛒 సాధారణ పదార్థాలు",
+
+                selectedIngredients:
+                    "🧺 నా పదార్థాలు",
+
+                findRecipes:
+                    "🍳 నేను తయారు చేయగల వంటకాలను కనుగొనండి",
+
+                clearAll:
+                    "అన్నింటినీ తొలగించండి",
+
+                recommendedRecipes:
+                    "మీరు తయారు చేయగల వంటకాలు",
+
+                recommendationDescription:
+                    "పదార్థాలను జోడించి మీకు సరిపోయే వంటకాలను కనుగొనండి.",
+
+                addIngredientsFirst:
+                    "ముందుగా కొన్ని పదార్థాలను జోడించండి",
+
+                addIngredientsDescription:
+                    "మీ ఇంట్లో ఉన్న పదార్థాలను ఎంచుకోండి. మేము మీకు వంటకాలను సూచిస్తాము.",
+
+                howToMake:
+                    "👨‍🍳 తయారు చేసే విధానం",
+
+                missing:
+                    "కావాల్సినవి",
+
+                ingredientsAvailable:
+                    "పదార్థాలు అందుబాటులో ఉన్నాయి"
+
+            }
+
+        };
+
+
+        /* ==========================================
+           RECIPE DATA
+        ========================================== */
+
+        const ingredientRecipes = [
 
             {
+                id: "chicken-biryani",
                 name: "Chicken Biryani",
-                icon: "🍛",
+                emoji: "🍗🍚",
                 ingredients: [
                     "Rice",
                     "Chicken",
                     "Onion",
                     "Tomato",
                     "Curd"
-                ],
-                link: "recipe-details.html?recipe=chicken-biryani"
+                ]
             },
 
             {
+                id: "masala-dosa",
                 name: "Masala Dosa",
-                icon: "🥞",
+                emoji: "🥞🥔",
                 ingredients: [
                     "Rice",
                     "Potato",
                     "Onion"
-                ],
-                link: "recipe-details.html?recipe=masala-dosa"
+                ]
             },
 
             {
+                id: "egg-fried-rice",
                 name: "Egg Fried Rice",
-                icon: "🍳",
+                emoji: "🍳🍚",
                 ingredients: [
                     "Rice",
                     "Egg",
                     "Onion",
                     "Carrot"
-                ],
-                link: "recipe-details.html?recipe=egg-fried-rice"
+                ]
             },
 
             {
+                id: "paneer-butter-masala",
                 name: "Paneer Butter Masala",
-                icon: "🧀",
+                emoji: "🧀🍅",
                 ingredients: [
                     "Paneer",
                     "Tomato",
                     "Onion",
                     "Curd"
-                ],
-                link: "recipe-details.html?recipe=paneer-butter-masala"
+                ]
             },
 
             {
+                id: "vegetable-sandwich",
                 name: "Vegetable Sandwich",
-                icon: "🥪",
+                emoji: "🥪🥕",
                 ingredients: [
                     "Bread",
                     "Tomato",
                     "Onion",
                     "Carrot"
-                ],
-                link: "recipe-details.html?recipe=vegetable-sandwich"
+                ]
             },
 
             {
+                id: "onion-pakoda",
                 name: "Onion Pakoda",
-                icon: "🧅",
+                emoji: "🧅🥨",
                 ingredients: [
                     "Onion",
                     "Besan"
-                ],
-                link: "recipe-details.html?recipe=onion-pakoda"
+                ]
             },
 
             {
+                id: "carrot-halwa",
                 name: "Carrot Halwa",
-                icon: "🥕",
+                emoji: "🥕🍮",
                 ingredients: [
                     "Carrot",
                     "Milk",
                     "Sugar"
-                ],
-                link: "recipe-details.html?recipe=carrot-halwa"
+                ]
             },
 
             {
+                id: "banana-milkshake",
                 name: "Banana Milkshake",
-                icon: "🍌",
+                emoji: "🍌🥛",
                 ingredients: [
                     "Banana",
                     "Milk",
                     "Sugar"
-                ],
-                link: "recipe-details.html?recipe=banana-milkshake"
+                ]
             },
 
             {
+                id: "aloo-roti",
                 name: "Aloo Roti",
-                icon: "🫓",
+                emoji: "🫓🥔",
                 ingredients: [
                     "Wheat Flour",
                     "Potato",
                     "Onion"
-                ],
-                link: "recipe-details.html?recipe=aloo-roti"
+                ]
             }
 
         ];
 
 
-        /* =================================
-           INGREDIENT STORAGE
-           ================================= */
+        /* ==========================================
+           RECIPE NAME TRANSLATIONS
+        ========================================== */
 
-        let myIngredients =
+        const recipeNames = {
+
+            "Chicken Biryani": {
+                en: "Chicken Biryani",
+                ta: "சிக்கன் பிரியாணி",
+                hi: "चिकन बिरयानी",
+                ml: "ചിക്കൻ ബിരിയാണി",
+                te: "చికెన్ బిర్యానీ"
+            },
+
+            "Masala Dosa": {
+                en: "Masala Dosa",
+                ta: "மசாலா தோசை",
+                hi: "मसाला डोसा",
+                ml: "മസാല ദോശ",
+                te: "మసాలా దోస"
+            },
+
+            "Egg Fried Rice": {
+                en: "Egg Fried Rice",
+                ta: "முட்டை ஃப்ரைட் ரைஸ்",
+                hi: "एग फ्राइड राइस",
+                ml: "എഗ് ഫ്രൈഡ് റൈസ്",
+                te: "ఎగ్ ఫ్రైడ్ రైస్"
+            },
+
+            "Paneer Butter Masala": {
+                en: "Paneer Butter Masala",
+                ta: "பனீர் பட்டர் மசாலா",
+                hi: "पनीर बटर मसाला",
+                ml: "പനീർ ബട്ടർ മസാല",
+                te: "పనీర్ బటర్ మసాలా"
+            },
+
+            "Vegetable Sandwich": {
+                en: "Vegetable Sandwich",
+                ta: "காய்கறி சாண்ட்விச்",
+                hi: "वेजिटेबल सैंडविच",
+                ml: "വെജിറ്റബിൾ സാൻഡ്‌വിച്ച്",
+                te: "వెజిటబుల్ శాండ్‌విచ్"
+            },
+
+            "Onion Pakoda": {
+                en: "Onion Pakoda",
+                ta: "வெங்காய பக்கோடா",
+                hi: "प्याज पकौड़ा",
+                ml: "ഉള്ളി പക്കോഡ",
+                te: "ఉల్లిపాయ పకోడా"
+            },
+
+            "Carrot Halwa": {
+                en: "Carrot Halwa",
+                ta: "கேரட் அல்வா",
+                hi: "गाजर का हलवा",
+                ml: "കാരറ്റ് ഹൽവ",
+                te: "క్యారెట్ హల్వా"
+            },
+
+            "Banana Milkshake": {
+                en: "Banana Milkshake",
+                ta: "வாழைப்பழ மில்க்ஷேக்",
+                hi: "केला मिल्कशेक",
+                ml: "വാഴപ്പഴ മിൽക്ക് ഷേക്ക്",
+                te: "అరటి మిల్క్‌షేక్"
+            },
+
+            "Aloo Roti": {
+                en: "Aloo Roti",
+                ta: "ஆலு ரொட்டி",
+                hi: "आलू रोटी",
+                ml: "ആലു റൊട്ടി",
+                te: "ఆలూ రోటీ"
+            }
+
+        };
+
+
+        /* ==========================================
+           INGREDIENT NAME TRANSLATIONS
+        ========================================== */
+
+        const ingredientNames = {
+
+            Rice: {
+                en: "Rice",
+                ta: "அரிசி",
+                hi: "चावल",
+                ml: "അരി",
+                te: "బియ్యం"
+            },
+
+            Chicken: {
+                en: "Chicken",
+                ta: "சிக்கன்",
+                hi: "चिकन",
+                ml: "ചിക്കൻ",
+                te: "చికెన్"
+            },
+
+            Egg: {
+                en: "Egg",
+                ta: "முட்டை",
+                hi: "अंडा",
+                ml: "മുട്ട",
+                te: "గుడ్డు"
+            },
+
+            Potato: {
+                en: "Potato",
+                ta: "உருளைக்கிழங்கு",
+                hi: "आलू",
+                ml: "ഉരുളക്കിഴങ്ങ്",
+                te: "ఆలుగడ్డ"
+            },
+
+            Tomato: {
+                en: "Tomato",
+                ta: "தக்காளி",
+                hi: "टमाटर",
+                ml: "തക്കാളി",
+                te: "టమాటా"
+            },
+
+            Onion: {
+                en: "Onion",
+                ta: "வெங்காயம்",
+                hi: "प्याज",
+                ml: "സവാള",
+                te: "ఉల్లిపాయ"
+            },
+
+            Paneer: {
+                en: "Paneer",
+                ta: "பனீர்",
+                hi: "पनीर",
+                ml: "പനീർ",
+                te: "పనీర్"
+            },
+
+            Carrot: {
+                en: "Carrot",
+                ta: "கேரட்",
+                hi: "गाजर",
+                ml: "കാരറ്റ്",
+                te: "క్యారెట్"
+            },
+
+            Curd: {
+                en: "Curd",
+                ta: "தயிர்",
+                hi: "दही",
+                ml: "തൈര്",
+                te: "పెరుగు"
+            },
+
+            Milk: {
+                en: "Milk",
+                ta: "பால்",
+                hi: "दूध",
+                ml: "പാൽ",
+                te: "పాలు"
+            },
+
+            "Wheat Flour": {
+                en: "Wheat Flour",
+                ta: "கோதுமை மாவு",
+                hi: "गेहूं का आटा",
+                ml: "ഗോതമ്പ് മാവ്",
+                te: "గోధుమ పిండి"
+            },
+
+            Besan: {
+                en: "Besan",
+                ta: "கடலை மாவு",
+                hi: "बेसन",
+                ml: "കടലമാവ്",
+                te: "సెనగపిండి"
+            },
+
+            Sugar: {
+                en: "Sugar",
+                ta: "சர்க்கரை",
+                hi: "चीनी",
+                ml: "പഞ്ചസാര",
+                te: "చక్కెర"
+            },
+
+            Bread: {
+                en: "Bread",
+                ta: "பிரெட்",
+                hi: "ब्रेड",
+                ml: "ബ്രെഡ്",
+                te: "బ్రెడ్"
+            },
+
+            Banana: {
+                en: "Banana",
+                ta: "வாழைப்பழம்",
+                hi: "केला",
+                ml: "വാഴപ്പഴം",
+                te: "అరటిపండు"
+            }
+
+        };
+
+
+        /* ==========================================
+           LOCAL STORAGE
+        ========================================== */
+
+        const STORAGE_KEY =
+            "cookmateIngredients";
+
+
+        let selectedIngredients =
             JSON.parse(
-                localStorage.getItem("cookmateIngredients")
-            ) || [];
-
-
-        /* =================================
-           PAGE LOAD
-           ================================= */
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            function () {
-
-                displayIngredients();
-
-                updateIngredientChips();
-
-            }
-        );
-
-
-        /* =================================
-           ADD INGREDIENT
-           ================================= */
-
-        function addIngredient() {
-
-            const input =
-                document.getElementById("ingredientInput");
-
-            const value =
-                input.value.trim();
-
-            if (value === "") {
-
-                alert("Please enter an ingredient.");
-
-                input.focus();
-
-                return;
-            }
-
-
-            const formatted =
-                formatIngredient(value);
-
-
-            if (
-                !myIngredients.some(
-                    item =>
-                        item.toLowerCase() ===
-                        formatted.toLowerCase()
-                )
-            ) {
-
-                myIngredients.push(formatted);
-
-                saveIngredients();
-
-                displayIngredients();
-
-                updateIngredientChips();
-
-                input.value = "";
-
-            } else {
-
-                alert("This ingredient is already added.");
-
-            }
-
-            input.focus();
-        }
-
-
-        /* =================================
-           ENTER KEY
-           ================================= */
-
-        document
-            .getElementById("ingredientInput")
-            .addEventListener(
-                "keydown",
-                function (event) {
-
-                    if (event.key === "Enter") {
-
-                        addIngredient();
-
-                    }
-
-                }
+                localStorage.getItem(
+                    STORAGE_KEY
+                ) || "[]"
             );
 
 
-        /* =================================
-           FORMAT INGREDIENT
-           ================================= */
+        /* ==========================================
+           CURRENT LANGUAGE
+        ========================================== */
 
-        function formatIngredient(value) {
+        function getIngredientLanguage() {
 
-            return value
-                .toLowerCase()
-                .split(" ")
-                .map(
-                    word =>
-                        word.charAt(0).toUpperCase() +
-                        word.slice(1)
-                )
-                .join(" ");
+            return localStorage.getItem(
+                "cookmateLanguage"
+            ) || "en";
 
         }
 
 
-        /* =================================
-           TOGGLE COMMON INGREDIENT
-           ================================= */
+        /* ==========================================
+           ADD INGREDIENT
+        ========================================== */
 
-        function toggleIngredient(ingredient) {
+        function addIngredient(ingredient) {
 
-            const index =
-                myIngredients.findIndex(
+            const exists =
+                selectedIngredients.some(
                     item =>
                         item.toLowerCase() ===
                         ingredient.toLowerCase()
                 );
 
 
-            if (index === -1) {
+            if (!exists) {
 
-                myIngredients.push(ingredient);
+                selectedIngredients.push(
+                    ingredient
+                );
 
-            } else {
-
-                myIngredients.splice(index, 1);
+                saveIngredients();
 
             }
 
 
-            saveIngredients();
-
-            displayIngredients();
-
-            updateIngredientChips();
+            displaySelectedIngredients();
 
         }
 
 
-        /* =================================
+        function addIngredientFromInput() {
+
+            const input =
+                document.getElementById(
+                    "ingredientInput"
+                );
+
+
+            const value =
+                input.value.trim();
+
+
+            if (value === "") {
+
+                return;
+
+            }
+
+
+            addIngredient(value);
+
+            input.value = "";
+
+        }
+
+
+        /* ==========================================
            REMOVE INGREDIENT
-           ================================= */
+        ========================================== */
 
         function removeIngredient(index) {
 
-            myIngredients.splice(index, 1);
+            selectedIngredients.splice(
+                index,
+                1
+            );
+
 
             saveIngredients();
 
-            displayIngredients();
-
-            updateIngredientChips();
+            displaySelectedIngredients();
 
         }
 
 
-        /* =================================
-           DISPLAY INGREDIENTS
-           ================================= */
+        /* ==========================================
+           CLEAR INGREDIENTS
+        ========================================== */
 
-        function displayIngredients() {
+        function clearIngredients() {
+
+            selectedIngredients = [];
+
+            saveIngredients();
+
+            displaySelectedIngredients();
+
+            document.getElementById(
+                "recommendationGrid"
+            ).innerHTML = "";
+
+            document.getElementById(
+                "noRecommendations"
+            ).style.display = "block";
+
+        }
+
+
+        /* ==========================================
+           SAVE
+        ========================================== */
+
+        function saveIngredients() {
+
+            localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify(
+                    selectedIngredients
+                )
+            );
+
+        }
+
+
+        /* ==========================================
+           DISPLAY SELECTED
+        ========================================== */
+
+        function displaySelectedIngredients() {
 
             const container =
                 document.getElementById(
                     "selectedIngredients"
                 );
 
-            const count =
-                document.getElementById(
-                    "ingredientCount"
-                );
-
 
             container.innerHTML = "";
 
 
-            if (myIngredients.length === 0) {
+            if (
+                selectedIngredients.length === 0
+            ) {
 
-                container.innerHTML =
-                    `<span class="empty-message">
-                        No ingredients added yet.
-                    </span>`;
+                const empty =
+                    document.createElement(
+                        "span"
+                    );
 
-            } else {
-
-                myIngredients.forEach(
-                    (ingredient, index) => {
-
-                        const item =
-                            document.createElement("div");
-
-                        item.className =
-                            "selected-item";
+                empty.className =
+                    "empty-selected";
 
 
-                        item.innerHTML = `
-
-                            <span>
-                                ${ingredient}
-                            </span>
-
-                            <button
-                                class="remove-ingredient"
-                                onclick="removeIngredient(${index})"
-                                title="Remove">
-
-                                ✕
-
-                            </button>
-
-                        `;
+                const language =
+                    getIngredientLanguage();
 
 
-                        container.appendChild(item);
+                empty.textContent =
+                    language === "ta"
+                        ? "இன்னும் எந்த பொருளும் தேர்வு செய்யப்படவில்லை."
+                        : language === "hi"
+                        ? "अभी कोई सामग्री नहीं चुनी गई है।"
+                        : language === "ml"
+                        ? "ഇതുവരെ ചേരുവകളൊന്നും തിരഞ്ഞെടുത്തിട്ടില്ല."
+                        : language === "te"
+                        ? "ఇంకా పదార్థాలు ఎంచుకోలేదు."
+                        : "No ingredients selected yet.";
 
-                    }
+
+                container.appendChild(
+                    empty
                 );
+
+
+                return;
 
             }
 
 
-            count.textContent =
-                myIngredients.length +
-                (
-                    myIngredients.length === 1
-                        ? " ingredient selected"
-                        : " ingredients selected"
-                );
+            selectedIngredients.forEach(
+                function(ingredient, index) {
 
-        }
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+                    item.className =
+                        "selected-item";
 
 
-        /* =================================
-           SAVE TO LOCAL STORAGE
-           ================================= */
+                    const name =
+                        ingredientNames[
+                            ingredient
+                        ];
 
-        function saveIngredients() {
 
-            localStorage.setItem(
-                "cookmateIngredients",
-                JSON.stringify(myIngredients)
+                    const translated =
+                        name
+                            ? (
+                                name[
+                                    getIngredientLanguage()
+                                ] || name.en
+                            )
+                            : ingredient;
+
+
+                    item.innerHTML = `
+                        <span>${translated}</span>
+
+                        <button
+                            class="remove-ingredient"
+                            onclick="removeIngredient(${index})"
+                            title="Remove"
+                        >
+                            ×
+                        </button>
+                    `;
+
+
+                    container.appendChild(
+                        item
+                    );
+
+                }
             );
 
         }
 
 
-        /* =================================
-           CLEAR ALL
-           ================================= */
+        /* ==========================================
+           FIND RECIPES
+        ========================================== */
 
-        function clearIngredients() {
+        function findRecipes() {
 
-            if (myIngredients.length === 0) {
+            const grid =
+                document.getElementById(
+                    "recommendationGrid"
+                );
+
+
+            const noResults =
+                document.getElementById(
+                    "noRecommendations"
+                );
+
+
+            grid.innerHTML = "";
+
+
+            if (
+                selectedIngredients.length === 0
+            ) {
+
+                noResults.style.display =
+                    "block";
 
                 return;
 
             }
 
 
-            const confirmClear =
-                confirm(
-                    "Are you sure you want to remove all ingredients?"
+            const selected =
+                selectedIngredients.map(
+                    item =>
+                        item.toLowerCase()
                 );
 
 
-            if (confirmClear) {
+            const matches =
+                ingredientRecipes
+                    .map(
+                        function(recipe) {
 
-                myIngredients = [];
-
-                saveIngredients();
-
-                displayIngredients();
-
-                updateIngredientChips();
-
-                document.getElementById(
-                    "recommendations"
-                ).innerHTML = "";
-
-            }
-
-        }
+                            const matched =
+                                recipe.ingredients
+                                    .filter(
+                                        ingredient =>
+                                            selected.includes(
+                                                ingredient.toLowerCase()
+                                            )
+                                    );
 
 
-        /* =================================
-           UPDATE COMMON INGREDIENT CHIPS
-           ================================= */
-
-        function updateIngredientChips() {
-
-            const chips =
-                document.querySelectorAll(
-                    ".ingredient-chip"
-                );
+                            const percentage =
+                                Math.round(
+                                    (
+                                        matched.length /
+                                        recipe.ingredients.length
+                                    ) * 100
+                                );
 
 
-            chips.forEach(chip => {
+                            const missing =
+                                recipe.ingredients
+                                    .filter(
+                                        ingredient =>
+                                            !selected.includes(
+                                                ingredient.toLowerCase()
+                                            )
+                                    );
 
-                const ingredient =
-                    chip.textContent
-                        .replace(/^[^\w]+/, "")
-                        .trim();
 
+                            return {
+                                recipe,
+                                matched,
+                                percentage,
+                                missing
+                            };
 
-                const exists =
-                    myIngredients.some(
-                        item =>
-                            item.toLowerCase() ===
-                            ingredient.toLowerCase()
+                        }
+                    )
+                    .filter(
+                        result =>
+                            result.percentage >= 40
+                    )
+                    .sort(
+                        (a, b) =>
+                            b.percentage -
+                            a.percentage
                     );
 
 
-                if (exists) {
+            if (
+                matches.length === 0
+            ) {
 
-                    chip.classList.add("selected");
-
-                } else {
-
-                    chip.classList.remove("selected");
-
-                }
-
-            });
-
-        }
+                noResults.style.display =
+                    "block";
 
 
-        /* =================================
-           SEARCH COMMON INGREDIENTS
-           ================================= */
-
-        function searchCommonIngredients() {
-
-            const search =
-                document
-                    .getElementById(
-                        "ingredientSearch"
-                    )
-                    .value
-                    .toLowerCase()
-                    .trim();
+                const language =
+                    getIngredientLanguage();
 
 
-            const chips =
-                document.querySelectorAll(
-                    ".ingredient-chip"
-                );
+                noResults.querySelector(
+                    "h3"
+                ).textContent =
+                    language === "ta"
+                        ? "பொருத்தமான சமையல் குறிப்பு கிடைக்கவில்லை"
+                        : language === "hi"
+                        ? "कोई मिलती-जुलती रेसिपी नहीं मिली"
+                        : language === "ml"
+                        ? "പൊരുത്തപ്പെടുന്ന പാചകക്കുറിപ്പ് കണ്ടെത്തിയില്ല"
+                        : language === "te"
+                        ? "సరిపోలే వంటకం కనుగొనబడలేదు"
+                        : "No matching recipes found";
 
-
-            chips.forEach(chip => {
-
-                const text =
-                    chip.textContent.toLowerCase();
-
-
-                if (text.includes(search)) {
-
-                    chip.style.display = "inline-block";
-
-                } else {
-
-                    chip.style.display = "none";
-
-                }
-
-            });
-
-        }
-
-
-        /* =================================
-           RECOMMEND RECIPES
-           ================================= */
-
-        function recommendRecipes() {
-
-            const container =
-                document.getElementById(
-                    "recommendations"
-                );
-
-
-            container.innerHTML = "";
-
-
-            if (myIngredients.length === 0) {
-
-                container.innerHTML = `
-
-                    <div class="no-results"
-                         style="display:block;">
-
-                        🥕 Please add some ingredients first.
-
-                    </div>
-
-                `;
 
                 return;
 
             }
 
 
-            const userIngredients =
-                myIngredients.map(
-                    item => item.toLowerCase()
-                );
+            noResults.style.display =
+                "none";
 
 
-            const results =
-                recipes.map(recipe => {
+            const language =
+                getIngredientLanguage();
 
-                    const matched =
-                        recipe.ingredients.filter(
-                            ingredient =>
-                                userIngredients.includes(
-                                    ingredient.toLowerCase()
-                                )
+
+            const t =
+                ingredientTranslations[
+                    language
+                ] || ingredientTranslations.en;
+
+
+            matches.forEach(
+                function(result) {
+
+                    const recipe =
+                        result.recipe;
+
+
+                    const card =
+                        document.createElement(
+                            "div"
                         );
 
 
-                    const missing =
-                        recipe.ingredients.filter(
-                            ingredient =>
-                                !userIngredients.includes(
-                                    ingredient.toLowerCase()
-                                )
-                        );
+                    card.className =
+                        "recommendation-card";
 
 
-                    const percentage =
-                        Math.round(
-                            (
-                                matched.length /
-                                recipe.ingredients.length
-                            ) * 100
-                        );
+                    const translatedName =
+                        recipeNames[
+                            recipe.name
+                        ];
 
 
-                    return {
-
-                        ...recipe,
-
-                        matched,
-                        missing,
-                        percentage
-
-                    };
-
-                })
-                .filter(
-                    recipe =>
-                        recipe.percentage >= 40
-                )
-                .sort(
-                    (a, b) =>
-                        b.percentage -
-                        a.percentage
-                );
+                    const displayName =
+                        translatedName
+                            ? (
+                                translatedName[
+                                    language
+                                ] ||
+                                translatedName.en
+                            )
+                            : recipe.name;
 
 
-            if (results.length === 0) {
-
-                container.innerHTML = `
-
-                    <div class="no-results"
-                         style="display:block;">
-
-                        😔 No matching recipes found.
-
-                        <br><br>
-
-                        Try adding more ingredients.
-
-                    </div>
-
-                `;
-
-                return;
-
-            }
+                    let missingText = "";
 
 
-            results.forEach(recipe => {
+                    if (
+                        result.missing.length > 0
+                    ) {
 
-                const card =
-                    document.createElement("div");
+                        const translatedMissing =
+                            result.missing.map(
+                                ingredient => {
 
-                card.className =
-                    "recommendation-card";
-
-
-                let missingText =
-                    "";
-
-
-                if (recipe.missing.length === 0) {
-
-                    missingText =
-                        "✅ You have all the listed ingredients!";
-
-                } else {
-
-                    missingText =
-                        "Missing: " +
-                        recipe.missing.join(", ");
-
-                }
+                                    const data =
+                                        ingredientNames[
+                                            ingredient
+                                        ];
 
 
-                card.innerHTML = `
+                                    return data
+                                        ? (
+                                            data[
+                                                language
+                                            ] ||
+                                            data.en
+                                        )
+                                        : ingredient;
 
-                    <div class="food-icon">
-                        ${recipe.icon}
-                    </div>
+                                }
+                            );
 
-                    <h3>
-                        ${recipe.name}
-                    </h3>
 
-                    <div class="match-text">
-                        ${recipe.percentage}% ingredients available
-                    </div>
+                        missingText =
+                            `
+                            <p class="missing-list">
+                                ${t.missing}: 
+                                ${translatedMissing.join(", ")}
+                            </p>
+                            `;
 
-                    <div class="progress-bar">
+                    }
 
-                        <div
-                            class="progress"
-                            style="width:${recipe.percentage}%;">
+
+                    card.innerHTML = `
+
+                        <div class="recommendation-image">
+                            ${recipe.emoji}
                         </div>
 
-                    </div>
+                        <span class="match-badge">
+                            ${result.percentage}% 
+                            ${t.ingredientsAvailable}
+                        </span>
 
-                    <div class="missing">
+                        <h3>
+                            ${displayName}
+                        </h3>
+
                         ${missingText}
-                    </div>
 
-                    <a
-                        href="${recipe.link}"
-                        class="make-btn">
+                        <a
+                            class="recipe-link-btn"
+                            href="recipe-details.html?recipe=${recipe.id}"
+                        >
+                            ${t.howToMake}
+                        </a>
 
-                        👨‍🍳 How to Make
-
-                    </a>
-
-                `;
+                    `;
 
 
-                container.appendChild(card);
+                    grid.appendChild(
+                        card
+                    );
 
-            });
+                }
+            );
 
         }
+
+
+        /* ==========================================
+           ENTER KEY
+        ========================================== */
+
+        document
+            .getElementById(
+                "ingredientInput"
+            )
+            .addEventListener(
+                "keydown",
+                function(event) {
+
+                    if (
+                        event.key === "Enter"
+                    ) {
+
+                        addIngredientFromInput();
+
+                    }
+
+                }
+            );
+
+
+        /* ==========================================
+           TRANSLATE STATIC TEXT
+        ========================================== */
+
+        function translateIngredientPage() {
+
+            const language =
+                getIngredientLanguage();
+
+
+            const t =
+                ingredientTranslations[
+                    language
+                ] || ingredientTranslations.en;
+
+
+            document
+                .querySelectorAll(
+                    "[data-i18n]"
+                )
+                .forEach(
+                    function(element) {
+
+                        const key =
+                            element.getAttribute(
+                                "data-i18n"
+                            );
+
+
+                        if (
+                            t[key]
+                        ) {
+
+                            element.textContent =
+                                t[key];
+
+                        }
+
+                    }
+                );
+
+
+            document
+                .querySelectorAll(
+                    "[data-i18n-placeholder]"
+                )
+                .forEach(
+                    function(element) {
+
+                        const key =
+                            element.getAttribute(
+                                "data-i18n-placeholder"
+                            );
+
+
+                        if (
+                            t[key]
+                        ) {
+
+                            element.placeholder =
+                                t[key];
+
+                        }
+
+                    }
+                );
+
+
+            displaySelectedIngredients();
+
+            findRecipes();
+
+        }
+
+
+        /* ==========================================
+           LANGUAGE CHANGE
+        ========================================== */
+
+        window.addEventListener(
+            "storage",
+            function(event) {
+
+                if (
+                    event.key ===
+                    "cookmateLanguage"
+                ) {
+
+                    translateIngredientPage();
+
+                }
+
+            }
+        );
+
+
+        /* ==========================================
+           INITIALIZE
+        ========================================== */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                displaySelectedIngredients();
+
+                translateIngredientPage();
+
+            }
+        );
 
     </script>
 
 </body>
+
 </html>
