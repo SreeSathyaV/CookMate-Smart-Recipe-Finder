@@ -3,1579 +3,1423 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Equipment | CookMate</title>
+    <title>CookMate - Equipment</title>
 
     <link rel="stylesheet" href="css/style.css">
-
-    <style>
-
-        /* =========================================
-           EQUIPMENT PAGE
-           ========================================= */
-
-        .equipment-hero {
-            text-align: center;
-            padding: 70px 20px 45px;
-        }
-
-        .equipment-hero h1 {
-            font-size: 42px;
-            margin-bottom: 12px;
-        }
-
-        .equipment-hero p {
-            max-width: 700px;
-            margin: auto;
-            font-size: 17px;
-            line-height: 1.7;
-        }
-
-
-        .equipment-container {
-            width: 90%;
-            max-width: 1100px;
-            margin: auto;
-            padding-bottom: 70px;
-        }
-
-
-        .equipment-box {
-            background: rgba(255, 255, 255, 0.94);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-        }
-
-
-        .equipment-box h2 {
-            margin-bottom: 8px;
-        }
-
-
-        .equipment-box > p {
-            line-height: 1.6;
-            color: #666;
-        }
-
-
-        /* =========================================
-           SEARCH
-           ========================================= */
-
-        .equipment-search {
-            margin-top: 22px;
-        }
-
-
-        .equipment-search input {
-            width: 100%;
-            padding: 15px 18px;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            font-size: 16px;
-            box-sizing: border-box;
-            outline: none;
-        }
-
-
-        .equipment-search input:focus {
-            border-color: #777;
-        }
-
-
-        /* =========================================
-           EQUIPMENT GRID
-           ========================================= */
-
-        .equipment-grid {
-            display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(180px, 1fr));
-
-            gap: 15px;
-            margin-top: 25px;
-        }
-
-
-        .equipment-card {
-            border: 1px solid #e2e2e2;
-            background: #fafafa;
-            border-radius: 16px;
-            padding: 20px 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-
-        .equipment-card:hover {
-            transform: translateY(-4px);
-            box-shadow:
-                0 6px 18px rgba(0, 0, 0, 0.08);
-        }
-
-
-        .equipment-card.selected {
-            background: #333;
-            color: white;
-            border-color: #333;
-        }
-
-
-        .equipment-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-
-        .equipment-name {
-            font-size: 15px;
-            font-weight: 600;
-        }
-
-
-        .equipment-status {
-            font-size: 12px;
-            margin-top: 7px;
-            opacity: 0.75;
-        }
-
-
-        /* =========================================
-           SELECTED EQUIPMENT
-           ========================================= */
-
-        .selected-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-
-        .selected-count {
-            font-size: 14px;
-            color: #777;
-        }
-
-
-        .selected-equipment {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            min-height: 45px;
-            margin-top: 20px;
-        }
-
-
-        .selected-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 14px;
-            border-radius: 25px;
-            background: #f1eee8;
-            font-size: 14px;
-        }
-
-
-        .remove-btn {
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            font-size: 15px;
-            color: #777;
-        }
-
-
-        .empty-message {
-            color: #888;
-            font-style: italic;
-        }
-
-
-        /* =========================================
-           BUTTONS
-           ========================================= */
-
-        .button-row {
-            display: flex;
-            gap: 12px;
-            margin-top: 22px;
-        }
-
-
-        .recommend-btn,
-        .clear-btn {
-            border: none;
-            padding: 14px 22px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-
-        .recommend-btn {
-            flex: 1;
-            background: #6b4f3a;
-            color: white;
-        }
-
-
-        .recommend-btn:hover {
-            transform: translateY(-2px);
-        }
-
-
-        .clear-btn {
-            background: #eee;
-            color: #333;
-        }
-
-
-        .clear-btn:hover {
-            background: #ddd;
-        }
-
-
-        /* =========================================
-           RECOMMENDATIONS
-           ========================================= */
-
-        .recommendations {
-            display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(260px, 1fr));
-
-            gap: 20px;
-            margin-top: 25px;
-        }
-
-
-        .recommendation-card {
-            background: white;
-            border-radius: 18px;
-            padding: 22px;
-            box-shadow:
-                0 6px 20px rgba(0, 0, 0, 0.07);
-
-            transition: 0.3s;
-        }
-
-
-        .recommendation-card:hover {
-            transform: translateY(-5px);
-        }
-
-
-        .food-icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-
-
-        .recommendation-card h3 {
-            margin-bottom: 8px;
-        }
-
-
-        .match-text {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-
-        .progress-bar {
-            height: 8px;
-            background: #eee;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-
-
-        .progress {
-            height: 100%;
-            background: #6b4f3a;
-            border-radius: 10px;
-        }
-
-
-        .equipment-needed {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-
-        .make-btn {
-            display: inline-block;
-            text-decoration: none;
-            background: #333;
-            color: white;
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-size: 14px;
-        }
-
-
-        .make-btn:hover {
-            opacity: 0.85;
-        }
-
-
-        .no-results {
-            text-align: center;
-            padding: 30px;
-            color: #777;
-        }
-
-
-        /* =========================================
-           MOBILE
-           ========================================= */
-
-        @media (max-width: 600px) {
-
-            .equipment-hero h1 {
-                font-size: 32px;
-            }
-
-
-            .equipment-box {
-                padding: 20px;
-            }
-
-
-            .equipment-grid {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
-
-
-            .button-row {
-                flex-direction: column;
-            }
-
-
-            .clear-btn {
-                width: 100%;
-            }
-
-        }
-
-    </style>
 </head>
-
 
 <body>
 
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+    <div class="logo">🍳 CookMate</div>
 
-    <!-- =========================================
-         NAVBAR
-         ========================================= -->
-
-    <nav class="navbar">
-
-        <div class="logo">
-            🍳 CookMate
-        </div>
-
-
-        <div class="nav-links">
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="recipes.html">
-                Recipes
-            </a>
-
-            <a href="ingredients.html">
-                My Ingredients
-            </a>
-
-            <a href="equipment.html" class="active">
-                Equipment
-            </a>
-
-            <a href="favourites.html">
-                Favourites
-            </a>
-
-            <a href="profile.html">
-                Profile
-            </a>
-
-        </div>
-
-    </nav>
+    <div class="nav-links">
+        <a href="index.html" data-i18n="home">Home</a>
+        <a href="recipes.html" data-i18n="recipes">Recipes</a>
+        <a href="ingredients.html" data-i18n="ingredients">Ingredients</a>
+        <a href="equipment.html" class="active" data-i18n="equipment">Equipment</a>
+        <a href="favourites.html" data-i18n="favourites">Favourites</a>
+        <a href="profile.html" data-i18n="profile">Profile</a>
+    </div>
+</nav>
 
 
+<!-- ================= HERO ================= -->
+<section class="hero">
+    <div class="hero-content">
 
-    <!-- =========================================
-         HERO
-         ========================================= -->
+        <span class="section-label">🍳 CookMate</span>
 
-    <section class="equipment-hero">
-
-        <h1>
-            🍳 What Cooking Equipment Do You Have?
+        <h1 data-i18n="equipmentAtHome">
+            What Cooking Equipment Do You Have?
         </h1>
 
-        <p>
-            Select the cooking equipment available in your
-            kitchen and CookMate will suggest recipes that
-            you can prepare.
+        <p data-i18n="equipmentDescription">
+            Select the kitchen equipment you have and discover recipes you can make.
         </p>
 
-    </section>
+        <div class="search-box">
+            <input
+                type="text"
+                id="equipmentSearch"
+                data-i18n-placeholder="equipmentSearchPlaceholder"
+                placeholder="Search equipment..."
+            >
+            <button class="primary-btn" onclick="searchEquipment()">
+                🔍 <span data-i18n="search">Search</span>
+            </button>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================= EQUIPMENT SECTION ================= -->
+<section class="section">
+
+    <div class="section-heading">
+        <span class="section-label">🔧 Cook Smart</span>
+
+        <h2 data-i18n="kitchenEquipmentHeading">
+            Kitchen Equipment
+        </h2>
+
+        <p data-i18n="equipmentDescription">
+            Select the equipment available in your kitchen.
+        </p>
+    </div>
+
+
+    <!-- EQUIPMENT GRID -->
+    <div class="recipe-grid" id="equipmentGrid">
+
+        <div class="equipment-item" data-equipment="Pressure Cooker">
+            <div class="equipment-icon">🍲</div>
+            <h3 data-equipment-name="Pressure Cooker">Pressure Cooker</h3>
+            <button class="secondary-btn equipment-select-btn">
+                + <span data-i18n="select">Select</span>
+            </button>
+        </div>
+
+
+        <div class="equipment-item" data-equipment="Frying Pan">
+            <div class="equipment-icon">🍳</div>
+            <h3 data-equipment-name="Frying Pan">Frying Pan</h3>
+            <button class="secondary-btn equipment-select-btn">
+                + <span data-i18n="select">Select</span>
+            </button>
+        </div>
+
+
+        <div class="equipment-item" data-equipment="Kadai">
+            <div class="equipment-icon">🥘</div>
+            <h3 data-equipment-name="Kadai">Kadai</h3>
+            <button class="secondary-btn equipment-select-btn">
+                + <span data-i18n="select">Select</span>
+            </button>
+        </div>
+
+
+        <div class="equipment-item" data-equipment="Tawa">
+            <div class="equipment-icon">🫓</div>
+            <h3 data-equipment-name="Tawa">Tawa</h3>
+            <button class="secondary-btn equipment-select-btn">
+                + <span data-i18n="select">Select</span>
+            </button>
+        </div>
+
+
+        <div class="equipment-item" data-equipment="Oven">
+            <div class="equipment-icon">🔥</div>
+            <h3 data-equipment-name="Oven">Oven</h3>
+            <button class="secondary-btn equipment-select-btn">
+                + <span data-i18n="select">Select</span>
+            </button>
+        </div>
+
+
+        <div class="equipment-item" data-equipment="Microwave">
+            <div class="equipment-icon">📡</div>
+            <h3 data-equipment-name="Microwave">Microwave</h3>
+            <button class="secondary-btn equipment-select-btn">
+                + <span data-i18n="select">Select</span>
+            </button>
+        </div>
+
+
+        <div class="equipment-item" data-equipment="Mixer Grinder">
+            <div class="equipment-icon">⚙️</div>
+            <h3 data-equipment-name="Mixer Grinder">Mixer Grinder</h3>
+            <button class="secondary-btn equipment-select-btn">
+                + <span data-i18n="select">Select</span>
+            </button>
+        </div>
+
+
+        <div class="equipment-item" data-equipment="Blender">
+            <div class="equipment-icon">🥤</div>
+            <h3 data-equipment-name="Blender">Blender</h3>
+            <button class="secondary-btn equipment-select-btn">
+                + <span data-i18n="select">Select</span>
+            </button>
+        </div>
 
 
+        <div class="equipment-item" data-equipment="Knife">
+            <div class="equipment-icon">🔪</div>
+            <h3 data-equipment-name="Knife">Knife</h3>
+            <button class="secondary-btn equipment-select-btn">
+                + <span data-i18n="select">Select</span>
+            </button>
+        </div>
 
-    <main class="equipment-container">
 
+        <div class="equipment-item" data-equipment="Mixing Bowl">
+            <div class="equipment-icon">🥣</div>
+            <h3 data-equipment-name="Mixing Bowl">Mixing Bowl</h3>
+            <button class="secondary-btn equipment-select-btn">
+                + <span data-i18n="select">Select</span>
+            </button>
+        </div>
 
-        <!-- =========================================
-             EQUIPMENT SELECTION
-             ========================================= -->
 
-        <section class="equipment-box">
+        <div class="equipment-item" data-equipment="Steamer">
+            <div class="equipment-icon">♨️</div>
+            <h3 data-equipment-name="Steamer">Steamer</h3>
+            <button class="secondary-btn equipment-select-btn">
+                + <span data-i18n="select">Select</span>
+            </button>
+        </div>
 
-            <h2>
-                🧰 Select Your Equipment
-            </h2>
 
-            <p>
-                Click the equipment you have at home.
-            </p>
+        <div class="equipment-item" data-equipment="Idli Cooker">
+            <div class="equipment-icon">🍥</div>
+            <h3 data-equipment-name="Idli Cooker">Idli Cooker</h3>
+            <button class="secondary-btn equipment-select-btn">
+                + <span data-i18n="select">Select</span>
+            </button>
+        </div>
 
+    </div>
 
-            <!-- Search -->
+</section>
 
-            <div class="equipment-search">
 
-                <input
-                    type="text"
-                    id="equipmentSearch"
-                    placeholder="🔍 Search equipment..."
-                    oninput="searchEquipment()"
-                >
+<!-- ================= SELECTED EQUIPMENT ================= -->
+<section class="section smart-section">
 
-            </div>
+    <div class="section-heading">
+        <span class="section-label">✅ Selected</span>
 
-
-
-            <!-- Equipment Grid -->
-
-            <div
-                class="equipment-grid"
-                id="equipmentGrid">
-
-
-                <div
-                    class="equipment-card"
-                    data-name="Pressure Cooker"
-                    onclick="toggleEquipment('Pressure Cooker')">
-
-                    <div class="equipment-icon">
-                        🥘
-                    </div>
-
-                    <div class="equipment-name">
-                        Pressure Cooker
-                    </div>
-
-                    <div class="equipment-status">
-                        Click to select
-                    </div>
-
-                </div>
-
-
-
-                <div
-                    class="equipment-card"
-                    data-name="Frying Pan"
-                    onclick="toggleEquipment('Frying Pan')">
-
-                    <div class="equipment-icon">
-                        🍳
-                    </div>
-
-                    <div class="equipment-name">
-                        Frying Pan
-                    </div>
-
-                    <div class="equipment-status">
-                        Click to select
-                    </div>
-
-                </div>
-
-
-
-                <div
-                    class="equipment-card"
-                    data-name="Kadai"
-                    onclick="toggleEquipment('Kadai')">
-
-                    <div class="equipment-icon">
-                        🥘
-                    </div>
-
-                    <div class="equipment-name">
-                        Kadai
-                    </div>
-
-                    <div class="equipment-status">
-                        Click to select
-                    </div>
-
-                </div>
-
-
-
-                <div
-                    class="equipment-card"
-                    data-name="Tawa"
-                    onclick="toggleEquipment('Tawa')">
-
-                    <div class="equipment-icon">
-                        🫓
-                    </div>
-
-                    <div class="equipment-name">
-                        Tawa
-                    </div>
-
-                    <div class="equipment-status">
-                        Click to select
-                    </div>
-
-                </div>
-
-
-
-                <div
-                    class="equipment-card"
-                    data-name="Oven"
-                    onclick="toggleEquipment('Oven')">
-
-                    <div class="equipment-icon">
-                        🔥
-                    </div>
-
-                    <div class="equipment-name">
-                        Oven
-                    </div>
-
-                    <div class="equipment-status">
-                        Click to select
-                    </div>
-
-                </div>
-
-
-
-                <div
-                    class="equipment-card"
-                    data-name="Microwave"
-                    onclick="toggleEquipment('Microwave')">
-
-                    <div class="equipment-icon">
-                        📡
-                    </div>
-
-                    <div class="equipment-name">
-                        Microwave
-                    </div>
-
-                    <div class="equipment-status">
-                        Click to select
-                    </div>
-
-                </div>
-
-
-
-                <div
-                    class="equipment-card"
-                    data-name="Mixer Grinder"
-                    onclick="toggleEquipment('Mixer Grinder')">
-
-                    <div class="equipment-icon">
-                        🌀
-                    </div>
-
-                    <div class="equipment-name">
-                        Mixer Grinder
-                    </div>
-
-                    <div class="equipment-status">
-                        Click to select
-                    </div>
-
-                </div>
-
-
-
-                <div
-                    class="equipment-card"
-                    data-name="Blender"
-                    onclick="toggleEquipment('Blender')">
-
-                    <div class="equipment-icon">
-                        🥤
-                    </div>
-
-                    <div class="equipment-name">
-                        Blender
-                    </div>
-
-                    <div class="equipment-status">
-                        Click to select
-                    </div>
-
-                </div>
-
-
-
-                <div
-                    class="equipment-card"
-                    data-name="Knife"
-                    onclick="toggleEquipment('Knife')">
-
-                    <div class="equipment-icon">
-                        🔪
-                    </div>
-
-                    <div class="equipment-name">
-                        Knife
-                    </div>
-
-                    <div class="equipment-status">
-                        Click to select
-                    </div>
-
-                </div>
-
-
-
-                <div
-                    class="equipment-card"
-                    data-name="Mixing Bowl"
-                    onclick="toggleEquipment('Mixing Bowl')">
-
-                    <div class="equipment-icon">
-                        🥣
-                    </div>
-
-                    <div class="equipment-name">
-                        Mixing Bowl
-                    </div>
-
-                    <div class="equipment-status">
-                        Click to select
-                    </div>
-
-                </div>
-
-
-
-                <div
-                    class="equipment-card"
-                    data-name="Steamer"
-                    onclick="toggleEquipment('Steamer')">
-
-                    <div class="equipment-icon">
-                        ♨️
-                    </div>
-
-                    <div class="equipment-name">
-                        Steamer
-                    </div>
-
-                    <div class="equipment-status">
-                        Click to select
-                    </div>
-
-                </div>
-
-
-
-                <div
-                    class="equipment-card"
-                    data-name="Idli Cooker"
-                    onclick="toggleEquipment('Idli Cooker')">
-
-                    <div class="equipment-icon">
-                        🍚
-                    </div>
-
-                    <div class="equipment-name">
-                        Idli Cooker
-                    </div>
-
-                    <div class="equipment-status">
-                        Click to select
-                    </div>
-
-                </div>
-
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================================
-             MY EQUIPMENT
-             ========================================= -->
-
-        <section class="equipment-box">
-
-            <div class="selected-header">
-
-                <div>
-
-                    <h2>
-                        🧰 My Kitchen Equipment
-                    </h2>
-
-                    <span
-                        class="selected-count"
-                        id="equipmentCount">
-
-                        0 equipment selected
-
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div
-                class="selected-equipment"
-                id="selectedEquipment">
-
-                <span class="empty-message">
-                    No equipment selected yet.
-                </span>
-
-            </div>
-
-
-            <div class="button-row">
-
-                <button
-                    class="recommend-btn"
-                    onclick="recommendRecipes()">
-
-                    🍽️ Find Recipes I Can Make
-
-                </button>
-
-
-                <button
-                    class="clear-btn"
-                    onclick="clearEquipment()">
-
-                    Clear All
-
-                </button>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =========================================
-             RECOMMENDATIONS
-             ========================================= -->
-
-        <section class="equipment-box">
-
-            <h2>
-                ✨ Recipes Based on Your Equipment
-            </h2>
-
-            <p>
-                These recipes match the equipment available
-                in your kitchen.
-            </p>
-
-
-            <div
-                class="recommendations"
-                id="recommendations">
-
-                <div class="no-results">
-
-                    🧰 Select some equipment and click
-                    <strong>
-                        Find Recipes I Can Make
-                    </strong>.
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-    </main>
-
-
-
-    <!-- =========================================
-         FOOTER
-         ========================================= -->
-
-    <footer class="footer">
+        <h2 data-i18n="selectedEquipment">
+            Selected Equipment
+        </h2>
 
         <p>
-            © 2026 CookMate | Smart Cooking & Recipe Finder
+            <span data-i18n="selectedCount">
+                You have selected
+            </span>
+            <strong id="equipmentCount">0</strong>
+            <span data-i18n="equipmentItems">
+                equipment items.
+            </span>
+        </p>
+    </div>
+
+
+    <div id="selectedEquipmentList" class="selected-list"></div>
+
+
+    <button
+        class="secondary-btn"
+        onclick="clearEquipment()"
+        id="clearEquipmentBtn"
+        style="display:none;"
+    >
+        🗑️ <span data-i18n="clearAll">Clear All</span>
+    </button>
+
+</section>
+
+
+<!-- ================= RECOMMENDATIONS ================= -->
+<section class="section">
+
+    <div class="section-heading">
+
+        <span class="section-label">🍽️ CookMate</span>
+
+        <h2 data-i18n="recommendedRecipes">
+            Recommended Recipes
+        </h2>
+
+        <p data-i18n="recommendationDescription">
+            Recipes based on the cooking equipment you have.
         </p>
 
-    </footer>
+    </div>
 
 
+    <!-- EMPTY MESSAGE -->
+    <div id="equipmentEmptyMessage" class="smart-section">
 
-    <!-- =========================================
-         JAVASCRIPT
-         ========================================= -->
+        <h3 data-i18n="addEquipmentFirst">
+            Select your equipment first
+        </h3>
 
-    <script>
+        <p data-i18n="addEquipmentDescription">
+            Choose the equipment available in your kitchen to see matching recipes.
+        </p>
 
+    </div>
 
-        /* =========================================
-           RECIPE EQUIPMENT DATA
-           ========================================= */
 
-        const recipes = [
+    <!-- RECOMMENDATION GRID -->
+    <div id="equipmentRecommendations" class="recipe-grid"></div>
 
-            {
-                name: "Chicken Biryani",
+</section>
 
-                icon: "🍛",
 
-                equipment: [
-                    "Pressure Cooker",
-                    "Frying Pan",
-                    "Knife",
-                    "Mixing Bowl"
-                ],
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
 
-                link:
-                    "recipe-details.html?recipe=chicken-biryani"
-            },
+    <div class="footer-content">
 
+        <div>
+            <h3>🍳 CookMate</h3>
 
-            {
-                name: "Masala Dosa",
+            <p data-i18n="footerDescription">
+                Your smart cooking companion for discovering delicious recipes.
+            </p>
+        </div>
 
-                icon: "🥞",
+        <div>
+            <p>© 2026 CookMate</p>
+            <p data-i18n="madeForFoodLovers">
+                Made with ❤️ for food lovers
+            </p>
+        </div>
 
-                equipment: [
-                    "Tawa",
-                    "Knife",
-                    "Mixing Bowl"
-                ],
+    </div>
 
-                link:
-                    "recipe-details.html?recipe=masala-dosa"
-            },
+</footer>
 
 
-            {
-                name: "Egg Fried Rice",
+<!-- ================= PAGE SCRIPT ================= -->
+<script>
 
-                icon: "🍳",
+const equipmentData = {
 
-                equipment: [
-                    "Frying Pan",
-                    "Knife"
-                ],
+    "Chicken Biryani": [
+        "Pressure Cooker",
+        "Frying Pan",
+        "Knife",
+        "Mixing Bowl"
+    ],
 
-                link:
-                    "recipe-details.html?recipe=egg-fried-rice"
-            },
+    "Masala Dosa": [
+        "Tawa",
+        "Knife",
+        "Mixing Bowl"
+    ],
 
+    "Egg Fried Rice": [
+        "Frying Pan",
+        "Knife"
+    ],
 
-            {
-                name: "Paneer Butter Masala",
+    "Paneer Butter Masala": [
+        "Kadai",
+        "Mixer Grinder",
+        "Knife"
+    ],
 
-                icon: "🧀",
+    "Vegetable Sandwich": [
+        "Frying Pan",
+        "Knife",
+        "Mixing Bowl"
+    ],
 
-                equipment: [
-                    "Kadai",
-                    "Mixer Grinder",
-                    "Knife"
-                ],
+    "Onion Pakoda": [
+        "Kadai",
+        "Mixing Bowl",
+        "Knife"
+    ],
 
-                link:
-                    "recipe-details.html?recipe=paneer-butter-masala"
-            },
+    "Carrot Halwa": [
+        "Kadai",
+        "Knife"
+    ],
 
+    "Banana Milkshake": [
+        "Blender",
+        "Knife"
+    ],
 
-            {
-                name: "Vegetable Sandwich",
+    "Idli": [
+        "Idli Cooker",
+        "Mixing Bowl"
+    ],
 
-                icon: "🥪",
+    "Steamed Vegetables": [
+        "Steamer",
+        "Knife"
+    ],
 
-                equipment: [
-                    "Frying Pan",
-                    "Knife",
-                    "Mixing Bowl"
-                ],
+    "Baked Cake": [
+        "Oven",
+        "Mixing Bowl"
+    ],
 
-                link:
-                    "recipe-details.html?recipe=vegetable-sandwich"
-            },
+    "Microwave Mug Cake": [
+        "Microwave",
+        "Mixing Bowl"
+    ]
+};
 
 
-            {
-                name: "Onion Pakoda",
+/* ================= TRANSLATIONS ================= */
 
-                icon: "🧅",
+const equipmentTranslations = {
 
-                equipment: [
-                    "Kadai",
-                    "Mixing Bowl",
-                    "Knife"
-                ],
+    en: {
 
-                link:
-                    "recipe-details.html?recipe=onion-pakoda"
-            },
+        equipmentAtHome: "What Cooking Equipment Do You Have?",
+        equipmentDescription:
+            "Select the kitchen equipment you have and discover recipes you can make.",
 
+        kitchenEquipmentHeading: "Kitchen Equipment",
 
-            {
-                name: "Carrot Halwa",
+        equipmentSearchPlaceholder:
+            "Search equipment...",
 
-                icon: "🥕",
+        selectedEquipment: "Selected Equipment",
 
-                equipment: [
-                    "Kadai",
-                    "Knife"
-                ],
+        selectedCount:
+            "You have selected",
 
-                link:
-                    "recipe-details.html?recipe=carrot-halwa"
-            },
+        equipmentItems:
+            "equipment items.",
 
+        select: "Select",
 
-            {
-                name: "Banana Milkshake",
+        selected: "Selected",
 
-                icon: "🍌",
+        clearAll: "Clear All",
 
-                equipment: [
-                    "Blender",
-                    "Knife"
-                ],
+        recommendedRecipes:
+            "Recommended Recipes",
 
-                link:
-                    "recipe-details.html?recipe=banana-milkshake"
-            },
+        recommendationDescription:
+            "Recipes based on the cooking equipment you have.",
 
+        addEquipmentFirst:
+            "Select your equipment first",
 
-            {
-                name: "Idli",
+        addEquipmentDescription:
+            "Choose the equipment available in your kitchen to see matching recipes.",
 
-                icon: "🍚",
+        howToMake:
+            "How to Make",
 
-                equipment: [
-                    "Idli Cooker",
-                    "Mixing Bowl"
-                ],
+        equipmentAvailable:
+            "equipment available",
 
-                link:
-                    "recipe-details.html?recipe=idli"
-            },
+        missing:
+            "Missing",
 
+        noMatchingRecipes:
+            "No matching recipes found.",
 
-            {
-                name: "Steamed Vegetables",
+        footerDescription:
+            "Your smart cooking companion for discovering delicious recipes.",
 
-                icon: "🥦",
+        madeForFoodLovers:
+            "Made with ❤️ for food lovers"
+    },
 
-                equipment: [
-                    "Steamer",
-                    "Knife"
-                ],
 
-                link:
-                    "recipe-details.html?recipe=steamed-vegetables"
-            },
+    ta: {
 
+        equipmentAtHome:
+            "உங்களிடம் என்ன சமையல் உபகரணங்கள் உள்ளன?",
 
-            {
-                name: "Baked Cake",
+        equipmentDescription:
+            "உங்களிடம் உள்ள சமையல் உபகரணங்களைத் தேர்ந்தெடுத்து நீங்கள் செய்யக்கூடிய உணவுகளை கண்டறியுங்கள்.",
 
-                icon: "🍰",
+        kitchenEquipmentHeading:
+            "சமையல் உபகரணங்கள்",
 
-                equipment: [
-                    "Oven",
-                    "Mixing Bowl"
-                ],
+        equipmentSearchPlaceholder:
+            "உபகரணங்களை தேடுங்கள்...",
 
-                link:
-                    "recipe-details.html?recipe=baked-cake"
-            },
+        selectedEquipment:
+            "தேர்ந்தெடுக்கப்பட்ட உபகரணங்கள்",
 
+        selectedCount:
+            "நீங்கள் தேர்ந்தெடுத்தது",
 
-            {
-                name: "Microwave Mug Cake",
+        equipmentItems:
+            "உபகரணங்கள்.",
 
-                icon: "🧁",
+        select:
+            "தேர்வு",
 
-                equipment: [
-                    "Microwave",
-                    "Mixing Bowl"
-                ],
+        selected:
+            "தேர்ந்தெடுக்கப்பட்டது",
 
-                link:
-                    "recipe-details.html?recipe=mug-cake"
-            }
+        clearAll:
+            "அனைத்தையும் நீக்கு",
 
-        ];
+        recommendedRecipes:
+            "பரிந்துரைக்கப்படும் உணவுகள்",
 
+        recommendationDescription:
+            "உங்களிடம் உள்ள சமையல் உபகரணங்களின் அடிப்படையில் உணவுகள்.",
 
+        addEquipmentFirst:
+            "முதலில் உபகரணங்களைத் தேர்ந்தெடுக்கவும்",
 
-        /* =========================================
-           LOCAL STORAGE
-           ========================================= */
+        addEquipmentDescription:
+            "உங்கள் சமையலறையில் உள்ள உபகரணங்களைத் தேர்ந்தெடுக்கவும்.",
 
-        let myEquipment =
-            JSON.parse(
-                localStorage.getItem(
-                    "cookmateEquipment"
-                )
-            ) || [];
+        howToMake:
+            "செய்முறை",
 
+        equipmentAvailable:
+            "உபகரணங்கள் உள்ளன",
 
+        missing:
+            "தேவை",
 
-        /* =========================================
-           PAGE LOAD
-           ========================================= */
+        noMatchingRecipes:
+            "பொருந்தும் உணவுகள் எதுவும் கிடைக்கவில்லை.",
 
-        document.addEventListener(
-            "DOMContentLoaded",
-            function () {
+        footerDescription:
+            "சுவையான உணவுகளை கண்டறிய உங்கள் ஸ்மார்ட் சமையல் துணை.",
 
-                displayEquipment();
+        madeForFoodLovers:
+            "உணவு பிரியர்களுக்காக ❤️ உருவாக்கப்பட்டது"
+    },
 
-                updateEquipmentCards();
 
-            }
-        );
+    hi: {
 
+        equipmentAtHome:
+            "आपके पास कौन से खाना पकाने के उपकरण हैं?",
 
+        equipmentDescription:
+            "अपने पास मौजूद रसोई उपकरण चुनें और उन व्यंजनों को खोजें जिन्हें आप बना सकते हैं।",
 
-        /* =========================================
-           TOGGLE EQUIPMENT
-           ========================================= */
+        kitchenEquipmentHeading:
+            "रसोई उपकरण",
 
-        function toggleEquipment(equipment) {
+        equipmentSearchPlaceholder:
+            "उपकरण खोजें...",
 
-            const index =
-                myEquipment.findIndex(
-                    item =>
-                        item.toLowerCase() ===
-                        equipment.toLowerCase()
-                );
+        selectedEquipment:
+            "चयनित उपकरण",
 
+        selectedCount:
+            "आपने चुने हैं",
 
-            if (index === -1) {
+        equipmentItems:
+            "उपकरण।",
 
-                myEquipment.push(equipment);
+        select:
+            "चुनें",
 
-            } else {
+        selected:
+            "चयनित",
 
-                myEquipment.splice(index, 1);
+        clearAll:
+            "सभी हटाएँ",
 
-            }
+        recommendedRecipes:
+            "अनुशंसित व्यंजन",
 
+        recommendationDescription:
+            "आपके पास मौजूद रसोई उपकरणों के आधार पर व्यंजन।",
 
-            saveEquipment();
+        addEquipmentFirst:
+            "पहले उपकरण चुनें",
 
-            displayEquipment();
+        addEquipmentDescription:
+            "मेल खाने वाले व्यंजन देखने के लिए अपने रसोई उपकरण चुनें।",
 
-            updateEquipmentCards();
+        howToMake:
+            "बनाने की विधि",
 
+        equipmentAvailable:
+            "उपकरण उपलब्ध",
+
+        missing:
+            "आवश्यक",
+
+        noMatchingRecipes:
+            "कोई मिलान वाला व्यंजन नहीं मिला।",
+
+        footerDescription:
+            "स्वादिष्ट व्यंजन खोजने के लिए आपका स्मार्ट कुकिंग साथी।",
+
+        madeForFoodLovers:
+            "खाने के शौकीनों के लिए ❤️ बनाया गया"
+    },
+
+
+    ml: {
+
+        equipmentAtHome:
+            "നിങ്ങളുടെ കൈവശം ഏത് പാചക ഉപകരണങ്ങളുണ്ട്?",
+
+        equipmentDescription:
+            "നിങ്ങളുടെ പക്കലുള്ള പാചക ഉപകരണങ്ങൾ തിരഞ്ഞെടുക്കുക, നിങ്ങൾക്ക് ഉണ്ടാക്കാൻ കഴിയുന്ന വിഭവങ്ങൾ കണ്ടെത്തുക.",
+
+        kitchenEquipmentHeading:
+            "അടുക്കള ഉപകരണങ്ങൾ",
+
+        equipmentSearchPlaceholder:
+            "ഉപകരണങ്ങൾ തിരയുക...",
+
+        selectedEquipment:
+            "തിരഞ്ഞെടുത്ത ഉപകരണങ്ങൾ",
+
+        selectedCount:
+            "നിങ്ങൾ തിരഞ്ഞെടുത്തത്",
+
+        equipmentItems:
+            "ഉപകരണങ്ങൾ.",
+
+        select:
+            "തിരഞ്ഞെടുക്കുക",
+
+        selected:
+            "തിരഞ്ഞെടുത്തു",
+
+        clearAll:
+            "എല്ലാം നീക്കം ചെയ്യുക",
+
+        recommendedRecipes:
+            "ശുപാർശ ചെയ്യുന്ന വിഭവങ്ങൾ",
+
+        recommendationDescription:
+            "നിങ്ങളുടെ കൈവശമുള്ള പാചക ഉപകരണങ്ങളെ അടിസ്ഥാനമാക്കിയുള്ള വിഭവങ്ങൾ.",
+
+        addEquipmentFirst:
+            "ആദ്യം ഉപകരണങ്ങൾ തിരഞ്ഞെടുക്കുക",
+
+        addEquipmentDescription:
+            "പൊരുത്തപ്പെടുന്ന വിഭവങ്ങൾ കാണാൻ നിങ്ങളുടെ അടുക്കളയിലെ ഉപകരണങ്ങൾ തിരഞ്ഞെടുക്കുക.",
+
+        howToMake:
+            "തയ്യാറാക്കുന്ന വിധം",
+
+        equipmentAvailable:
+            "ഉപകരണങ്ങൾ ലഭ്യമാണ്",
+
+        missing:
+            "ആവശ്യമാണ്",
+
+        noMatchingRecipes:
+            "പൊരുത്തപ്പെടുന്ന വിഭവങ്ങളൊന്നും കണ്ടെത്തിയില്ല.",
+
+        footerDescription:
+            "രുചികരമായ വിഭവങ്ങൾ കണ്ടെത്താനുള്ള നിങ്ങളുടെ സ്മാർട്ട് പാചക സഹായി.",
+
+        madeForFoodLovers:
+            "ഭക്ഷണപ്രേമികൾക്കായി ❤️ നിർമ്മിച്ചത്"
+    },
+
+
+    te: {
+
+        equipmentAtHome:
+            "మీ దగ్గర ఏ వంట పరికరాలు ఉన్నాయి?",
+
+        equipmentDescription:
+            "మీ దగ్గర ఉన్న వంట పరికరాలను ఎంచుకుని మీరు తయారు చేయగల వంటకాలను కనుగొనండి.",
+
+        kitchenEquipmentHeading:
+            "వంటగది పరికరాలు",
+
+        equipmentSearchPlaceholder:
+            "పరికరాలను వెతకండి...",
+
+        selectedEquipment:
+            "ఎంచుకున్న పరికరాలు",
+
+        selectedCount:
+            "మీరు ఎంచుకున్నవి",
+
+        equipmentItems:
+            "పరికరాలు.",
+
+        select:
+            "ఎంచుకోండి",
+
+        selected:
+            "ఎంచుకున్నారు",
+
+        clearAll:
+            "అన్నింటినీ తొలగించండి",
+
+        recommendedRecipes:
+            "సిఫార్సు చేసిన వంటకాలు",
+
+        recommendationDescription:
+            "మీ దగ్గర ఉన్న వంట పరికరాల ఆధారంగా వంటకాలు.",
+
+        addEquipmentFirst:
+            "ముందుగా పరికరాలను ఎంచుకోండి",
+
+        addEquipmentDescription:
+            "సరిపోయే వంటకాలను చూడటానికి మీ వంటగదిలో ఉన్న పరికరాలను ఎంచుకోండి.",
+
+        howToMake:
+            "తయారు చేసే విధానం",
+
+        equipmentAvailable:
+            "పరికరాలు అందుబాటులో ఉన్నాయి",
+
+        missing:
+            "అవసరం",
+
+        noMatchingRecipes:
+            "సరిపోయే వంటకాలు ఏవీ కనుగొనబడలేదు.",
+
+        footerDescription:
+            "రుచికరమైన వంటకాలను కనుగొనడానికి మీ స్మార్ట్ కుకింగ్ సహాయకుడు.",
+
+        madeForFoodLovers:
+            "ఆహార ప్రియుల కోసం ❤️ తయారు చేయబడింది"
+    }
+};
+
+
+/* ================= EQUIPMENT NAME TRANSLATIONS ================= */
+
+const equipmentNames = {
+
+    "Pressure Cooker": {
+        en: "Pressure Cooker",
+        ta: "பிரஷர் குக்கர்",
+        hi: "प्रेशर कुकर",
+        ml: "പ്രഷർ കുക്കർ",
+        te: "ప్రెజర్ కుక్కర్"
+    },
+
+    "Frying Pan": {
+        en: "Frying Pan",
+        ta: "வாணலி",
+        hi: "फ्राइंग पैन",
+        ml: "ഫ്രൈയിംഗ് പാൻ",
+        te: "ఫ్రైయింగ్ పాన్"
+    },
+
+    "Kadai": {
+        en: "Kadai",
+        ta: "கடை",
+        hi: "कड़ाही",
+        ml: "കടായി",
+        te: "కడాయి"
+    },
+
+    "Tawa": {
+        en: "Tawa",
+        ta: "தோசைக்கல்",
+        hi: "तवा",
+        ml: "തവ",
+        te: "తవా"
+    },
+
+    "Oven": {
+        en: "Oven",
+        ta: "ஓவன்",
+        hi: "ओवन",
+        ml: "ഓവൻ",
+        te: "ఓవెన్"
+    },
+
+    "Microwave": {
+        en: "Microwave",
+        ta: "மைக்ரோவேவ்",
+        hi: "माइक्रोवेव",
+        ml: "മൈക്രോവേവ്",
+        te: "మైక్రోవేవ్"
+    },
+
+    "Mixer Grinder": {
+        en: "Mixer Grinder",
+        ta: "மிக்ஸி",
+        hi: "मिक्सर ग्राइंडर",
+        ml: "മിക്സർ ഗ്രൈൻഡർ",
+        te: "మిక్సర్ గ్రైండర్"
+    },
+
+    "Blender": {
+        en: "Blender",
+        ta: "பிளெண்டர்",
+        hi: "ब्लेंडर",
+        ml: "ബ്ലെൻഡർ",
+        te: "బ్లెండర్"
+    },
+
+    "Knife": {
+        en: "Knife",
+        ta: "கத்தி",
+        hi: "चाकू",
+        ml: "കത്തി",
+        te: "కత్తి"
+    },
+
+    "Mixing Bowl": {
+        en: "Mixing Bowl",
+        ta: "கலக்கும் கிண்ணம்",
+        hi: "मिक्सिंग बाउल",
+        ml: "മിക്സിംഗ് ബൗൾ",
+        te: "మిక్సింగ్ బౌల్"
+    },
+
+    "Steamer": {
+        en: "Steamer",
+        ta: "ஸ்டீமர்",
+        hi: "स्टीमर",
+        ml: "സ്റ്റീമർ",
+        te: "స్టీమర్"
+    },
+
+    "Idli Cooker": {
+        en: "Idli Cooker",
+        ta: "இட்லி குக்கர்",
+        hi: "इडली कुकर",
+        ml: "ഇഡ്ലി കുക്കർ",
+        te: "ఇడ్లీ కుక్కర్"
+    }
+};
+
+
+/* ================= RECIPE NAMES ================= */
+
+const recipeNames = {
+
+    "Chicken Biryani": {
+        en: "Chicken Biryani",
+        ta: "சிக்கன் பிரியாணி",
+        hi: "चिकन बिरयानी",
+        ml: "ചിക്കൻ ബിരിയാണി",
+        te: "చికెన్ బిర్యానీ"
+    },
+
+    "Masala Dosa": {
+        en: "Masala Dosa",
+        ta: "மசாலா தோசை",
+        hi: "मसाला डोसा",
+        ml: "മസാല ദോശ",
+        te: "మసాలా దోస"
+    },
+
+    "Egg Fried Rice": {
+        en: "Egg Fried Rice",
+        ta: "முட்டை ஃப்ரைட் ரைஸ்",
+        hi: "एग फ्राइड राइस",
+        ml: "എഗ് ഫ്രൈഡ് റൈസ്",
+        te: "ఎగ్ ఫ్రైడ్ రైస్"
+    },
+
+    "Paneer Butter Masala": {
+        en: "Paneer Butter Masala",
+        ta: "பனீர் பட்டர் மசாலா",
+        hi: "पनीर बटर मसाला",
+        ml: "പനീർ ബട്ടർ മസാല",
+        te: "పనీర్ బటర్ మసాలా"
+    },
+
+    "Vegetable Sandwich": {
+        en: "Vegetable Sandwich",
+        ta: "காய்கறி சாண்ட்விச்",
+        hi: "वेजिटेबल सैंडविच",
+        ml: "വെജിറ്റബിൾ സാൻഡ്‌വിച്ച്",
+        te: "వెజిటబుల్ శాండ్విచ్"
+    },
+
+    "Onion Pakoda": {
+        en: "Onion Pakoda",
+        ta: "வெங்காய பக்கோடா",
+        hi: "प्याज पकौड़ा",
+        ml: "ഉള്ളി പക്കോഡ",
+        te: "ఉల్లిపాయ పకోడా"
+    },
+
+    "Carrot Halwa": {
+        en: "Carrot Halwa",
+        ta: "கேரட் அல்வா",
+        hi: "गाजर का हलवा",
+        ml: "കാരറ്റ് ഹൽവ",
+        te: "క్యారెట్ హల్వా"
+    },
+
+    "Banana Milkshake": {
+        en: "Banana Milkshake",
+        ta: "வாழைப்பழ மில்க்ஷேக்",
+        hi: "केला मिल्कशेक",
+        ml: "വാഴപ്പഴ മിൽക്ക്‌ഷേക്ക്",
+        te: "అరటి మిల్క్‌షేక్"
+    },
+
+    "Idli": {
+        en: "Idli",
+        ta: "இட்லி",
+        hi: "इडली",
+        ml: "ഇഡ്ലി",
+        te: "ఇడ్లీ"
+    },
+
+    "Steamed Vegetables": {
+        en: "Steamed Vegetables",
+        ta: "ஆவியில் வேகவைத்த காய்கறிகள்",
+        hi: "स्टीम्ड सब्जियां",
+        ml: "ആവിയിൽ വേവിച്ച പച്ചക്കറികൾ",
+        te: "ఆవిరితో ఉడికించిన కూరగాయలు"
+    },
+
+    "Baked Cake": {
+        en: "Baked Cake",
+        ta: "பேக் செய்த கேக்",
+        hi: "बेक्ड केक",
+        ml: "ബേക്ക് ചെയ്ത കേക്ക്",
+        te: "బేక్ చేసిన కేక్"
+    },
+
+    "Microwave Mug Cake": {
+        en: "Microwave Mug Cake",
+        ta: "மைக்ரோவேவ் மக் கேக்",
+        hi: "माइक्रोवेव मग केक",
+        ml: "മൈക്രോവേവ് മഗ് കേക്ക്",
+        te: "మైక్రోవేవ్ మగ్ కేక్"
+    }
+};
+
+
+/* ================= STATE ================= */
+
+let selectedEquipment =
+    JSON.parse(localStorage.getItem("cookmateEquipment")) || [];
+
+
+/* ================= LANGUAGE ================= */
+
+function getLanguage() {
+
+    return localStorage.getItem("cookmateLanguage") || "en";
+}
+
+
+function translatePage() {
+
+    const language = getLanguage();
+
+    const translations =
+        equipmentTranslations[language] ||
+        equipmentTranslations.en;
+
+
+    document.querySelectorAll("[data-i18n]").forEach(element => {
+
+        const key = element.getAttribute("data-i18n");
+
+        if (translations[key]) {
+            element.textContent = translations[key];
         }
 
+    });
 
 
-        /* =========================================
-           REMOVE EQUIPMENT
-           ========================================= */
+    document.querySelectorAll("[data-i18n-placeholder]")
+        .forEach(element => {
 
-        function removeEquipment(index) {
+            const key =
+                element.getAttribute("data-i18n-placeholder");
 
-            myEquipment.splice(index, 1);
-
-            saveEquipment();
-
-            displayEquipment();
-
-            updateEquipmentCards();
-
-        }
-
-
-
-        /* =========================================
-           DISPLAY SELECTED EQUIPMENT
-           ========================================= */
-
-        function displayEquipment() {
-
-            const container =
-                document.getElementById(
-                    "selectedEquipment"
-                );
-
-
-            const count =
-                document.getElementById(
-                    "equipmentCount"
-                );
-
-
-            container.innerHTML = "";
-
-
-            if (myEquipment.length === 0) {
-
-                container.innerHTML =
-                    `<span class="empty-message">
-                        No equipment selected yet.
-                    </span>`;
-
-            } else {
-
-                myEquipment.forEach(
-                    (equipment, index) => {
-
-                        const item =
-                            document.createElement(
-                                "div"
-                            );
-
-
-                        item.className =
-                            "selected-item";
-
-
-                        item.innerHTML = `
-
-                            <span>
-                                ${equipment}
-                            </span>
-
-                            <button
-                                class="remove-btn"
-                                onclick="removeEquipment(${index})"
-                                title="Remove">
-
-                                ✕
-
-                            </button>
-
-                        `;
-
-
-                        container.appendChild(item);
-
-                    }
-                );
-
+            if (translations[key]) {
+                element.placeholder = translations[key];
             }
 
-
-            count.textContent =
-                myEquipment.length +
-                (
-                    myEquipment.length === 1
-                        ? " equipment selected"
-                        : " equipment selected"
-                );
-
-        }
+        });
 
 
+    document.querySelectorAll("[data-equipment-name]")
+        .forEach(element => {
 
-        /* =========================================
-           SAVE EQUIPMENT
-           ========================================= */
+            const name =
+                element.getAttribute("data-equipment-name");
 
-        function saveEquipment() {
+            if (
+                equipmentNames[name] &&
+                equipmentNames[name][language]
+            ) {
 
-            localStorage.setItem(
-                "cookmateEquipment",
-                JSON.stringify(myEquipment)
+                element.textContent =
+                    equipmentNames[name][language];
+            }
+
+        });
+
+
+    updateEquipmentButtons();
+
+    updateSelectedEquipment();
+
+    findRecipes();
+}
+
+
+/* ================= SELECT / UNSELECT ================= */
+
+function toggleEquipment(equipment) {
+
+    if (selectedEquipment.includes(equipment)) {
+
+        selectedEquipment =
+            selectedEquipment.filter(
+                item => item !== equipment
             );
 
-        }
+    } else {
+
+        selectedEquipment.push(equipment);
+    }
 
 
+    saveEquipment();
 
-        /* =========================================
-           UPDATE EQUIPMENT CARDS
-           ========================================= */
+    updateEquipmentButtons();
 
-        function updateEquipmentCards() {
+    updateSelectedEquipment();
 
-            const cards =
-                document.querySelectorAll(
-                    ".equipment-card"
-                );
+    findRecipes();
+}
 
 
-            cards.forEach(card => {
+/* ================= BUTTON STATUS ================= */
 
-                const name =
-                    card.dataset.name;
+function updateEquipmentButtons() {
 
+    const language = getLanguage();
 
-                const selected =
-                    myEquipment.some(
-                        item =>
-                            item.toLowerCase() ===
-                            name.toLowerCase()
-                    );
+    const translations =
+        equipmentTranslations[language] ||
+        equipmentTranslations.en;
 
 
-                const status =
-                    card.querySelector(
-                        ".equipment-status"
-                    );
+    document.querySelectorAll(".equipment-item")
+        .forEach(item => {
+
+            const equipment =
+                item.getAttribute("data-equipment");
+
+            const button =
+                item.querySelector(".equipment-select-btn");
+
+            if (!button) return;
 
 
-                if (selected) {
+            if (selectedEquipment.includes(equipment)) {
 
-                    card.classList.add("selected");
+                item.classList.add("selected");
 
-                    status.textContent =
-                        "✓ Selected";
+                button.innerHTML =
+                    `✓ ${translations.selected}`;
 
-                } else {
+            } else {
 
-                    card.classList.remove(
-                        "selected"
-                    );
+                item.classList.remove("selected");
 
-                    status.textContent =
-                        "Click to select";
-
-                }
-
-            });
-
-        }
-
-
-
-        /* =========================================
-           SEARCH EQUIPMENT
-           ========================================= */
-
-        function searchEquipment() {
-
-            const search =
-                document
-                    .getElementById(
-                        "equipmentSearch"
-                    )
-                    .value
-                    .toLowerCase()
-                    .trim();
-
-
-            const cards =
-                document.querySelectorAll(
-                    ".equipment-card"
-                );
-
-
-            cards.forEach(card => {
-
-                const name =
-                    card.dataset.name
-                        .toLowerCase();
-
-
-                if (name.includes(search)) {
-
-                    card.style.display =
-                        "block";
-
-                } else {
-
-                    card.style.display =
-                        "none";
-
-                }
-
-            });
-
-        }
-
-
-
-        /* =========================================
-           CLEAR ALL EQUIPMENT
-           ========================================= */
-
-        function clearEquipment() {
-
-            if (myEquipment.length === 0) {
-
-                return;
-
+                button.innerHTML =
+                    `+ ${translations.select}`;
             }
 
-
-            const confirmation =
-                confirm(
-                    "Are you sure you want to remove all equipment?"
-                );
+        });
+}
 
 
-            if (confirmation) {
+/* ================= SAVE ================= */
 
-                myEquipment = [];
+function saveEquipment() {
 
-                saveEquipment();
-
-                displayEquipment();
-
-                updateEquipmentCards();
-
-                document.getElementById(
-                    "recommendations"
-                ).innerHTML = `
-
-                    <div class="no-results">
-
-                        🧰 Select some equipment and click
-                        <strong>
-                            Find Recipes I Can Make
-                        </strong>.
-
-                    </div>
-
-                `;
-
-            }
-
-        }
+    localStorage.setItem(
+        "cookmateEquipment",
+        JSON.stringify(selectedEquipment)
+    );
+}
 
 
+/* ================= SELECTED LIST ================= */
 
-        /* =========================================
-           RECOMMEND RECIPES
-           ========================================= */
+function updateSelectedEquipment() {
 
-        function recommendRecipes() {
+    const container =
+        document.getElementById("selectedEquipmentList");
 
-            const container =
-                document.getElementById(
-                    "recommendations"
-                );
+    const count =
+        document.getElementById("equipmentCount");
 
+    const clearButton =
+        document.getElementById("clearEquipmentBtn");
 
-            container.innerHTML = "";
-
-
-            if (myEquipment.length === 0) {
-
-                container.innerHTML = `
-
-                    <div class="no-results">
-
-                        🧰 Please select at least one
-                        equipment.
-
-                    </div>
-
-                `;
-
-                return;
-
-            }
+    const language = getLanguage();
 
 
-            const userEquipment =
-                myEquipment.map(
+    count.textContent =
+        selectedEquipment.length;
+
+
+    container.innerHTML = "";
+
+
+    if (selectedEquipment.length === 0) {
+
+        clearButton.style.display = "none";
+
+        return;
+    }
+
+
+    clearButton.style.display =
+        "inline-block";
+
+
+    selectedEquipment.forEach(equipment => {
+
+        const item =
+            document.createElement("span");
+
+        item.className =
+            "selected-item";
+
+
+        const translatedName =
+            equipmentNames[equipment]?.[language] ||
+            equipment;
+
+
+        item.innerHTML = `
+            ${translatedName}
+            <button onclick="toggleEquipment('${equipment}')">
+                ×
+            </button>
+        `;
+
+
+        container.appendChild(item);
+
+    });
+}
+
+
+/* ================= CLEAR ================= */
+
+function clearEquipment() {
+
+    selectedEquipment = [];
+
+    saveEquipment();
+
+    updateEquipmentButtons();
+
+    updateSelectedEquipment();
+
+    findRecipes();
+}
+
+
+/* ================= SEARCH ================= */
+
+function searchEquipment() {
+
+    const input =
+        document.getElementById("equipmentSearch")
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    document.querySelectorAll(".equipment-item")
+        .forEach(item => {
+
+            const name =
+                item.getAttribute("data-equipment")
+                    .toLowerCase();
+
+
+            item.style.display =
+                name.includes(input)
+                    ? ""
+                    : "none";
+        });
+}
+
+
+document.getElementById("equipmentSearch")
+    .addEventListener("input", searchEquipment);
+
+
+/* ================= RECIPE RECOMMENDATION ================= */
+
+function findRecipes() {
+
+    const container =
+        document.getElementById("equipmentRecommendations");
+
+    const emptyMessage =
+        document.getElementById("equipmentEmptyMessage");
+
+    const language = getLanguage();
+
+    const translations =
+        equipmentTranslations[language] ||
+        equipmentTranslations.en;
+
+
+    container.innerHTML = "";
+
+
+    if (selectedEquipment.length === 0) {
+
+        emptyMessage.style.display = "block";
+
+        return;
+    }
+
+
+    emptyMessage.style.display = "none";
+
+
+    let matches = [];
+
+
+    Object.entries(equipmentData).forEach(
+        ([recipe, requiredEquipment]) => {
+
+            const available =
+                requiredEquipment.filter(
                     item =>
-                        item.toLowerCase()
+                        selectedEquipment.includes(item)
                 );
 
 
-            const results =
-                recipes
-                    .map(recipe => {
-
-                        const matched =
-                            recipe.equipment.filter(
-                                equipment =>
-                                    userEquipment.includes(
-                                        equipment.toLowerCase()
-                                    )
-                            );
+            const percentage =
+                Math.round(
+                    (available.length /
+                    requiredEquipment.length) * 100
+                );
 
 
-                        const missing =
-                            recipe.equipment.filter(
-                                equipment =>
-                                    !userEquipment.includes(
-                                        equipment.toLowerCase()
-                                    )
-                            );
+            if (percentage >= 50) {
 
-
-                        const percentage =
-                            Math.round(
-                                (
-                                    matched.length /
-                                    recipe.equipment.length
-                                ) * 100
-                            );
-
-
-                        return {
-
-                            ...recipe,
-
-                            matched,
-                            missing,
-                            percentage
-
-                        };
-
-                    })
-                    .filter(
-                        recipe =>
-                            recipe.percentage >= 50
-                    )
-                    .sort(
-                        (a, b) =>
-                            b.percentage -
-                            a.percentage
+                const missing =
+                    requiredEquipment.filter(
+                        item =>
+                            !selectedEquipment.includes(item)
                     );
 
 
-            if (results.length === 0) {
+                matches.push({
+                    recipe,
+                    percentage,
+                    missing
+                });
+            }
 
-                container.innerHTML = `
+        }
+    );
 
-                    <div class="no-results">
 
-                        😔 No matching recipes found.
+    matches.sort(
+        (a, b) =>
+            b.percentage - a.percentage
+    );
 
-                        <br><br>
 
-                        Try selecting more equipment.
+    if (matches.length === 0) {
 
-                    </div>
+        container.innerHTML = `
+            <div class="smart-section">
+                <h3>${translations.noMatchingRecipes}</h3>
+            </div>
+        `;
 
-                `;
+        return;
+    }
 
+
+    matches.forEach(match => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "recipe-card";
+
+
+        const recipeName =
+            recipeNames[match.recipe]?.[language] ||
+            match.recipe;
+
+
+        const missingText =
+            match.missing.length > 0
+                ? `
+                    <p>
+                        <strong>
+                            ${translations.missing}:
+                        </strong>
+                        ${match.missing
+                            .map(item =>
+                                equipmentNames[item]?.[language] ||
+                                item
+                            )
+                            .join(", ")}
+                    </p>
+                  `
+                : `
+                    <p>
+                        ✓ ${translations.equipmentAvailable}
+                    </p>
+                  `;
+
+
+        card.innerHTML = `
+
+            <div class="recipe-image">
+                🍽️
+            </div>
+
+            <div class="recipe-content">
+
+                <h3>
+                    ${recipeName}
+                </h3>
+
+                <p>
+                    ${match.percentage}%
+                    ${translations.equipmentAvailable}
+                </p>
+
+                ${missingText}
+
+                <a
+                    href="recipe-details.html?recipe=${getRecipeId(match.recipe)}"
+                    class="primary-btn"
+                >
+                    👨‍🍳
+                    ${translations.howToMake}
+                </a>
+
+            </div>
+        `;
+
+
+        container.appendChild(card);
+
+    });
+}
+
+
+/* ================= RECIPE IDS ================= */
+
+function getRecipeId(recipeName) {
+
+    const ids = {
+
+        "Chicken Biryani":
+            "chicken-biryani",
+
+        "Masala Dosa":
+            "masala-dosa",
+
+        "Egg Fried Rice":
+            "egg-fried-rice",
+
+        "Paneer Butter Masala":
+            "paneer-butter-masala",
+
+        "Vegetable Sandwich":
+            "vegetable-sandwich",
+
+        "Onion Pakoda":
+            "onion-pakoda",
+
+        "Carrot Halwa":
+            "carrot-halwa",
+
+        "Banana Milkshake":
+            "banana-milkshake",
+
+        "Idli":
+            "idli",
+
+        "Steamed Vegetables":
+            "steamed-vegetables",
+
+        "Baked Cake":
+            "baked-cake",
+
+        "Microwave Mug Cake":
+            "microwave-mug-cake"
+    };
+
+
+    return ids[recipeName] || "";
+}
+
+
+/* ================= EQUIPMENT CLICK EVENTS ================= */
+
+document.querySelectorAll(".equipment-item")
+    .forEach(item => {
+
+        item.addEventListener("click", function(event) {
+
+            if (
+                event.target.tagName === "BUTTON" ||
+                event.target.closest("button")
+            ) {
                 return;
-
             }
 
 
-            results.forEach(recipe => {
+            const equipment =
+                this.getAttribute("data-equipment");
 
-                const card =
-                    document.createElement(
-                        "div"
-                    );
+            toggleEquipment(equipment);
 
-
-                card.className =
-                    "recommendation-card";
+        });
 
 
-                let equipmentText;
+        const button =
+            item.querySelector(".equipment-select-btn");
 
 
-                if (recipe.missing.length === 0) {
+        button.addEventListener("click", function() {
 
-                    equipmentText =
-                        "✅ You have all the required equipment!";
+            const equipment =
+                item.getAttribute("data-equipment");
 
-                } else {
+            toggleEquipment(equipment);
 
-                    equipmentText =
-                        "Missing: " +
-                        recipe.missing.join(", ");
+        });
 
-                }
+    });
 
 
-                card.innerHTML = `
+/* ================= LANGUAGE CHANGE ================= */
 
-                    <div class="food-icon">
-                        ${recipe.icon}
-                    </div>
+window.addEventListener("storage", function(event) {
 
-                    <h3>
-                        ${recipe.name}
-                    </h3>
+    if (event.key === "cookmateLanguage") {
 
-                    <div class="match-text">
-                        ${recipe.percentage}%
-                        equipment available
-                    </div>
+        translatePage();
+    }
 
-                    <div class="progress-bar">
-
-                        <div
-                            class="progress"
-                            style="width:${recipe.percentage}%;">
-                        </div>
-
-                    </div>
-
-                    <div class="equipment-needed">
-                        ${equipmentText}
-                    </div>
-
-                    <a
-                        href="${recipe.link}"
-                        class="make-btn">
-
-                        👨‍🍳 How to Make
-
-                    </a>
-
-                `;
+});
 
 
-                container.appendChild(card);
+/* ================= INITIAL LOAD ================= */
 
-            });
+document.addEventListener("DOMContentLoaded", function() {
 
-        }
+    translatePage();
 
-    </script>
+    updateEquipmentButtons();
+
+    updateSelectedEquipment();
+
+    findRecipes();
+
+});
+
+</script>
 
 </body>
 </html>
