@@ -1,723 +1,1258 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>CookMate - Smart Cooking & Recipe Finder</title>
+    <title>CookMate - Smart Recipe Finder</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <style>
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #fffdf5;
+            color: #29251f;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .navbar {
+            width: 100%;
+            min-height: 72px;
+            padding: 15px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+
+            background: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid #eee8d8;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #29251f;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: #4f493f;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: #9a6d38;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            min-height: 600px;
+            padding: 85px 7%;
+
+            display: flex;
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(255, 253, 245, 0.98) 0%,
+                    rgba(255, 253, 245, 0.92) 48%,
+                    rgba(255, 253, 245, 0.45) 100%
+                ),
+                url("https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1600&q=85");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .welcome-text {
+            display: inline-block;
+            padding: 8px 15px;
+            margin-bottom: 20px;
+
+            background: #f2ead8;
+            border-radius: 30px;
+
+            color: #72542e;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 6vw, 72px);
+            line-height: 1.08;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+            color: #a16f35;
+        }
+
+        .hero-description {
+            max-width: 580px;
+            color: #625c52;
+            font-size: 17px;
+            margin-bottom: 30px;
+        }
+
+
+        /* =====================================================
+           SEARCH
+        ===================================================== */
+
+        .search-box {
+            width: 100%;
+            max-width: 620px;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            background: white;
+            padding: 8px;
+
+            border: 1px solid #e4dece;
+            border-radius: 16px;
+
+            box-shadow: 0 10px 30px rgba(60, 45, 20, 0.08);
+        }
+
+        .search-box input {
+            flex: 1;
+            min-width: 0;
+
+            border: none;
+            outline: none;
+
+            padding: 14px 15px;
+
+            font-size: 15px;
+            background: transparent;
+        }
+
+        .search-box button {
+            border: none;
+            cursor: pointer;
+
+            padding: 13px 22px;
+
+            background: #302c27;
+            color: white;
+
+            border-radius: 11px;
+
+            font-weight: 700;
+
+            transition: 0.25s ease;
+        }
+
+        .search-box button:hover {
+            transform: translateY(-2px);
+            background: #171512;
+        }
+
+
+        /* =====================================================
+           HERO BUTTONS
+        ===================================================== */
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 12px 20px;
+
+            border-radius: 11px;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.25s ease;
+        }
+
+        .primary-btn {
+            background: #302c27;
+            color: white;
+            border: 1px solid #302c27;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background: white;
+            color: #302c27;
+            border: 1px solid #d8d0bf;
+        }
+
+        .secondary-btn:hover {
+            transform: translateY(-2px);
+            background: #f7f2e6;
+        }
+
+
+        /* =====================================================
+           COMMON SECTION
+        ===================================================== */
+
+        .section {
+            padding: 75px 7%;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .section-label {
+            display: inline-block;
+
+            margin-bottom: 10px;
+
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+
+            color: #9a6d38;
+            text-transform: uppercase;
+        }
+
+        .section-header h2 {
+            font-size: clamp(30px, 4vw, 44px);
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: #6b655c;
+        }
+
+
+        /* =====================================================
+           SMART COOKING
+        ===================================================== */
+
+        .smart-section {
+            background: #f4efe3;
+        }
+
+        .smart-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .smart-card {
+            background: white;
+            padding: 30px;
+
+            border: 1px solid #ebe4d4;
+            border-radius: 22px;
+
+            box-shadow: 0 8px 25px rgba(60, 45, 20, 0.05);
+
+            transition: 0.3s ease;
+        }
+
+        .smart-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(60, 45, 20, 0.09);
+        }
+
+        .smart-icon {
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 18px;
+
+            border-radius: 17px;
+
+            background: #f4eddd;
+
+            font-size: 28px;
+        }
+
+        .smart-card h3 {
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .smart-card p {
+            color: #6c665d;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .card-link {
+            color: #8d6230;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           CATEGORY SECTION
+        ===================================================== */
+
+        .category-grid {
+            max-width: 1150px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .category-card {
+            min-height: 220px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
+            padding: 25px;
+
+            border-radius: 22px;
+
+            background: white;
+            border: 1px solid #e9e2d3;
+
+            box-shadow: 0 7px 22px rgba(60, 45, 20, 0.05);
+
+            transition: 0.3s ease;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: "";
+            position: absolute;
+
+            width: 130px;
+            height: 130px;
+
+            right: -30px;
+            top: -30px;
+
+            background: #f5eddb;
+
+            border-radius: 50%;
+        }
+
+        .category-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(60, 45, 20, 0.1);
+        }
+
+        .category-icon {
+            font-size: 55px;
+            margin-bottom: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-card h3 {
+            font-size: 21px;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .category-card p {
+            color: #716a60;
+            font-size: 13px;
+            position: relative;
+            z-index: 1;
+        }
+
+
+        /* =====================================================
+           POPULAR RECIPES
+        ===================================================== */
+
+        .popular-section {
+            background: #faf7ee;
+        }
+
+        .recipe-grid {
+            max-width: 1150px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .recipe-card {
+            background: white;
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            border: 1px solid #ebe4d5;
+
+            box-shadow: 0 6px 20px rgba(60, 45, 20, 0.05);
+
+            transition: 0.3s ease;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .recipe-image {
+            height: 180px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #f2eadb;
+
+            font-size: 75px;
+        }
+
+        .recipe-content {
+            padding: 20px;
+        }
+
+        .recipe-tag {
+            display: inline-block;
+
+            padding: 5px 9px;
+
+            border-radius: 15px;
+
+            background: #f1eadc;
+
+            color: #75552f;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            margin-bottom: 9px;
+        }
+
+        .recipe-content h3 {
+            font-size: 19px;
+            margin-bottom: 8px;
+        }
+
+        .recipe-content p {
+            color: #716a61;
+            font-size: 13px;
+
+            margin-bottom: 13px;
+        }
+
+        .rating {
+            font-size: 13px;
+            margin-bottom: 14px;
+        }
+
+
+        /* =====================================================
+           HOW IT WORKS
+        ===================================================== */
+
+        .steps-grid {
+            max-width: 1050px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 25px;
+        }
+
+        .step-number {
+            width: 55px;
+            height: 55px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            background: #302c27;
+            color: white;
+
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .step h3 {
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: #716a61;
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           CTA
+        ===================================================== */
+
+        .cta-section {
+            padding: 75px 7%;
+        }
+
+        .cta-box {
+            max-width: 1100px;
+            margin: auto;
+
+            padding: 55px 45px;
+
+            text-align: center;
+
+            background: #302c27;
+            color: white;
+
+            border-radius: 28px;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: "🍳";
+            position: absolute;
+
+            font-size: 130px;
+
+            right: 40px;
+            bottom: -40px;
+
+            opacity: 0.08;
+        }
+
+        .cta-box h2 {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .cta-box p {
+            max-width: 600px;
+            margin: 0 auto 25px;
+
+            color: #ddd7cb;
+        }
+
+        .cta-box .primary-btn {
+            background: white;
+            color: #302c27;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+            background: #211f1b;
+            color: white;
+            padding: 45px 7% 25px;
+        }
+
+        .footer-content {
+            max-width: 1150px;
+            margin: auto;
+
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+
+            padding-bottom: 30px;
+
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .footer h3 {
+            margin-bottom: 10px;
+        }
+
+        .footer p {
+            color: #c9c4bb;
+            font-size: 13px;
+            max-width: 450px;
+        }
+
+        .footer-bottom {
+            max-width: 1150px;
+            margin: 20px auto 0;
+
+            text-align: center;
+
+            color: #a9a49b;
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           ANIMATIONS
+        ===================================================== */
+
+        .fade-up {
+            animation: fadeUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1050px) {
+
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .recipe-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .navbar {
+                flex-direction: column;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .hero {
+                min-height: 650px;
+                padding: 65px 5%;
+            }
+
+            .section {
+                padding: 55px 5%;
+            }
+
+            .smart-grid,
+            .category-grid,
+            .recipe-grid,
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+            .search-box {
+                flex-direction: column;
+                background: white;
+                padding: 10px;
+            }
+
+            .search-box input {
+                width: 100%;
+            }
+
+            .search-box button {
+                width: 100%;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .cta-box {
+                padding: 40px 25px;
+            }
+
+            .cta-box h2 {
+                font-size: 28px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-    <!-- =========================
-         NAVIGATION BAR
-    ========================== -->
-    <header class="navbar">
 
-        <div class="logo">
-            🍳 CookMate
-        </div>
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
 
-        <nav>
-            <a href="index.html" class="active">Home</a>
-            <a href="recipes.html">Recipes</a>
-            <a href="ingredients.html">Ingredients</a>
-            <a href="equipment.html">Equipment</a>
-            <a href="favourites.html">Favourites</a>
-            <a href="profile.html">Profile</a>
-        </nav>
+<nav class="navbar">
 
-    </header>
+    <a href="index.html" class="logo">
+        🍳 CookMate
+    </a>
 
+    <div class="nav-links">
 
-    <!-- =========================
-         HERO SECTION
-    ========================== -->
-    <section class="hero">
+        <a href="index.html" data-i18n="home">
+            Home
+        </a>
 
-        <div class="hero-content">
+        <a href="recipes.html" data-i18n="recipes">
+            Recipes
+        </a>
 
-            <p class="hero-small-title">
-                👋 Welcome to CookMate
-            </p>
+        <a href="ingredients.html" data-i18n="ingredients">
+            Ingredients
+        </a>
 
-            <h1>
-                Cook Something<br>
-                <span>Delicious Today!</span>
-            </h1>
+        <a href="equipment.html" data-i18n="equipment">
+            Equipment
+        </a>
 
-            <p class="hero-description">
-                Discover delicious recipes, find meals based on
-                what you have at home, and make cooking easier
-                with CookMate.
-            </p>
+        <a href="favourites.html" data-i18n="favourites">
+            Favourites
+        </a>
 
+        <a href="profile.html" data-i18n="profile">
+            Profile
+        </a>
 
-            <!-- SEARCH -->
-            <div class="search-box">
+    </div>
 
-                <input
-                    type="text"
-                    id="homeSearch"
-                    placeholder="Search for a recipe..."
-                    autocomplete="off"
-                >
-
-                <button
-                    type="button"
-                    class="primary-btn"
-                    onclick="searchRecipe()"
-                >
-                    🔍 Search
-                </button>
-
-            </div>
-
-
-            <!-- QUICK BUTTONS -->
-            <div class="hero-buttons">
-
-                <a
-                    href="recipes.html"
-                    class="primary-btn"
-                >
-                    🍴 Explore Recipes
-                </a>
-
-                <a
-                    href="ingredients.html"
-                    class="secondary-btn"
-                >
-                    🥕 What Do I Have?
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
+</nav>
 
 
 
-    <!-- =========================
-         QUICK ACCESS
-    ========================== -->
-    <section class="section">
+<!-- =====================================================
+     HERO
+===================================================== -->
 
-        <div class="section-heading">
+<section class="hero">
 
-            <p class="section-label">
-                COOK SMARTER
-            </p>
+    <div class="hero-content fade-up">
 
-            <h2>
-                Everything You Need
-            </h2>
+        <div class="welcome-text">
 
-            <p>
-                CookMate helps you plan and discover meals
-                with the ingredients and equipment you already have.
-            </p>
+            👋 <span data-i18n="welcome">
+                Welcome to CookMate
+            </span>
 
         </div>
 
 
-        <div class="category-grid">
+        <h1>
 
-            <!-- INGREDIENTS -->
-            <a
-                href="ingredients.html"
-                class="category-card"
-                style="text-decoration:none; color:inherit;"
+            <span data-i18n="cookToday">
+                Cook Something
+            </span>
+
+            <br>
+
+            Delicious Today!
+
+        </h1>
+
+
+        <p
+            class="hero-description"
+            data-i18n="cookingCompanion"
+        >
+
+            Discover delicious recipes, find meals based on
+            what you have at home, and make cooking easier
+            with CookMate.
+
+        </p>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="homeSearch"
+                placeholder="Search for a recipe..."
+                data-i18n-placeholder="searchPlaceholder"
             >
 
-                <div class="category-icon">
-                    🥕
-                </div>
-
-                <h3>
-                    Ingredients at Home
-                </h3>
-
-                <p>
-                    Select the ingredients you have and
-                    discover recipes you can make.
-                </p>
-
-                <span>
-                    Find Recipes →
-                </span>
-
-            </a>
-
-
-            <!-- EQUIPMENT -->
-            <a
-                href="equipment.html"
-                class="category-card"
-                style="text-decoration:none; color:inherit;"
+            <button
+                onclick="searchRecipe()"
+                data-i18n="search"
             >
-
-                <div class="category-icon">
-                    🍳
-                </div>
-
-                <h3>
-                    Kitchen Equipment
-                </h3>
-
-                <p>
-                    Choose the cooking equipment available
-                    in your kitchen.
-                </p>
-
-                <span>
-                    Check Equipment →
-                </span>
-
-            </a>
-
-
-            <!-- FAVOURITES -->
-            <a
-                href="favourites.html"
-                class="category-card"
-                style="text-decoration:none; color:inherit;"
-            >
-
-                <div class="category-icon">
-                    ⭐
-                </div>
-
-                <h3>
-                    Favourite Recipes
-                </h3>
-
-                <p>
-                    Save your favourite recipes and
-                    access them anytime.
-                </p>
-
-                <span>
-                    View Favourites →
-                </span>
-
-            </a>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         RECIPE CATEGORIES
-    ========================== -->
-    <section class="section">
-
-        <div class="section-heading">
-
-            <p class="section-label">
-                EXPLORE
-            </p>
-
-            <h2>
-                Recipe Categories
-            </h2>
-
-            <p>
-                Choose a category and find something delicious to cook.
-            </p>
+                🔍 Search
+            </button>
 
         </div>
 
 
-        <div class="category-grid">
+        <!-- BUTTONS -->
 
-            <!-- VEG -->
-            <a
-                href="recipes.html?category=veg"
-                class="category-card"
-                style="text-decoration:none; color:inherit;"
-            >
-
-                <div class="category-icon">
-                    🥦
-                </div>
-
-                <h3>
-                    Vegetarian
-                </h3>
-
-                <p>
-                    Healthy and delicious vegetarian recipes
-                    for everyday cooking.
-                </p>
-
-                <span>
-                    View Veg Recipes →
-                </span>
-
-            </a>
-
-
-            <!-- NON VEG -->
-            <a
-                href="recipes.html?category=nonveg"
-                class="category-card"
-                style="text-decoration:none; color:inherit;"
-            >
-
-                <div class="category-icon">
-                    🍗
-                </div>
-
-                <h3>
-                    Non-Vegetarian
-                </h3>
-
-                <p>
-                    Tasty chicken, egg and other non-vegetarian
-                    recipes.
-                </p>
-
-                <span>
-                    View Non-Veg Recipes →
-                </span>
-
-            </a>
-
-
-            <!-- SWEETS -->
-            <a
-                href="recipes.html?category=sweets"
-                class="category-card"
-                style="text-decoration:none; color:inherit;"
-            >
-
-                <div class="category-icon">
-                    🍰
-                </div>
-
-                <h3>
-                    Sweets
-                </h3>
-
-                <p>
-                    Sweet and delicious desserts for
-                    every occasion.
-                </p>
-
-                <span>
-                    View Sweets →
-                </span>
-
-            </a>
-
-
-            <!-- SNACKS -->
-            <a
-                href="recipes.html?category=snacks"
-                class="category-card"
-                style="text-decoration:none; color:inherit;"
-            >
-
-                <div class="category-icon">
-                    🥨
-                </div>
-
-                <h3>
-                    Snacks
-                </h3>
-
-                <p>
-                    Quick and crispy snacks for your
-                    evening cravings.
-                </p>
-
-                <span>
-                    View Snacks →
-                </span>
-
-            </a>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         POPULAR RECIPES
-    ========================== -->
-    <section class="section">
-
-        <div class="section-heading">
-
-            <p class="section-label">
-                POPULAR
-            </p>
-
-            <h2>
-                Popular Recipes
-            </h2>
-
-            <p>
-                Try some of the most popular recipes on CookMate.
-            </p>
-
-        </div>
-
-
-        <div class="recipe-grid">
-
-            <!-- CHICKEN BIRYANI -->
-            <a
-                href="recipe-details.html?recipe=chicken-biryani"
-                class="recipe-card"
-                style="text-decoration:none; color:inherit;"
-            >
-
-                <div class="recipe-image">
-                    🍗🍚
-                </div>
-
-                <div class="recipe-card-content">
-
-                    <span class="recipe-category">
-                        Non-Veg
-                    </span>
-
-                    <h3>
-                        Chicken Biryani
-                    </h3>
-
-                    <p>
-                        Aromatic and flavorful chicken biryani
-                        made with fragrant rice and spices.
-                    </p>
-
-                    <span>
-                        View Recipe →
-                    </span>
-
-                </div>
-
-            </a>
-
-
-            <!-- MASALA DOSA -->
-            <a
-                href="recipe-details.html?recipe=masala-dosa"
-                class="recipe-card"
-                style="text-decoration:none; color:inherit;"
-            >
-
-                <div class="recipe-image">
-                    🥞🥔
-                </div>
-
-                <div class="recipe-card-content">
-
-                    <span class="recipe-category">
-                        Veg
-                    </span>
-
-                    <h3>
-                        Masala Dosa
-                    </h3>
-
-                    <p>
-                        Crispy dosa served with a delicious
-                        spiced potato filling.
-                    </p>
-
-                    <span>
-                        View Recipe →
-                    </span>
-
-                </div>
-
-            </a>
-
-
-            <!-- PANEER BUTTER MASALA -->
-            <a
-                href="recipe-details.html?recipe=paneer-butter-masala"
-                class="recipe-card"
-                style="text-decoration:none; color:inherit;"
-            >
-
-                <div class="recipe-image">
-                    🧀🍅
-                </div>
-
-                <div class="recipe-card-content">
-
-                    <span class="recipe-category">
-                        Veg
-                    </span>
-
-                    <h3>
-                        Paneer Butter Masala
-                    </h3>
-
-                    <p>
-                        Soft paneer cooked in a creamy,
-                        rich tomato-based gravy.
-                    </p>
-
-                    <span>
-                        View Recipe →
-                    </span>
-
-                </div>
-
-            </a>
-
-
-            <!-- GULAB JAMUN -->
-            <a
-                href="recipe-details.html?recipe=gulab-jamun"
-                class="recipe-card"
-                style="text-decoration:none; color:inherit;"
-            >
-
-                <div class="recipe-image">
-                    🍩🍯
-                </div>
-
-                <div class="recipe-card-content">
-
-                    <span class="recipe-category">
-                        Sweets
-                    </span>
-
-                    <h3>
-                        Gulab Jamun
-                    </h3>
-
-                    <p>
-                        Soft sweet dumplings soaked in
-                        warm sugar syrup.
-                    </p>
-
-                    <span>
-                        View Recipe →
-                    </span>
-
-                </div>
-
-            </a>
-
-        </div>
-
-
-        <div class="center-button">
+        <div class="hero-buttons">
 
             <a
                 href="recipes.html"
                 class="primary-btn"
+                data-i18n="exploreRecipes"
             >
-                View All Recipes →
+                🍽️ Explore Recipes
+            </a>
+
+            <a
+                href="ingredients.html"
+                class="secondary-btn"
+                data-i18n="whatDoIHave"
+            >
+                🥕 What Do I Have?
             </a>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
 
-    <!-- =========================
-         SMART RECIPE FINDER
-    ========================== -->
-    <section class="smart-section">
+<!-- =====================================================
+     SMART COOKING
+===================================================== -->
 
-        <div class="smart-content">
+<section class="section smart-section">
 
-            <p class="section-label">
-                SMART COOKING
+    <div class="section-header">
+
+        <span
+            class="section-label"
+            data-i18n="smartCooking"
+        >
+            COOK SMARTER
+        </span>
+
+        <h2 data-i18n="everythingYouNeed">
+            Everything You Need
+        </h2>
+
+        <p>
+            CookMate helps you plan and discover meals
+            with the ingredients and equipment you already have.
+        </p>
+
+    </div>
+
+
+    <div class="smart-grid">
+
+
+        <!-- INGREDIENTS -->
+
+        <div class="smart-card">
+
+            <div class="smart-icon">
+                🥕
+            </div>
+
+            <h3 data-i18n="ingredientsAtHome">
+                Ingredients at Home
+            </h3>
+
+            <p data-i18n="ingredientsDescription">
+                Select the ingredients you have and discover
+                recipes you can make.
             </p>
 
-            <h2>
-                Not Sure What to Cook?
-            </h2>
+            <a
+                href="ingredients.html"
+                class="card-link"
+                data-i18n="findRecipes"
+            >
+                Find Recipes →
+            </a>
 
-            <p>
-                Don't worry! Tell CookMate what ingredients
-                and equipment you have at home. We'll help
-                you discover recipes you can make.
+        </div>
+
+
+        <!-- EQUIPMENT -->
+
+        <div class="smart-card">
+
+            <div class="smart-icon">
+                🍳
+            </div>
+
+            <h3 data-i18n="kitchenEquipment">
+                Kitchen Equipment
+            </h3>
+
+            <p data-i18n="equipmentDescription">
+                Choose the cooking equipment available
+                in your kitchen.
             </p>
 
+            <a
+                href="equipment.html"
+                class="card-link"
+                data-i18n="checkEquipment"
+            >
+                Check Equipment →
+            </a>
 
-            <div class="smart-buttons">
+        </div>
+
+
+        <!-- FAVOURITES -->
+
+        <div class="smart-card">
+
+            <div class="smart-icon">
+                ⭐
+            </div>
+
+            <h3 data-i18n="favouriteRecipes">
+                Favourite Recipes
+            </h3>
+
+            <p data-i18n="favouriteDescription">
+                Save your favourite recipes and access them anytime.
+            </p>
+
+            <a
+                href="favourites.html"
+                class="card-link"
+                data-i18n="viewFavourites"
+            >
+                View Favourites →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     RECIPE CATEGORIES
+===================================================== -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <span
+            class="section-label"
+            data-i18n="explore"
+        >
+            EXPLORE
+        </span>
+
+        <h2 data-i18n="recipeCategories">
+            Recipe Categories
+        </h2>
+
+        <p>
+            Choose a category and find something delicious to cook.
+        </p>
+
+    </div>
+
+
+    <div class="category-grid">
+
+
+        <!-- VEG -->
+
+        <a
+            href="recipes.html?category=veg"
+            class="category-card"
+        >
+
+            <div class="category-icon">
+                🥗
+            </div>
+
+            <h3 data-i18n="vegetarian">
+                Vegetarian
+            </h3>
+
+            <p data-i18n="vegetarianDescription">
+                Fresh and delicious vegetarian recipes.
+            </p>
+
+        </a>
+
+
+        <!-- NON VEG -->
+
+        <a
+            href="recipes.html?category=nonveg"
+            class="category-card"
+        >
+
+            <div class="category-icon">
+                🍗
+            </div>
+
+            <h3 data-i18n="nonVegetarian">
+                Non-Vegetarian
+            </h3>
+
+            <p data-i18n="nonVegetarianDescription">
+                Delicious chicken, egg and non-veg recipes.
+            </p>
+
+        </a>
+
+
+        <!-- SWEETS -->
+
+        <a
+            href="recipes.html?category=sweets"
+            class="category-card"
+        >
+
+            <div class="category-icon">
+                🍰
+            </div>
+
+            <h3 data-i18n="sweets">
+                Sweets
+            </h3>
+
+            <p data-i18n="sweetsDescription">
+                Sweet treats for every occasion.
+            </p>
+
+        </a>
+
+
+        <!-- SNACKS -->
+
+        <a
+            href="recipes.html?category=snacks"
+            class="category-card"
+        >
+
+            <div class="category-icon">
+                🥪
+            </div>
+
+            <h3 data-i18n="snacks">
+                Snacks
+            </h3>
+
+            <p data-i18n="snacksDescription">
+                Quick and tasty snacks for everyone.
+            </p>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     POPULAR RECIPES
+===================================================== -->
+
+<section class="section popular-section">
+
+    <div class="section-header">
+
+        <span
+            class="section-label"
+            data-i18n="popular"
+        >
+            POPULAR
+        </span>
+
+        <h2 data-i18n="popularRecipes">
+            Popular Recipes
+        </h2>
+
+    </div>
+
+
+    <div class="recipe-grid">
+
+
+        <!-- CHICKEN BIRYANI -->
+
+        <div class="recipe-card">
+
+            <div class="recipe-image">
+                🍗
+            </div>
+
+            <div class="recipe-content">
+
+                <span class="recipe-tag">
+                    Non-Veg
+                </span>
+
+                <h3 data-i18n="chickenBiryani">
+                    Chicken Biryani
+                </h3>
+
+                <div class="rating">
+                    ⭐ 4.8
+                </div>
+
+                <p>
+                    Flavorful and aromatic chicken biryani.
+                </p>
 
                 <a
-                    href="ingredients.html"
+                    href="recipe-details.html?recipe=chicken-biryani"
                     class="primary-btn"
+                    data-i18n="viewRecipe"
                 >
-                    🥕 Choose Ingredients
+                    View Recipe
                 </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- MASALA DOSA -->
+
+        <div class="recipe-card">
+
+            <div class="recipe-image">
+                🥞
+            </div>
+
+            <div class="recipe-content">
+
+                <span class="recipe-tag">
+                    Veg
+                </span>
+
+                <h3 data-i18n="masalaDosa">
+                    Masala Dosa
+                </h3>
+
+                <div class="rating">
+                    ⭐ 4.7
+                </div>
+
+                <p>
+                    Crispy dosa with delicious potato masala.
+                </p>
 
                 <a
-                    href="equipment.html"
-                    class="secondary-btn"
+                    href="recipe-details.html?recipe=masala-dosa"
+                    class="primary-btn"
+                    data-i18n="viewRecipe"
                 >
-                    🍳 Choose Equipment
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         HOW COOKMATE WORKS
-    ========================== -->
-    <section class="section">
-
-        <div class="section-heading">
-
-            <p class="section-label">
-                SIMPLE STEPS
-            </p>
-
-            <h2>
-                How CookMate Works
-            </h2>
-
-        </div>
-
-
-        <div class="steps-grid">
-
-            <div class="step">
-
-                <div class="step-number">
-                    01
-                </div>
-
-                <h3>
-                    Choose Ingredients
-                </h3>
-
-                <p>
-                    Select the ingredients available
-                    in your kitchen.
-                </p>
-
-            </div>
-
-
-            <div class="step">
-
-                <div class="step-number">
-                    02
-                </div>
-
-                <h3>
-                    Choose Equipment
-                </h3>
-
-                <p>
-                    Select the cooking equipment
-                    you have available.
-                </p>
-
-            </div>
-
-
-            <div class="step">
-
-                <div class="step-number">
-                    03
-                </div>
-
-                <h3>
-                    Find Your Recipe
-                </h3>
-
-                <p>
-                    CookMate recommends recipes based
-                    on your available items.
-                </p>
-
-            </div>
-
-
-            <div class="step">
-
-                <div class="step-number">
-                    04
-                </div>
-
-                <h3>
-                    Start Cooking
-                </h3>
-
-                <p>
-                    Follow the step-by-step instructions
-                    and enjoy your meal.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
-    <footer class="footer">
-
-        <div class="footer-content">
-
-            <div>
-
-                <h2>
-                    🍳 CookMate
-                </h2>
-
-                <p>
-                    Your smart cooking companion for
-                    simple and delicious recipes.
-                </p>
-
-            </div>
-
-
-            <div class="footer-links">
-
-                <a href="index.html">
-                    Home
-                </a>
-
-                <a href="recipes.html">
-                    Recipes
-                </a>
-
-                <a href="ingredients.html">
-                    Ingredients
-                </a>
-
-                <a href="equipment.html">
-                    Equipment
-                </a>
-
-                <a href="favourites.html">
-                    Favourites
-                </a>
-
-                <a href="profile.html">
-                    Profile
+                    View Recipe
                 </a>
 
             </div>
@@ -725,65 +1260,338 @@
         </div>
 
 
-        <div class="footer-bottom">
+        <!-- PANEER -->
 
-            <p>
-                © 2026 CookMate. Made for food lovers ❤️
+        <div class="recipe-card">
+
+            <div class="recipe-image">
+                🧀
+            </div>
+
+            <div class="recipe-content">
+
+                <span class="recipe-tag">
+                    Veg
+                </span>
+
+                <h3 data-i18n="paneerButterMasala">
+                    Paneer Butter Masala
+                </h3>
+
+                <div class="rating">
+                    ⭐ 4.8
+                </div>
+
+                <p>
+                    Creamy paneer curry with tomato and butter.
+                </p>
+
+                <a
+                    href="recipe-details.html?recipe=paneer-butter-masala"
+                    class="primary-btn"
+                    data-i18n="viewRecipe"
+                >
+                    View Recipe
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- GULAB JAMUN -->
+
+        <div class="recipe-card">
+
+            <div class="recipe-image">
+                🍩
+            </div>
+
+            <div class="recipe-content">
+
+                <span class="recipe-tag">
+                    Sweet
+                </span>
+
+                <h3 data-i18n="gulabJamun">
+                    Gulab Jamun
+                </h3>
+
+                <div class="rating">
+                    ⭐ 4.9
+                </div>
+
+                <p>
+                    Soft and juicy sweet soaked in sugar syrup.
+                </p>
+
+                <a
+                    href="recipe-details.html?recipe=gulab-jamun"
+                    class="primary-btn"
+                    data-i18n="viewRecipe"
+                >
+                    View Recipe
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div style="text-align:center; margin-top:35px;">
+
+        <a
+            href="recipes.html"
+            class="secondary-btn"
+            data-i18n="viewAllRecipes"
+        >
+            View All Recipes →
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     HOW COOKMATE WORKS
+===================================================== -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <span
+            class="section-label"
+            data-i18n="simpleSteps"
+        >
+            SIMPLE STEPS
+        </span>
+
+        <h2 data-i18n="howCookMateWorks">
+            How CookMate Works
+        </h2>
+
+    </div>
+
+
+    <div class="steps-grid">
+
+
+        <div class="step">
+
+            <div class="step-number">
+                1
+            </div>
+
+            <h3 data-i18n="step1Title">
+                Choose Ingredients
+            </h3>
+
+            <p data-i18n="step1Description">
+                Select the ingredients available at home.
             </p>
 
         </div>
 
-    </footer>
+
+        <div class="step">
+
+            <div class="step-number">
+                2
+            </div>
+
+            <h3 data-i18n="step2Title">
+                Choose Equipment
+            </h3>
+
+            <p data-i18n="step2Description">
+                Select the cooking equipment you have.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                3
+            </div>
+
+            <h3 data-i18n="step3Title">
+                Find Recipes
+            </h3>
+
+            <p data-i18n="step3Description">
+                CookMate finds suitable recipes for you.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                4
+            </div>
+
+            <h3 data-i18n="step4Title">
+                Start Cooking
+            </h3>
+
+            <p data-i18n="step4Description">
+                Follow the recipe and enjoy your meal.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
 
 
 
-    <!-- =========================
-         JAVASCRIPT
-    ========================== -->
-    <script src="js/script.js"></script>
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="cta-section">
+
+    <div class="cta-box">
+
+        <h2>
+            🍳 Ready to Cook?
+        </h2>
+
+        <p>
+            Find a recipe based on what you already have
+            in your kitchen.
+        </p>
+
+        <a
+            href="ingredients.html"
+            class="primary-btn"
+            data-i18n="whatDoIHave"
+        >
+            🥕 What Do I Have?
+        </a>
+
+    </div>
+
+</section>
 
 
-    <script>
 
-        /*
-         * HOME PAGE SEARCH
-         */
-        function searchRecipe() {
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
-            const searchInput =
-                document.getElementById("homeSearch");
+<footer class="footer">
 
-            if (!searchInput) return;
+    <div class="footer-content">
 
-            const searchText =
-                searchInput.value.trim();
+        <div>
 
+            <h3>
+                🍳 CookMate
+            </h3>
 
-            if (searchText === "") {
+            <p data-i18n="footerDescription">
+                Your smart cooking companion for easy and
+                delicious recipes.
+            </p>
 
-                alert(
-                    "Please enter a recipe name to search."
-                );
-
-                searchInput.focus();
-
-                return;
-            }
+        </div>
 
 
-            window.location.href =
-                "recipes.html?search=" +
-                encodeURIComponent(searchText);
+        <div>
+
+            <p data-i18n="madeForFoodLovers">
+                Made with ❤️ for food lovers
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 CookMate. All rights reserved.
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="./js/script.js"></script>
+
+
+<script>
+
+    /* =====================================================
+       HOME SEARCH
+    ===================================================== */
+
+    function searchRecipe() {
+
+        const input =
+            document.getElementById("homeSearch");
+
+        const recipe =
+            input.value.trim();
+
+        if (recipe === "") {
+
+            const language =
+                localStorage.getItem("cookmateLanguage") || "en";
+
+            const messages = {
+
+                en: "Please enter a recipe name.",
+
+                ta: "தயவுசெய்து சமையல் குறிப்பின் பெயரை உள்ளிடவும்.",
+
+                hi: "कृपया रेसिपी का नाम दर्ज करें।",
+
+                ml: "ദയവായി ഒരു പാചകക്കുറിപ്പിന്റെ പേര് നൽകുക.",
+
+                te: "దయచేసి వంటకం పేరును నమోదు చేయండి."
+
+            };
+
+            alert(
+                messages[language] || messages.en
+            );
+
+            return;
         }
 
 
+        window.location.href =
+            "recipes.html?search=" +
+            encodeURIComponent(recipe);
 
-        /*
-         * PRESS ENTER TO SEARCH
-         */
-        document
-            .getElementById("homeSearch")
-            .addEventListener("keydown", function(event) {
+    }
+
+
+    /* =====================================================
+       ENTER KEY
+    ===================================================== */
+
+    document
+        .getElementById("homeSearch")
+        .addEventListener(
+            "keydown",
+            function(event) {
 
                 if (event.key === "Enter") {
 
@@ -791,9 +1599,60 @@
 
                 }
 
-            });
+            }
+        );
 
-    </script>
+
+    /* =====================================================
+       SCROLL ANIMATION
+    ===================================================== */
+
+    const animatedElements =
+        document.querySelectorAll(
+            ".smart-card, .category-card, .recipe-card, .step"
+        );
+
+
+    const observer =
+        new IntersectionObserver(
+            function(entries) {
+
+                entries.forEach(
+                    function(entry) {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add(
+                                "fade-up"
+                            );
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.15
+            }
+        );
+
+
+    animatedElements.forEach(
+        function(element) {
+
+            observer.observe(element);
+
+        }
+    );
+
+
+</script>
+
 
 </body>
 </html>
