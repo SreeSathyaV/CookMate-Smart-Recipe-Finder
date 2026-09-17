@@ -1,22 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>CookMate - Recipe Details</title>
+    <title>Recipe Details - CookMate</title>
 
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        /* =========================
-           RECIPE DETAILS
-        ========================== */
-
-        .details-hero {
-            padding: 55px 7%;
-            background: #fff3dc;
+        .recipe-detail-page {
+            padding: 60px 8%;
+            background: #fffdf5;
         }
 
         .breadcrumb {
@@ -25,173 +19,147 @@
             font-size: 14px;
         }
 
-        .breadcrumb a {
-            color: #d97706;
-            text-decoration: none;
-        }
-
-        .recipe-details-header {
-            max-width: 1100px;
-            margin: auto;
+        .recipe-detail-header {
             display: grid;
             grid-template-columns: 280px 1fr;
             gap: 40px;
             align-items: center;
+            margin-bottom: 45px;
         }
 
         .recipe-big-image {
             height: 280px;
             border-radius: 25px;
-            background: #fff;
+            background: #f5efe0;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 110px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
         }
 
-        .recipe-category-label {
+        .recipe-category {
             display: inline-block;
-            background: #d97706;
-            color: white;
-            padding: 6px 14px;
+            padding: 7px 14px;
             border-radius: 20px;
-            font-size: 13px;
+            background: #eee7d0;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .recipe-detail-header h1 {
+            font-size: 42px;
             margin-bottom: 12px;
         }
 
-        .recipe-details-header h1 {
-            font-size: clamp(35px, 5vw, 55px);
-            margin-bottom: 12px;
-            color: #292929;
+        .recipe-rating {
+            margin-bottom: 15px;
+            font-size: 16px;
         }
 
         .recipe-description {
             color: #666;
             line-height: 1.7;
-            max-width: 750px;
+            margin-bottom: 20px;
         }
 
-        .rating-box {
-            margin: 15px 0;
-            color: #e6a000;
-            font-weight: 600;
+        .recipe-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .info-box {
+            background: white;
+            border: 1px solid #eee;
+            padding: 12px 18px;
+            border-radius: 12px;
         }
 
         .recipe-actions {
             display: flex;
-            flex-wrap: wrap;
             gap: 12px;
-            margin-top: 22px;
+            flex-wrap: wrap;
         }
 
-        .secondary-btn {
-            background: white;
-            color: #d97706;
-            border: 1px solid #d97706;
-            padding: 12px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .secondary-btn:hover {
-            background: #fff0d5;
-        }
-
-        .info-section {
-            padding: 45px 7%;
-        }
-
-        .recipe-info-grid {
-            max-width: 1000px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .info-box {
-            padding: 22px;
-            background: white;
-            border: 1px solid #eee;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .info-box-icon {
-            font-size: 30px;
-            margin-bottom: 8px;
-        }
-
-        .info-box h3 {
-            font-size: 15px;
-            color: #777;
-            margin-bottom: 5px;
-        }
-
-        .info-box p {
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .recipe-content {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px 7% 70px;
+        .detail-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
+            gap: 30px;
+            margin-bottom: 35px;
         }
 
-        .content-card {
+        .detail-box {
             background: white;
-            border: 1px solid #eee;
-            border-radius: 18px;
-            padding: 28px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
         }
 
-        .content-card.full-width {
-            grid-column: 1 / -1;
-        }
-
-        .content-card h2 {
+        .detail-box h2 {
             margin-bottom: 20px;
         }
 
         .ingredient-list,
         .equipment-list,
         .steps-list {
-            padding-left: 22px;
+            padding-left: 20px;
         }
 
         .ingredient-list li,
         .equipment-list li {
             margin-bottom: 12px;
-            line-height: 1.5;
+        }
+
+        .steps-list {
+            counter-reset: recipe-step;
+            list-style: none;
+            padding-left: 0;
         }
 
         .steps-list li {
-            margin-bottom: 18px;
+            counter-increment: recipe-step;
+            position: relative;
+            padding: 15px 15px 15px 55px;
+            margin-bottom: 12px;
+            background: #faf8ef;
+            border-radius: 12px;
             line-height: 1.6;
         }
 
-        .tip-box {
-            background: #fff8e8;
-            padding: 18px;
-            border-radius: 12px;
-            border-left: 4px solid #d97706;
+        .steps-list li::before {
+            content: counter(recipe-step);
+            position: absolute;
+            left: 15px;
+            top: 14px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .tips-box {
+            background: #f5efe0;
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 35px;
+        }
+
+        .tips-box h2 {
             margin-bottom: 12px;
         }
 
         .related-section {
-            padding: 60px 7%;
-            background: #faf8f3;
+            margin-top: 40px;
         }
 
         .related-grid {
-            max-width: 1000px;
-            margin: 30px auto 0;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
@@ -199,188 +167,1373 @@
 
         .related-card {
             background: white;
-            border-radius: 16px;
-            padding: 22px;
-            text-decoration: none;
-            color: inherit;
-            border: 1px solid #eee;
-            transition: 0.3s;
-        }
-
-        .related-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .related-image {
-            font-size: 55px;
+            border-radius: 18px;
+            padding: 20px;
             text-align: center;
-            margin-bottom: 12px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.06);
         }
 
-        .shopping-list {
-            line-height: 1.8;
+        .related-card .food-icon {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        .related-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .not-found {
+            text-align: center;
+            padding: 80px 20px;
         }
 
         @media (max-width: 800px) {
-
-            .recipe-details-header {
+            .recipe-detail-header {
                 grid-template-columns: 1fr;
-                text-align: center;
             }
 
             .recipe-big-image {
-                max-width: 280px;
                 width: 100%;
-                margin: auto;
             }
 
-            .recipe-description {
-                margin: auto;
-            }
-
-            .recipe-actions {
-                justify-content: center;
-            }
-
-            .recipe-info-grid {
+            .detail-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .recipe-content {
-                grid-template-columns: 1fr;
-            }
-
-            .content-card.full-width {
-                grid-column: auto;
             }
 
             .related-grid {
                 grid-template-columns: 1fr;
             }
+
+            .recipe-detail-header h1 {
+                font-size: 32px;
+            }
         }
     </style>
 </head>
 
-
 <body>
 
-    <!-- =========================
-         NAVBAR
-    ========================== -->
+<!-- ================= NAVBAR ================= -->
 
-    <header class="navbar">
+<nav class="navbar">
 
-        <div class="logo">
-            🍳 CookMate
+    <div class="logo">
+        🍳 CookMate
+    </div>
+
+    <div class="nav-links">
+
+        <a href="index.html" data-i18n="home">
+            Home
+        </a>
+
+        <a href="recipes.html" data-i18n="recipes">
+            Recipes
+        </a>
+
+        <a href="ingredients.html" data-i18n="ingredients">
+            Ingredients
+        </a>
+
+        <a href="equipment.html" data-i18n="equipment">
+            Equipment
+        </a>
+
+        <a href="favourites.html" data-i18n="favourites">
+            Favourites
+        </a>
+
+        <a href="profile.html" data-i18n="profile">
+            Profile
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="recipe-detail-page">
+
+    <div id="recipeContainer"></div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+        <div>
+            <h3>🍳 CookMate</h3>
+
+            <p data-i18n="footerDescription">
+                Your smart cooking companion for easy and delicious recipes.
+            </p>
         </div>
 
-        <nav>
+        <div>
+            <p data-i18n="madeForFoodLovers">
+                Made with ❤️ for food lovers
+            </p>
+        </div>
 
-            <a href="index.html" data-i18n="home">
-                Home
-            </a>
+    </div>
 
-            <a href="recipes.html" data-i18n="recipes">
-                Recipes
-            </a>
-
-            <a href="ingredients.html" data-i18n="ingredients">
-                Ingredients
-            </a>
-
-            <a href="equipment.html" data-i18n="equipment">
-                Equipment
-            </a>
-
-            <a href="favourites.html" data-i18n="favourites">
-                Favourites
-            </a>
-
-            <a href="profile.html" data-i18n="profile">
-                Profile
-            </a>
-
-        </nav>
-
-    </header>
+</footer>
 
 
-    <!-- =========================
-         RECIPE HEADER
-    ========================== -->
+<!-- ================= JAVASCRIPT ================= -->
 
-    <section class="details-hero">
+<script src="js/script.js"></script>
+
+<script>
+
+const recipes = {
+
+    /* ================= CHICKEN BIRYANI ================= */
+
+    "chicken-biryani": {
+
+        emoji: "🍗",
+
+        rating: "⭐ 4.8",
+
+        ratings: "125",
+
+        translations: {
+
+            en: {
+                name: "Chicken Biryani",
+                category: "Non-Veg",
+                description: "A flavorful and aromatic rice dish made with chicken, spices and basmati rice.",
+                prepTime: "20 mins",
+                cookTime: "40 mins",
+                servings: "4",
+                ingredients: [
+                    "2 cups basmati rice",
+                    "500g chicken",
+                    "2 onions",
+                    "2 tomatoes",
+                    "1/2 cup curd",
+                    "2 tbsp ginger garlic paste",
+                    "Biryani masala",
+                    "Mint and coriander leaves",
+                    "Salt and oil"
+                ],
+                equipment: [
+                    "Pressure Cooker",
+                    "Frying Pan",
+                    "Knife",
+                    "Mixing Bowl"
+                ],
+                steps: [
+                    "Wash and soak the basmati rice for about 20 minutes.",
+                    "Marinate the chicken with curd, spices, salt and ginger garlic paste.",
+                    "Heat oil and fry sliced onions until golden brown.",
+                    "Add tomatoes and marinated chicken and cook well.",
+                    "Add soaked rice and required water.",
+                    "Cook until the rice is soft and chicken is completely cooked.",
+                    "Garnish with mint and coriander leaves and serve hot."
+                ],
+                tips: "Use good quality basmati rice and avoid overcooking the rice."
+            },
+
+            ta: {
+                name: "சிக்கன் பிரியாணி",
+                category: "அசைவம்",
+                description: "சிக்கன், வாசனை மசாலா மற்றும் பாஸ்மதி அரிசியுடன் செய்யப்படும் சுவையான பிரியாணி.",
+                prepTime: "20 நிமிடங்கள்",
+                cookTime: "40 நிமிடங்கள்",
+                servings: "4",
+                ingredients: [
+                    "2 கப் பாஸ்மதி அரிசி",
+                    "500 கிராம் சிக்கன்",
+                    "2 வெங்காயம்",
+                    "2 தக்காளி",
+                    "1/2 கப் தயிர்",
+                    "2 டேபிள்ஸ்பூன் இஞ்சி பூண்டு விழுது",
+                    "பிரியாணி மசாலா",
+                    "புதினா மற்றும் கொத்தமல்லி",
+                    "உப்பு மற்றும் எண்ணெய்"
+                ],
+                equipment: [
+                    "பிரஷர் குக்கர்",
+                    "வாணலி",
+                    "கத்தி",
+                    "கலவை கிண்ணம்"
+                ],
+                steps: [
+                    "பாஸ்மதி அரிசியை கழுவி 20 நிமிடங்கள் ஊற வைக்கவும்.",
+                    "சிக்கனை தயிர், மசாலா, உப்பு மற்றும் இஞ்சி பூண்டு விழுதுடன் ஊற வைக்கவும்.",
+                    "எண்ணெயில் நறுக்கிய வெங்காயத்தை பொன்னிறமாக வதக்கவும்.",
+                    "தக்காளி மற்றும் ஊற வைத்த சிக்கனை சேர்த்து நன்றாக சமைக்கவும்.",
+                    "ஊற வைத்த அரிசி மற்றும் தேவையான அளவு தண்ணீர் சேர்க்கவும்.",
+                    "அரிசி மற்றும் சிக்கன் நன்றாக வேகும் வரை சமைக்கவும்.",
+                    "புதினா மற்றும் கொத்தமல்லி தூவி சூடாக பரிமாறவும்."
+                ],
+                tips: "நல்ல தரமான பாஸ்மதி அரிசியை பயன்படுத்தவும். அரிசியை அதிகமாக வேகவிட வேண்டாம்."
+            },
+
+            hi: {
+                name: "चिकन बिरयानी",
+                category: "मांसाहारी",
+                description: "चिकन, मसालों और बासमती चावल से बनाई गई स्वादिष्ट और खुशबूदार बिरयानी।",
+                prepTime: "20 मिनट",
+                cookTime: "40 मिनट",
+                servings: "4",
+                ingredients: [
+                    "2 कप बासमती चावल",
+                    "500 ग्राम चिकन",
+                    "2 प्याज",
+                    "2 टमाटर",
+                    "1/2 कप दही",
+                    "2 बड़े चम्मच अदरक लहसुन पेस्ट",
+                    "बिरयानी मसाला",
+                    "पुदीना और धनिया",
+                    "नमक और तेल"
+                ],
+                equipment: [
+                    "प्रेशर कुकर",
+                    "फ्राइंग पैन",
+                    "चाकू",
+                    "मिक्सिंग बाउल"
+                ],
+                steps: [
+                    "बासमती चावल को धोकर लगभग 20 मिनट भिगोएँ।",
+                    "चिकन को दही, मसाले, नमक और अदरक लहसुन पेस्ट के साथ मैरीनेट करें।",
+                    "तेल में कटे हुए प्याज को सुनहरा होने तक भूनें।",
+                    "टमाटर और मैरीनेट किया हुआ चिकन डालकर पकाएँ।",
+                    "भीगे हुए चावल और आवश्यक पानी डालें।",
+                    "चावल और चिकन पूरी तरह पकने तक पकाएँ।",
+                    "पुदीना और धनिया से सजाकर गर्म परोसें।"
+                ],
+                tips: "अच्छी गुणवत्ता वाले बासमती चावल का उपयोग करें और चावल को ज्यादा न पकाएँ।"
+            },
+
+            ml: {
+                name: "ചിക്കൻ ബിരിയാണി",
+                category: "നോൺ-വെജ്",
+                description: "ചിക്കൻ, മസാലകൾ, ബാസ്മതി അരി എന്നിവ ഉപയോഗിച്ച് തയ്യാറാക്കുന്ന രുചികരമായ ബിരിയാണി.",
+                prepTime: "20 മിനിറ്റ്",
+                cookTime: "40 മിനിറ്റ്",
+                servings: "4",
+                ingredients: [
+                    "2 കപ്പ് ബാസ്മതി അരി",
+                    "500 ഗ്രാം ചിക്കൻ",
+                    "2 സവാള",
+                    "2 തക്കാളി",
+                    "1/2 കപ്പ് തൈര്",
+                    "2 ടേബിൾസ്പൂൺ ഇഞ്ചി വെളുത്തുള്ളി പേസ്റ്റ്",
+                    "ബിരിയാണി മസാല",
+                    "പുതിനയും മല്ലിയിലയും",
+                    "ഉപ്പും എണ്ണയും"
+                ],
+                equipment: [
+                    "പ്രഷർ കുക്കർ",
+                    "ഫ്രൈയിംഗ് പാൻ",
+                    "കത്തി",
+                    "മിക്സിംഗ് ബൗൾ"
+                ],
+                steps: [
+                    "ബാസ്മതി അരി കഴുകി 20 മിനിറ്റ് കുതിർക്കുക.",
+                    "ചിക്കൻ തൈര്, മസാല, ഉപ്പ്, ഇഞ്ചി വെളുത്തുള്ളി പേസ്റ്റ് എന്നിവ ചേർത്ത് മാരിനേറ്റ് ചെയ്യുക.",
+                    "എണ്ണയിൽ സവാള സ്വർണ്ണനിറമാകുന്നതുവരെ വറുക്കുക.",
+                    "തക്കാളിയും മാരിനേറ്റ് ചെയ്ത ചിക്കനും ചേർത്ത് വേവിക്കുക.",
+                    "കുതിർത്ത അരിയും ആവശ്യമായ വെള്ളവും ചേർക്കുക.",
+                    "അരിയും ചിക്കനും പൂർണ്ണമായി വേവുന്നതുവരെ പാകം ചെയ്യുക.",
+                    "പുതിനയും മല്ലിയിലയും ചേർത്ത് ചൂടോടെ വിളമ്പുക."
+                ],
+                tips: "നല്ല ഗുണമേന്മയുള്ള ബാസ്മതി അരി ഉപയോഗിക്കുക. അരി അധികമായി വേവിക്കരുത്."
+            },
+
+            te: {
+                name: "చికెన్ బిర్యానీ",
+                category: "నాన్-వెజ్",
+                description: "చికెన్, మసాలాలు మరియు బాస్మతి బియ్యంతో తయారు చేసే రుచికరమైన బిర్యానీ.",
+                prepTime: "20 నిమిషాలు",
+                cookTime: "40 నిమిషాలు",
+                servings: "4",
+                ingredients: [
+                    "2 కప్పుల బాస్మతి బియ్యం",
+                    "500 గ్రాముల చికెన్",
+                    "2 ఉల్లిపాయలు",
+                    "2 టమాటాలు",
+                    "1/2 కప్పు పెరుగు",
+                    "2 టేబుల్ స్పూన్ల అల్లం వెల్లుల్లి పేస్ట్",
+                    "బిర్యానీ మసాలా",
+                    "పుదీనా మరియు కొత్తిమీర",
+                    "ఉప్పు మరియు నూనె"
+                ],
+                equipment: [
+                    "ప్రెషర్ కుక్కర్",
+                    "ఫ్రైయింగ్ పాన్",
+                    "కత్తి",
+                    "మిక్సింగ్ బౌల్"
+                ],
+                steps: [
+                    "బాస్మతి బియ్యాన్ని కడిగి 20 నిమిషాలు నానబెట్టండి.",
+                    "చికెన్‌ను పెరుగు, మసాలాలు, ఉప్పు మరియు అల్లం వెల్లుల్లి పేస్ట్‌తో మారినేట్ చేయండి.",
+                    "నూనెలో ఉల్లిపాయలను బంగారు రంగు వచ్చే వరకు వేయించండి.",
+                    "టమాటాలు మరియు మారినేట్ చేసిన చికెన్ వేసి ఉడికించండి.",
+                    "నానబెట్టిన బియ్యం మరియు అవసరమైన నీరు వేయండి.",
+                    "బియ్యం మరియు చికెన్ పూర్తిగా ఉడికే వరకు ఉడికించండి.",
+                    "పుదీనా మరియు కొత్తిమీరతో అలంకరించి వేడిగా వడ్డించండి."
+                ],
+                tips: "మంచి నాణ్యత గల బాస్మతి బియ్యం ఉపయోగించండి. బియ్యాన్ని ఎక్కువగా ఉడికించవద్దు."
+            }
+
+        }
+
+    },
+
+
+    /* ================= MASALA DOSA ================= */
+
+    "masala-dosa": {
+
+        emoji: "🥞",
+
+        rating: "⭐ 4.7",
+
+        ratings: "98",
+
+        translations: {
+
+            en: {
+                name: "Masala Dosa",
+                category: "Veg",
+                description: "Crispy South Indian dosa filled with a delicious spiced potato masala.",
+                prepTime: "15 mins",
+                cookTime: "20 mins",
+                servings: "3",
+                ingredients: [
+                    "2 cups dosa batter",
+                    "3 potatoes",
+                    "1 onion",
+                    "Green chilli",
+                    "Mustard seeds",
+                    "Curry leaves",
+                    "Turmeric powder",
+                    "Salt and oil"
+                ],
+                equipment: [
+                    "Tawa",
+                    "Knife",
+                    "Mixing Bowl"
+                ],
+                steps: [
+                    "Boil potatoes and mash them.",
+                    "Heat oil and add mustard seeds.",
+                    "Add onion, green chilli and curry leaves.",
+                    "Add mashed potatoes, turmeric and salt.",
+                    "Heat the dosa tawa and spread dosa batter thinly.",
+                    "Place potato masala in the center.",
+                    "Fold and serve hot."
+                ],
+                tips: "Keep the tawa hot but not extremely hot while spreading the dosa."
+            },
+
+            ta: {
+                name: "மசாலா தோசை",
+                category: "சைவம்",
+                description: "உருளைக்கிழங்கு மசாலா நிரப்பப்பட்ட மொறுமொறுப்பான தென்னிந்திய தோசை.",
+                prepTime: "15 நிமிடங்கள்",
+                cookTime: "20 நிமிடங்கள்",
+                servings: "3",
+                ingredients: [
+                    "2 கப் தோசை மாவு",
+                    "3 உருளைக்கிழங்கு",
+                    "1 வெங்காயம்",
+                    "பச்சை மிளகாய்",
+                    "கடுகு",
+                    "கறிவேப்பிலை",
+                    "மஞ்சள் தூள்",
+                    "உப்பு மற்றும் எண்ணெய்"
+                ],
+                equipment: [
+                    "தோசைக்கல்",
+                    "கத்தி",
+                    "கலவை கிண்ணம்"
+                ],
+                steps: [
+                    "உருளைக்கிழங்கை வேகவைத்து மசிக்கவும்.",
+                    "எண்ணெயை சூடாக்கி கடுகு சேர்க்கவும்.",
+                    "வெங்காயம், பச்சை மிளகாய் மற்றும் கறிவேப்பிலை சேர்க்கவும்.",
+                    "உருளைக்கிழங்கு, மஞ்சள் தூள் மற்றும் உப்பு சேர்க்கவும்.",
+                    "தோசைக்கல்லை சூடாக்கி தோசை மாவை மெல்லியதாக ஊற்றவும்.",
+                    "நடுவில் உருளைக்கிழங்கு மசாலாவை வைக்கவும்.",
+                    "மடித்து சூடாக பரிமாறவும்."
+                ],
+                tips: "தோசை ஊற்றும்போது தோசைக்கல் அதிகமாக சூடாகாமல் சரியான சூட்டில் இருக்க வேண்டும்."
+            },
+
+            hi: {
+                name: "मसाला डोसा",
+                category: "शाकाहारी",
+                description: "मसालेदार आलू से भरा कुरकुरा दक्षिण भारतीय डोसा।",
+                prepTime: "15 मिनट",
+                cookTime: "20 मिनट",
+                servings: "3",
+                ingredients: [
+                    "2 कप डोसा बैटर",
+                    "3 आलू",
+                    "1 प्याज",
+                    "हरी मिर्च",
+                    "सरसों के बीज",
+                    "करी पत्ता",
+                    "हल्दी पाउडर",
+                    "नमक और तेल"
+                ],
+                equipment: [
+                    "तवा",
+                    "चाकू",
+                    "मिक्सिंग बाउल"
+                ],
+                steps: [
+                    "आलू उबालकर मैश करें।",
+                    "तेल गरम करके सरसों डालें।",
+                    "प्याज, हरी मिर्च और करी पत्ता डालें।",
+                    "आलू, हल्दी और नमक डालें।",
+                    "तवा गरम करके डोसा बैटर को पतला फैलाएँ।",
+                    "बीच में आलू मसाला रखें।",
+                    "डोसा मोड़कर गर्म परोसें।"
+                ],
+                tips: "डोसा फैलाते समय तवा बहुत ज्यादा गर्म नहीं होना चाहिए।"
+            },
+
+            ml: {
+                name: "മസാല ദോശ",
+                category: "വെജ്",
+                description: "മസാല ചേർത്ത ഉരുളക്കിഴങ്ങ് നിറച്ച ക്രിസ്പിയായ ദക്ഷിണേന്ത്യൻ ദോശ.",
+                prepTime: "15 മിനിറ്റ്",
+                cookTime: "20 മിനിറ്റ്",
+                servings: "3",
+                ingredients: [
+                    "2 കപ്പ് ദോശ മാവ്",
+                    "3 ഉരുളക്കിഴങ്ങ്",
+                    "1 സവാള",
+                    "പച്ചമുളക്",
+                    "കടുക്",
+                    "കറിവേപ്പില",
+                    "മഞ്ഞൾപ്പൊടി",
+                    "ഉപ്പും എണ്ണയും"
+                ],
+                equipment: [
+                    "തവ",
+                    "കത്തി",
+                    "മിക്സിംഗ് ബൗൾ"
+                ],
+                steps: [
+                    "ഉരുളക്കിഴങ്ങ് വേവിച്ച് ഉടയ്ക്കുക.",
+                    "എണ്ണ ചൂടാക്കി കടുക് ചേർക്കുക.",
+                    "സവാള, പച്ചമുളക്, കറിവേപ്പില ചേർക്കുക.",
+                    "ഉരുളക്കിഴങ്ങ്, മഞ്ഞൾപ്പൊടി, ഉപ്പ് ചേർക്കുക.",
+                    "തവ ചൂടാക്കി ദോശ മാവ് നേർത്തതായി പരത്തുക.",
+                    "നടുവിൽ ഉരുളക്കിഴങ്ങ് മസാല വയ്ക്കുക.",
+                    "മടക്കി ചൂടോടെ വിളമ്പുക."
+                ],
+                tips: "ദോശ പരത്തുമ്പോൾ തവ വളരെ ചൂടാകാതിരിക്കാൻ ശ്രദ്ധിക്കുക."
+            },
+
+            te: {
+                name: "మసాలా దోస",
+                category: "వెజ్",
+                description: "మసాలా బంగాళాదుంపతో నింపిన క్రిస్పీ దక్షిణ భారత దోస.",
+                prepTime: "15 నిమిషాలు",
+                cookTime: "20 నిమిషాలు",
+                servings: "3",
+                ingredients: [
+                    "2 కప్పుల దోస పిండి",
+                    "3 బంగాళాదుంపలు",
+                    "1 ఉల్లిపాయ",
+                    "పచ్చిమిర్చి",
+                    "ఆవాలు",
+                    "కరివేపాకు",
+                    "పసుపు",
+                    "ఉప్పు మరియు నూనె"
+                ],
+                equipment: [
+                    "తవా",
+                    "కత్తి",
+                    "మిక్సింగ్ బౌల్"
+                ],
+                steps: [
+                    "బంగాళాదుంపలను ఉడికించి మెత్తగా చేయండి.",
+                    "నూనె వేడి చేసి ఆవాలు వేయండి.",
+                    "ఉల్లిపాయ, పచ్చిమిర్చి మరియు కరివేపాకు వేయండి.",
+                    "బంగాళాదుంపలు, పసుపు మరియు ఉప్పు వేయండి.",
+                    "తవాను వేడి చేసి దోస పిండిని పలుచగా పరచండి.",
+                    "మధ్యలో బంగాళాదుంప మసాలా పెట్టండి.",
+                    "మడిచి వేడిగా వడ్డించండి."
+                ],
+                tips: "దోస వేస్తున్నప్పుడు తవా చాలా వేడిగా ఉండకూడదు."
+            }
+
+        }
+
+    },
+
+
+    /* ================= GULAB JAMUN ================= */
+
+    "gulab-jamun": {
+
+        emoji: "🍩",
+
+        rating: "⭐ 4.9",
+
+        ratings: "156",
+
+        translations: {
+
+            en: {
+                name: "Gulab Jamun",
+                category: "Sweets",
+                description: "Soft and juicy Indian sweet soaked in warm sugar syrup.",
+                prepTime: "20 mins",
+                cookTime: "25 mins",
+                servings: "6",
+                ingredients: [
+                    "1 cup gulab jamun mix",
+                    "Milk",
+                    "Sugar",
+                    "Water",
+                    "Cardamom",
+                    "Oil for frying"
+                ],
+                equipment: [
+                    "Mixing Bowl",
+                    "Kadai",
+                    "Knife"
+                ],
+                steps: [
+                    "Prepare the dough using gulab jamun mix and milk.",
+                    "Make small smooth balls.",
+                    "Heat oil and fry the balls until golden brown.",
+                    "Prepare sugar syrup with sugar, water and cardamom.",
+                    "Place fried jamuns into warm syrup.",
+                    "Allow them to soak for at least 30 minutes.",
+                    "Serve warm or chilled."
+                ],
+                tips: "Fry the jamuns on medium-low heat so they cook evenly inside."
+            },
+
+            ta: {
+                name: "குலாப் ஜாமூன்",
+                category: "இனிப்பு",
+                description: "சூடான சர்க்கரை பாகில் ஊறவைக்கப்பட்ட மென்மையான இந்திய இனிப்பு.",
+                prepTime: "20 நிமிடங்கள்",
+                cookTime: "25 நிமிடங்கள்",
+                servings: "6",
+                ingredients: [
+                    "1 கப் குலாப் ஜாமூன் மிக்ஸ்",
+                    "பால்",
+                    "சர்க்கரை",
+                    "தண்ணீர்",
+                    "ஏலக்காய்",
+                    "பொரிக்க எண்ணெய்"
+                ],
+                equipment: [
+                    "கலவை கிண்ணம்",
+                    "கடை",
+                    "கத்தி"
+                ],
+                steps: [
+                    "குலாப் ஜாமூன் மிக்ஸ் மற்றும் பாலைக் கொண்டு மாவு தயாரிக்கவும்.",
+                    "சிறிய உருண்டைகளை உருவாக்கவும்.",
+                    "எண்ணெயை சூடாக்கி உருண்டைகளை பொன்னிறமாக பொரிக்கவும்.",
+                    "சர்க்கரை, தண்ணீர் மற்றும் ஏலக்காய் சேர்த்து பாகு தயாரிக்கவும்.",
+                    "பொரித்த ஜாமூன்களை சூடான பாகில் போடவும்.",
+                    "குறைந்தது 30 நிமிடங்கள் ஊற விடவும்.",
+                    "சூடாக அல்லது குளிர்ச்சியாக பரிமாறவும்."
+                ],
+                tips: "ஜாமூனை உள்ளேயும் நன்றாக வேக வைக்க மிதமான தீயில் பொரிக்கவும்."
+            },
+
+            hi: {
+                name: "गुलाब जामुन",
+                category: "मिठाई",
+                description: "गर्म चीनी की चाशनी में भिगोई हुई नरम और रसदार भारतीय मिठाई।",
+                prepTime: "20 मिनट",
+                cookTime: "25 मिनट",
+                servings: "6",
+                ingredients: [
+                    "1 कप गुलाब जामुन मिक्स",
+                    "दूध",
+                    "चीनी",
+                    "पानी",
+                    "इलायची",
+                    "तलने के लिए तेल"
+                ],
+                equipment: [
+                    "मिक्सिंग बाउल",
+                    "कड़ाही",
+                    "चाकू"
+                ],
+                steps: [
+                    "गुलाब जामुन मिक्स और दूध से आटा तैयार करें।",
+                    "छोटी चिकनी गोलियाँ बनाएँ।",
+                    "तेल गरम करके गोलियों को सुनहरा होने तक तलें।",
+                    "चीनी, पानी और इलायची से चाशनी बनाएँ।",
+                    "तले हुए जामुन को गर्म चाशनी में डालें।",
+                    "कम से कम 30 मिनट भिगोने दें।",
+                    "गर्म या ठंडा परोसें।"
+                ],
+                tips: "जामुन को अंदर तक पकाने के लिए धीमी-मध्यम आँच पर तलें।"
+            },
+
+            ml: {
+                name: "ഗുലാബ് ജാമുൻ",
+                category: "മധുരപലഹാരം",
+                description: "ചൂടുള്ള പഞ്ചസാര സിറപ്പിൽ കുതിർന്ന മൃദുവായ ഇന്ത്യൻ മധുരപലഹാരം.",
+                prepTime: "20 മിനിറ്റ്",
+                cookTime: "25 മിനിറ്റ്",
+                servings: "6",
+                ingredients: [
+                    "1 കപ്പ് ഗുലാബ് ജാമുൻ മിക്സ്",
+                    "പാൽ",
+                    "പഞ്ചസാര",
+                    "വെള്ളം",
+                    "ഏലക്ക",
+                    "വറുക്കാൻ എണ്ണ"
+                ],
+                equipment: [
+                    "മിക്സിംഗ് ബൗൾ",
+                    "കടായി",
+                    "കത്തി"
+                ],
+                steps: [
+                    "ഗുലാബ് ജാമുൻ മിക്സും പാലും ഉപയോഗിച്ച് മാവ് തയ്യാറാക്കുക.",
+                    "ചെറിയ ഉരുളകൾ ഉണ്ടാക്കുക.",
+                    "എണ്ണ ചൂടാക്കി ഉരുളകൾ സ്വർണ്ണനിറമാകുന്നതുവരെ വറുക്കുക.",
+                    "പഞ്ചസാര, വെള്ളം, ഏലക്ക എന്നിവ ഉപയോഗിച്ച് സിറപ്പ് തയ്യാറാക്കുക.",
+                    "വറുത്ത ജാമുൻ ചൂടുള്ള സിറപ്പിൽ ഇടുക.",
+                    "കുറഞ്ഞത് 30 മിനിറ്റ് കുതിർക്കാൻ അനുവദിക്കുക.",
+                    "ചൂടോടെയോ തണുപ്പിച്ചോ വിളമ്പുക."
+                ],
+                tips: "ജാമുൻ ഉള്ളിലും നന്നായി വേവാൻ ഇടത്തരം കുറഞ്ഞ തീയിൽ വറുക്കുക."
+            },
+
+            te: {
+                name: "గులాబ్ జామూన్",
+                category: "స్వీట్స్",
+                description: "వెచ్చని చక్కెర పాకంలో నానబెట్టిన మెత్తని రుచికరమైన భారతీయ స్వీట్.",
+                prepTime: "20 నిమిషాలు",
+                cookTime: "25 నిమిషాలు",
+                servings: "6",
+                ingredients: [
+                    "1 కప్పు గులాబ్ జామూన్ మిక్స్",
+                    "పాలు",
+                    "చక్కెర",
+                    "నీరు",
+                    "ఏలకులు",
+                    "వేయించడానికి నూనె"
+                ],
+                equipment: [
+                    "మిక్సింగ్ బౌల్",
+                    "కడాయి",
+                    "కత్తి"
+                ],
+                steps: [
+                    "గులాబ్ జామూన్ మిక్స్ మరియు పాలతో పిండిని తయారు చేయండి.",
+                    "చిన్న గుండ్రని ఉండలు చేయండి.",
+                    "నూనె వేడి చేసి ఉండలను బంగారు రంగు వచ్చే వరకు వేయించండి.",
+                    "చక్కెర, నీరు మరియు ఏలకులతో పాకం తయారు చేయండి.",
+                    "వేయించిన జామూన్‌లను వెచ్చని పాకంలో వేయండి.",
+                    "కనీసం 30 నిమిషాలు నాననివ్వండి.",
+                    "వేడిగా లేదా చల్లగా వడ్డించండి."
+                ],
+                tips: "జామూన్ లోపల కూడా బాగా ఉడికేందుకు మీడియం-లో ఫ్లేమ్‌లో వేయించండి."
+            }
+
+        }
+
+    }
+
+};
+
+
+/* =====================================================
+   DEFAULT DATA FOR OTHER RECIPES
+===================================================== */
+
+function createSimpleRecipe(
+    name,
+    category,
+    emoji,
+    description,
+    prepTime,
+    cookTime,
+    servings,
+    ingredients,
+    equipment,
+    steps,
+    tips
+) {
+
+    return {
+        emoji: emoji,
+        rating: "⭐ 4.7",
+        ratings: "80",
+        translations: {
+            en: {
+                name,
+                category,
+                description,
+                prepTime,
+                cookTime,
+                servings,
+                ingredients,
+                equipment,
+                steps,
+                tips
+            }
+        }
+    };
+}
+
+
+/* ================= OTHER RECIPES ================= */
+
+recipes["vegetable-sandwich"] = createSimpleRecipe(
+    "Vegetable Sandwich",
+    "Snacks",
+    "🥪",
+    "A quick and healthy sandwich filled with fresh vegetables.",
+    "10 mins",
+    "10 mins",
+    "2",
+    ["Bread", "Tomato", "Onion", "Carrot", "Butter", "Salt"],
+    ["Frying Pan", "Knife", "Mixing Bowl"],
+    [
+        "Chop all vegetables.",
+        "Mix vegetables with salt.",
+        "Apply butter on bread.",
+        "Add vegetable filling.",
+        "Toast the sandwich on a pan.",
+        "Cut and serve."
+    ],
+    "Use fresh vegetables for better taste."
+);
+
+
+recipes["egg-fried-rice"] = createSimpleRecipe(
+    "Egg Fried Rice",
+    "Non-Veg",
+    "🍳",
+    "A quick fried rice made with eggs and vegetables.",
+    "10 mins",
+    "15 mins",
+    "2",
+    ["Cooked rice", "2 eggs", "Onion", "Carrot", "Soy sauce", "Salt"],
+    ["Frying Pan", "Knife"],
+    [
+        "Heat oil in a pan.",
+        "Add eggs and scramble them.",
+        "Add chopped vegetables.",
+        "Add cooked rice.",
+        "Add soy sauce and salt.",
+        "Mix well and serve hot."
+    ],
+    "Use cooled cooked rice for better fried rice."
+);
+
+
+recipes["paneer-butter-masala"] = createSimpleRecipe(
+    "Paneer Butter Masala",
+    "Veg",
+    "🧀",
+    "Creamy paneer curry prepared with tomato and butter.",
+    "15 mins",
+    "25 mins",
+    "3",
+    ["Paneer", "Tomato", "Onion", "Butter", "Cream", "Spices"],
+    ["Kadai", "Mixer Grinder", "Knife"],
+    [
+        "Cut paneer into cubes.",
+        "Prepare tomato-onion paste.",
+        "Heat butter in a kadai.",
+        "Add the paste and cook.",
+        "Add spices and cream.",
+        "Add paneer cubes.",
+        "Cook for a few minutes and serve."
+    ],
+    "Do not overcook paneer as it can become hard."
+);
+
+
+recipes["onion-pakoda"] = createSimpleRecipe(
+    "Onion Pakoda",
+    "Snacks",
+    "🧅",
+    "Crispy onion fritters made with gram flour.",
+    "10 mins",
+    "15 mins",
+    "4",
+    ["Onion", "Besan", "Green chilli", "Salt", "Oil"],
+    ["Kadai", "Mixing Bowl", "Knife"],
+    [
+        "Slice onions thinly.",
+        "Mix onions with besan and spices.",
+        "Add a little water and prepare the mixture.",
+        "Heat oil in a kadai.",
+        "Drop small portions into the oil.",
+        "Fry until crispy and golden.",
+        "Serve hot."
+    ],
+    "Do not add too much water to the mixture."
+);
+
+
+recipes["payasam"] = createSimpleRecipe(
+    "Payasam",
+    "Sweets",
+    "🥛",
+    "A traditional creamy Indian dessert made with milk and sugar.",
+    "10 mins",
+    "25 mins",
+    "4",
+    ["Milk", "Sugar", "Rice", "Cardamom", "Cashews"],
+    ["Kadai", "Mixing Bowl"],
+    [
+        "Boil milk.",
+        "Add washed rice.",
+        "Cook until rice becomes soft.",
+        "Add sugar and cardamom.",
+        "Add roasted cashews.",
+        "Serve warm or chilled."
+    ],
+    "Stir frequently to prevent milk from sticking."
+);
+
+
+recipes["vegetable-pulao"] = createSimpleRecipe(
+    "Vegetable Pulao",
+    "Veg",
+    "🍚",
+    "Aromatic rice cooked with mixed vegetables and spices.",
+    "15 mins",
+    "25 mins",
+    "4",
+    ["Rice", "Carrot", "Beans", "Peas", "Onion", "Spices"],
+    ["Pressure Cooker", "Knife", "Mixing Bowl"],
+    [
+        "Wash and soak rice.",
+        "Chop vegetables.",
+        "Fry onion and spices.",
+        "Add vegetables.",
+        "Add rice and water.",
+        "Cook until rice is done.",
+        "Serve hot."
+    ],
+    "Use fresh vegetables for better flavour."
+);
+
+
+recipes["chicken-65"] = createSimpleRecipe(
+    "Chicken 65",
+    "Non-Veg",
+    "🍗",
+    "Spicy and crispy fried chicken snack.",
+    "20 mins",
+    "20 mins",
+    "4",
+    ["Chicken", "Corn flour", "Chilli powder", "Ginger garlic paste", "Salt"],
+    ["Kadai", "Mixing Bowl", "Knife"],
+    [
+        "Cut chicken into small pieces.",
+        "Marinate chicken with spices.",
+        "Add corn flour.",
+        "Heat oil.",
+        "Deep fry chicken until crispy.",
+        "Serve hot."
+    ],
+    "Marinate the chicken for at least 30 minutes."
+);
+
+
+recipes["vegetable-samosa"] = createSimpleRecipe(
+    "Vegetable Samosa",
+    "Snacks",
+    "🥟",
+    "Crispy pastry filled with spicy vegetables.",
+    "25 mins",
+    "25 mins",
+    "6",
+    ["Samosa sheets", "Potato", "Peas", "Onion", "Spices"],
+    ["Kadai", "Knife", "Mixing Bowl"],
+    [
+        "Prepare potato and vegetable filling.",
+        "Fill the samosa sheets.",
+        "Fold into triangular shape.",
+        "Heat oil.",
+        "Fry until golden and crispy.",
+        "Serve with chutney."
+    ],
+    "Seal the edges properly before frying."
+);
+
+
+recipes["carrot-halwa"] = createSimpleRecipe(
+    "Carrot Halwa",
+    "Sweets",
+    "🥕",
+    "Sweet and creamy dessert made with grated carrots and milk.",
+    "15 mins",
+    "35 mins",
+    "4",
+    ["Carrot", "Milk", "Sugar", "Ghee", "Cashews"],
+    ["Kadai", "Knife"],
+    [
+        "Grate the carrots.",
+        "Cook carrots with milk.",
+        "Add sugar.",
+        "Add ghee and cook until thick.",
+        "Add roasted cashews.",
+        "Serve warm."
+    ],
+    "Use fresh red carrots for better colour and flavour."
+);
+
+
+recipes["banana-milkshake"] = createSimpleRecipe(
+    "Banana Milkshake",
+    "Drinks",
+    "🍌",
+    "A simple creamy banana milkshake.",
+    "5 mins",
+    "5 mins",
+    "2",
+    ["Banana", "Milk", "Sugar"],
+    ["Blender", "Knife"],
+    [
+        "Peel and cut bananas.",
+        "Add bananas and milk to a blender.",
+        "Add sugar.",
+        "Blend until smooth.",
+        "Serve chilled."
+    ],
+    "Use ripe bananas for natural sweetness."
+);
+
+
+recipes["idli"] = createSimpleRecipe(
+    "Idli",
+    "Veg",
+    "⚪",
+    "Soft and healthy South Indian steamed rice cakes.",
+    "10 mins",
+    "15 mins",
+    "4",
+    ["Idli batter", "Water", "Salt"],
+    ["Idli Cooker", "Mixing Bowl"],
+    [
+        "Prepare idli batter.",
+        "Grease the idli plates.",
+        "Pour batter into the moulds.",
+        "Steam for 10 to 15 minutes.",
+        "Remove carefully and serve."
+    ],
+    "Do not overfill the idli moulds."
+);
+
+
+recipes["steamed-vegetables"] = createSimpleRecipe(
+    "Steamed Vegetables",
+    "Veg",
+    "🥦",
+    "Healthy vegetables cooked gently using steam.",
+    "10 mins",
+    "15 mins",
+    "2",
+    ["Carrot", "Beans", "Broccoli", "Salt"],
+    ["Steamer", "Knife"],
+    [
+        "Wash the vegetables.",
+        "Cut them into small pieces.",
+        "Place them in the steamer.",
+        "Steam until tender.",
+        "Add salt.",
+        "Serve hot."
+    ],
+    "Avoid over-steaming to keep the vegetables crisp."
+);
+
+
+recipes["baked-cake"] = createSimpleRecipe(
+    "Baked Cake",
+    "Sweets",
+    "🍰",
+    "Soft homemade cake baked in an oven.",
+    "15 mins",
+    "35 mins",
+    "6",
+    ["Flour", "Sugar", "Milk", "Butter", "Baking powder"],
+    ["Oven", "Mixing Bowl"],
+    [
+        "Mix flour and baking powder.",
+        "Add sugar, milk and butter.",
+        "Prepare smooth batter.",
+        "Pour into a cake tin.",
+        "Bake until golden.",
+        "Cool before serving."
+    ],
+    "Preheat the oven before baking."
+);
+
+
+recipes["microwave-mug-cake"] = createSimpleRecipe(
+    "Microwave Mug Cake",
+    "Sweets",
+    "🍫",
+    "A quick single-serving cake prepared in a microwave.",
+    "5 mins",
+    "2 mins",
+    "1",
+    ["Flour", "Sugar", "Milk", "Cocoa powder"],
+    ["Microwave", "Mixing Bowl"],
+    [
+        "Add all ingredients into a mug.",
+        "Mix well.",
+        "Place the mug in the microwave.",
+        "Cook for about 1 to 2 minutes.",
+        "Allow it to cool slightly.",
+        "Enjoy."
+    ],
+    "Do not overcook because the cake can become dry."
+);
+
+
+recipes["aloo-roti"] = createSimpleRecipe(
+    "Aloo Roti",
+    "Veg",
+    "🫓",
+    "Indian flatbread stuffed with spicy potato filling.",
+    "20 mins",
+    "20 mins",
+    "4",
+    ["Wheat flour", "Potato", "Onion", "Spices", "Salt"],
+    ["Tawa", "Mixing Bowl", "Knife"],
+    [
+        "Prepare wheat flour dough.",
+        "Boil and mash potatoes.",
+        "Mix potatoes with onion and spices.",
+        "Stuff the filling into the dough.",
+        "Roll into a flatbread.",
+        "Cook on a hot tawa.",
+        "Serve hot."
+    ],
+    "Roll gently so the filling does not come out."
+);
+
+
+/* =====================================================
+   GET RECIPE ID
+===================================================== */
+
+const params = new URLSearchParams(window.location.search);
+
+const recipeId =
+    params.get("recipe") || "chicken-biryani";
+
+const recipe = recipes[recipeId];
+
+const container =
+    document.getElementById("recipeContainer");
+
+
+/* =====================================================
+   CURRENT LANGUAGE
+===================================================== */
+
+function getRecipeLanguage() {
+
+    return localStorage.getItem("cookmateLanguage") || "en";
+
+}
+
+
+/* =====================================================
+   GET TRANSLATION
+===================================================== */
+
+function getRecipeTranslation(recipe) {
+
+    const language = getRecipeLanguage();
+
+    if (recipe.translations[language]) {
+
+        return recipe.translations[language];
+
+    }
+
+    return recipe.translations.en;
+
+}
+
+
+/* =====================================================
+   RENDER RECIPE
+===================================================== */
+
+function renderRecipe() {
+
+    if (!recipe) {
+
+        container.innerHTML = `
+
+            <div class="not-found">
+
+                <h1>🍽️ Recipe Not Found</h1>
+
+                <p>
+                    The recipe you are looking for does not exist.
+                </p>
+
+                <br>
+
+                <a href="recipes.html" class="primary-btn">
+                    Browse Recipes
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const data = getRecipeTranslation(recipe);
+
+
+    const language =
+        getRecipeLanguage();
+
+
+    const labels = {
+
+        en: {
+            home: "Home",
+            recipes: "Recipes",
+            ingredients: "Ingredients",
+            equipment: "Equipment",
+            howToMake: "How to Make",
+            cookingTips: "Cooking Tips",
+            prepTime: "Prep Time",
+            cookTime: "Cook Time",
+            servings: "Servings",
+            save: "Save Recipe",
+            saved: "Saved Recipe",
+            shopping: "Shopping List",
+            related: "Related Recipes",
+            ingredientsTitle: "Ingredients",
+            equipmentTitle: "Equipment"
+        },
+
+        ta: {
+            home: "முகப்பு",
+            recipes: "சமையல் குறிப்புகள்",
+            ingredients: "தேவையான பொருட்கள்",
+            equipment: "சமையல் உபகரணங்கள்",
+            howToMake: "செய்முறை",
+            cookingTips: "சமையல் குறிப்புகள்",
+            prepTime: "தயாரிப்பு நேரம்",
+            cookTime: "சமைக்கும் நேரம்",
+            servings: "பரிமாறுதல்",
+            save: "சேமிக்கவும்",
+            saved: "சேமிக்கப்பட்டது",
+            shopping: "ஷாப்பிங் பட்டியல்",
+            related: "தொடர்புடைய சமையல்",
+            ingredientsTitle: "தேவையான பொருட்கள்",
+            equipmentTitle: "உபகரணங்கள்"
+        },
+
+        hi: {
+            home: "होम",
+            recipes: "रेसिपी",
+            ingredients: "सामग्री",
+            equipment: "उपकरण",
+            howToMake: "बनाने की विधि",
+            cookingTips: "खाना पकाने के सुझाव",
+            prepTime: "तैयारी का समय",
+            cookTime: "पकाने का समय",
+            servings: "सर्विंग",
+            save: "रेसिपी सेव करें",
+            saved: "सेव किया गया",
+            shopping: "शॉपिंग लिस्ट",
+            related: "संबंधित रेसिपी",
+            ingredientsTitle: "सामग्री",
+            equipmentTitle: "उपकरण"
+        },
+
+        ml: {
+            home: "ഹോം",
+            recipes: "പാചകക്കുറിപ്പുകൾ",
+            ingredients: "ചേരുവകൾ",
+            equipment: "ഉപകരണങ്ങൾ",
+            howToMake: "തയ്യാറാക്കുന്ന വിധം",
+            cookingTips: "പാചക ടിപ്പുകൾ",
+            prepTime: "തയ്യാറാക്കൽ സമയം",
+            cookTime: "പാചക സമയം",
+            servings: "സെർവിംഗ്",
+            save: "സേവ് ചെയ്യുക",
+            saved: "സേവ് ചെയ്തു",
+            shopping: "ഷോപ്പിംഗ് ലിസ്റ്റ്",
+            related: "ബന്ധപ്പെട്ട പാചകക്കുറിപ്പുകൾ",
+            ingredientsTitle: "ചേരുവകൾ",
+            equipmentTitle: "ഉപകരണങ്ങൾ"
+        },
+
+        te: {
+            home: "హోమ్",
+            recipes: "వంటకాలు",
+            ingredients: "పదార్థాలు",
+            equipment: "పరికరాలు",
+            howToMake: "తయారు చేసే విధానం",
+            cookingTips: "వంట చిట్కాలు",
+            prepTime: "తయారీ సమయం",
+            cookTime: "వంట సమయం",
+            servings: "సర్వింగ్స్",
+            save: "రెసిపీ సేవ్ చేయండి",
+            saved: "సేవ్ చేయబడింది",
+            shopping: "షాపింగ్ లిస్ట్",
+            related: "సంబంధిత వంటకాలు",
+            ingredientsTitle: "పదార్థాలు",
+            equipmentTitle: "పరికరాలు"
+        }
+
+    };
+
+
+    const t =
+        labels[language] || labels.en;
+
+
+    const favourites =
+        JSON.parse(
+            localStorage.getItem("cookmateFavourites") || "[]"
+        );
+
+
+    const isFavourite =
+        favourites.includes(recipeId);
+
+
+    container.innerHTML = `
 
         <div class="breadcrumb">
 
-            <a href="index.html" data-i18n="home">
-                Home
+            <a href="index.html">
+                ${t.home}
             </a>
 
             /
             
-            <a href="recipes.html" data-i18n="recipes">
-                Recipes
+            <a href="recipes.html">
+                ${t.recipes}
             </a>
 
             /
-
-            <span id="breadcrumbName">
-                Recipe
-            </span>
+            
+            ${data.name}
 
         </div>
 
 
-        <div class="recipe-details-header">
+        <!-- RECIPE HEADER -->
 
-            <div
-                class="recipe-big-image"
-                id="recipeImage"
-            >
-                🍳
+        <section class="recipe-detail-header">
+
+            <div class="recipe-big-image">
+
+                ${recipe.emoji}
+
             </div>
 
 
             <div>
 
-                <span
-                    class="recipe-category-label"
-                    id="recipeCategory"
-                >
-                    Recipe
+                <span class="recipe-category">
+
+                    ${data.category}
+
                 </span>
 
 
-                <h1 id="recipeName">
-                    Recipe
+                <h1>
+                    ${data.name}
                 </h1>
 
 
-                <div
-                    class="rating-box"
-                    id="recipeRating"
-                >
-                    ⭐⭐⭐⭐⭐ 4.8
+                <div class="recipe-rating">
+
+                    ${recipe.rating}
+
+                    (${recipe.ratings})
+
                 </div>
 
 
-                <p
-                    class="recipe-description"
-                    id="recipeDescription"
-                >
-                    Delicious recipe.
+                <p class="recipe-description">
+
+                    ${data.description}
+
                 </p>
+
+
+                <div class="recipe-info">
+
+                    <div class="info-box">
+
+                        ⏱️ <strong>
+                            ${t.prepTime}
+                        </strong><br>
+
+                        ${data.prepTime}
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        🔥 <strong>
+                            ${t.cookTime}
+                        </strong><br>
+
+                        ${data.cookTime}
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        👥 <strong>
+                            ${t.servings}
+                        </strong><br>
+
+                        ${data.servings}
+
+                    </div>
+
+                </div>
 
 
                 <div class="recipe-actions">
 
                     <button
                         class="primary-btn"
+                        onclick="toggleFavourite('${recipeId}')"
                         id="saveButton"
-                        onclick="toggleFavourite()"
                     >
-                        ♡ Save Recipe
+
+                        ${isFavourite ? "❤️ " + t.saved : "🤍 " + t.save}
+
                     </button>
 
 
@@ -388,1858 +1541,350 @@
                         class="secondary-btn"
                         onclick="showShoppingList()"
                     >
-                        🛒 Shopping List
+
+                        🛒 ${t.shopping}
+
                     </button>
 
                 </div>
 
             </div>
 
-        </div>
+        </section>
 
-    </section>
 
 
-    <!-- =========================
-         RECIPE INFORMATION
-    ========================== -->
+        <!-- INGREDIENTS + EQUIPMENT -->
 
-    <section class="info-section">
+        <section class="detail-grid">
 
-        <div
-            class="recipe-info-grid"
-            id="recipeInfo"
-        >
 
-            <div class="info-box">
-
-                <div class="info-box-icon">
-                    ⏱️
-                </div>
-
-                <h3 data-i18n="prepTime">
-                    Prep Time
-                </h3>
-
-                <p id="prepTime">
-                    -
-                </p>
-
-            </div>
-
-
-            <div class="info-box">
-
-                <div class="info-box-icon">
-                    🍳
-                </div>
-
-                <h3 data-i18n="cookTime">
-                    Cook Time
-                </h3>
-
-                <p id="cookTime">
-                    -
-                </p>
-
-            </div>
-
-
-            <div class="info-box">
-
-                <div class="info-box-icon">
-                    👥
-                </div>
-
-                <h3 data-i18n="servings">
-                    Servings
-                </h3>
-
-                <p id="servings">
-                    -
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         INGREDIENTS + EQUIPMENT
-    ========================== -->
-
-    <section class="recipe-content">
-
-
-        <!-- INGREDIENTS -->
-
-        <div class="content-card">
-
-            <h2 data-i18n="ingredientsTitle">
-                🥕 Ingredients
-            </h2>
-
-            <ul
-                class="ingredient-list"
-                id="ingredientList"
-            >
-            </ul>
-
-        </div>
-
-
-        <!-- EQUIPMENT -->
-
-        <div class="content-card">
-
-            <h2 data-i18n="equipmentTitle">
-                🍳 Equipment
-            </h2>
-
-            <ul
-                class="equipment-list"
-                id="equipmentList"
-            >
-            </ul>
-
-        </div>
-
-
-        <!-- =========================
-             HOW TO MAKE
-        ========================== -->
-
-        <div class="content-card full-width">
-
-            <h2 data-i18n="howToMake">
-                👨‍🍳 How to Make
-            </h2>
-
-            <ol
-                class="steps-list"
-                id="stepsList"
-            >
-            </ol>
-
-        </div>
-
-
-        <!-- =========================
-             COOKING TIPS
-        ========================== -->
-
-        <div class="content-card full-width">
-
-            <h2 data-i18n="cookingTips">
-                💡 Cooking Tips
-            </h2>
-
-            <div id="tipsList">
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         RELATED RECIPES
-    ========================== -->
-
-    <section class="related-section">
-
-        <div class="section-heading">
-
-            <p class="section-label">
-                🍽️ EXPLORE MORE
-            </p>
-
-            <h2 data-i18n="relatedRecipes">
-                Related Recipes
-            </h2>
-
-        </div>
-
-
-        <div
-            class="related-grid"
-            id="relatedRecipes"
-        >
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
-
-    <footer class="footer">
-
-        <div class="footer-content">
-
-            <div>
+            <div class="detail-box">
 
                 <h2>
-                    🍳 CookMate
+                    🥕 ${t.ingredientsTitle}
                 </h2>
 
-                <p data-i18n="footerDescription">
-                    Your smart cooking companion for
-                    simple and delicious recipes.
-                </p>
+                <ul class="ingredient-list">
+
+                    ${data.ingredients
+                        .map(item => `<li>${item}</li>`)
+                        .join("")}
+
+                </ul>
 
             </div>
 
 
-            <div class="footer-links">
+            <div class="detail-box">
 
-                <a href="index.html" data-i18n="home">
-                    Home
-                </a>
+                <h2>
+                    🍳 ${t.equipmentTitle}
+                </h2>
 
-                <a href="recipes.html" data-i18n="recipes">
-                    Recipes
-                </a>
+                <ul class="equipment-list">
 
-                <a href="ingredients.html" data-i18n="ingredients">
-                    Ingredients
-                </a>
+                    ${data.equipment
+                        .map(item => `<li>${item}</li>`)
+                        .join("")}
 
-                <a href="equipment.html" data-i18n="equipment">
-                    Equipment
-                </a>
-
-                <a href="favourites.html" data-i18n="favourites">
-                    Favourites
-                </a>
-
-                <a href="profile.html" data-i18n="profile">
-                    Profile
-                </a>
+                </ul>
 
             </div>
 
-        </div>
+        </section>
 
 
-        <div class="footer-bottom">
 
-            <p data-i18n="madeForFoodLovers">
-                © 2026 CookMate. Made for food lovers ❤️
+        <!-- HOW TO MAKE -->
+
+        <section class="detail-box">
+
+            <h2>
+                👩‍🍳 ${t.howToMake}
+            </h2>
+
+            <ol class="steps-list">
+
+                ${data.steps
+                    .map(step => `<li>${step}</li>`)
+                    .join("")}
+
+            </ol>
+
+        </section>
+
+
+        <br>
+
+
+        <!-- TIPS -->
+
+        <section class="tips-box">
+
+            <h2>
+                💡 ${t.cookingTips}
+            </h2>
+
+            <p>
+                ${data.tips}
             </p>
 
-        </div>
+        </section>
 
-    </footer>
 
+        <!-- RELATED -->
 
-    <!-- =========================
-         JAVASCRIPT
-    ========================== -->
+        <section class="related-section">
 
-    <script src="js/script.js"></script>
+            <h2>
+                🍽️ ${t.related}
+            </h2>
 
+            <br>
 
-    <script>
+            <div class="related-grid">
 
-        /* ==========================================
-           LANGUAGE DATA
-        ========================================== */
+                ${getRelatedRecipes(recipeId, language)}
 
-        const detailTranslations = {
+            </div>
 
-            en: {
+        </section>
 
-                prepTime: "Prep Time",
-                cookTime: "Cook Time",
-                servings: "Servings",
+    `;
 
-                ingredientsTitle: "🥕 Ingredients",
-                equipmentTitle: "🍳 Equipment",
-                howToMake: "👨‍🍳 How to Make",
-                cookingTips: "💡 Cooking Tips",
-                relatedRecipes: "Related Recipes",
+}
 
-                saveRecipe: "♡ Save Recipe",
-                savedRecipe: "♥ Saved",
-                shoppingList: "🛒 Shopping List",
 
-                viewRecipe: "View Recipe →",
+/* =====================================================
+   RELATED RECIPES
+===================================================== */
 
-                category: {
-                    veg: "Veg",
-                    nonveg: "Non-Veg",
-                    sweets: "Sweets",
-                    snacks: "Snacks"
-                },
+function getRelatedRecipes(currentId, language) {
 
-                shoppingMessage:
-                    "Shopping List:\\n\\n",
+    const relatedIds =
+        Object.keys(recipes)
+            .filter(id => id !== currentId)
+            .slice(0, 3);
 
-                savedMessage:
-                    "Recipe saved to favourites!",
 
-                removedMessage:
-                    "Recipe removed from favourites!"
+    return relatedIds.map(id => {
 
-            },
+        const item = recipes[id];
 
+        const data =
+            item.translations[language] ||
+            item.translations.en;
 
-            ta: {
 
-                prepTime: "தயாரிப்பு நேரம்",
-                cookTime: "சமைக்கும் நேரம்",
-                servings: "பரிமாறுதல்",
+        return `
 
-                ingredientsTitle: "🥕 தேவையான பொருட்கள்",
-                equipmentTitle: "🍳 சமையல் உபகரணங்கள்",
-                howToMake: "👨‍🍳 செய்வது எப்படி",
-                cookingTips: "💡 சமையல் குறிப்புகள்",
-                relatedRecipes: "தொடர்புடைய சமையல் குறிப்புகள்",
+            <div class="related-card">
 
-                saveRecipe: "♡ சேமிக்கவும்",
-                savedRecipe: "♥ சேமிக்கப்பட்டது",
-                shoppingList: "🛒 வாங்க வேண்டிய பொருட்கள்",
+                <div class="food-icon">
 
-                viewRecipe: "செய்முறையைப் பார்க்க →",
+                    ${item.emoji}
 
-                category: {
-                    veg: "சைவம்",
-                    nonveg: "அசைவம்",
-                    sweets: "இனிப்புகள்",
-                    snacks: "சிற்றுண்டிகள்"
-                },
+                </div>
 
-                shoppingMessage:
-                    "வாங்க வேண்டிய பொருட்கள்:\\n\\n",
+                <h3>
 
-                savedMessage:
-                    "சமையல் குறிப்பு பிடித்தவைகளில் சேமிக்கப்பட்டது!",
+                    ${data.name}
 
-                removedMessage:
-                    "சமையல் குறிப்பு பிடித்தவைகளிலிருந்து நீக்கப்பட்டது!"
+                </h3>
 
-            },
+                <p>
 
+                    ${data.category}
 
-            hi: {
+                </p>
 
-                prepTime: "तैयारी का समय",
-                cookTime: "पकाने का समय",
-                servings: "सर्विंग्स",
+                <br>
 
-                ingredientsTitle: "🥕 सामग्री",
-                equipmentTitle: "🍳 रसोई के उपकरण",
-                howToMake: "👨‍🍳 बनाने की विधि",
-                cookingTips: "💡 खाना पकाने के सुझाव",
-                relatedRecipes: "संबंधित रेसिपी",
+                <a
+                    href="recipe-details.html?recipe=${id}"
+                    class="primary-btn"
+                >
 
-                saveRecipe: "♡ सेव करें",
-                savedRecipe: "♥ सेव किया गया",
-                shoppingList: "🛒 खरीदारी सूची",
+                    View Recipe
 
-                viewRecipe: "रेसिपी देखें →",
+                </a>
 
-                category: {
-                    veg: "शाकाहारी",
-                    nonveg: "मांसाहारी",
-                    sweets: "मिठाइयाँ",
-                    snacks: "स्नैक्स"
-                },
+            </div>
 
-                shoppingMessage:
-                    "खरीदारी सूची:\\n\\n",
+        `;
 
-                savedMessage:
-                    "रेसिपी पसंदीदा में सेव की गई!",
+    }).join("");
 
-                removedMessage:
-                    "रेसिपी पसंदीदा से हटा दी गई!"
+}
 
-            },
 
+/* =====================================================
+   FAVOURITE
+===================================================== */
 
-            ml: {
+function getFavourites() {
 
-                prepTime: "തയ്യാറാക്കുന്ന സമയം",
-                cookTime: "പാചക സമയം",
-                servings: "സെർവിംഗുകൾ",
+    return JSON.parse(
+        localStorage.getItem("cookmateFavourites") || "[]"
+    );
 
-                ingredientsTitle: "🥕 ചേരുവകൾ",
-                equipmentTitle: "🍳 പാചക ഉപകരണങ്ങൾ",
-                howToMake: "👨‍🍳 തയ്യാറാക്കുന്ന വിധം",
-                cookingTips: "💡 പാചക നുറുങ്ങുകൾ",
-                relatedRecipes: "ബന്ധപ്പെട്ട പാചകക്കുറിപ്പുകൾ",
+}
 
-                saveRecipe: "♡ സേവ് ചെയ്യുക",
-                savedRecipe: "♥ സേവ് ചെയ്തു",
-                shoppingList: "🛒 വാങ്ങേണ്ട സാധനങ്ങൾ",
 
-                viewRecipe: "പാചകക്കുറിപ്പ് കാണുക →",
+function toggleFavourite(id) {
 
-                category: {
-                    veg: "സസ്യാഹാരം",
-                    nonveg: "മാംസാഹാരം",
-                    sweets: "മധുരപലഹാരങ്ങൾ",
-                    snacks: "സ്നാക്കുകൾ"
-                },
+    let favourites =
+        getFavourites();
 
-                shoppingMessage:
-                    "വാങ്ങേണ്ട സാധനങ്ങൾ:\\n\\n",
 
-                savedMessage:
-                    "പാചകക്കുറിപ്പ് പ്രിയപ്പെട്ടവയിൽ സേവ് ചെയ്തു!",
+    const language =
+        getRecipeLanguage();
 
-                removedMessage:
-                    "പാചകക്കുറിപ്പ് പ്രിയപ്പെട്ടവയിൽ നിന്ന് നീക്കി!"
 
-            },
-
-
-            te: {
-
-                prepTime: "తయారీ సమయం",
-                cookTime: "వంట సమయం",
-                servings: "సర్వింగ్స్",
-
-                ingredientsTitle: "🥕 కావలసిన పదార్థాలు",
-                equipmentTitle: "🍳 వంట పరికరాలు",
-                howToMake: "👨‍🍳 తయారు చేసే విధానం",
-                cookingTips: "💡 వంట చిట్కాలు",
-                relatedRecipes: "సంబంధిత వంటకాలు",
-
-                saveRecipe: "♡ సేవ్ చేయండి",
-                savedRecipe: "♥ సేవ్ చేయబడింది",
-                shoppingList: "🛒 కొనాల్సిన వస్తువులు",
-
-                viewRecipe: "వంటకాన్ని చూడండి →",
-
-                category: {
-                    veg: "శాకాహారం",
-                    nonveg: "మాంసాహారం",
-                    sweets: "తీపి వంటకాలు",
-                    snacks: "స్నాక్స్"
-                },
-
-                shoppingMessage:
-                    "కొనాల్సిన వస్తువులు:\\n\\n",
-
-                savedMessage:
-                    "వంటకం ఇష్టమైన వాటిలో సేవ్ చేయబడింది!",
-
-                removedMessage:
-                    "వంటకం ఇష్టమైన వాటి నుండి తొలగించబడింది!"
-
-            }
-
-        };
-
-
-        /* ==========================================
-           RECIPE DATABASE
-        ========================================== */
-
-        const recipes = {
-
-            "chicken-biryani": {
-
-                emoji: "🍗🍚",
-
-                category: "nonveg",
-
-                rating: "⭐⭐⭐⭐⭐ 4.9 / 5",
-
-                prepTime: "20 min",
-                cookTime: "40 min",
-                servings: "4",
-
-                name: {
-                    en: "Chicken Biryani",
-                    ta: "சிக்கன் பிரியாணி",
-                    hi: "चिकन बिरयानी",
-                    ml: "ചിക്കൻ ബിരിയാണി",
-                    te: "చికెన్ బిర్యానీ"
-                },
-
-                description: {
-                    en: "Aromatic chicken biryani made with flavorful rice, spices and tender chicken.",
-                    ta: "மணம் மிக்க அரிசி, மசாலா மற்றும் மென்மையான சிக்கனுடன் செய்யப்படும் சுவையான பிரியாணி.",
-                    hi: "खुशबूदार चावल, मसालों और नरम चिकन से बनी स्वादिष्ट बिरयानी।",
-                    ml: "സുഗന്ധമുള്ള അരിയും മസാലകളും മൃദുവായ ചിക്കനും ചേർത്ത് തയ്യാറാക്കുന്ന രുചികരമായ ബിരിയാണി.",
-                    te: "సువాసనగల బియ్యం, మసాలాలు మరియు మృదువైన చికెన్‌తో తయారు చేసే రుచికరమైన బిర్యానీ."
-                },
-
-                ingredients: {
-                    en: [
-                        "2 cups Basmati rice",
-                        "500 g chicken",
-                        "2 onions",
-                        "2 tomatoes",
-                        "1/2 cup curd",
-                        "2 tbsp ginger-garlic paste",
-                        "Biryani masala",
-                        "Salt",
-                        "Oil",
-                        "Mint and coriander"
-                    ],
-                    ta: [
-                        "2 கப் பாஸ்மதி அரிசி",
-                        "500 கிராம் சிக்கன்",
-                        "2 வெங்காயம்",
-                        "2 தக்காளி",
-                        "1/2 கப் தயிர்",
-                        "2 மேசைக்கரண்டி இஞ்சி-பூண்டு விழுது",
-                        "பிரியாணி மசாலா",
-                        "உப்பு",
-                        "எண்ணெய்",
-                        "புதினா மற்றும் கொத்தமல்லி"
-                    ],
-                    hi: [
-                        "2 कप बासमती चावल",
-                        "500 ग्राम चिकन",
-                        "2 प्याज",
-                        "2 टमाटर",
-                        "1/2 कप दही",
-                        "2 बड़े चम्मच अदरक-लहसुन पेस्ट",
-                        "बिरयानी मसाला",
-                        "नमक",
-                        "तेल",
-                        "पुदीना और धनिया"
-                    ],
-                    ml: [
-                        "2 കപ്പ് ബാസ്മതി അരി",
-                        "500 ഗ്രാം ചിക്കൻ",
-                        "2 സവാള",
-                        "2 തക്കാളി",
-                        "1/2 കപ്പ് തൈര്",
-                        "2 ടേബിൾസ്പൂൺ ഇഞ്ചി-വെളുത്തുള്ളി പേസ്റ്റ്",
-                        "ബിരിയാണി മസാല",
-                        "ഉപ്പ്",
-                        "എണ്ണ",
-                        "പുതിനയും മല്ലിയിലയും"
-                    ],
-                    te: [
-                        "2 కప్పులు బాస్మతి బియ్యం",
-                        "500 గ్రాముల చికెన్",
-                        "2 ఉల్లిపాయలు",
-                        "2 టమోటాలు",
-                        "1/2 కప్పు పెరుగు",
-                        "2 టేబుల్ స్పూన్లు అల్లం-వెల్లుల్లి పేస్ట్",
-                        "బిర్యానీ మసాలా",
-                        "ఉప్పు",
-                        "నూనె",
-                        "పుదీనా మరియు కొత్తిమీర"
-                    ]
-                },
-
-                equipment: {
-                    en: [
-                        "Pressure Cooker",
-                        "Frying Pan",
-                        "Knife",
-                        "Mixing Bowl"
-                    ],
-                    ta: [
-                        "பிரஷர் குக்கர்",
-                        "வாணலி",
-                        "கத்தி",
-                        "கலவை கிண்ணம்"
-                    ],
-                    hi: [
-                        "प्रेशर कुकर",
-                        "फ्राइंग पैन",
-                        "चाकू",
-                        "मिक्सिंग बाउल"
-                    ],
-                    ml: [
-                        "പ്രഷർ കുക്കർ",
-                        "ഫ്രൈയിംഗ് പാൻ",
-                        "കത്തി",
-                        "മിക്സിംഗ് ബൗൾ"
-                    ],
-                    te: [
-                        "ప్రెషర్ కుక్కర్",
-                        "ఫ్రైయింగ్ పాన్",
-                        "కత్తి",
-                        "మిక్సింగ్ బౌల్"
-                    ]
-                },
-
-                steps: {
-                    en: [
-                        "Wash and soak the rice for about 20 minutes.",
-                        "Marinate the chicken with curd, spices, salt and ginger-garlic paste.",
-                        "Heat oil and sauté onions until golden brown.",
-                        "Add tomatoes and cook until soft.",
-                        "Add marinated chicken and cook well.",
-                        "Add soaked rice and required water.",
-                        "Cook until the rice is completely done.",
-                        "Garnish with mint and coriander and serve hot."
-                    ],
-                    ta: [
-                        "அரிசியை கழுவி சுமார் 20 நிமிடங்கள் ஊற வைக்கவும்.",
-                        "சிக்கனை தயிர், மசாலா, உப்பு மற்றும் இஞ்சி-பூண்டு விழுதுடன் ஊற வைக்கவும்.",
-                        "எண்ணெயை சூடாக்கி வெங்காயத்தை பொன்னிறமாக வதக்கவும்.",
-                        "தக்காளியை சேர்த்து மென்மையாகும் வரை சமைக்கவும்.",
-                        "ஊற வைத்த சிக்கனை சேர்த்து நன்றாக சமைக்கவும்.",
-                        "ஊற வைத்த அரிசி மற்றும் தேவையான தண்ணீர் சேர்க்கவும்.",
-                        "அரிசி நன்றாக வெந்ததும் இறக்கவும்.",
-                        "புதினா மற்றும் கொத்தமல்லியால் அலங்கரித்து சூடாக பரிமாறவும்."
-                    ],
-                    hi: [
-                        "चावल को धोकर लगभग 20 मिनट भिगोएँ।",
-                        "चिकन को दही, मसाले, नमक और अदरक-लहसुन पेस्ट के साथ मैरिनेट करें।",
-                        "तेल गर्म करके प्याज को सुनहरा होने तक भूनें।",
-                        "टमाटर डालकर नरम होने तक पकाएँ।",
-                        "मैरिनेट किया हुआ चिकन डालकर अच्छी तरह पकाएँ।",
-                        "भीगे हुए चावल और आवश्यक पानी डालें।",
-                        "चावल पूरी तरह पकने तक पकाएँ।",
-                        "पुदीना और धनिया से सजाकर गरम परोसें।"
-                    ],
-                    ml: [
-                        "അരി കഴുകി ഏകദേശം 20 മിനിറ്റ് കുതിർക്കുക.",
-                        "ചിക്കൻ തൈര്, മസാല, ഉപ്പ്, ഇഞ്ചി-വെളുത്തുള്ളി പേസ്റ്റ് എന്നിവ ചേർത്ത് മാരിനേറ്റ് ചെയ്യുക.",
-                        "എണ്ണ ചൂടാക്കി സവാള സ്വർണ്ണനിറമാകുന്നത് വരെ വഴറ്റുക.",
-                        "തക്കാളി ചേർത്ത് മൃദുവാകുന്നത് വരെ വേവിക്കുക.",
-                        "മാരിനേറ്റ് ചെയ്ത ചിക്കൻ ചേർത്ത് നന്നായി വേവിക്കുക.",
-                        "കുതിർന്ന അരിയും ആവശ്യത്തിന് വെള്ളവും ചേർക്കുക.",
-                        "അരി പൂർണ്ണമായി വേവുന്നത് വരെ പാകം ചെയ്യുക.",
-                        "പുതിനയും മല്ലിയിലയും ചേർത്ത് ചൂടോടെ വിളമ്പുക."
-                    ],
-                    te: [
-                        "బియ్యాన్ని కడిగి సుమారు 20 నిమిషాలు నానబెట్టండి.",
-                        "చికెన్‌ను పెరుగు, మసాలాలు, ఉప్పు మరియు అల్లం-వెల్లుల్లి పేస్ట్‌తో మారినేట్ చేయండి.",
-                        "నూనె వేడి చేసి ఉల్లిపాయలను బంగారు రంగు వచ్చే వరకు వేయించండి.",
-                        "టమోటాలు వేసి మెత్తబడే వరకు ఉడికించండి.",
-                        "మారినేట్ చేసిన చికెన్ వేసి బాగా ఉడికించండి.",
-                        "నానబెట్టిన బియ్యం మరియు అవసరమైన నీరు వేయండి.",
-                        "బియ్యం పూర్తిగా ఉడికే వరకు ఉడికించండి.",
-                        "పుదీనా మరియు కొత్తిమీరతో అలంకరించి వేడిగా వడ్డించండి."
-                    ]
-                },
-
-                tips: {
-                    en: [
-                        "Use good quality basmati rice for better texture.",
-                        "Do not add too much water.",
-                        "Allow the biryani to rest for 5 minutes before serving."
-                    ],
-                    ta: [
-                        "நல்ல தரமான பாஸ்மதி அரிசியை பயன்படுத்தவும்.",
-                        "அதிகமாக தண்ணீர் சேர்க்க வேண்டாம்.",
-                        "பரிமாறுவதற்கு முன் 5 நிமிடங்கள் பிரியாணியை அப்படியே வைக்கவும்."
-                    ],
-                    hi: [
-                        "बेहतर स्वाद और बनावट के लिए अच्छी गुणवत्ता वाले बासमती चावल का उपयोग करें।",
-                        "बहुत अधिक पानी न डालें।",
-                        "परोसने से पहले बिरयानी को 5 मिनट आराम दें।"
-                    ],
-                    ml: [
-                        "നല്ല ഗുണമേന്മയുള്ള ബാസ്മതി അരി ഉപയോഗിക്കുക.",
-                        "വളരെ അധികം വെള്ളം ചേർക്കരുത്.",
-                        "വിളമ്പുന്നതിന് മുമ്പ് ബിരിയാണി 5 മിനിറ്റ് വയ്ക്കുക."
-                    ],
-                    te: [
-                        "మంచి నాణ్యత గల బాస్మతి బియ్యం ఉపయోగించండి.",
-                        "ఎక్కువ నీరు వేయకండి.",
-                        "వడ్డించే ముందు బిర్యానీని 5 నిమిషాలు ఉంచండి."
-                    ]
-                }
-
-            },
-
-
-            "masala-dosa": {
-
-                emoji: "🥞🥔",
-                category: "veg",
-                rating: "⭐⭐⭐⭐⭐ 4.8 / 5",
-
-                prepTime: "15 min",
-                cookTime: "20 min",
-                servings: "4",
-
-                name: {
-                    en: "Masala Dosa",
-                    ta: "மசாலா தோசை",
-                    hi: "मसाला डोसा",
-                    ml: "മസാല ദോശ",
-                    te: "మసాలా దోస"
-                },
-
-                description: {
-                    en: "Crispy South Indian dosa filled with delicious spiced potato masala.",
-                    ta: "சுவையான மசாலா உருளைக்கிழங்குடன் நிரப்பப்பட்ட மொறுமொறுப்பான தென்னிந்திய தோசை.",
-                    hi: "स्वादिष्ट मसालेदार आलू से भरा हुआ कुरकुरा दक्षिण भारतीय डोसा।",
-                    ml: "രുചികരമായ മസാല ഉരുളക്കിഴങ്ങ് നിറച്ച ക്രിസ്പിയായ ദക്ഷിണേന്ത്യൻ ദോശ.",
-                    te: "రుచికరమైన మసాలా ఆలూ ఫిల్లింగ్‌తో తయారు చేసే క్రిస్పీ దక్షిణ భారత దోస."
-                },
-
-                ingredients: {
-                    en: [
-                        "2 cups dosa batter",
-                        "3 potatoes",
-                        "1 onion",
-                        "Green chillies",
-                        "Mustard seeds",
-                        "Turmeric",
-                        "Salt",
-                        "Oil"
-                    ],
-                    ta: [
-                        "2 கப் தோசை மாவு",
-                        "3 உருளைக்கிழங்கு",
-                        "1 வெங்காயம்",
-                        "பச்சை மிளகாய்",
-                        "கடுகு",
-                        "மஞ்சள் தூள்",
-                        "உப்பு",
-                        "எண்ணெய்"
-                    ],
-                    hi: [
-                        "2 कप डोसा बैटर",
-                        "3 आलू",
-                        "1 प्याज",
-                        "हरी मिर्च",
-                        "सरसों",
-                        "हल्दी",
-                        "नमक",
-                        "तेल"
-                    ],
-                    ml: [
-                        "2 കപ്പ് ദോശ മാവ്",
-                        "3 ഉരുളക്കിഴങ്ങ്",
-                        "1 സവാള",
-                        "പച്ചമുളക്",
-                        "കടുക്",
-                        "മഞ്ഞൾപ്പൊടി",
-                        "ഉപ്പ്",
-                        "എണ്ണ"
-                    ],
-                    te: [
-                        "2 కప్పుల దోస పిండి",
-                        "3 ఆలుగడ్డలు",
-                        "1 ఉల్లిపాయ",
-                        "పచ్చిమిరపకాయలు",
-                        "ఆవాలు",
-                        "పసుపు",
-                        "ఉప్పు",
-                        "నూనె"
-                    ]
-                },
-
-                equipment: {
-                    en: [
-                        "Tawa",
-                        "Knife",
-                        "Mixing Bowl"
-                    ],
-                    ta: [
-                        "தோசைக்கல்",
-                        "கத்தி",
-                        "கலவை கிண்ணம்"
-                    ],
-                    hi: [
-                        "तवा",
-                        "चाकू",
-                        "मिक्सिंग बाउल"
-                    ],
-                    ml: [
-                        "ദോശക്കല്ല്",
-                        "കത്തി",
-                        "മിക്സിംഗ് ബൗൾ"
-                    ],
-                    te: [
-                        "తవా",
-                        "కత్తి",
-                        "మిక్సింగ్ బౌల్"
-                    ]
-                },
-
-                steps: {
-                    en: [
-                        "Prepare the potato masala with boiled potatoes, onion and spices.",
-                        "Heat the tawa and spread dosa batter into a thin circle.",
-                        "Drizzle some oil around the dosa.",
-                        "Cook until the bottom becomes crispy.",
-                        "Place potato masala in the centre.",
-                        "Fold the dosa and serve hot."
-                    ],
-                    ta: [
-                        "வேகவைத்த உருளைக்கிழங்கு, வெங்காயம் மற்றும் மசாலாவுடன் உருளைக்கிழங்கு மசாலா தயாரிக்கவும்.",
-                        "தோசைக்கல்லை சூடாக்கி மாவை மெல்லிய வட்டமாக ஊற்றவும்.",
-                        "தோசையைச் சுற்றி சிறிது எண்ணெய் ஊற்றவும்.",
-                        "கீழ்ப்பக்கம் மொறுமொறுப்பாகும் வரை சமைக்கவும்.",
-                        "நடுவில் உருளைக்கிழங்கு மசாலாவை வைக்கவும்.",
-                        "தோசையை மடித்து சூடாக பரிமாறவும்."
-                    ],
-                    hi: [
-                        "उबले हुए आलू, प्याज और मसालों से आलू मसाला तैयार करें।",
-                        "तवा गर्म करके डोसा बैटर को पतले गोल आकार में फैलाएँ।",
-                        "डोसे के चारों ओर थोड़ा तेल डालें।",
-                        "नीचे से कुरकुरा होने तक पकाएँ।",
-                        "बीच में आलू मसाला रखें।",
-                        "डोसा मोड़कर गरम परोसें।"
-                    ],
-                    ml: [
-                        "വേവിച്ച ഉരുളക്കിഴങ്ങ്, സവാള, മസാല എന്നിവ ഉപയോഗിച്ച് മസാല തയ്യാറാക്കുക.",
-                        "ദോശക്കല്ല് ചൂടാക്കി ദോശമാവ് നേർത്ത വൃത്താകൃതിയിൽ പരത്തുക.",
-                        "ദോശയുടെ ചുറ്റും കുറച്ച് എണ്ണ ഒഴിക്കുക.",
-                        "താഴെ ഭാഗം ക്രിസ്പിയാകുന്നത് വരെ വേവിക്കുക.",
-                        "നടുവിൽ ഉരുളക്കിഴങ്ങ് മസാല വയ്ക്കുക.",
-                        "ദോശ മടക്കി ചൂടോടെ വിളമ്പുക."
-                    ],
-                    te: [
-                        "ఉడికించిన ఆలుగడ్డలు, ఉల్లిపాయ మరియు మసాలాలతో ఆలూ మసాలా తయారు చేయండి.",
-                        "తవాను వేడి చేసి దోస పిండిని పలుచగా గుండ్రంగా పోయండి.",
-                        "దోస చుట్టూ కొద్దిగా నూనె వేయండి.",
-                        "కింద భాగం క్రిస్పీగా అయ్యే వరకు ఉడికించండి.",
-                        "మధ్యలో ఆలూ మసాలా పెట్టండి.",
-                        "దోసను మడిచి వేడిగా వడ్డించండి."
-                    ]
-                },
-
-                tips: {
-                    en: [
-                        "Keep the batter at the right consistency.",
-                        "A hot tawa gives a crispier dosa.",
-                        "Serve immediately for the best texture."
-                    ],
-                    ta: [
-                        "மாவை சரியான பதத்தில் வைத்திருக்கவும்.",
-                        "சூடான தோசைக்கல் மொறுமொறுப்பான தோசையை தரும்.",
-                        "சிறந்த சுவைக்காக உடனடியாக பரிமாறவும்."
-                    ],
-                    hi: [
-                        "बैटर की सही consistency रखें।",
-                        "गर्म तवे से डोसा अधिक कुरकुरा बनेगा।",
-                        "बेहतर स्वाद के लिए तुरंत परोसें।"
-                    ],
-                    ml: [
-                        "മാവിന്റെ ശരിയായ കട്ട നിലനിർത്തുക.",
-                        "ചൂടുള്ള ദോശക്കല്ലിൽ കൂടുതൽ ക്രിസ്പിയായ ദോശ ലഭിക്കും.",
-                        "മികച്ച രുചിക്കായി ഉടൻ വിളമ്പുക."
-                    ],
-                    te: [
-                        "పిండి సరైన గాఢతలో ఉండేలా చూసుకోండి.",
-                        "వేడి తవా క్రిస్పీ దోసను ఇస్తుంది.",
-                        "మంచి రుచి కోసం వెంటనే వడ్డించండి."
-                    ]
-                }
-
-            },
-
-
-            "gulab-jamun": {
-
-                emoji: "🍩🍯",
-                category: "sweets",
-                rating: "⭐⭐⭐⭐⭐ 4.9 / 5",
-
-                prepTime: "15 min",
-                cookTime: "20 min",
-                servings: "4",
-
-                name: {
-                    en: "Gulab Jamun",
-                    ta: "குலாப் ஜாமூன்",
-                    hi: "गुलाब जामुन",
-                    ml: "ഗുലാബ് ജാമുൻ",
-                    te: "గులాబ్ జామూన్"
-                },
-
-                description: {
-                    en: "Soft sweet dumplings soaked in warm sugar syrup.",
-                    ta: "சூடான சர்க்கரை பாகில் ஊறவைக்கப்படும் மென்மையான இனிப்பு உருண்டைகள்.",
-                    hi: "गर्म चीनी की चाशनी में भिगोए हुए नरम मीठे गोले।",
-                    ml: "ചൂടുള്ള പഞ്ചസാര പാനിയിൽ മുക്കിയ മൃദുവായ മധുര ഉരുളകൾ.",
-                    te: "వెచ్చని చక్కెర పాకంలో నానబెట్టిన మృదువైన తీపి ఉండలు."
-                },
-
-                ingredients: {
-                    en: [
-                        "1 cup milk powder",
-                        "2 tbsp flour",
-                        "Milk",
-                        "Sugar",
-                        "Cardamom",
-                        "Oil for frying"
-                    ],
-                    ta: [
-                        "1 கப் பால் பவுடர்",
-                        "2 மேசைக்கரண்டி மாவு",
-                        "பால்",
-                        "சர்க்கரை",
-                        "ஏலக்காய்",
-                        "பொரிப்பதற்கு எண்ணெய்"
-                    ],
-                    hi: [
-                        "1 कप मिल्क पाउडर",
-                        "2 बड़े चम्मच मैदा",
-                        "दूध",
-                        "चीनी",
-                        "इलायची",
-                        "तलने के लिए तेल"
-                    ],
-                    ml: [
-                        "1 കപ്പ് പാൽപ്പൊടി",
-                        "2 ടേബിൾസ്പൂൺ മൈദ",
-                        "പാൽ",
-                        "പഞ്ചസാര",
-                        "ഏലക്ക",
-                        "വറുക്കാൻ എണ്ണ"
-                    ],
-                    te: [
-                        "1 కప్పు మిల్క్ పౌడర్",
-                        "2 టేబుల్ స్పూన్లు మైదా",
-                        "పాలు",
-                        "చక్కెర",
-                        "ఏలకులు",
-                        "వేయించడానికి నూనె"
-                    ]
-                },
-
-                equipment: {
-                    en: [
-                        "Mixing Bowl",
-                        "Kadai",
-                        "Knife"
-                    ],
-                    ta: [
-                        "கலவை கிண்ணம்",
-                        "கடை",
-                        "கத்தி"
-                    ],
-                    hi: [
-                        "मिक्सिंग बाउल",
-                        "कड़ाही",
-                        "चाकू"
-                    ],
-                    ml: [
-                        "മിക്സിംഗ് ബൗൾ",
-                        "കടായി",
-                        "കത്തി"
-                    ],
-                    te: [
-                        "మిక్సింగ్ బౌల్",
-                        "కడాయి",
-                        "కత్తి"
-                    ]
-                },
-
-                steps: {
-                    en: [
-                        "Mix milk powder and flour in a bowl.",
-                        "Add a little milk and make a soft dough.",
-                        "Shape the dough into small smooth balls.",
-                        "Heat oil and fry the balls on low-medium heat.",
-                        "Prepare sugar syrup with sugar and water.",
-                        "Soak the fried balls in warm syrup.",
-                        "Allow them to absorb the syrup before serving."
-                    ],
-                    ta: [
-                        "ஒரு கிண்ணத்தில் பால் பவுடர் மற்றும் மாவை கலக்கவும்.",
-                        "சிறிது பால் சேர்த்து மென்மையான மாவாக பிசையவும்.",
-                        "மாவை சிறிய உருண்டைகளாக உருட்டவும்.",
-                        "எண்ணெயை சூடாக்கி குறைந்த-நடுத்தர தீயில் உருண்டைகளை பொரிக்கவும்.",
-                        "சர்க்கரை மற்றும் தண்ணீருடன் சர்க்கரை பாகு தயாரிக்கவும்.",
-                        "பொரித்த உருண்டைகளை சூடான பாகில் போடவும்.",
-                        "பாகை நன்றாக உறிஞ்சிய பிறகு பரிமாறவும்."
-                    ],
-                    hi: [
-                        "एक बाउल में मिल्क पाउडर और मैदा मिलाएँ।",
-                        "थोड़ा दूध डालकर नरम आटा तैयार करें।",
-                        "आटे से छोटे चिकने गोले बनाएँ।",
-                        "तेल गर्म करके गोलों को धीमी-मध्यम आँच पर तलें।",
-                        "चीनी और पानी से चाशनी तैयार करें।",
-                        "तले हुए गोलों को गर्म चाशनी में डालें।",
-                        "चाशनी सोखने के बाद परोसें।"
-                    ],
-                    ml: [
-                        "ഒരു ബൗളിൽ പാൽപ്പൊടിയും മൈദയും ചേർക്കുക.",
-                        "കുറച്ച് പാൽ ചേർത്ത് മൃദുവായ മാവ് തയ്യാറാക്കുക.",
-                        "മാവ് ചെറിയ മിനുസമുള്ള ഉരുളകളാക്കുക.",
-                        "എണ്ണ ചൂടാക്കി കുറഞ്ഞ-ഇടത്തരം തീയിൽ ഉരുളകൾ വറുക്കുക.",
-                        "പഞ്ചസാരയും വെള്ളവും ഉപയോഗിച്ച് പഞ്ചസാര പാനി തയ്യാറാക്കുക.",
-                        "വറുത്ത ഉരുളകൾ ചൂടുള്ള പാനിയിൽ ഇടുക.",
-                        "പാനി നന്നായി ആഗിരണം ചെയ്ത ശേഷം വിളമ്പുക."
-                    ],
-                    te: [
-                        "ఒక బౌల్‌లో మిల్క్ పౌడర్ మరియు మైదా కలపండి.",
-                        "కొద్దిగా పాలు వేసి మెత్తని పిండిని తయారు చేయండి.",
-                        "పిండిని చిన్న మృదువైన ఉండలుగా చేయండి.",
-                        "నూనె వేడి చేసి తక్కువ-మధ్యస్థ మంటపై ఉండలను వేయించండి.",
-                        "చక్కెర మరియు నీటితో పాకం తయారు చేయండి.",
-                        "వేయించిన ఉండలను వెచ్చని పాకంలో వేయండి.",
-                        "పాకం బాగా పీల్చుకున్న తర్వాత వడ్డించండి."
-                    ]
-                },
-
-                tips: {
-                    en: [
-                        "Do not make the dough too hard.",
-                        "Fry on medium-low heat for even cooking.",
-                        "Warm syrup helps the jamun absorb it better."
-                    ],
-                    ta: [
-                        "மாவை மிகவும் கடினமாக பிசைய வேண்டாம்.",
-                        "சமமாக வேகுவதற்கு மிதமான தீயில் பொரிக்கவும்.",
-                        "சூடான பாகு ஜாமூன் நன்றாக பாகை உறிஞ்ச உதவும்."
-                    ],
-                    hi: [
-                        "आटे को बहुत सख्त न करें।",
-                        "समान रूप से पकाने के लिए मध्यम-धीमी आँच पर तलें।",
-                        "गर्म चाशनी से जामुन अच्छी तरह चाशनी सोखता है।"
-                    ],
-                    ml: [
-                        "മാവ് വളരെ കട്ടിയാക്കരുത്.",
-                        "ഒരുപോലെ വേവാൻ ഇടത്തരം കുറഞ്ഞ തീയിൽ വറുക്കുക.",
-                        "ചൂടുള്ള പാനി ജാമുൻ നന്നായി ആഗിരണം ചെയ്യാൻ സഹായിക്കും."
-                    ],
-                    te: [
-                        "పిండిని చాలా గట్టిగా చేయకండి.",
-                        "సమంగా ఉడకడానికి మధ్యస్థ తక్కువ మంటపై వేయించండి.",
-                        "వెచ్చని పాకం జామూన్ బాగా పీల్చుకోవడానికి సహాయపడుతుంది."
-                    ]
-                }
-
-            }
-
-        };
-
-
-        /* ==========================================
-           SIMPLE FALLBACK RECIPES
-           Other recipe links also continue working.
-        ========================================== */
-
-        const extraRecipes = {
-
-            "vegetable-sandwich": [
-                "Vegetable Sandwich",
-                "🥪🥕",
-                "snacks"
-            ],
-
-            "egg-fried-rice": [
-                "Egg Fried Rice",
-                "🍳🍚",
-                "nonveg"
-            ],
-
-            "paneer-butter-masala": [
-                "Paneer Butter Masala",
-                "🧀🍅",
-                "veg"
-            ],
-
-            "onion-pakoda": [
-                "Onion Pakoda",
-                "🧅🥨",
-                "snacks"
-            ],
-
-            "payasam": [
-                "Payasam",
-                "🥛🍚",
-                "sweets"
-            ],
-
-            "vegetable-pulao": [
-                "Vegetable Pulao",
-                "🍚🥕",
-                "veg"
-            ],
-
-            "chicken-65": [
-                "Chicken 65",
-                "🍗🌶️",
-                "nonveg"
-            ],
-
-            "vegetable-samosa": [
-                "Vegetable Samosa",
-                "🥟🥔",
-                "snacks"
-            ],
-
-            "carrot-halwa": [
-                "Carrot Halwa",
-                "🥕🍮",
-                "sweets"
-            ],
-
-            "banana-milkshake": [
-                "Banana Milkshake",
-                "🍌🥛",
-                "sweets"
-            ],
-
-            "idli": [
-                "Idli",
-                "⚪🥥",
-                "veg"
-            ],
-
-            "steamed-vegetables": [
-                "Steamed Vegetables",
-                "🥦🥕",
-                "veg"
-            ],
-
-            "baked-cake": [
-                "Baked Cake",
-                "🎂",
-                "sweets"
-            ],
-
-            "microwave-mug-cake": [
-                "Microwave Mug Cake",
-                "🍰☕",
-                "sweets"
-            ],
-
-            "aloo-roti": [
-                "Aloo Roti",
-                "🫓🥔",
-                "veg"
-            ]
-
-        };
-
-
-        /* ==========================================
-           GET LANGUAGE
-        ========================================== */
-
-        function getDetailLanguage() {
-
-            return localStorage.getItem(
-                "cookmateLanguage"
-            ) || "en";
-
-        }
-
-
-        /* ==========================================
-           GET RECIPE ID
-        ========================================== */
-
-        const urlParams =
-            new URLSearchParams(
-                window.location.search
-            );
-
-        const recipeId =
-            urlParams.get("recipe")
-            || "chicken-biryani";
-
-
-        let currentRecipe =
-            recipes[recipeId];
-
-
-        /* ==========================================
-           DISPLAY RECIPE
-        ========================================== */
-
-        function displayRecipe() {
-
-            const language =
-                getDetailLanguage();
-
-            const t =
-                detailTranslations[language]
-                || detailTranslations.en;
-
-
-            /*
-             * Full multilingual recipe
-             */
-
-            if (currentRecipe) {
-
-                document.getElementById(
-                    "recipeImage"
-                ).textContent =
-                    currentRecipe.emoji;
-
-
-                document.getElementById(
-                    "recipeName"
-                ).textContent =
-                    currentRecipe.name[language]
-                    || currentRecipe.name.en;
-
-
-                document.getElementById(
-                    "breadcrumbName"
-                ).textContent =
-                    currentRecipe.name[language]
-                    || currentRecipe.name.en;
-
-
-                document.getElementById(
-                    "recipeCategory"
-                ).textContent =
-                    t.category[
-                        currentRecipe.category
-                    ];
-
-
-                document.getElementById(
-                    "recipeRating"
-                ).textContent =
-                    currentRecipe.rating;
-
-
-                document.getElementById(
-                    "recipeDescription"
-                ).textContent =
-                    currentRecipe.description[language]
-                    || currentRecipe.description.en;
-
-
-                document.getElementById(
-                    "prepTime"
-                ).textContent =
-                    currentRecipe.prepTime;
-
-
-                document.getElementById(
-                    "cookTime"
-                ).textContent =
-                    currentRecipe.cookTime;
-
-
-                document.getElementById(
-                    "servings"
-                ).textContent =
-                    currentRecipe.servings;
-
-
-                /* INGREDIENTS */
-
-                const ingredientList =
-                    document.getElementById(
-                        "ingredientList"
-                    );
-
-                ingredientList.innerHTML = "";
-
-                currentRecipe.ingredients[
-                    language
-                ].forEach(
-                    function(item) {
-
-                        const li =
-                            document.createElement(
-                                "li"
-                            );
-
-                        li.textContent =
-                            item;
-
-                        ingredientList.appendChild(
-                            li
-                        );
-
-                    }
-                );
-
-
-                /* EQUIPMENT */
-
-                const equipmentList =
-                    document.getElementById(
-                        "equipmentList"
-                    );
-
-                equipmentList.innerHTML = "";
-
-                currentRecipe.equipment[
-                    language
-                ].forEach(
-                    function(item) {
-
-                        const li =
-                            document.createElement(
-                                "li"
-                            );
-
-                        li.textContent =
-                            item;
-
-                        equipmentList.appendChild(
-                            li
-                        );
-
-                    }
-                );
-
-
-                /* STEPS */
-
-                const stepsList =
-                    document.getElementById(
-                        "stepsList"
-                    );
-
-                stepsList.innerHTML = "";
-
-                currentRecipe.steps[
-                    language
-                ].forEach(
-                    function(item) {
-
-                        const li =
-                            document.createElement(
-                                "li"
-                            );
-
-                        li.textContent =
-                            item;
-
-                        stepsList.appendChild(
-                            li
-                        );
-
-                    }
-                );
-
-
-                /* TIPS */
-
-                const tipsList =
-                    document.getElementById(
-                        "tipsList"
-                    );
-
-                tipsList.innerHTML = "";
-
-                currentRecipe.tips[
-                    language
-                ].forEach(
-                    function(item) {
-
-                        const div =
-                            document.createElement(
-                                "div"
-                            );
-
-                        div.className =
-                            "tip-box";
-
-                        div.textContent =
-                            "✓ " + item;
-
-                        tipsList.appendChild(
-                            div
-                        );
-
-                    }
-                );
-
-            }
-
-            /*
-             * Other recipes
-             * fallback display
-             */
-
-            else if (
-                extraRecipes[recipeId]
-            ) {
-
-                const data =
-                    extraRecipes[recipeId];
-
-
-                document.getElementById(
-                    "recipeImage"
-                ).textContent =
-                    data[1];
-
-
-                document.getElementById(
-                    "recipeName"
-                ).textContent =
-                    data[0];
-
-
-                document.getElementById(
-                    "breadcrumbName"
-                ).textContent =
-                    data[0];
-
-
-                document.getElementById(
-                    "recipeCategory"
-                ).textContent =
-                    t.category[data[2]]
-                    || data[2];
-
-
-                document.getElementById(
-                    "recipeRating"
-                ).textContent =
-                    "⭐⭐⭐⭐⭐";
-
-
-                document.getElementById(
-                    "recipeDescription"
-                ).textContent =
-                    data[0] +
-                    " - a delicious homemade recipe.";
-
-
-                document.getElementById(
-                    "prepTime"
-                ).textContent =
-                    "15 min";
-
-
-                document.getElementById(
-                    "cookTime"
-                ).textContent =
-                    "20 min";
-
-
-                document.getElementById(
-                    "servings"
-                ).textContent =
-                    "4";
-
-
-                const sampleText = {
-                    en: "Recipe ingredients will be displayed here.",
-                    ta: "சமையல் குறிப்பின் தேவையான பொருட்கள் இங்கே காட்டப்படும்.",
-                    hi: "रेसिपी की सामग्री यहाँ दिखाई जाएगी।",
-                    ml: "പാചകക്കുറിപ്പിന്റെ ചേരുവകൾ ഇവിടെ കാണിക്കും.",
-                    te: "వంటకానికి కావలసిన పదార్థాలు ఇక్కడ చూపబడతాయి."
-                };
-
-
-                document.getElementById(
-                    "ingredientList"
-                ).innerHTML =
-                    "<li>" +
-                    sampleText[language] +
-                    "</li>";
-
-
-                document.getElementById(
-                    "equipmentList"
-                ).innerHTML =
-                    "<li>" +
-                    (language === "ta"
-                        ? "தேவையான சமையல் உபகரணங்கள்"
-                        : language === "hi"
-                        ? "आवश्यक रसोई उपकरण"
-                        : language === "ml"
-                        ? "ആവശ്യമായ പാചക ഉപകരണങ്ങൾ"
-                        : language === "te"
-                        ? "అవసరమైన వంట పరికరాలు"
-                        : "Required cooking equipment"
-                    ) +
-                    "</li>";
-
-
-                document.getElementById(
-                    "stepsList"
-                ).innerHTML =
-                    "<li>" +
-                    (language === "ta"
-                        ? "செய்முறை படிகள் இங்கே காட்டப்படும்."
-                        : language === "hi"
-                        ? "बनाने की विधि यहाँ दिखाई जाएगी।"
-                        : language === "ml"
-                        ? "തയ്യാറാക്കുന്ന വിധം ഇവിടെ കാണിക്കും."
-                        : language === "te"
-                        ? "తయారు చేసే విధానం ఇక్కడ చూపబడుతుంది."
-                        : "Recipe preparation steps will be displayed here."
-                    ) +
-                    "</li>";
-
-
-                document.getElementById(
-                    "tipsList"
-                ).innerHTML =
-                    "<div class='tip-box'>✓ " +
-                    (
-                        language === "ta"
-                        ? "புதிய பொருட்களை பயன்படுத்தவும்."
-                        : language === "hi"
-                        ? "ताजा सामग्री का उपयोग करें।"
-                        : language === "ml"
-                        ? "പുതിയ ചേരുവകൾ ഉപയോഗിക്കുക."
-                        : language === "te"
-                        ? "తాజా పదార్థాలను ఉపయోగించండి."
-                        : "Use fresh ingredients."
-                    ) +
-                    "</div>";
-
-            }
-
-            updateSaveButton();
-
-            displayRelatedRecipes();
-
-        }
-
-
-        /* ==========================================
-           FAVOURITES
-        ========================================== */
-
-        function getFavourites() {
-
-            return JSON.parse(
-                localStorage.getItem(
-                    "cookmateFavourites"
-                ) || "[]"
-            );
-
-        }
-
-
-        function toggleFavourite() {
-
-            let favourites =
-                getFavourites();
-
-
-            const language =
-                getDetailLanguage();
-
-            const t =
-                detailTranslations[language]
-                || detailTranslations.en;
-
-
-            const index =
-                favourites.indexOf(
-                    recipeId
-                );
-
-
-            if (index === -1) {
-
-                favourites.push(
-                    recipeId
-                );
-
-                alert(
-                    t.savedMessage
-                );
-
-            } else {
-
-                favourites.splice(
-                    index,
-                    1
-                );
-
-                alert(
-                    t.removedMessage
-                );
-
-            }
-
-
-            localStorage.setItem(
-                "cookmateFavourites",
-                JSON.stringify(
-                    favourites
-                )
+    const savedText = {
+
+        en: "Recipe saved!",
+        ta: "சமையல் குறிப்பு சேமிக்கப்பட்டது!",
+        hi: "रेसिपी सेव हो गई!",
+        ml: "പാചകക്കുറിപ്പ് സേവ് ചെയ്തു!",
+        te: "రెసిపీ సేవ్ చేయబడింది!"
+    };
+
+
+    const removedText = {
+
+        en: "Recipe removed from favourites.",
+        ta: "பிடித்தவைகளிலிருந்து நீக்கப்பட்டது.",
+        hi: "रेसिपी पसंदीदा सूची से हटा दी गई।",
+        ml: "പ്രിയപ്പെട്ടവയിൽ നിന്ന് നീക്കം ചെയ്തു.",
+        te: "ఫేవరెట్స్ నుండి రెసిపీ తొలగించబడింది."
+    };
+
+
+    if (favourites.includes(id)) {
+
+        favourites =
+            favourites.filter(
+                item => item !== id
             );
 
 
-            updateSaveButton();
-
-        }
-
-
-        function updateSaveButton() {
-
-            const button =
-                document.getElementById(
-                    "saveButton"
-                );
-
-
-            const language =
-                getDetailLanguage();
-
-            const t =
-                detailTranslations[language]
-                || detailTranslations.en;
-
-
-            const favourites =
-                getFavourites();
-
-
-            if (
-                favourites.includes(
-                    recipeId
-                )
-            ) {
-
-                button.textContent =
-                    t.savedRecipe;
-
-            } else {
-
-                button.textContent =
-                    t.saveRecipe;
-
-            }
-
-        }
-
-
-        /* ==========================================
-           SHOPPING LIST
-        ========================================== */
-
-        function showShoppingList() {
-
-            if (!currentRecipe) {
-
-                return;
-
-            }
-
-
-            const language =
-                getDetailLanguage();
-
-            const t =
-                detailTranslations[language]
-                || detailTranslations.en;
-
-
-            const ingredients =
-                currentRecipe.ingredients[
-                    language
-                ];
-
-
-            alert(
-                t.shoppingMessage +
-                ingredients
-                    .map(
-                        item => "• " + item
-                    )
-                    .join("\n")
-            );
-
-        }
-
-
-        /* ==========================================
-           RELATED RECIPES
-        ========================================== */
-
-        function displayRelatedRecipes() {
-
-            const container =
-                document.getElementById(
-                    "relatedRecipes"
-                );
-
-
-            const language =
-                getDetailLanguage();
-
-
-            const related =
-                Object.keys(
-                    recipes
-                )
-                .filter(
-                    id =>
-                        id !== recipeId
-                )
-                .slice(0, 3);
-
-
-            container.innerHTML = "";
-
-
-            related.forEach(
-                function(id) {
-
-                    const recipe =
-                        recipes[id];
-
-
-                    const card =
-                        document.createElement(
-                            "a"
-                        );
-
-
-                    card.className =
-                        "related-card";
-
-
-                    card.href =
-                        "recipe-details.html?recipe=" +
-                        id;
-
-
-                    card.innerHTML = `
-
-                        <div class="related-image">
-                            ${recipe.emoji}
-                        </div>
-
-                        <h3>
-                            ${
-                                recipe.name[language]
-                                || recipe.name.en
-                            }
-                        </h3>
-
-                        <p>
-                            ${recipe.rating}
-                        </p>
-
-                    `;
-
-
-                    container.appendChild(
-                        card
-                    );
-
-                }
-            );
-
-        }
-
-
-        /* ==========================================
-           TRANSLATE PAGE LABELS
-        ========================================== */
-
-        function translateDetailLabels() {
-
-            const language =
-                getDetailLanguage();
-
-            const t =
-                detailTranslations[language]
-                || detailTranslations.en;
-
-
-            document
-                .querySelectorAll(
-                    "[data-i18n]"
-                )
-                .forEach(
-                    function(element) {
-
-                        const key =
-                            element.getAttribute(
-                                "data-i18n"
-                            );
-
-
-                        if (t[key]) {
-
-                            element.textContent =
-                                t[key];
-
-                        }
-
-                    }
-                );
-
-
-            updateSaveButton();
-
-        }
-
-
-        /* ==========================================
-           INITIAL LOAD
-        ========================================== */
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            function() {
-
-                displayRecipe();
-
-                translateDetailLabels();
-
-            }
+        alert(
+            removedText[language] ||
+            removedText.en
         );
 
+    } else {
 
-        /* ==========================================
-           LANGUAGE CHANGE DETECTION
-        ========================================== */
+        favourites.push(id);
 
-        window.addEventListener(
-            "storage",
-            function(event) {
-
-                if (
-                    event.key ===
-                    "cookmateLanguage"
-                ) {
-
-                    displayRecipe();
-
-                    translateDetailLabels();
-
-                }
-
-            }
+        alert(
+            savedText[language] ||
+            savedText.en
         );
 
-
-        /*
-         * Re-render when language selector
-         * in the shared script changes.
-         */
-
-        const originalSetLanguage =
-            window.setLanguage;
+    }
 
 
-        if (originalSetLanguage) {
+    localStorage.setItem(
+        "cookmateFavourites",
+        JSON.stringify(favourites)
+    );
 
-            window.setLanguage =
-                function(language) {
 
-                    originalSetLanguage(
-                        language
-                    );
+    renderRecipe();
 
-                    setTimeout(
-                        function() {
+}
 
-                            displayRecipe();
 
-                            translateDetailLabels();
+/* =====================================================
+   SHOPPING LIST
+===================================================== */
 
-                        },
-                        50
-                    );
+function showShoppingList() {
 
-                };
+    if (!recipe) return;
+
+
+    const data =
+        getRecipeTranslation(recipe);
+
+
+    const language =
+        getRecipeLanguage();
+
+
+    const title = {
+
+        en: "Shopping List",
+        ta: "ஷாப்பிங் பட்டியல்",
+        hi: "शॉपिंग लिस्ट",
+        ml: "ഷോപ്പിംഗ് ലിസ്റ്റ്",
+        te: "షాపింగ్ లిస్ట్"
+
+    };
+
+
+    alert(
+
+        title[language] +
+
+        "\n\n" +
+
+        data.ingredients
+            .map(item => "☐ " + item)
+            .join("\n")
+
+    );
+
+}
+
+
+/* =====================================================
+   LANGUAGE CHANGE
+===================================================== */
+
+window.addEventListener(
+    "cookmateLanguageChanged",
+    function() {
+
+        renderRecipe();
+
+    }
+);
+
+
+window.addEventListener(
+    "storage",
+    function(event) {
+
+        if (
+            event.key === "cookmateLanguage"
+        ) {
+
+            renderRecipe();
 
         }
 
-    </script>
+    }
+);
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        renderRecipe();
+
+    }
+);
+
+</script>
 
 </body>
-
 </html>
